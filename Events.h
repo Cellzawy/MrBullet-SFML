@@ -1,8 +1,6 @@
-#pragma once
-using namespace sf;
+#ifndef EVENTS
+#define EVENTS
 
-void EventListener() {
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
-    sf::Event event;
+void EventListener();
 
-}
+#endif

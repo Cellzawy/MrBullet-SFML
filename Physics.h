@@ -1,32 +1,19 @@
-#pragma once
+#ifndef PHYSICS
+#define PHYSICS
+
+#include <SFML/Graphics.hpp>
+
 using namespace sf;
 using namespace std;
 
-Vector2f bulletDirection;
+extern Vector2f bulletDirection;
 
-Vector2f NormalizeVector(Vector2f vector) //  Gets the vector required to move the bullets
-{
-	float m = sqrt(vector.x * vector.x + vector.y * vector.y);
-	Vector2f normalizedVector;
-	normalizedVector.x = vector.x / m;
-	normalizedVector.y = vector.y / m;
+Vector2f NormalizeVector(Vector2f vector); //  Gets the vector required to move the bullets
 
-	return normalizedVector;
-}
 
-void DirectBullet(CircleShape b, Event e, Vector2i mousep) //  Takes bullet and event from pollEvent as parameters
-{
-	bulletDirection = bullet.getPosition() - Vector2f(mousep);
-	bulletDirection = NormalizeVector(bulletDirection);
-}
+void DirectBullet(CircleShape b, Event e, Vector2i mousep); //  Takes bullet and event from pollEvent as parameters
 
-void RicochetBullet(CircleShape b, RectangleShape w) //  Takes bullet and wall as parameters
-{
-	if (w.getRotation() == 0) {
-		bulletDirection = Vector2f(bulletDirection.x, -1 * bulletDirection.y);
-	}
-	else if (w.getRotation() == 90) {
-		bulletDirection = Vector2f(-1 * bulletDirection.x, bulletDirection.y);
-	}
-}
 
+void RicochetBullet(CircleShape b, RectangleShape w); //  Takes bullet and wall as parameters
+
+#endif
