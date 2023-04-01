@@ -7,8 +7,8 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
-    bullet.setPosition(1920 / 2, 1080 / 2);
-    window.setFramerateLimit(144);
+    bullet.setPosition(200, 200);
+    window.setFramerateLimit(100);
 
     while (window.isOpen())
     {
@@ -20,20 +20,23 @@ int main()
 
         // Ricochet the bullet
         if (bullet.getGlobalBounds().intersects(wall1.getGlobalBounds())) {
-            cout << "yes";
             RicochetBullet(bullet, wall1);
         }
         if (bullet.getGlobalBounds().intersects(wall2.getGlobalBounds())) {
-            cout << "yes";
             RicochetBullet(bullet, wall2);
         }
         if (bullet.getGlobalBounds().intersects(wall3.getGlobalBounds())) {
-            cout << "yes";
             RicochetBullet(bullet, wall3);
         }
         if (bullet.getGlobalBounds().intersects(wall4.getGlobalBounds())) {
-            cout << "yes";
             RicochetBullet(bullet, wall4);
+        }
+
+        if (bullet.getGlobalBounds().intersects(box.getGlobalBounds())) {
+            RicochetBullet(bullet, box);
+        }
+        if (bullet.getGlobalBounds().intersects(ring.getGlobalBounds())) {
+            RicochetBullet(bullet, ring);
         }
 
         sf::Event event;
@@ -57,6 +60,9 @@ int main()
         window.draw(wall2);
         window.draw(wall3);
         window.draw(wall4);
+        window.draw(box);
+        window.draw(ring);
+        //window.draw(triangle);
         window.display();
     }
     return 0;
