@@ -1,6 +1,5 @@
-#pragma once
-using namespace sf;
-using namespace std;
+#include "Sprites.h"
+#include <SFML/Graphics.hpp>
 
 Vector2f bulletDirection;
 
