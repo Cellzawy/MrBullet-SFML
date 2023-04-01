@@ -1,5 +1,9 @@
-#include "Sprites.h"
 #include <SFML/Graphics.hpp>
+#include <cmath>
+#include "Sprites.h"
+
+using namespace sf;
+using namespace std;
 
 Vector2f bulletDirection;
 

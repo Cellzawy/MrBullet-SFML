@@ -10,10 +10,9 @@ int main()
     bullet.setPosition(200, 200);
     window.setFramerateLimit(100);
 
+    sprites();
     while (window.isOpen())
     {
-        sprites();
-
         // Moving the bullet
         Vector2i mousepos = Mouse::getPosition(window);
         bullet.setPosition(bullet.getPosition() - bulletDirection * 10.f);

@@ -16,6 +16,6 @@ void DirectBullet(CircleShape b, Event e, Vector2i mousep); //  Takes bullet and
 
 void RicochetBullet(CircleShape b, RectangleShape w); //  Takes bullet and wall as parameters
 
-void RicochetBullet(CircleShape b, CircleShape w) // Takes bullet and wall as parameters
+void RicochetBullet(CircleShape b, CircleShape w); // Takes bullet and wall as parameters
 
 #endif
