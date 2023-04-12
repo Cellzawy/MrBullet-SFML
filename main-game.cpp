@@ -8,8 +8,17 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
     bullet.setPosition(200, 200);
-    window.setFramerateLimit(100);
+    window.setFramerateLimit(60);
+    sf::Color window_color(50, 50, 50);
 
+    Character killer, target;
+
+    character_init(killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/Killer/hitman_body.png", false);
+    character_set_scale(killer, 0.4);
+    character_set_position(killer, sf::Vector2f(100, 700));
+    character_init(target, "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", true);
+    character_set_scale(target, 0.4);
+    character_set_position(target, sf::Vector2f(1620, 700));
     sprites();
     while (window.isOpen())
     {
@@ -53,7 +62,7 @@ int main()
         }
 
 
-        window.clear();
+        window.clear(window_color);
         window.draw(bullet);
         window.draw(wall1);
         window.draw(wall2);
@@ -61,6 +70,8 @@ int main()
         window.draw(wall4);
         window.draw(box);
         window.draw(ring);
+        character_draw(killer, window);
+        character_draw(target, window);
         //window.draw(triangle);
         window.display();
     }
