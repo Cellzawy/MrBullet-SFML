@@ -85,8 +85,6 @@ void constructlev2(RenderWindow& window)
 
 void constructlev3(RenderWindow& window)
 {
-    // lev3.bg, lev3.killer, lev3.target[0], lev3.ground, lev3.shape1, lev3.shape2, 
-    // Sprite& a3, Character& killer3, Character& target3, RectangleShape& ground, RectangleShape& sh1, RectangleShape& sh2, 
     //backround
     lev3.BG.loadFromFile("assets/Backgrounds/background_city.png");
     lev3.bg.setTexture(lev3.BG);
@@ -126,8 +124,6 @@ void constructlev3(RenderWindow& window)
 
 void constructlev4(RenderWindow& window)
 {
-    // Sprite& a4, Character& killer4, Character target[3], RectangleShape& area, 
-    // lev4.bg, lev4.killer, lev4.target, lev4.shape1, 
     //background
     lev4.BG.loadFromFile("assets/Backgrounds/background_city.png");
     lev4.bg.setTexture(lev4.BG);
