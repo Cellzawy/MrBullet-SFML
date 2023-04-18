@@ -2,8 +2,62 @@
 #include <iostream>
 #include "Sprites.h"
 #include "Physics.h"
+#include "Levels.h"
 
 
+// Levels test
+int main() {
+	RenderWindow window(VideoMode(1920, 1080), "Levels");
+
+	// GAME loop
+	while (window.isOpen())
+	{
+		Event ev;
+		while (window.pollEvent(ev))
+		{
+			if (ev.type == Event::Closed)
+				window.close();
+            if (ev.type == Event::KeyPressed) {
+                if (ev.key.code == Keyboard::Right) {
+                    levCounter++;
+                }
+            }
+		}
+        
+		window.clear();
+
+		if (levCounter == 1) // ==> constructing level 1
+		{
+			constructlev1(window);
+		}
+
+
+		else if (levCounter == 2) // ==> constructing level 2
+		{
+			constructlev2(window);
+		}
+
+
+		else if (levCounter == 3) // ==> constructing level 3
+		{
+            constructlev3(window);
+		}
+       
+
+        else if (levCounter == 4)   // ==> constructing level 4
+        {
+            constructlev4(window);
+            
+        } else {
+            levCounter = 1;
+        }
+		window.display();
+	}
+}
+
+
+/*
+// Physics and Sprites test
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
@@ -77,3 +131,4 @@ int main()
     }
     return 0;
 }
+*/
