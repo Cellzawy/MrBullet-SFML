@@ -27,7 +27,6 @@ struct level {
 };
 
 extern level lev1, lev2, lev3, lev4, lev5;
-extern int levCounter;
 
 void constructlev1(RenderWindow& window);
 void constructlev2(RenderWindow& window);

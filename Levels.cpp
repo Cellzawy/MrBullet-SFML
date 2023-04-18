@@ -3,7 +3,7 @@
 #include "Levels.h"
 
 using namespace sf;
-int levCounter = 1;
+
 level lev1, lev2, lev3, lev4, lev5;
 
 void constructlev1(RenderWindow& window)
@@ -31,11 +31,6 @@ void constructlev1(RenderWindow& window)
     character_init(lev1.target[0], "assets/Characters/gangster_head.png", "assets/Characters/punk_body.png", true);
     character_set_scale(lev1.target[0], 0.4);
     character_set_position(lev1.target[0], Vector2f(1720, lev1.ground.getPosition().y - (lev1.ground.getLocalBounds().height) * 1.4));
-
-	window.draw(lev1.bg);
-	window.draw(lev1.ground);
-    character_draw(lev1.killer, window);
-    character_draw(lev1.target[0], window);
 }
 
 void constructlev2(RenderWindow& window)
@@ -86,16 +81,6 @@ void constructlev2(RenderWindow& window)
         character_set_scale(lev2.target[i], 0.4);
         character_set_position(lev2.target[i], Vector2f(lev2.blocks[i + 1].getPosition().x - 50, lev2.blocks[i + 1].getPosition().y - 295));
     }
-	window.draw(lev2.bg);
-	for (int i = 0; i < 10; i++)
-	{
-		window.draw(lev2.blocks[i]);
-	}
-    character_draw(lev2.killer, window);
-    for (int i = 0; i < 8; i++)
-    {
-        character_draw(lev2.target[i], window);
-    }
 }
 
 void constructlev3(RenderWindow& window)
@@ -137,14 +122,6 @@ void constructlev3(RenderWindow& window)
     character_init(lev3.target[0], "assets/Characters/gangster_head.png", "assets/Characters/punk_body.png", true);
     character_set_scale(lev3.target[0], 0.34);
     character_set_position(lev3.target[0], Vector2f(lev3.shape1.getPosition().x - (lev3.shape1.getSize().x / 2), lev3.shape1.getPosition().y-235));
-
-    window.draw(lev3.bg);
-    window.draw(lev3.ground);
-    window.draw(lev3.shape1);
-    window.draw(lev3.shape2);
-    character_draw(lev3.killer, window);
-    character_draw(lev3.target[0], window);
-
 }
 
 void constructlev4(RenderWindow& window)
@@ -180,12 +157,4 @@ void constructlev4(RenderWindow& window)
     character_init(lev4.target[2], "assets/Characters/gangster_head.png", "assets/Characters/punk_body.png", false);
     character_set_scale(lev4.target[2], 0.3);
     character_set_position(lev4.target[2], Vector2f(lev4.shape1.getPosition().x - 100, lev4.shape1.getPosition().y -390));
-
-    window.draw(lev4.bg);
-    window.draw(lev4.shape1);
-    character_draw(lev4.killer, window);
-    for (int i = 0; i < 3; i++)
-    {
-        character_draw(lev4.target[i], window);
-    }
 }
