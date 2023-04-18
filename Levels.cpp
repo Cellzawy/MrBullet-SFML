@@ -8,19 +8,19 @@ level lev1, lev2, lev3, lev4, lev5;
 
 void constructlev1(RenderWindow& window)
 {
-	// background
-	lev1.BG.loadFromFile("assets/Backgrounds/background_city.png");
-	lev1.bg.setTexture(lev1.BG);
-	lev1.bg.setScale(4, 1.2);
+    // background
+    lev1.BG.loadFromFile("assets/Backgrounds/background_city.png");
+    lev1.bg.setTexture(lev1.BG);
+    lev1.bg.setScale(4, 1.2);
 
-	// Rectangular ground
-	lev1.FLOOR[0].loadFromFile("assets/Textures/ground.png");
-	lev1.ground.setTexture(&lev1.FLOOR[0]);
-	lev1.ground.setSize(Vector2f(window.getSize().x, window.getSize().y / 4));
-	lev1.ground.setOrigin(lev1.ground.getLocalBounds().width / 2, lev1.ground.getLocalBounds().height / 2);
-	lev1.ground.setPosition(window.getSize().x /2.0, window.getSize().y);
+    // Rectangular ground
+    lev1.FLOOR[0].loadFromFile("assets/Textures/ground.png");
+    lev1.ground.setTexture(&lev1.FLOOR[0]);
+    lev1.ground.setSize(Vector2f(window.getSize().x, window.getSize().y / 4));
+    lev1.ground.setOrigin(lev1.ground.getLocalBounds().width / 2, lev1.ground.getLocalBounds().height / 2);
+    lev1.ground.setPosition(window.getSize().x /2.0, window.getSize().y);
 
-	// Charachters
+    // Charachters
     
     //killer
     character_init(lev1.killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);

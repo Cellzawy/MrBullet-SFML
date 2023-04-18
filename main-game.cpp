@@ -7,62 +7,62 @@
 
 // Levels test
 int main() {
-	RenderWindow window(VideoMode(1920, 1080), "Levels");
+    RenderWindow window(VideoMode(1920, 1080), "Levels");
     int levCounter = 1;
 
-	constructlev1(window);
-	constructlev2(window);
+    constructlev1(window);
+    constructlev2(window);
     constructlev3(window);
     constructlev4(window);
 
-	// GAME loop
-	while (window.isOpen())
-	{
-		Event ev;
-		while (window.pollEvent(ev))
-		{
-			if (ev.type == Event::Closed)
-				window.close();
+    // GAME loop
+    while (window.isOpen())
+    {
+        Event ev;
+        while (window.pollEvent(ev))
+        {
+            if (ev.type == Event::Closed)
+                window.close();
             if (ev.type == Event::KeyPressed) {
                 if (ev.key.code == Keyboard::Right) {
                     levCounter++;
                 }
             }
-		}
+        }
         
-		window.clear();
+        window.clear();
 
-		if (levCounter == 1) // ==> constructing level 1
-		{
-	        window.draw(lev1.bg);
-	        window.draw(lev1.ground);
+        if (levCounter == 1) // ==> constructing level 1
+        {
+            window.draw(lev1.bg);
+            window.draw(lev1.ground);
             character_draw(lev1.killer, window);
             character_draw(lev1.target[0], window);
-		}
-		else if (levCounter == 2) // ==> constructing level 2
-		{
-	        window.draw(lev2.bg);
-	        for (int i = 0; i < 10; i++)
-	        {
-		        window.draw(lev2.blocks[i]);
-	        }
+        }
+        else if (levCounter == 2) // ==> constructing level 2
+        {
+            window.draw(lev2.bg);
+            for (int i = 0; i < 10; i++)
+            {
+                window.draw(lev2.blocks[i]);
+            }
             character_draw(lev2.killer, window);
             for (int i = 0; i < 8; i++)
             {
                 character_draw(lev2.target[i], window);
             }
-		}
+        }
 
 
-		else if (levCounter == 3) // ==> constructing level 3
-		{
+        else if (levCounter == 3) // ==> constructing level 3
+        {
             window.draw(lev3.bg);
             window.draw(lev3.ground);
             window.draw(lev3.shape1);
             window.draw(lev3.shape2);
             character_draw(lev3.killer, window);
             character_draw(lev3.target[0], window);
-		}
+        }
         else if (levCounter == 4)   // ==> constructing level 4
         {
             window.draw(lev4.bg);
@@ -77,8 +77,8 @@ int main() {
         {
             levCounter = 1;
         }
-		window.display();
-	}
+        window.display();
+    }
 }
 
 

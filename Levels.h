@@ -6,13 +6,13 @@
 using namespace sf;
 
 struct level {
-	Texture BG;
+    Texture BG;
 
-	Texture ENEMY1[100];
+    Texture ENEMY1[100];
 
-	Texture FLOOR[10];
+    Texture FLOOR[10];
 
-	Texture BLOCK[10];
+    Texture BLOCK[10];
 
     Texture SHAPES[10];
 
