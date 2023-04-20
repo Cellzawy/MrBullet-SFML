@@ -6,7 +6,10 @@
 using namespace sf;
 using namespace std;
 
-enum menu_type {main_menu, play_menu, options_menu, classic_Mode, achievements_menu};
+enum menu_type {
+    main_menu, play_menu, options_menu, classic_Mode, achievements_menu,
+    level_1, level_2, level_3, level_4, level_5, level_6, level_7, level_8, level_9, level_10
+};
 
 struct Button{
     sf::Texture Default_texture;
