@@ -3,8 +3,55 @@
 #include "Sprites.h"
 #include "Physics.h"
 #include "Levels.h"
+#include "Menus.h"
 
 
+// Menus test
+int main()
+{
+    sf::RenderWindow window (sf::VideoMode(1920, 1080), "Mr Bullet", sf::Style::Fullscreen);
+
+    Texture_loading();
+
+
+    while(window.isOpen())
+    {
+        // drawing
+
+        window.clear();
+
+        if (current_menu == main_menu)
+        {
+            Main_menu(window);
+        }
+
+        else if (current_menu == play_menu)
+        {
+            Play_menu(window);
+        }
+
+        else if (current_menu == options_menu)
+        {
+            Options_menu(window);
+        }
+
+        else if (current_menu == classic_Mode)
+        {
+            Classic_menu(window);
+        }
+
+        else if (current_menu == achievements_menu)
+        {
+            Achievements_menu(window);
+        }
+
+        window.display();
+    }
+
+	return 0;
+}
+
+/*
 // Levels test
 int main() {
     RenderWindow window(VideoMode(1920, 1080), "Levels");
@@ -80,7 +127,7 @@ int main() {
         window.display();
     }
 }
-
+*/
 
 /*
 // Physics and Sprites test
