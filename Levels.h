@@ -24,8 +24,6 @@ struct level {
 
     Character killer, target[100];
 
-    int levelNum;
-
 };
 
 extern level lev1, lev2, lev3, lev4, lev5;
