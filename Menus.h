@@ -63,6 +63,9 @@ extern menu_type current_menu;
 // general
 extern sf::Font game_font;
 extern Button back_button;
+extern Music mainmenu_music;
+extern SoundBuffer SFX_click_soundbuffer;
+extern Sound SFX_click;
 
 // main menu
 extern sf::Texture main_menu_background_texture, mr_bullet_logo_texture;
@@ -99,7 +102,7 @@ void Texture_loading();
 void Level_Evaluation(Level level[]);
 
 void volume_manage(sf::RenderWindow&, sf::Text&, sf::Sprite, sf::Sprite, int&, Font&, string);
-void MUSIC(Music& music_name, string music_file_name, int& volume_num);
+void MUSIC(Music& music_name, String music_file_name, int& volume_num);
 void FONT(Font& font_name, string font_file_name);
 
 void hoverEffect(sf::Sprite&, sf::RenderWindow&); // for buttons

@@ -7,12 +7,16 @@
 
 
 // Menus test
-int main()
-{
+int main() {
     sf::RenderWindow window (sf::VideoMode(1920, 1080), "Mr Bullet", sf::Style::Fullscreen);
 
     Texture_loading();
 
+    SFX_click.setBuffer(SFX_click_soundbuffer);
+
+    mainmenu_music.openFromFile("assets/sounds/main_music.ogg");
+    mainmenu_music.play();
+    mainmenu_music.setLoop(true);
 
     while(window.isOpen())
     {

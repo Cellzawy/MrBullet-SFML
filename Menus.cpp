@@ -15,6 +15,9 @@ menu_type current_menu = main_menu;
 // general
 sf::Font game_font;
 Button back_button;
+Music mainmenu_music;
+SoundBuffer SFX_click_soundbuffer;
+Sound SFX_click;
 
 // main menu
 sf::Texture main_menu_background_texture, mr_bullet_logo_texture;
@@ -36,6 +39,7 @@ Level level[20];
 sf::Texture achievements_menu_background;
 sf::Texture achievement_texture, achievement_hovered_texture;
 Achievment achievements[5];
+
 
 void Main_menu(sf::RenderWindow& mainmenu)
 {
@@ -100,7 +104,7 @@ void Main_menu(sf::RenderWindow& mainmenu)
     {
         if(event.type == sf::Event::Closed)
         {
-
+            SFX_click.play();
             mainmenu.close();
         }
 
@@ -112,7 +116,7 @@ void Main_menu(sf::RenderWindow& mainmenu)
 
             if(quit_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
-
+                SFX_click.play();
                 quit_button.sprite.setTexture(quit_button.Pressed_texture);
                 mainmenu.close();
 
@@ -120,7 +124,7 @@ void Main_menu(sf::RenderWindow& mainmenu)
 
             else if (options_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
-
+                SFX_click.play();
                 options_button.sprite.setTexture(options_button.Pressed_texture);
                 current_menu = options_menu;
             }
@@ -128,7 +132,7 @@ void Main_menu(sf::RenderWindow& mainmenu)
 
             else if (play_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
-
+                SFX_click.play();
                 play_button.sprite.setTexture(play_button.Pressed_texture);
                 current_menu = play_menu;
 
@@ -136,7 +140,7 @@ void Main_menu(sf::RenderWindow& mainmenu)
 
             else if (achievements_button.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
-
+                SFX_click.play();
                 current_menu = achievements_menu;
             }
 
@@ -225,7 +229,7 @@ void Play_menu(sf::RenderWindow& play_menu)
     {
         if (event.type == sf::Event::Closed)
         {
-
+            SFX_click.play();
             play_menu.close();
         }
 
@@ -235,14 +239,14 @@ void Play_menu(sf::RenderWindow& play_menu)
 
             if (back_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
-
+                SFX_click.play();
                 back_button.sprite.setTexture(back_button.Pressed_texture);
                 current_menu = main_menu;
             }
 
             else if (classic_menu.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
-
+                SFX_click.play();
                 current_menu = classic_Mode;
             }
         }
@@ -296,10 +300,7 @@ void Options_menu(sf::RenderWindow& window )
 
 
     //sprite
-    Sprite armor_sprite, Back_ground, check_box_close, check_box_open, Back_Button_Red, Rectangle_Background, Back_Button_Yellow, Volume_increase[2], Volume_decrease[2];
-
-    Back_ground.setTexture(back_ground);
-    Back_ground.setScale(window.getSize().x / Back_ground.getLocalBounds().width, window.getSize().y / Back_ground.getLocalBounds().height);
+    Sprite armor_sprite, Back_ground, check_box_close, check_box_open, Rectangle_Background, Volume_increase[2], Volume_decrease[2];
 
 
     check_box_close.setTexture(checkbox_close);
@@ -311,18 +312,6 @@ void Options_menu(sf::RenderWindow& window )
     check_box_open.setScale(Vector2f(0.5, .5));
     check_box_open.setPosition(window.getSize().x / 1.6, window.getSize().y / 5.837);
 
-
-    Back_Button_Yellow.setTexture(Back_button_Yellow);
-    Back_Button_Yellow.setPosition(window.getSize().x / 10.666, window.getSize().y / 1.018);
-    Back_Button_Yellow.setColor(Color::White);
-    Back_Button_Yellow.setOrigin(Back_Button_Yellow.getLocalBounds().width / 2, Back_Button_Yellow.getLocalBounds().height);
-
-
-    Back_Button_Red.setTexture(Back_button_Red);
-    Back_Button_Red.setScale(Vector2f(0.125, .125));
-    Back_Button_Red.setPosition(window.getSize().x / 10.666, window.getSize().y / 1.018);
-    Back_Button_Red.setColor(Color::White);
-    Back_Button_Red.setOrigin(Back_Button_Red.getLocalBounds().width / 2, Back_Button_Red.getLocalBounds().height);
 
 
     Volume_increase[0].setTexture(volume_increase);
@@ -353,23 +342,23 @@ void Options_menu(sf::RenderWindow& window )
     Volume_decrease[1].setOrigin(Volume_decrease[1].getLocalBounds().width / 2, Volume_decrease[1].getLocalBounds().height);
 
 
+    back_button.sprite.setTexture(back_button.Default_texture);
+    back_button.sprite.setOrigin(back_button.sprite.getLocalBounds().width / 2, back_button.sprite.getLocalBounds().height / 2);
+    back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
+
+
     bool fullscreen = true;
     bool back = true;
 
 
 
 
-    hoverEffect(Back_Button_Red, window);
+    hoverEffect(back_button.sprite, window);
 
     Event event;
     while (window.pollEvent(event))
     {
         //Mouse Events
-
-        if (Mouse::isButtonPressed(Mouse::Right))
-        {
-            cout << event.mouseMove.x << "\t" << event.mouseMove.y;
-        }
 
         if (Mouse::isButtonPressed(Mouse::Left))
         {
@@ -378,26 +367,27 @@ void Options_menu(sf::RenderWindow& window )
 
 
 
-            volume_manage(window, volume_presentage[0], Volume_increase[0], Volume_decrease[0], volumeVariable[0], game_font, "HelveticaNeueCondensedBlack.ttf");
+            volume_manage(window, volume_presentage[0], Volume_increase[0], Volume_decrease[0], volumeVariable[0], game_font, "assets/HelveticaNeueCondensedBlack.ttf");
 
 
 
-            volume_manage(window, volume_presentage[1], Volume_increase[1], Volume_decrease[1], volumeVariable[1], game_font, "HelveticaNeueCondensedBlack.ttf");
+            volume_manage(window, volume_presentage[1], Volume_increase[1], Volume_decrease[1], volumeVariable[1], game_font, "assets/HelveticaNeueCondensedBlack.ttf");
 
             volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
             volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
 
 
 
-            if (Back_Button_Red.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+            if (back_button.sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
             {
+                back_button.sprite.setTexture(back_button.Pressed_texture);
+                SFX_click.play();
                 current_menu = main_menu;
-
             }
 
             if (check_box_close.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && fullscreen)
             {
-
+                SFX_click.play();
                 fullscreen = false;
                 Fullscreen_text.setFillColor(Color::White);
                 window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
@@ -405,7 +395,7 @@ void Options_menu(sf::RenderWindow& window )
 
             else if (check_box_open.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
             {
-
+                SFX_click.play();
                 fullscreen = true;
                 Fullscreen_text.setFillColor(Color::White);
                 window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
@@ -414,7 +404,7 @@ void Options_menu(sf::RenderWindow& window )
 
             if (event.type == Event::Closed)
             {
-
+                SFX_click.play();
                 window.close();
             }
 
@@ -436,10 +426,7 @@ void Options_menu(sf::RenderWindow& window )
             window.draw(check_box_open);
         else
             window.draw(check_box_close);
-        if (back == false)
-            window.draw(Back_Button_Yellow);
-        else
-            window.draw(Back_Button_Red);
+        window.draw(back_button.sprite);
 }
 
 
@@ -503,7 +490,7 @@ void Classic_menu(sf::RenderWindow& classic_menu)
     {
         if (event.type == sf::Event::Closed)
         {
-
+            SFX_click.play();
             classic_menu.close();
         }
 
@@ -513,7 +500,7 @@ void Classic_menu(sf::RenderWindow& classic_menu)
 
             if (back_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
-
+                SFX_click.play();
                 back_button.sprite.setTexture(back_button.Pressed_texture);
                 current_menu = play_menu;
             }
@@ -573,7 +560,7 @@ void Achievements_menu(sf::RenderWindow& achievements_menu)
     {
         if (event.type == sf::Event::Closed)
         {
-
+            SFX_click.play();
             achievements_menu.close();
         }
 
@@ -583,7 +570,7 @@ void Achievements_menu(sf::RenderWindow& achievements_menu)
 
             if (back_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
-
+                SFX_click.play();
                 back_button.sprite.setTexture(back_button.Pressed_texture);
                 current_menu = main_menu;
             }
@@ -610,6 +597,7 @@ game_font.loadFromFile("assets/HelveticaNeueCondensedBlack.ttf");
 back_button.Default_texture.loadFromFile("assets/menus/Back_button.png");
 back_button.Pressed_texture.loadFromFile("assets/menus/Back_button_pressed.png");
 
+SFX_click_soundbuffer.loadFromFile("assets/sounds/SFX_click.ogg");
 
 // main menu
 
@@ -749,13 +737,10 @@ for (int i = 0; i < 5; i++)
 }
 
 
-
-
 void FONT(Font& font_name, string font_file_name)
 {
     font_name.loadFromFile(font_file_name);
 }
-
 
 
 void volume_manage(sf::RenderWindow& window, sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down, int& volume_num, Font& font_name, string font_file_name)
