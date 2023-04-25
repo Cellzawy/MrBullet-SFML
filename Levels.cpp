@@ -154,3 +154,60 @@ void constructlev4(RenderWindow& window)
     character_set_scale(lev4.target[2], 0.3);
     character_set_position(lev4.target[2], Vector2f(lev4.shape1.getPosition().x - 100, lev4.shape1.getPosition().y -390));
 }
+
+void DrawingLevels(int num, RenderWindow& window)
+{
+    if (num == 1) // ==> constructing level 1
+    {
+
+        constructlev1(window);
+        window.draw(lev1.bg);
+        window.draw(lev1.ground);
+        character_draw(lev1.killer, window);
+        character_draw(lev1.target[0], window);
+
+
+    }
+
+
+    else if (num == 2) // ==> constructing level 2
+    {
+        constructlev2(window);
+        window.draw(lev2.bg);
+        for (int i = 0; i < 10; i++)
+        {
+            window.draw(lev2.blocks[i]);
+        }
+        character_draw(lev2.killer, window);
+        for (int i = 0; i < 8; i++)
+        {
+            character_draw(lev2.target[i], window);
+        }
+    }
+
+
+    else if (num == 3) // ==> constructing level 3
+    {
+        constructlev3(window);
+        window.draw(lev3.bg);
+        window.draw(lev3.ground);
+        window.draw(lev3.shape1);
+        window.draw(lev3.shape2);
+        character_draw(lev3.killer, window);
+        character_draw(lev3.target[0], window);
+    }
+
+
+    else if (num == 4)   // ==> constructing level 4
+    {
+        constructlev4(window);
+        window.draw(lev4.bg);
+        window.draw(lev4.shape1);
+        character_draw(lev4.killer, window);
+        for (int i = 0; i < 3; i++)
+        {
+            character_draw(lev4.target[i], window);
+        }
+
+    }
+}

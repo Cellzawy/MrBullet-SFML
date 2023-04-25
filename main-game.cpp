@@ -8,7 +8,7 @@
 
 // Menus test
 int main() {
-    sf::RenderWindow window (sf::VideoMode(1920, 1080), "Mr Bullet", sf::Style::Fullscreen);
+    sf::RenderWindow window (sf::VideoMode(1920, 1080), "Mr Bullet", sf::Style::Default);
 
     Texture_loading();
 
@@ -17,11 +17,17 @@ int main() {
     mainmenu_music.openFromFile("assets/sounds/main_music.ogg");
     mainmenu_music.play();
     mainmenu_music.setLoop(true);
+    constructlev1(window);
 
     while(window.isOpen())
     {
         // drawing
-
+    sf::Event event;
+    while(window.pollEvent(event))
+    {
+    if(event.type == sf::Event::Closed)
+        window.close();
+    }
         window.clear();
 
         if (current_menu == main_menu)
@@ -48,6 +54,29 @@ int main() {
         {
             Achievements_menu(window);
         }
+        
+        else if (current_menu == level_1)
+        {
+            window.draw(lev1.bg);
+            window.draw(lev1.ground);
+            character_draw(lev1.killer, window);
+            character_draw(lev1.target[0], window);
+        }
+        
+        else if (current_menu == level_2)
+        {
+            window.close();
+        }
+        
+        else if (current_menu == level_3)
+        {
+            
+        }
+        
+        else if (current_menu == level_4)
+        {
+            
+        }
 
         window.display();
     }
@@ -61,11 +90,6 @@ int main() {
     RenderWindow window(VideoMode(1920, 1080), "Levels");
     int levCounter = 1;
 
-    constructlev1(window);
-    constructlev2(window);
-    constructlev3(window);
-    constructlev4(window);
-
     // GAME loop
     while (window.isOpen())
     {
@@ -77,57 +101,15 @@ int main() {
             if (ev.type == Event::KeyPressed) {
                 if (ev.key.code == Keyboard::Right) {
                     levCounter++;
+                    if (levCounter > 4) {
+                        levCounter = 1;
+                    }
                 }
             }
         }
         
         window.clear();
-
-        if (levCounter == 1) // ==> constructing level 1
-        {
-            window.draw(lev1.bg);
-            window.draw(lev1.ground);
-            character_draw(lev1.killer, window);
-            character_draw(lev1.target[0], window);
-        }
-        else if (levCounter == 2) // ==> constructing level 2
-        {
-            window.draw(lev2.bg);
-            for (int i = 0; i < 10; i++)
-            {
-                window.draw(lev2.blocks[i]);
-            }
-            character_draw(lev2.killer, window);
-            for (int i = 0; i < 8; i++)
-            {
-                character_draw(lev2.target[i], window);
-            }
-        }
-
-
-        else if (levCounter == 3) // ==> constructing level 3
-        {
-            window.draw(lev3.bg);
-            window.draw(lev3.ground);
-            window.draw(lev3.shape1);
-            window.draw(lev3.shape2);
-            character_draw(lev3.killer, window);
-            character_draw(lev3.target[0], window);
-        }
-        else if (levCounter == 4)   // ==> constructing level 4
-        {
-            window.draw(lev4.bg);
-            window.draw(lev4.shape1);
-            character_draw(lev4.killer, window);
-            for (int i = 0; i < 3; i++)
-            {
-                character_draw(lev4.target[i], window);
-            }
-        }
-        else
-        {
-            levCounter = 1;
-        }
+        DrawingLevels(levCounter, window);
         window.display();
     }
 }

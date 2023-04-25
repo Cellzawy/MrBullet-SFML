@@ -504,6 +504,14 @@ void Classic_menu(sf::RenderWindow& classic_menu)
                 back_button.sprite.setTexture(back_button.Pressed_texture);
                 current_menu = play_menu;
             }
+            else
+            {
+                for (int i = 0; i < levels.size();i++)
+                {
+                    if (level[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level[i].view.Level_evaluation != -1)
+                        current_menu = i;
+                }
+            }
         }
     }
 

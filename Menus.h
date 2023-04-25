@@ -7,8 +7,8 @@ using namespace sf;
 using namespace std;
 
 enum menu_type {
-    main_menu, play_menu, options_menu, classic_Mode, achievements_menu,
-    level_1, level_2, level_3, level_4, level_5, level_6, level_7, level_8, level_9, level_10
+    level_1, level_2, level_3, level_4, level_5,Level_6, Level_7, Level_8, Level_9, Level_10,
+    main_menu, play_menu, options_menu, classic_Mode, achievements_menu
 };
 
 struct Button{
