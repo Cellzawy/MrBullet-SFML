@@ -4,7 +4,7 @@
 
 using namespace std;
 using namespace sf;
-
+/**/
 //  Shapes & sprites declaration:
 extern CircleShape bullet;
 extern CircleShape ring;
