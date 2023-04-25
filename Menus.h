@@ -86,11 +86,13 @@ extern Menu classic_menu, duels_menu;
 extern sf::Texture classic_menu_background_texture;
 extern sf::Texture Border_hover_effect;
 extern Level level[20];
+extern std::vector<sf::Sprite> levels;
 
 // achievements menu
 extern sf::Texture achievements_menu_background;
 extern sf::Texture achievement_texture, achievement_hovered_texture;
 extern Achievment achievements[5];
+extern sf::Sprite achievements_button;
 
 extern sf::RenderWindow window;
 

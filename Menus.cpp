@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <SFML/System.hpp>
 #include <vector>
 #include <string>
 #include <iostream>
 #include "Menus.h"
+#include "Events.h"
+#include "win-lose-logic.h"
 
 using namespace sf;
 using namespace std;
@@ -36,14 +37,13 @@ Menu classic_menu, duels_menu;
 sf::Texture classic_menu_background_texture;
 sf::Texture Border_hover_effect;
 Level level[20];
+std::vector<sf::Sprite> levels;
 
 // achievements menu
 sf::Texture achievements_menu_background;
 sf::Texture achievement_texture, achievement_hovered_texture;
 Achievment achievements[5];
 
-bool main_menu_done = true;
-bool play_menu_done = true;
 
 void Main_menu()
 {
@@ -101,53 +101,7 @@ void Main_menu()
 
     // pollEvent loop
 
-    sf::Event event;
-    while(window.pollEvent(event))
-    {
-        if(event.type == sf::Event::Closed)
-        {
-            SFX_click.play();
-            window.close();
-        }
-
-        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-        {
-
-            // a variable to store the mouse position on the screen
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-            if(quit_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-            {
-                SFX_click.play();
-                quit_button.sprite.setTexture(quit_button.Pressed_texture);
-                window.close();
-
-            }
-
-            else if (options_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-            {
-                SFX_click.play();
-                options_button.sprite.setTexture(options_button.Pressed_texture);
-                current_menu = options_menu;
-            }
-
-
-            else if (play_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-            {
-                SFX_click.play();
-                play_button.sprite.setTexture(play_button.Pressed_texture);
-                current_menu = play_menu;
-
-            }
-
-            else if (achievements_button.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-            {
-                SFX_click.play();
-                current_menu = achievements_menu;
-            }
-
-        }
-    }
+    main_menu_eventloop();
 
     //drawing
     window.draw(main_menu_background);
@@ -174,14 +128,9 @@ void Play_menu()
 
     // classic menu    and     duels menu
 
-
-
     classic_menu.sprite.setTexture(classic_menu.Default_texture);
     classic_menu.sprite.setOrigin(classic_menu.sprite.getLocalBounds().width / 2, classic_menu.sprite.getLocalBounds().height / 2);
     classic_menu.sprite.setPosition(window.getSize().x / 5.529, window.getSize().y / 2);
-
-
-
 
 
     duels_menu.sprite.setTexture(duels_menu.Default_texture);
@@ -189,9 +138,6 @@ void Play_menu()
     duels_menu.sprite.setPosition(window.getSize().x / 1.235,window.getSize().y / 2);
 
     // Text
-
-
-
 
 
 
@@ -218,42 +164,17 @@ void Play_menu()
     back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
 
 
-
-
     // hovereffect checking
 
     hoverEffect(back_button.sprite);
     hoverEffect(classic_menu.sprite, classic_menu.Default_texture, classic_menu.Hovered_texture, classic_mode);
     hoverEffect(duels_menu.sprite, duels_menu.Default_texture, duels_menu.Hovered_texture, duels_mode);
 
+    // pollEvent loop
 
-    sf::Event event;
-    while(window.pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-        {
-            SFX_click.play();
-            window.close();
-        }
+    play_menu_eventloop();
 
-        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-        {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-            if (back_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-            {
-                SFX_click.play();
-                back_button.sprite.setTexture(back_button.Pressed_texture);
-                current_menu = main_menu;
-            }
-
-            else if (classic_menu.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-            {
-                SFX_click.play();
-                current_menu = classic_Mode;
-            }
-        }
-    }
+    // drawing
 
     window.draw(play_menu_background);
     window.draw(choose);
@@ -264,7 +185,6 @@ void Play_menu()
     window.draw(back_button.sprite);
 
 }
-
 
 
 void Options_menu()
@@ -430,7 +350,6 @@ void Options_menu()
 }
 
 
-
 void Classic_menu()
 {
     // background
@@ -461,7 +380,7 @@ void Classic_menu()
 
     Level_Evaluation(level);
 
-    std::vector<sf::Sprite> levels;
+
     for (int i = 0; i < num_rows * num_cols; ++i)
     {
 
@@ -484,37 +403,9 @@ void Classic_menu()
 
     hoverEffect(back_button.sprite);
 
+    // pollEvent loop
 
-    sf::Event event;
-    while(window.pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-        {
-            SFX_click.play();
-            window.close();
-        }
-
-        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-        {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-            if (back_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-            {
-                SFX_click.play();
-                back_button.sprite.setTexture(back_button.Pressed_texture);
-                current_menu = play_menu;
-            }
-            else
-            {
-                for (int i = 0; i < levels.size();i++)
-                {
-                    if (level[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level[i].view.Level_evaluation != -1)
-                        current_menu = menu_type(i);
-                }
-            }
-        }
-    }
-
+    classic_menu_eventloop();
 
     // drawing
 
@@ -564,26 +455,7 @@ void Achievements_menu()
 
     // pollEvent loop
 
-    sf::Event event;
-    while(window.pollEvent(event))
-    {
-        if(event.type == sf::Event::Closed)
-        {
-            window.close();
-        }
-
-        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-        {
-             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-            if (back_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
-            {
-                SFX_click.play();
-                back_button.sprite.setTexture(back_button.Pressed_texture);
-                current_menu = main_menu;
-            }
-        }
-    }
+    achievements_menu_eventloop();
 
     // drawing
 
@@ -606,6 +478,18 @@ back_button.Default_texture.loadFromFile("assets/menus/Back_button.png");
 back_button.Pressed_texture.loadFromFile("assets/menus/Back_button_pressed.png");
 
 SFX_click_soundbuffer.loadFromFile("assets/sounds/SFX_click.ogg");
+
+// win lose panels
+
+win_panel_texture.loadFromFile("assets/win_lose_panels/win_panel.png");
+lose_panel_texture.loadFromFile("assets/win_lose_panels/lose_panel.png");
+star_texture.loadFromFile("assets/win_lose_panels/Star.png");
+empty_star_texture.loadFromFile("assets/win_lose_panels/Empty_star.png");
+backward_texture.loadFromFile("assets/win_lose_panels/Backward_texture.png");
+forward_texture.loadFromFile("assets/win_lose_panels/Forward_texture.png");
+backward_texture.loadFromFile("assets/win_lose_panels/Backward_texture.png");
+reset_texture.loadFromFile("assets/win_lose_panels/Reset_button.png");
+quit_to_main_menu_texture.loadFromFile("assets/win_lose_panels/Quit_To_Main_Menu.png");
 
 // main menu
 

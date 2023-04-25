@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include "Sprites.h"
 #include "Physics.h"
 #include "Levels.h"
 #include "Menus.h"
 
-sf::RenderWindow window(sf::VideoMode(1920, 1080), "Mr bullet", sf::Style::Fullscreen);
+sf::RenderWindow window(sf::VideoMode(1400, 900), "Mr bullet", sf::Style::Default);
 
 // Menus test
 int main() {

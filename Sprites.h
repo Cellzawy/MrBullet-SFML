@@ -14,7 +14,7 @@ extern RectangleShape wall3;
 extern RectangleShape wall4;
 extern RectangleShape box;
 extern RectangleShape walls[];
-/*****/
+
 void sprites();
 
 struct Character {

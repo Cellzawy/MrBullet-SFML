@@ -1,5 +1,6 @@
 #include "Sprites.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 //  Shapes & sprites declaration:
 CircleShape bullet(5.f);
@@ -32,7 +33,7 @@ void sprites() {
 	wall4.setFillColor(Color::Cyan);
 	box.setFillColor(Color::Cyan);
 	ring.setFillColor(Color::Cyan);
-	
+
 	wall1.setRotation(0);
 	wall2.setRotation(0);
 	wall3.setRotation(0);
@@ -63,7 +64,7 @@ void character_set_position(Character &character, sf::Vector2f pos) {
         character.right_leg1.setScale(sf::Vector2f(-scale, scale));
         character.right_leg2.setOrigin(sf::Vector2f(character.right_leg2.getLocalBounds().width, 0));
         character.right_leg2.setScale(sf::Vector2f(-scale, scale));
-        
+
         character.head.setPosition(pos + sf::Vector2f(character.body.getGlobalBounds().width / 2 - character.head.getGlobalBounds().width / 2 - 4 * character.head.getScale().y, 0));
         character.body.setPosition(pos + sf::Vector2f(0, character.head.getGlobalBounds().height));
 
@@ -73,7 +74,7 @@ void character_set_position(Character &character, sf::Vector2f pos) {
 
         character.left_arm1.setPosition(character.right_arm1.getPosition() + sf::Vector2f(character.body.getGlobalBounds().width - 5 * character.head.getScale().y, 0));
         character.left_arm2.setPosition(character.left_arm1.getPosition() + sf::Vector2f(0, 95 * character.head.getScale().y));
-        
+
         character.right_leg1.setPosition(character.body.getPosition() + sf::Vector2f(37 * character.head.getScale().y, character.body.getGlobalBounds().height - 30 * character.head.getScale().y));
         character.right_leg2.setPosition(character.right_leg1.getPosition() + sf::Vector2f(-27 * character.head.getScale().y, character.left_leg1.getGlobalBounds().height - 45 * character.head.getScale().y));
 
