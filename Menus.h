@@ -92,25 +92,26 @@ extern sf::Texture achievements_menu_background;
 extern sf::Texture achievement_texture, achievement_hovered_texture;
 extern Achievment achievements[5];
 
+extern sf::RenderWindow window;
 
 
-void Main_menu(sf::RenderWindow&);
-void Play_menu(sf::RenderWindow&);
-void Options_menu(sf::RenderWindow&);
-void Classic_menu(sf::RenderWindow&);
-void Achievements_menu(sf::RenderWindow&);
+void Main_menu();
+void Play_menu();
+void Options_menu();
+void Classic_menu();
+void Achievements_menu();
 
 void Texture_loading();
 
 void Level_Evaluation(Level level[]);
 
-void volume_manage(sf::RenderWindow&, sf::Text&, sf::Sprite, sf::Sprite, int&, Font&, string);
+void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&, Font&, string);
 void MUSIC(Music& music_name, String music_file_name, int& volume_num);
 void FONT(Font& font_name, string font_file_name);
 
-void hoverEffect(sf::Sprite&, sf::RenderWindow&); // for buttons
-void hoverEffect(sf::Sprite&, sf::Texture&, sf::Texture&, sf::Text&, sf::RenderWindow&); // for menu selection in play menu
-void hoverEffect(Level level[], sf::RenderWindow&); // for levels selection in classic menu
-void hoverEffect(sf::Sprite&, sf::Texture&, sf::RenderWindow&); // for achievement button in main menu
+void hoverEffect(sf::Sprite&); // for buttons
+void hoverEffect(sf::Sprite&, sf::Texture&, sf::Texture&, sf::Text&); // for menu selection in play menu
+void hoverEffect(Level level[]); // for levels selection in classic menu
+void hoverEffect(sf::Sprite&, sf::Texture&); // for achievement button in main menu
 
 #endif

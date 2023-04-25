@@ -22,6 +22,8 @@ Sound SFX_click;
 // main menu
 sf::Texture main_menu_background_texture, mr_bullet_logo_texture;
 Button play_button, options_button, quit_button;
+sf::Sprite main_menu_background, mr_bullet_logo;
+sf::Sprite achievements_button;
 
 // options menu
 Texture back_ground, checkbox_close, checkbox_open, Back_button_Red, Back_button_Yellow, volume_increase, volume_decrease;
@@ -40,24 +42,25 @@ sf::Texture achievements_menu_background;
 sf::Texture achievement_texture, achievement_hovered_texture;
 Achievment achievements[5];
 
+bool main_menu_done = true;
+bool play_menu_done = true;
 
-void Main_menu(sf::RenderWindow& mainmenu)
+void Main_menu()
 {
-    // main menu background and logo
 
-	sf::Sprite main_menu_background, mr_bullet_logo;
+    // main menu background and logo
 
 
 	main_menu_background.setTexture(main_menu_background_texture);
 	main_menu_background.setScale(
-		mainmenu.getSize().x / main_menu_background.getLocalBounds().width, // to make the background fit into the screen size
-		mainmenu.getSize().y / main_menu_background.getLocalBounds().height
+		window.getSize().x / main_menu_background.getLocalBounds().width, // to make the background fit into the screen size
+		window.getSize().y / main_menu_background.getLocalBounds().height
     );
 
 
     mr_bullet_logo.setTexture(mr_bullet_logo_texture);
     mr_bullet_logo.setOrigin(mr_bullet_logo.getLocalBounds().width / 2, mr_bullet_logo.getLocalBounds().height / 2);
-	mr_bullet_logo.setPosition(mainmenu.getSize().x / 2, mainmenu.getSize().y / 9);
+	mr_bullet_logo.setPosition(window.getSize().x / 2, window.getSize().y / 9);
 
 
 	// Buttons
@@ -65,60 +68,59 @@ void Main_menu(sf::RenderWindow& mainmenu)
 
 	play_button.sprite.setTexture(play_button.Default_texture);
     play_button.sprite.setOrigin(play_button.sprite.getLocalBounds().width / 2, play_button.sprite.getLocalBounds().height / 2);
-	play_button.sprite.setPosition(mainmenu.getSize().x / 2, mainmenu.getSize().y / 3);
+	play_button.sprite.setPosition(window.getSize().x / 2, window.getSize().y / 3);
 
 
 
 	options_button.sprite.setTexture(options_button.Default_texture);
     options_button.sprite.setOrigin(options_button.sprite.getLocalBounds().width / 2, options_button.sprite.getLocalBounds().height / 2);
-	options_button.sprite.setPosition(mainmenu.getSize().x / 2, mainmenu.getSize().y / 2);
+	options_button.sprite.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
 
 
 	quit_button.sprite.setTexture(quit_button.Default_texture);
     quit_button.sprite.setOrigin(quit_button.sprite.getLocalBounds().width / 2, quit_button.sprite.getLocalBounds().height / 2);
-	quit_button.sprite.setPosition(mainmenu.getSize().x / 2, mainmenu.getSize().y * 2/3);
+	quit_button.sprite.setPosition(window.getSize().x / 2, window.getSize().y * 2/3);
 
 
 	// achievements menu
 
-	sf::Sprite achievements_button;
+
 	achievements_button.setTexture(achievement_texture);
 
 	achievements_button.setOrigin(achievements_button.getLocalBounds().width / 2, achievements_button.getLocalBounds().height / 2);
-	achievements_button.setPosition(mainmenu.getSize().x / 1.059, mainmenu.getSize().y / 1.097);
+	achievements_button.setPosition(window.getSize().x / 1.059, window.getSize().y / 1.097);
 
 
     //hovereffect checking
 
-    hoverEffect(quit_button.sprite, mainmenu);
-    hoverEffect(options_button.sprite, mainmenu);
-    hoverEffect(play_button.sprite, mainmenu);
-    hoverEffect(achievements_button, achievement_hovered_texture, mainmenu);
+    hoverEffect(quit_button.sprite);
+    hoverEffect(options_button.sprite);
+    hoverEffect(play_button.sprite);
+    hoverEffect(achievements_button, achievement_hovered_texture);
 
     // pollEvent loop
 
     sf::Event event;
-
-    while(mainmenu.pollEvent(event))
+    while(window.pollEvent(event))
     {
         if(event.type == sf::Event::Closed)
         {
             SFX_click.play();
-            mainmenu.close();
+            window.close();
         }
 
         else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
         {
 
             // a variable to store the mouse position on the screen
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(mainmenu);
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
             if(quit_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
                 SFX_click.play();
                 quit_button.sprite.setTexture(quit_button.Pressed_texture);
-                mainmenu.close();
+                window.close();
 
             }
 
@@ -148,28 +150,26 @@ void Main_menu(sf::RenderWindow& mainmenu)
     }
 
     //drawing
-    mainmenu.draw(main_menu_background);
-    mainmenu.draw(mr_bullet_logo);
-    mainmenu.draw(play_button.sprite);
-    mainmenu.draw(options_button.sprite);
-    mainmenu.draw(quit_button.sprite);
-    mainmenu.draw(achievements_button);
+    window.draw(main_menu_background);
+    window.draw(mr_bullet_logo);
+    window.draw(play_button.sprite);
+    window.draw(options_button.sprite);
+    window.draw(quit_button.sprite);
+    window.draw(achievements_button);
 }
 
 
-
-
-void Play_menu(sf::RenderWindow& play_menu)
+void Play_menu()
 {
+    sf::Sprite play_menu_background;
+    sf::Text classic_mode("Classic", game_font, 40), duels_mode("Duels", game_font, 40), choose("Choose your mode", game_font, 50);
     // Background
 
 
-
-    sf::Sprite play_menu_background;
     play_menu_background.setTexture(play_menu_background_texture);
     play_menu_background.setScale(
-        play_menu.getSize().x / play_menu_background.getLocalBounds().width,
-        play_menu.getSize().y / play_menu_background.getLocalBounds().height);
+        window.getSize().x / play_menu_background.getLocalBounds().width,
+        window.getSize().y / play_menu_background.getLocalBounds().height);
 
 
     // classic menu    and     duels menu
@@ -178,7 +178,7 @@ void Play_menu(sf::RenderWindow& play_menu)
 
     classic_menu.sprite.setTexture(classic_menu.Default_texture);
     classic_menu.sprite.setOrigin(classic_menu.sprite.getLocalBounds().width / 2, classic_menu.sprite.getLocalBounds().height / 2);
-    classic_menu.sprite.setPosition(play_menu.getSize().x / 5.529, play_menu.getSize().y / 2);
+    classic_menu.sprite.setPosition(window.getSize().x / 5.529, window.getSize().y / 2);
 
 
 
@@ -186,28 +186,28 @@ void Play_menu(sf::RenderWindow& play_menu)
 
     duels_menu.sprite.setTexture(duels_menu.Default_texture);
     duels_menu.sprite.setOrigin(duels_menu.sprite.getLocalBounds().width / 2, duels_menu.sprite.getLocalBounds().height / 2);
-    duels_menu.sprite.setPosition(play_menu.getSize().x / 1.235,play_menu.getSize().y / 2);
+    duels_menu.sprite.setPosition(window.getSize().x / 1.235,window.getSize().y / 2);
 
     // Text
 
 
 
-    sf::Text classic_mode("Classic", game_font, 40), duels_mode("Duels", game_font, 40), choose("Choose your mode", game_font, 50);
+
 
 
     choose.setFillColor(sf::Color::Black);
     choose.setOrigin(choose.getLocalBounds().width / 2, choose.getLocalBounds().height / 2);
-    choose.setPosition(play_menu.getSize().x / 2, play_menu.getSize().y / 9);
+    choose.setPosition(window.getSize().x / 2, window.getSize().y / 9);
 
 
     classic_mode.setFillColor(sf::Color::Black);
     classic_mode.setOrigin(classic_mode.getLocalBounds().width / 2, classic_mode.getLocalBounds().height / 2);
-    classic_mode.setPosition(play_menu.getSize().x / 5.529, play_menu.getSize().y / 3.342);
+    classic_mode.setPosition(window.getSize().x / 5.529, window.getSize().y / 3.342);
 
 
     duels_mode.setFillColor(sf::Color::Black);
     duels_mode.setOrigin(duels_mode.getLocalBounds().width / 2, duels_mode.getLocalBounds().height / 2);
-    duels_mode.setPosition(play_menu.getSize().x / 1.235, play_menu.getSize().y / 3.342);
+    duels_mode.setPosition(window.getSize().x / 1.235, window.getSize().y / 3.342);
 
 
     // back button
@@ -215,27 +215,30 @@ void Play_menu(sf::RenderWindow& play_menu)
 
     back_button.sprite.setTexture(back_button.Default_texture);
     back_button.sprite.setOrigin(back_button.sprite.getLocalBounds().width / 2, back_button.sprite.getLocalBounds().height / 2);
-    back_button.sprite.setPosition(play_menu.getSize().x / 12.061, play_menu.getSize().y / 1.099);
+    back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
+
+
 
 
     // hovereffect checking
 
-    hoverEffect(back_button.sprite, play_menu);
-    hoverEffect(classic_menu.sprite, classic_menu.Default_texture, classic_menu.Hovered_texture, classic_mode, play_menu);
-    hoverEffect(duels_menu.sprite, duels_menu.Default_texture, duels_menu.Hovered_texture, duels_mode, play_menu);
+    hoverEffect(back_button.sprite);
+    hoverEffect(classic_menu.sprite, classic_menu.Default_texture, classic_menu.Hovered_texture, classic_mode);
+    hoverEffect(duels_menu.sprite, duels_menu.Default_texture, duels_menu.Hovered_texture, duels_mode);
+
 
     sf::Event event;
-    while(play_menu.pollEvent(event))
+    while(window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
         {
             SFX_click.play();
-            play_menu.close();
+            window.close();
         }
 
         else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
         {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(play_menu);
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
             if (back_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
@@ -252,18 +255,19 @@ void Play_menu(sf::RenderWindow& play_menu)
         }
     }
 
-    play_menu.draw(play_menu_background);
-    play_menu.draw(choose);
-    play_menu.draw(classic_mode);
-    play_menu.draw(classic_menu.sprite);
-    play_menu.draw(duels_mode);
-    play_menu.draw(duels_menu.sprite);
-    play_menu.draw(back_button.sprite);
+    window.draw(play_menu_background);
+    window.draw(choose);
+    window.draw(classic_mode);
+    window.draw(classic_menu.sprite);
+    window.draw(duels_mode);
+    window.draw(duels_menu.sprite);
+    window.draw(back_button.sprite);
+
 }
 
 
 
-void Options_menu(sf::RenderWindow& window )
+void Options_menu()
 {
     //Text
     sf::Text Audio_text("Audio", game_font, 50);
@@ -353,7 +357,7 @@ void Options_menu(sf::RenderWindow& window )
 
 
 
-    hoverEffect(back_button.sprite, window);
+    hoverEffect(back_button.sprite);
 
     Event event;
     while (window.pollEvent(event))
@@ -367,11 +371,7 @@ void Options_menu(sf::RenderWindow& window )
 
 
 
-            volume_manage(window, volume_presentage[0], Volume_increase[0], Volume_decrease[0], volumeVariable[0], game_font, "assets/HelveticaNeueCondensedBlack.ttf");
 
-
-
-            volume_manage(window, volume_presentage[1], Volume_increase[1], Volume_decrease[1], volumeVariable[1], game_font, "assets/HelveticaNeueCondensedBlack.ttf");
 
             volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
             volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
@@ -431,7 +431,7 @@ void Options_menu(sf::RenderWindow& window )
 
 
 
-void Classic_menu(sf::RenderWindow& classic_menu)
+void Classic_menu()
 {
     // background
 
@@ -440,8 +440,8 @@ void Classic_menu(sf::RenderWindow& classic_menu)
 
    classic_menu_background.setTexture(classic_menu_background_texture);
     classic_menu_background.setScale(
-        classic_menu.getSize().x / classic_menu_background.getLocalBounds().width,
-        classic_menu.getSize().y / classic_menu_background.getLocalBounds().height);
+        window.getSize().x / classic_menu_background.getLocalBounds().width,
+        window.getSize().y / classic_menu_background.getLocalBounds().height);
 
     // levels
 
@@ -455,8 +455,8 @@ void Classic_menu(sf::RenderWindow& classic_menu)
     const int grid_width = (num_cols * width) + ((num_cols - 1) * gap);
     const int grid_height = (num_rows * height) + ((num_rows - 1) * gap);
 
-    const int start_x = (classic_menu.getSize().x - grid_width) / 2;
-    const int start_y = (classic_menu.getSize().y - grid_height) / 2;
+    const int start_x = (window.getSize().x - grid_width) / 2;
+    const int start_y = (window.getSize().y - grid_height) / 2;
 
 
     Level_Evaluation(level);
@@ -478,25 +478,25 @@ void Classic_menu(sf::RenderWindow& classic_menu)
 
     back_button.sprite.setTexture(back_button.Default_texture);
     back_button.sprite.setOrigin(back_button.sprite.getLocalBounds().width / 2, back_button.sprite.getLocalBounds().height / 2);
-    back_button.sprite.setPosition(classic_menu.getSize().x / 12.061, classic_menu.getSize().y / 1.099);
+    back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
 
     // hoverEffect checking
 
-    hoverEffect(back_button.sprite, classic_menu);
+    hoverEffect(back_button.sprite);
 
 
     sf::Event event;
-    while(classic_menu.pollEvent(event))
+    while(window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
         {
             SFX_click.play();
-            classic_menu.close();
+            window.close();
         }
 
         else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
         {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(classic_menu);
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
             if (back_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
@@ -509,7 +509,7 @@ void Classic_menu(sf::RenderWindow& classic_menu)
                 for (int i = 0; i < levels.size();i++)
                 {
                     if (level[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level[i].view.Level_evaluation != -1)
-                        current_menu = i;
+                        current_menu = menu_type(i);
                 }
             }
         }
@@ -518,26 +518,27 @@ void Classic_menu(sf::RenderWindow& classic_menu)
 
     // drawing
 
-    classic_menu.draw(classic_menu_background);
-    classic_menu.draw(back_button.sprite);
+    window.draw(classic_menu_background);
+    window.draw(back_button.sprite);
     for (int i = 0; i < levels.size(); i++)
     {
-        classic_menu.draw(level[i].view.Level_selection);
+        window.draw(level[i].view.Level_selection);
     }
-    hoverEffect(level, classic_menu);
+    hoverEffect(level);
 }
 
 
-void Achievements_menu(sf::RenderWindow& achievements_menu)
+void Achievements_menu()
 {
+
     // backgroound
 
     sf::Sprite background;
     background.setTexture(achievements_menu_background);
 
     background.setScale(
-        achievements_menu.getSize().x / background.getLocalBounds().width,
-        achievements_menu.getSize().y / background.getLocalBounds().height);
+        window.getSize().x / background.getLocalBounds().width,
+        window.getSize().y / background.getLocalBounds().height);
 
     // achievements
 
@@ -547,34 +548,33 @@ void Achievements_menu(sf::RenderWindow& achievements_menu)
         achievements[i].sprite.setScale(0.5f, 0.5f);
     }
 
-    achievements[0].sprite.setPosition(achievements_menu.getSize().x / 2, achievements_menu.getSize().y / 7);
-    achievements[1].sprite.setPosition(achievements_menu.getSize().x / 2, achievements_menu.getSize().y / 3.186);
-    achievements[2].sprite.setPosition(achievements_menu.getSize().x / 2, achievements_menu.getSize().y / 2.065);
-    achievements[3].sprite.setPosition(achievements_menu.getSize().x / 2, achievements_menu.getSize().y / 1.531);
-    achievements[4].sprite.setPosition(achievements_menu.getSize().x / 2, achievements_menu.getSize().y / 1.211);
+    achievements[0].sprite.setPosition(window.getSize().x / 2, window.getSize().y / 7);
+    achievements[1].sprite.setPosition(window.getSize().x / 2, window.getSize().y / 3.186);
+    achievements[2].sprite.setPosition(window.getSize().x / 2, window.getSize().y / 2.065);
+    achievements[3].sprite.setPosition(window.getSize().x / 2, window.getSize().y / 1.531);
+    achievements[4].sprite.setPosition(window.getSize().x / 2, window.getSize().y / 1.211);
 
     // back button
 
     back_button.sprite.setTexture(back_button.Default_texture);
     back_button.sprite.setOrigin(back_button.sprite.getLocalBounds().width / 2, back_button.sprite.getLocalBounds().height / 2);
-    back_button.sprite.setPosition(achievements_menu.getSize().x / 12.061, achievements_menu.getSize().y / 1.099);
+    back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
 
-    hoverEffect(back_button.sprite, achievements_menu);
+    hoverEffect(back_button.sprite);
 
     // pollEvent loop
 
     sf::Event event;
-    while(achievements_menu.pollEvent(event))
+    while(window.pollEvent(event))
     {
-        if (event.type == sf::Event::Closed)
+        if(event.type == sf::Event::Closed)
         {
-            SFX_click.play();
-            achievements_menu.close();
+            window.close();
         }
 
         else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
         {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(achievements_menu);
+             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
             if (back_button.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
@@ -587,12 +587,12 @@ void Achievements_menu(sf::RenderWindow& achievements_menu)
 
     // drawing
 
-    achievements_menu.draw(background);
+    window.draw(background);
     for (int i = 0; i < 5; i++)
     {
-        achievements_menu.draw(achievements[i].sprite);
+        window.draw(achievements[i].sprite);
     }
-    achievements_menu.draw(back_button.sprite);
+    window.draw(back_button.sprite);
 }
 
 
@@ -751,7 +751,7 @@ void FONT(Font& font_name, string font_file_name)
 }
 
 
-void volume_manage(sf::RenderWindow& window, sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down, int& volume_num, Font& font_name, string font_file_name)
+void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down, int& volume_num, Font& font_name, string font_file_name)
 {
     font_name.loadFromFile(font_file_name);
     text.setFont(font_name);
@@ -808,7 +808,7 @@ void Level_Evaluation(Level level[])
 }
 
 
-void hoverEffect(sf::Sprite& button, sf::Texture& hovered, sf::RenderWindow& window)
+void hoverEffect(sf::Sprite& button, sf::Texture& hovered)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
@@ -818,7 +818,7 @@ void hoverEffect(sf::Sprite& button, sf::Texture& hovered, sf::RenderWindow& win
     }
 }
 
-void hoverEffect(sf::Sprite& button, sf::RenderWindow& window)
+void hoverEffect(sf::Sprite& button)
 {
 	// Get the local bounds of the button
 	sf::FloatRect bounds = button.getLocalBounds();
@@ -842,7 +842,7 @@ void hoverEffect(sf::Sprite& button, sf::RenderWindow& window)
 	}
 }
 
-void hoverEffect(Level level[], sf::RenderWindow& window)
+void hoverEffect(Level level[])
 {
     sf::Sprite Border;
     Border.setTexture(Border_hover_effect);
@@ -858,7 +858,7 @@ void hoverEffect(Level level[], sf::RenderWindow& window)
     }
 }
 
-void hoverEffect(sf::Sprite& option, sf::Texture& original,sf::Texture& hovered, sf::Text& attached_text, sf::RenderWindow& window)
+void hoverEffect(sf::Sprite& option, sf::Texture& original,sf::Texture& hovered, sf::Text& attached_text)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 

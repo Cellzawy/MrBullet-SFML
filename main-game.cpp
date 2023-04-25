@@ -5,10 +5,11 @@
 #include "Levels.h"
 #include "Menus.h"
 
+sf::RenderWindow window(sf::VideoMode(1920, 1080), "Mr bullet", sf::Style::Fullscreen);
 
 // Menus test
 int main() {
-    sf::RenderWindow window (sf::VideoMode(1920, 1080), "Mr Bullet", sf::Style::Default);
+    window.setFramerateLimit(30);
 
     Texture_loading();
 
@@ -22,39 +23,36 @@ int main() {
     while(window.isOpen())
     {
         // drawing
-    sf::Event event;
-    while(window.pollEvent(event))
-    {
-    if(event.type == sf::Event::Closed)
-        window.close();
-    }
+
         window.clear();
 
         if (current_menu == main_menu)
         {
-            Main_menu(window);
+            Main_menu();
         }
 
         else if (current_menu == play_menu)
         {
-            Play_menu(window);
+            Play_menu();
         }
+
 
         else if (current_menu == options_menu)
         {
-            Options_menu(window);
+            Options_menu();
         }
+
 
         else if (current_menu == classic_Mode)
         {
-            Classic_menu(window);
+            Classic_menu();
         }
 
         else if (current_menu == achievements_menu)
         {
-            Achievements_menu(window);
+            Achievements_menu();
         }
-        
+
         else if (current_menu == level_1)
         {
             window.draw(lev1.bg);
@@ -62,20 +60,20 @@ int main() {
             character_draw(lev1.killer, window);
             character_draw(lev1.target[0], window);
         }
-        
+
         else if (current_menu == level_2)
         {
             window.close();
         }
-        
+
         else if (current_menu == level_3)
         {
-            
+
         }
-        
+
         else if (current_menu == level_4)
         {
-            
+
         }
 
         window.display();
@@ -107,7 +105,7 @@ int main() {
                 }
             }
         }
-        
+
         window.clear();
         DrawingLevels(levCounter, window);
         window.display();
