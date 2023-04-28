@@ -28,7 +28,9 @@ sf::Sprite achievements_button;
 
 // options menu
 Texture back_ground, checkbox_close, checkbox_open, volume_increase, volume_decrease;
-
+int volumeVariable[2] = { 50,50 }; 
+Text volume_presentage[2];
+bool fullscreen_close = false;
 // play menu
 sf::Texture play_menu_background_texture;
 Menu classic_menu, duels_menu;
@@ -211,13 +213,22 @@ void Options_menu()
     Audio_text.setOrigin(Audio_text.getLocalBounds().width / 2, Audio_text.getLocalBounds().height / 2);
     Audio_text.setFillColor(Color(190, 95, 14));
 
-    sf::Text volume_presentage[2];
-    int volumeVariable[2] = { 50,50 };
+  
 
+
+    sf::Text volume_presentage[2];
+    volume_presentage[0].setFont(game_font);
+    volume_presentage[0].setString(to_string(volumeVariable[0]));
     volume_presentage[0].setCharacterSize(50);
+    volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
+    volume_presentage[0].setScale(Vector2f(1.2, 1.2));
     volume_presentage[0].setPosition(window.getSize().x / 5.052, window.getSize().y / 7.448);
 
+    volume_presentage[1].setFont(game_font);
+    volume_presentage[1].setString(to_string(volumeVariable[1]));
     volume_presentage[1].setCharacterSize(50);
+    volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[1].getLocalBounds().height / 2);
+    volume_presentage[1].setScale(Vector2f(1.2, 1.2));
     volume_presentage[1].setPosition(window.getSize().x / 5.052, window.getSize().y / 4.102);
 
     sf::Text Music_Text("Music", game_font, 50);
@@ -290,15 +301,9 @@ void Options_menu()
     back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
 
 
-    bool fullscreen_close = false;
+   
 
     string font_path = "assets/HelveticaNeueCondensedBlack.ttf";
-
-    volume_manage(volume_presentage[0], Volume_increase[0], Volume_decrease[0], volumeVariable[0], font, font_path);
-
-
-    volume_manage(volume_presentage[1], Volume_increase[1], Volume_decrease[1], volumeVariable[1], font, font_path);
-
 
 
     hoverEffect(back_button.sprite);
@@ -306,47 +311,52 @@ void Options_menu()
     Event event;
     while (window.pollEvent(event))
     {
+       
         //Mouse Events
-
-        if (Mouse::isButtonPressed(Mouse::Left))
+        if (event.type == Event::MouseButtonPressed)
         {
+           
 
-            Vector2i mousePosition = Mouse::getPosition(window);
-
-            //Music
-            volume_manage( volume_presentage[0], Volume_increase[0], Volume_decrease[0], volumeVariable[0], font, font_path);
-
-            //SFX
-            volume_manage( volume_presentage[1], Volume_increase[1], Volume_decrease[1], volumeVariable[1], font, font_path);
-
-
-
-            volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
-            volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
-
-
-
-            if (back_button.sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+            if (Mouse::isButtonPressed(Mouse::Left))
             {
-                back_button.sprite.setTexture(back_button.Pressed_texture);
-                SFX_click.play();
-                current_menu = main_menu;
-            }
 
-            if (check_box_close.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && fullscreen_close == true)
-            {
-                SFX_click.play();
-                fullscreen_close = false;
-                Fullscreen_text.setFillColor(Color::White);
-                window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
-            }
+                Vector2i mousePosition = Mouse::getPosition(window);
 
-            else if (check_box_open.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-            {
-                SFX_click.play();
-                fullscreen_close = true;
-                Fullscreen_text.setFillColor(Color::White);
-                window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
+                //Music
+                volume_manage(volume_presentage[0], Volume_increase[0], Volume_decrease[0], volumeVariable[0], font, font_path);
+                mainmenu_music.setVolume(volumeVariable[0]);
+                //SFX
+                volume_manage(volume_presentage[1], Volume_increase[1], Volume_decrease[1], volumeVariable[1], font, font_path);
+                SFX_click.setVolume(volumeVariable[1]);
+
+
+                volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
+                volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
+
+
+
+                if (back_button.sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                {
+                    back_button.sprite.setTexture(back_button.Pressed_texture);
+                    SFX_click.play();
+                    current_menu = main_menu;
+                }
+
+                if (check_box_close.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && fullscreen_close == true)
+                {
+                    SFX_click.play();
+                    fullscreen_close = false;
+                    Fullscreen_text.setFillColor(Color::White);
+                    window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
+                }
+
+                else if (check_box_open.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                {
+                    SFX_click.play();
+                    fullscreen_close = true;
+                    Fullscreen_text.setFillColor(Color::White);
+                    window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
+                }
             }
         }
 
@@ -534,7 +544,7 @@ quit_button.Pressed_texture.loadFromFile("assets/menus/main_menu/Quit_button_pre
 
 
 // options menu
-
+int volumeVariable[2] = { 50,50 };
 
 back_ground.loadFromFile("assets/menus/options_menu/background_western.png");
 checkbox_close.loadFromFile("assets/menus/options_menu/switch_off.png");
@@ -659,23 +669,25 @@ void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down,
     text.setCharacterSize(50);
     text.setOrigin(text.getLocalBounds().width / 2, text.getLocalBounds().height / 2);
     text.setScale(Vector2f(1.2, 1.2));
-    Vector2i mousePosition = Mouse::getPosition(window);
+    
+        if (Mouse::isButtonPressed(Mouse::Left))
+        {
+            Vector2i mousePosition = Mouse::getPosition(window);
 
-    if (volume_up.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && volume_num < 100)
-    {
 
+            if (volume_up.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && volume_num < 100)
+            {
+                volume_num += 10;
+                text.setString(to_string(volume_num));
+            }
 
-            volume_num += 10;
-            text.setString(to_string(volume_num));
-
-    }
-
-    else if (volume_down.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && volume_num > 0)
-    {
-
-        volume_num -= 10;
-        text.setString(to_string(volume_num));
-    }
+            else if (volume_down.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && volume_num > 0)
+            {
+                volume_num -= 10;
+                text.setString(to_string(volume_num));
+            }
+        }
+    
 }
 
 void Level_Evaluation(Level level[])

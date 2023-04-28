@@ -77,7 +77,9 @@ extern Button play_button, options_button, quit_button;
 
 // options menu
 extern Texture back_ground, checkbox_close, checkbox_open, volume_increase, volume_decrease;
-
+extern Text volume_presentage[2];
+extern  int volumeVariable[2];
+extern bool fullscreen_close;
 // play menu
 
 extern sf::Texture play_menu_background_texture;

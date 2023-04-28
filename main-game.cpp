@@ -5,8 +5,6 @@
 #include "Physics.h"
 #include "Levels.h"
 #include "Menus.h"
-#include "win-lose-logic.h"
-
 
 sf::RenderWindow window(sf::VideoMode(1920, 1080), "Mr bullet", sf::Style::Fullscreen);
 
@@ -19,6 +17,7 @@ int main() {
     SFX_click.setBuffer(SFX_click_soundbuffer);
 
     mainmenu_music.openFromFile("assets/sounds/main_music.ogg");
+    mainmenu_music.setVolume(volumeVariable[0]);
     mainmenu_music.play();
     mainmenu_music.setLoop(true);
     constructlev1(window);
@@ -58,11 +57,10 @@ int main() {
 
         else if (current_menu == level_1)
         {
-            //window.draw(lev1.bg);
-            //window.draw(lev1.ground);
-            //character_draw(lev1.killer, window);
-            //character_draw(lev1.target[0], window);
-            Win_panel();
+            window.draw(lev1.bg);
+            window.draw(lev1.ground);
+            character_draw(lev1.killer, window);
+            character_draw(lev1.target[0], window);
         }
 
         else if (current_menu == level_2)
@@ -187,90 +185,6 @@ int main()
         window.draw(ring);
         character_draw(killer, window);
         character_draw(target, window);
-        //window.draw(triangle);
-        window.display();
-    }
-    return 0;
-}
-*/
-
-
-
-//Cellz
-
-/*
-Vector2f startPosition;
-Vector2f endPosition;
-
-
-int main()
-{
-    RenderWindow window(VideoMode(1920, 1080), "SFML works!", Style::Fullscreen);
-    bullet.setPosition(200, 200);
-    window.setFramerateLimit(144);
-    Clock clock;
-    bool bulletFired = false;
-    bool bulletExists = false;
-    sf::Music music;
-
-    sf::Sound SFX_click;
-
-    sf::SoundBuffer SFX_click_soundbuffer;
-
-    while (window.isOpen())
-    {
-        sprites();
-
-        // Moving the bullet
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 12.f);
-        }
-
-        if (bullets.size() != 0)
-        {
-            for (int i = 0; i < bullets.size(); i++)
-            {
-                Time elapsed = bullets[i].clock.getElapsedTime();
-                if (elapsed >= seconds(5.f))
-                {
-                    cout << "erased" << endl;
-                    bulletExists = false;
-                    bullets.erase(bullets.begin() + i);
-                    clock.restart();
-                }
-            }
-        }
-
-        Event event;
-
-        while (window.pollEvent(event))
-        {
-            switch (event.type) {
-            case Event::Closed:
-                window.close();
-                break;
-            case Event::MouseButtonReleased:
-                if (event.mouseButton.button == Mouse::Left && !Mouse::isButtonPressed(Mouse::Right)) {
-                    cout << "yes";
-                    Vector2i mousepos = Mouse::getPosition(window);
-                    Bullet newBullet;
-                    newBullet.bulletBody = bullet;
-                    bullets.push_back(newBullet);
-                    DirectBullet(bullets[bullets.size() - 1], event, mousepos);
-                    bulletFired = true;
-                    bulletExists = true;
-                }
-                break;
-            default:
-                break;
-            }
-        }
-
-
-        window.clear();
-        for (int i = 0; i < bullets.size(); i++) {
-            window.draw(bullets[i].bulletBody);
-        }
         //window.draw(triangle);
         window.display();
     }
