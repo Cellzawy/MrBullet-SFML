@@ -135,7 +135,7 @@ sf::Event classic_menu_eventloop()
             }
             else
             {
-                for (int i = 0; i < levels.size();i++)
+                for (int i = 0; i < 10;i++)
                 {
                     if (level[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level[i].view.Level_evaluation != -1)
                         current_menu = menu_type(i);
