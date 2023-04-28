@@ -17,6 +17,12 @@ extern RectangleShape walls[];
 
 void sprites();
 
+struct Bullet {
+	CircleShape bulletBody;
+	Vector2f bulletDirection;
+	Clock clock;
+};
+
 struct Character {
     bool flip;
     sf::Texture head_texture;
