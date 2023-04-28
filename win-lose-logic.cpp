@@ -460,18 +460,18 @@ void DissolveEffect_first_Text(sf::Text text, float dissolveTime)
 {
     normal_eventloop();
 
-    text.setColor(sf::Color(147, 22, 22, 0));
+    text.setFillColor(sf::Color(147, 22, 22, 0));
 
     sf::Clock dissolveClock;
-    while(text.getColor().a != 225)
+    while(text.getFillColor().a != 225)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
-        text.setColor(sf::Color(147, 22, 22, static_cast<sf::Uint8>(dissolvePercent * 255)));
+        text.setFillColor(sf::Color(147, 22, 22, static_cast<sf::Uint8>(dissolvePercent * 255)));
 
         if (dissolvePercent >= 1.0f)
         {
-            text.setColor(sf::Color(147, 22, 22, 255));
+            text.setFillColor(sf::Color(147, 22, 22, 255));
         }
 
         window.clear();
@@ -485,18 +485,18 @@ void DissolveEffect_second_Text(sf::Text text, float dissolveTime)
 {
     normal_eventloop();
 
-    text.setColor(sf::Color(147, 22, 22, 0));
+    text.setFillColor(sf::Color(147, 22, 22, 0));
 
     sf::Clock dissolveClock;
-    while(text.getColor().a != 225)
+    while(text.getFillColor().a != 225)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
-        text.setColor(sf::Color(147, 22, 22, static_cast<sf::Uint8>(dissolvePercent * 255)));
+        text.setFillColor(sf::Color(147, 22, 22, static_cast<sf::Uint8>(dissolvePercent * 255)));
 
         if (dissolvePercent >= 1.0f)
         {
-            text.setColor(sf::Color(147, 22, 22, 255));
+            text.setFillColor(sf::Color(147, 22, 22, 255));
         }
 
         window.clear();
