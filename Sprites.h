@@ -14,8 +14,10 @@ extern RectangleShape wall3;
 extern RectangleShape wall4;
 extern RectangleShape box;
 extern RectangleShape walls[];
+extern vector<Bullet> bullets;
 
 void sprites();
+
 
 struct Bullet {
 	CircleShape bulletBody;
