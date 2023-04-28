@@ -5,6 +5,8 @@
 #include "Physics.h"
 #include "Levels.h"
 #include "Menus.h"
+#include "win-lose-logic.h"
+
 
 sf::RenderWindow window(sf::VideoMode(1920, 1080), "Mr bullet", sf::Style::Fullscreen);
 
@@ -56,10 +58,11 @@ int main() {
 
         else if (current_menu == level_1)
         {
-            window.draw(lev1.bg);
-            window.draw(lev1.ground);
-            character_draw(lev1.killer, window);
-            character_draw(lev1.target[0], window);
+            //window.draw(lev1.bg);
+            //window.draw(lev1.ground);
+            //character_draw(lev1.killer, window);
+            //character_draw(lev1.target[0], window);
+            Win_panel();
         }
 
         else if (current_menu == level_2)
