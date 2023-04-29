@@ -670,8 +670,7 @@ void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down,
     text.setOrigin(text.getLocalBounds().width / 2, text.getLocalBounds().height / 2);
     text.setScale(Vector2f(1.2, 1.2));
     
-        if (Mouse::isButtonPressed(Mouse::Left))
-        {
+     
             Vector2i mousePosition = Mouse::getPosition(window);
 
 
@@ -686,8 +685,8 @@ void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down,
                 volume_num -= 10;
                 text.setString(to_string(volume_num));
             }
-        }
-    
+        
+   
 }
 
 void Level_Evaluation(Level level[])
