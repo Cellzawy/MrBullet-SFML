@@ -15,7 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="Events.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprites.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="win-lose-logic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main-game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -24,6 +42,18 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Physics.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menus.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="win-lose-logic.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

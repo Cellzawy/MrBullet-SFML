@@ -6,7 +6,9 @@
 using namespace sf;
 using namespace std;
 
-extern Vector2f bulletDirection;
+//extern Vector2f bulletDirection;
+
+float dot(sf::Vector2f v1, sf::Vector2f v2); // Gets the dot product of two vectors
 
 Vector2f NormalizeVector(Vector2f vector); //  Gets the vector required to move the bullets
 

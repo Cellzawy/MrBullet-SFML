@@ -1,5 +1,5 @@
-#ifndef WIN-LOSE-LOGIC_H_INCLUDED
-#define WIN-LOSE-LOGIC_H_INCLUDED
+#ifndef WIN_LOSE_LOGIC_H_INCLUDED
+#define WIN_LOSE_LOGIC_H_INCLUDED
 
 extern sf::Texture win_panel_texture, lose_panel_texture;
 extern sf::Texture star_texture, empty_star_texture, forward_texture, backward_texture, reset_texture;

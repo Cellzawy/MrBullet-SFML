@@ -41,7 +41,7 @@ bool animation = true;
 
 void Win_panel()
 {
-    int x = 0;
+    int x = 3;
 
     Forward.setTexture(forward_texture);
     backward.setTexture(backward_texture);
@@ -55,7 +55,7 @@ void Win_panel()
     if (animation)
     {
         win_panel.setOrigin(win_panel.getLocalBounds().width / 2, win_panel.getLocalBounds().height / 2);
-        win_panel.setPosition(window.getSize().x / 2, window.getSize().y / -0.624);
+        win_panel.setPosition(window.getSize().x / 2, window.getSize().x / -0.577);
 
         first_star.setTexture(empty_star_texture);
         second_star.setTexture(empty_star_texture);
@@ -63,24 +63,19 @@ void Win_panel()
     }
 
     first_star.setOrigin(first_star.getLocalBounds().width / 2, first_star.getLocalBounds().height / 2);
-    first_star.setPosition(window.getSize().x / 2.6, window.getSize().y / 2.466);
+    first_star.setPosition(window.getSize().x / 2.4, window.getSize().y / 2.466);
 
     second_star.setOrigin(second_star.getLocalBounds().width / 2, second_star.getLocalBounds().height / 2);
-    second_star.setPosition(window.getSize().x / 1.625, window.getSize().y / 2.466);
+    second_star.setPosition(window.getSize().x / 1.714, window.getSize().y / 2.466);
 
     third_star.setOrigin(third_star.getLocalBounds().width / 2, third_star.getLocalBounds().height / 2);
     third_star.setPosition(window.getSize().x / 2, window.getSize().y / 2.799);
 
-    result_text.setCharacterSize(50);
-    result_text.setFont(game_font);
-    result_text.setOrigin(result_text.getGlobalBounds().width / 2, result_text.getGlobalBounds().height / 2);
-    result_text.setPosition(window.getSize().x / 2, window.getSize().y / 2.1);
-
     Forward.setOrigin(Forward.getLocalBounds().width / 2, Forward.getLocalBounds().height / 2);
-    Forward.setPosition(window.getSize().x / 1.579, window.getSize().y / 1.239);
+    Forward.setPosition(window.getSize().x / 1.701, window.getSize().y / 1.339);
 
-    backward.setOrigin(backward.getLocalBounds().width /2, backward.getLocalBounds().height / 2);
-    backward.setPosition(window.getSize().x / 2.727, window.getSize().y / 1.239);
+    backward.setOrigin(backward.getLocalBounds().width / 2, backward.getLocalBounds().height / 2);
+    backward.setPosition(window.getSize().x / 2.427, window.getSize().y / 1.339);
 
     reset.setOrigin(reset.getLocalBounds().width / 2, reset.getLocalBounds().height / 2);
     reset.setPosition(window.getSize().x / 2, window.getSize().y / 1.388);
@@ -144,7 +139,7 @@ void DissolveEffect_three_stars(sf::Sprite& sprite1, sf::Sprite& sprite2, sf::Sp
 
     sf::Clock dissolveClock;
 
-    while(sprite1.getColor().a != 225 && sprite2.getColor().a != 255 && sprite3.getColor().a != 255)
+    while(sprite1.getColor().a != 255 && sprite2.getColor().a != 255 && sprite3.getColor().a != 255)
     {
 
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
@@ -202,6 +197,10 @@ void Winning_level_results(int result)
 void Zero_stars()
 {
     result_text.setString("Good");
+    result_text.setCharacterSize(50);
+    result_text.setFont(game_font);
+    result_text.setOrigin(result_text.getLocalBounds().width / 2, result_text.getLocalBounds().height / 2);
+    result_text.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
     window.clear();
     window.draw(win_panel);
@@ -214,6 +213,11 @@ void Zero_stars()
 void One_star()
 {
     result_text.setString("Great");
+    result_text.setCharacterSize(50);
+    result_text.setFont(game_font);
+    result_text.setOrigin(result_text.getLocalBounds().width / 2, result_text.getLocalBounds().height / 2);
+    result_text.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+
 
     sf::Clock delay;
     while(delay.getElapsedTime().asMilliseconds() < 800)
@@ -235,6 +239,10 @@ void One_star()
 void Two_stars()
 {
     result_text.setString("AWESOME");
+    result_text.setCharacterSize(50);
+    result_text.setFont(game_font);
+    result_text.setOrigin(result_text.getLocalBounds().width / 2, result_text.getLocalBounds().height / 2);
+    result_text.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
     sf::Clock delay;
 
@@ -269,6 +277,11 @@ void Two_stars()
 void Three_stars()
 {
     result_text.setString("EXCELLENT");
+    result_text.setCharacterSize(50);
+    result_text.setFont(game_font);
+    result_text.setOrigin(result_text.getLocalBounds().width / 2, result_text.getLocalBounds().height / 2);
+    result_text.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+
 
     sf::Clock delay;
     while(delay.getElapsedTime().asMilliseconds() < 1400)
@@ -320,7 +333,7 @@ void DissolveEffect_won_options(sf::Sprite& sprite1, sf::Sprite& sprite2, sf::Sp
 
     sf::Clock dissolveClock;
 
-    while(sprite1.getColor().a != 225 && sprite2.getColor().a != 255 && sprite3.getColor().a != 255)
+    while(sprite1.getColor().a != 255 && sprite2.getColor().a != 255 && sprite3.getColor().a != 255)
     {
 
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
@@ -353,7 +366,7 @@ void DissolveEffect_won_Quit(sf::Sprite& quit_button, float dissolveTime)
     quit_button.setColor(sf::Color(255, 255, 255, 0));
 
     sf::Clock dissolveClock;
-    while(quit_button.getColor().a != 225)
+    while(quit_button.getColor().a != 255)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
@@ -397,17 +410,17 @@ void Lose_panel()
 
     out_of_bullets.setFillColor(sf::Color(147, 22, 22, 255));
     out_of_bullets.setOrigin(out_of_bullets.getLocalBounds().width / 2, out_of_bullets.getLocalBounds().height / 2);
-    out_of_bullets.setPosition(window.getSize().x / 2, window.getSize().y / 2.988);
+    out_of_bullets.setPosition(window.getSize().x / 2, window.getSize().y / 2.788);
 
     Try_again.setFillColor(sf::Color(147, 22, 22, 255));
     Try_again.setOrigin(Try_again.getLocalBounds().width / 2, Try_again.getLocalBounds().height / 2);
     Try_again.setPosition(window.getSize().x / 2, window.getSize().y / 1.825);
 
     Forward.setOrigin(Forward.getLocalBounds().width / 2, Forward.getLocalBounds().height / 2);
-    Forward.setPosition(window.getSize().x / 1.579, window.getSize().y / 1.239);
+    Forward.setPosition(window.getSize().x / 1.701, window.getSize().y / 1.339);
 
     backward.setOrigin(backward.getLocalBounds().width /2, backward.getLocalBounds().height / 2);
-    backward.setPosition(window.getSize().x / 2.727, window.getSize().y / 1.239);
+    backward.setPosition(window.getSize().x / 2.427, window.getSize().y / 1.339);
 
     reset.setOrigin(reset.getLocalBounds().width / 2, reset.getLocalBounds().height / 2);
     reset.setPosition(window.getSize().x / 2, window.getSize().y / 1.388);
@@ -460,18 +473,18 @@ void DissolveEffect_first_Text(sf::Text text, float dissolveTime)
 {
     normal_eventloop();
 
-    text.setColor(sf::Color(147, 22, 22, 0));
+    text.setFillColor(sf::Color(147, 22, 22, 0));
 
     sf::Clock dissolveClock;
-    while(text.getColor().a != 225)
+    while(text.getFillColor().a != 255)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
-        text.setColor(sf::Color(147, 22, 22, static_cast<sf::Uint8>(dissolvePercent * 255)));
+        text.setFillColor(sf::Color(147, 22, 22, (dissolvePercent * 255)));
 
         if (dissolvePercent >= 1.0f)
         {
-            text.setColor(sf::Color(147, 22, 22, 255));
+            text.setFillColor(sf::Color(147, 22, 22, 255));
         }
 
         window.clear();
@@ -485,18 +498,18 @@ void DissolveEffect_second_Text(sf::Text text, float dissolveTime)
 {
     normal_eventloop();
 
-    text.setColor(sf::Color(147, 22, 22, 0));
+    text.setFillColor(sf::Color(147, 22, 22, 0));
 
     sf::Clock dissolveClock;
-    while(text.getColor().a != 225)
+    while(text.getFillColor().a != 255)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
-        text.setColor(sf::Color(147, 22, 22, static_cast<sf::Uint8>(dissolvePercent * 255)));
+        text.setFillColor(sf::Color(147, 22, 22, static_cast<sf::Uint8>(dissolvePercent * 255)));
 
         if (dissolvePercent >= 1.0f)
         {
-            text.setColor(sf::Color(147, 22, 22, 255));
+            text.setFillColor(sf::Color(147, 22, 22, 255));
         }
 
         window.clear();
@@ -516,7 +529,7 @@ void DissolveEffect_lost_options(sf::Sprite& sprite1, sf::Sprite& sprite2, sf::S
 
     sf::Clock dissolveClock;
 
-    while(sprite1.getColor().a != 225 && sprite2.getColor().a != 255 && sprite3.getColor().a != 255)
+    while(sprite1.getColor().a != 255 && sprite2.getColor().a != 255 && sprite3.getColor().a != 255)
     {
 
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
@@ -549,7 +562,7 @@ void DissolveEffect_lost_Quit(sf::Sprite& quit_button, float dissolveTime)
     quit_button.setColor(sf::Color(255, 255, 255, 0));
 
     sf::Clock dissolveClock;
-    while(quit_button.getColor().a != 225)
+    while(quit_button.getColor().a != 255)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
@@ -585,7 +598,7 @@ void Moving_down_animation(sf::Sprite& panel)
         window.clear();
         if (delay.getElapsedTime().asSeconds() > 1)
         {
-            panel.move(0, window.getSize().y / 550);
+            panel.move(0, window.getSize().y / 50);
             window.draw(panel);
         }
         window.display();

@@ -14,8 +14,16 @@ extern RectangleShape wall3;
 extern RectangleShape wall4;
 extern RectangleShape box;
 extern RectangleShape walls[];
+extern vector<Bullet> bullets;
 
 void sprites();
+
+
+struct Bullet {
+	CircleShape bulletBody;
+	Vector2f bulletDirection;
+	Clock clock;
+};
 
 struct Character {
     bool flip;

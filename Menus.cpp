@@ -27,8 +27,11 @@ sf::Sprite main_menu_background, mr_bullet_logo;
 sf::Sprite achievements_button;
 
 // options menu
-Texture back_ground, checkbox_close, checkbox_open, Back_button_Red, Back_button_Yellow, volume_increase, volume_decrease;
-
+Texture back_ground, checkbox_close, checkbox_open, volume_increase, volume_decrease;
+int volume_value[2] = { 50,50 };
+Text volume_presentage[2];
+bool fullscreen_close = false;
+Sprite check_box_close, check_box_open, Volume_increase[2], Volume_decrease[2];
 // play menu
 sf::Texture play_menu_background_texture;
 Menu classic_menu, duels_menu;
@@ -37,12 +40,28 @@ Menu classic_menu, duels_menu;
 sf::Texture classic_menu_background_texture;
 sf::Texture Border_hover_effect;
 Level level[20];
-std::vector<sf::Sprite> levels;
 
 // achievements menu
 sf::Texture achievements_menu_background;
 sf::Texture achievement_texture, achievement_hovered_texture;
 Achievment achievements[5];
+
+void Main_menu();
+void Play_menu();
+void Options_menu();
+void Classic_menu();
+void Achievements_menu();
+
+void Texture_loading();
+
+void Level_Evaluation(Level level[]);
+
+void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&);
+
+void hoverEffect(sf::Sprite&); // for buttons
+void hoverEffect(sf::Sprite&, sf::Texture&, sf::Texture&, sf::Text&); // for menu selection in play menu
+void hoverEffect(Level level[]); // for levels selection in classic menu
+void hoverEffect(sf::Sprite&, sf::Texture&); // for achievement button in main menu
 
 
 void Main_menu()
@@ -111,7 +130,6 @@ void Main_menu()
     window.draw(quit_button.sprite);
     window.draw(achievements_button);
 }
-
 
 void Play_menu()
 {
@@ -186,7 +204,6 @@ void Play_menu()
 
 }
 
-
 void Options_menu()
 {
     //Text
@@ -195,13 +212,22 @@ void Options_menu()
     Audio_text.setOrigin(Audio_text.getLocalBounds().width / 2, Audio_text.getLocalBounds().height / 2);
     Audio_text.setFillColor(Color(190, 95, 14));
 
-    sf::Text volume_presentage[2];
-    int volumeVariable[2] = { 50,50 };
+  
 
+
+    sf::Text volume_presentage[2];
+    volume_presentage[0].setFont(game_font);
+    volume_presentage[0].setString(to_string(volume_value[0]));
     volume_presentage[0].setCharacterSize(50);
+    volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
+    volume_presentage[0].setScale(Vector2f(1.2, 1.2));
     volume_presentage[0].setPosition(window.getSize().x / 5.052, window.getSize().y / 7.448);
 
+    volume_presentage[1].setFont(game_font);
+    volume_presentage[1].setString(to_string(volume_value[1]));
     volume_presentage[1].setCharacterSize(50);
+    volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[1].getLocalBounds().height / 2);
+    volume_presentage[1].setScale(Vector2f(1.2, 1.2));
     volume_presentage[1].setPosition(window.getSize().x / 5.052, window.getSize().y / 4.102);
 
     sf::Text Music_Text("Music", game_font, 50);
@@ -220,11 +246,13 @@ void Options_menu()
     sf::Text Fullscreen_text("Fullscreen", game_font, 50);
     Fullscreen_text.setOrigin(Fullscreen_text.getLocalBounds().width / 2, Fullscreen_text.getLocalBounds().height / 2);
     Fullscreen_text.setPosition(window.getSize().x / 1.828, window.getSize().y / 5.45);
-    Fullscreen_text.setFillColor(Color::White);
 
 
     //sprite
-    Sprite armor_sprite, Back_ground, check_box_close, check_box_open, Rectangle_Background, Volume_increase[2], Volume_decrease[2];
+    Sprite  Back_ground;
+
+    Back_ground.setTexture(back_ground);
+    Back_ground.setScale(window.getSize().x / Back_ground.getLocalBounds().width, window.getSize().y / Back_ground.getLocalBounds().height);
 
 
     check_box_close.setTexture(checkbox_close);
@@ -271,84 +299,29 @@ void Options_menu()
     back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
 
 
-    bool fullscreen = true;
-    bool back = true;
-
-
-
-
     hoverEffect(back_button.sprite);
 
-    Event event;
-    while (window.pollEvent(event))
-    {
-        //Mouse Events
-
-        if (Mouse::isButtonPressed(Mouse::Left))
-        {
-
-            Vector2i mousePosition = Mouse::getPosition(window);
+    options_menu_eventloop();
 
 
-
-
-
-            volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
-            volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
-
-
-
-            if (back_button.sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-            {
-                back_button.sprite.setTexture(back_button.Pressed_texture);
-                SFX_click.play();
-                current_menu = main_menu;
-            }
-
-            if (check_box_close.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && fullscreen)
-            {
-                SFX_click.play();
-                fullscreen = false;
-                Fullscreen_text.setFillColor(Color::White);
-                window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
-            }
-
-            else if (check_box_open.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-            {
-                SFX_click.play();
-                fullscreen = true;
-                Fullscreen_text.setFillColor(Color::White);
-                window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
-            }
-        }
-
-            if (event.type == Event::Closed)
-            {
-                SFX_click.play();
-                window.close();
-            }
-
-    }
-
-        window.draw(Back_ground);
-        window.draw(Audio_text);
-        window.draw(Music_Text);
-        window.draw(SFX_Text);
-        window.draw(video_text);
-        window.draw(Fullscreen_text);
-        window.draw(Volume_increase[0]);
-        window.draw(Volume_decrease[0]);
-        window.draw(volume_presentage[0]);
-        window.draw(Volume_increase[1]);
-        window.draw(Volume_decrease[1]);
-        window.draw(volume_presentage[1]);
-        if (fullscreen == false)
-            window.draw(check_box_open);
-        else
-            window.draw(check_box_close);
-        window.draw(back_button.sprite);
+    window.draw(Back_ground);
+    window.draw(Audio_text);
+    window.draw(Music_Text);
+    window.draw(SFX_Text);
+    window.draw(video_text);
+    window.draw(Fullscreen_text);
+    window.draw(Volume_increase[0]);
+    window.draw(Volume_decrease[0]);
+    window.draw(volume_presentage[0]);
+    window.draw(Volume_increase[1]);
+    window.draw(Volume_decrease[1]);
+    window.draw(volume_presentage[1]);
+    window.draw(back_button.sprite);
+    if (fullscreen_close == false)
+        window.draw(check_box_open);
+    else
+        window.draw(check_box_close);
 }
-
 
 void Classic_menu()
 {
@@ -389,7 +362,6 @@ void Classic_menu()
             start_x + (i % num_cols) * (width + gap),
             start_y + (i / num_cols) * (height + gap)
         );
-        levels.push_back(level[i].view.Level_selection);
     }
 
 
@@ -411,13 +383,12 @@ void Classic_menu()
 
     window.draw(classic_menu_background);
     window.draw(back_button.sprite);
-    for (int i = 0; i < levels.size(); i++)
+    for (int i = 0; i < 10; i++)
     {
         window.draw(level[i].view.Level_selection);
     }
     hoverEffect(level);
 }
-
 
 void Achievements_menu()
 {
@@ -467,7 +438,6 @@ void Achievements_menu()
     window.draw(back_button.sprite);
 }
 
-
 void Texture_loading()
 {
 // general
@@ -510,13 +480,11 @@ quit_button.Pressed_texture.loadFromFile("assets/menus/main_menu/Quit_button_pre
 
 
 // options menu
-
+int volumeVariable[2] = { 50,50 };
 
 back_ground.loadFromFile("assets/menus/options_menu/background_western.png");
 checkbox_close.loadFromFile("assets/menus/options_menu/switch_off.png");
 checkbox_open.loadFromFile("assets/menus/options_menu/switch_on.png");
-Back_button_Red.loadFromFile("assets/menus/Back_button.png");
-Back_button_Yellow.loadFromFile("assets/menus/Back_button_pressed.png");
 volume_increase.loadFromFile("assets/menus/options_menu/Volume_increase.png");
 volume_decrease.loadFromFile("assets/menus/options_menu/Volume_decrease.png");
 
@@ -628,36 +596,25 @@ for (int i = 0; i < 5; i++)
 
 }
 
-
-void FONT(Font& font_name, string font_file_name)
+void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down, int& volume_num)
 {
-    font_name.loadFromFile(font_file_name);
-}
+
+            Vector2i mousePosition = Mouse::getPosition(window);
 
 
-void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down, int& volume_num, Font& font_name, string font_file_name)
-{
-    font_name.loadFromFile(font_file_name);
-    text.setFont(font_name);
-    text.setString(to_string(volume_num));          //to display the volume presentage
-    text.setCharacterSize(50);
-    text.setOrigin(text.getLocalBounds().width / 2, text.getLocalBounds().height / 2);
-    text.setScale(Vector2f(1.2, 1.2));
-    Vector2i mousePosition = Mouse::getPosition(window);
+            if (volume_up.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && volume_num < 100)
+            {
+                volume_num += 10;
+                text.setString(to_string(volume_num));
+            }
 
-    if (volume_up.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && volume_num < 100)
-    {
-
-        volume_num += 10;
-        text.setString(to_string(volume_num));
-    }
-
-    else if (volume_down.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && volume_num > 0)
-    {
-
-        volume_num -= 10;
-        text.setString(to_string(volume_num));
-    }
+            else if (volume_down.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && volume_num > 0)
+            {
+                volume_num -= 10;
+                text.setString(to_string(volume_num));
+            }
+        
+   
 }
 
 void Level_Evaluation(Level level[])
@@ -690,7 +647,6 @@ void Level_Evaluation(Level level[])
         }
     }
 }
-
 
 void hoverEffect(sf::Sprite& button, sf::Texture& hovered)
 {

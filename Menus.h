@@ -2,6 +2,7 @@
 #define MENUS
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <string>
 
 using namespace sf;
 using namespace std;
@@ -75,8 +76,11 @@ extern sf::Texture main_menu_background_texture, mr_bullet_logo_texture;
 extern Button play_button, options_button, quit_button;
 
 // options menu
-extern Texture back_ground, checkbox_close, checkbox_open, Back_button_Red, Back_button_Yellow, volume_increase, volume_decrease;
-
+extern Texture back_ground, checkbox_close, checkbox_open, volume_increase, volume_decrease;
+extern Text volume_presentage[2];
+extern  int volume_value[2];
+extern bool fullscreen_close;
+extern Sprite check_box_close, check_box_open, Volume_increase[2], Volume_decrease[2];
 // play menu
 
 extern sf::Texture play_menu_background_texture;
@@ -86,7 +90,6 @@ extern Menu classic_menu, duels_menu;
 extern sf::Texture classic_menu_background_texture;
 extern sf::Texture Border_hover_effect;
 extern Level level[20];
-extern std::vector<sf::Sprite> levels;
 
 // achievements menu
 extern sf::Texture achievements_menu_background;
@@ -107,9 +110,7 @@ void Texture_loading();
 
 void Level_Evaluation(Level level[]);
 
-void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&, Font&, string);
-void MUSIC(Music& music_name, String music_file_name, int& volume_num);
-void FONT(Font& font_name, string font_file_name);
+void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&);
 
 void hoverEffect(sf::Sprite&); // for buttons
 void hoverEffect(sf::Sprite&, sf::Texture&, sf::Texture&, sf::Text&); // for menu selection in play menu

@@ -11,6 +11,7 @@ RectangleShape wall3(Vector2f(1920.f, 10.f));
 RectangleShape wall4(Vector2f(10.f, 1080.f));
 RectangleShape box(Vector2f(300.f, 300.f));
 RectangleShape walls[] = {wall1, wall2, wall3, wall4};
+vector<Bullet> bullets;
 //CircleShape triangle(10, 3);
 
 

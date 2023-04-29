@@ -6,7 +6,7 @@
 #include "Levels.h"
 #include "Menus.h"
 
-sf::RenderWindow window(sf::VideoMode(1400, 900), "Mr bullet", sf::Style::Default);
+sf::RenderWindow window(sf::VideoMode(1920, 1080), "Mr bullet", sf::Style::Fullscreen);
 
 // Menus test
 int main() {
@@ -17,6 +17,7 @@ int main() {
     SFX_click.setBuffer(SFX_click_soundbuffer);
 
     mainmenu_music.openFromFile("assets/sounds/main_music.ogg");
+    mainmenu_music.setVolume(volume_value[0]);
     mainmenu_music.play();
     mainmenu_music.setLoop(true);
     constructlev1(window);
