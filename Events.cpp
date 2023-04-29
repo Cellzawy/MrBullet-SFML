@@ -1,8 +1,11 @@
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <SFML/Audio.hpp>
 #include "Events.h"
 #include "Menus.h"
+#include "Sprites.h"
+#include "Physics.h"
 #include "win-lose-logic.h"
 
 using namespace sf;
@@ -227,6 +230,38 @@ sf::Event achievements_menu_eventloop()
                 back_button.sprite.setTexture(back_button.Pressed_texture);
                 current_menu = main_menu;
             }
+        }
+    }
+
+    return event;
+}
+
+
+sf::Event levels_eventloop()
+{
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+        {
+            window.close();
+        }
+
+        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+        {
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+            Vector2i mousepos = Mouse::getPosition(window);
+            //CircleShape newBullet(10.f);
+            std::cout << "yes";
+            Bullet newBullet;
+            newBullet.bulletBody.setFillColor(sf::Color::Black);
+            newBullet.bulletBody.setRadius(8.f);
+            bullets.push_back(newBullet);
+            //for (int i = 0; i < bullets.size(); i++) {
+            //    DirectBullet(bullets[i], event, mousepos);
+            //}
+            DirectBullet(bullets[bullets.size() - 1], event, mousepos);
+
         }
     }
 

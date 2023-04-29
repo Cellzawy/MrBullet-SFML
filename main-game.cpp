@@ -5,12 +5,15 @@
 #include "Physics.h"
 #include "Levels.h"
 #include "Menus.h"
+#include "Events.h"
+//#include "Levels.cpp"
 
 sf::RenderWindow window(sf::VideoMode(1920, 1080), "Mr bullet", sf::Style::Fullscreen);
+bool in_level;
 
 // Menus test
 int main() {
-    window.setFramerateLimit(30);
+    window.setFramerateLimit(60);
 
     Texture_loading();
 
@@ -24,6 +27,40 @@ int main() {
 
     while(window.isOpen())
     {
+        if (bullets.size() != 0)
+        {
+            for (int i = bullets.size() - 1; i >= 0; i--)
+            {
+                Time elapsed = bullets[i].clock.getElapsedTime();
+                if (elapsed >= seconds(5.f))
+                {
+                    bullets[i].clock.restart();
+                    bullets.erase(bullets.begin() + i);
+                    std::cout << "erased";
+                }
+            }
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 30.f);
+            //for (int i = 0; i < bullets.size(); i++) {
+            //    if (bullets[i].bulletBody.getGlobalBounds().intersects()) {
+
+            //    }
+            //    else if (bullets[i].bulletBody.getGlobalBounds().intersects()) {
+
+            //    }
+            //    else if (bullets[i].bulletBody.getGlobalBounds().intersects()) {
+
+            //    }
+            //    else if (bullets[i].bulletBody.getGlobalBounds().intersects()) {
+
+            //    }
+            //    else if (bullets[i].bulletBody.getGlobalBounds().intersects()) {
+
+            //    }
+            //}
+
+        }
         // drawing
 
         window.clear();
@@ -57,26 +94,37 @@ int main() {
 
         else if (current_menu == level_1)
         {
-            window.draw(lev1.bg);
-            window.draw(lev1.ground);
-            character_draw(lev1.killer, window);
-            character_draw(lev1.target[0], window);
+            window.draw(lev[1].bg);
+            window.draw(lev[1].ground);
+            character_draw(lev[1].killer, window);
+            character_draw(lev[1].target[0], window);
+            in_level = true;
+            levels_eventloop();
         }
 
         else if (current_menu == level_2)
         {
+            levels_eventloop();
+            in_level = true;
             window.close();
         }
 
         else if (current_menu == level_3)
         {
-
+            levels_eventloop();
+            in_level = true;
         }
 
         else if (current_menu == level_4)
         {
-
+            levels_eventloop();
+            in_level = true;
         }
+
+        for (int i = 0; i < bullets.size(); i++) {
+            window.draw(bullets[i].bulletBody);
+        }
+
 
         window.display();
     }

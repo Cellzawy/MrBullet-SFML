@@ -1,5 +1,8 @@
 #ifndef PHYSICS
 #define PHYSICS
+#include "Sprites.h"
+//#include "Levels.h"
+
 
 #include <SFML/Graphics.hpp>
 
@@ -13,11 +16,12 @@ float dot(sf::Vector2f v1, sf::Vector2f v2); // Gets the dot product of two vect
 Vector2f NormalizeVector(Vector2f vector); //  Gets the vector required to move the bullets
 
 
-void DirectBullet(CircleShape b, Event e, Vector2i mousep); //  Takes bullet and event from pollEvent as parameters
+void DirectBullet(Bullet& b, Event e, Vector2i mousep); //  Takes bullet and event from pollEvent as parameters
 
+void HandlePhysics(int levNum, Bullet b);
 
-void RicochetBullet(CircleShape b, RectangleShape w); //  Takes bullet and wall as parameters
+void RicochetBullet(Bullet& b, RectangleShape w); //  Takes bullet and wall as parameters
 
-void RicochetBullet(CircleShape b, CircleShape w); // Takes bullet and wall as parameters
+void RicochetBullet(Bullet& b, CircleShape w); // Takes bullet and wall as parameters
 
 #endif

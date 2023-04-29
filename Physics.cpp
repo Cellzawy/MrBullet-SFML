@@ -1,4 +1,7 @@
-#pragma once
+#include "Physics.h"
+#include "Sprites.h"
+#include "Levels.h"
+
 using namespace sf;
 using namespace std;
 
@@ -19,13 +22,20 @@ Vector2f NormalizeVector(Vector2f vector) //  Gets the vector required to move t
     return normalizedVector;
 }
 
+
 void DirectBullet(Bullet& b, Event e, Vector2i mousep) //  Takes bullet and event from pollEvent as parameters
 {
+
     for (int i = 0; i < bullets.size(); i++) 
     {
+        //b.bulletBody.setPosition(killer.body.getPosition());                        /*- helmy -*/
         b.bulletDirection = b.bulletBody.getPosition() - Vector2f(mousep);
         b.bulletDirection = NormalizeVector(b.bulletDirection);
     }
+}
+
+void HandlePhysics(int levNum, Bullet b) {
+    
 }
 
 void RicochetBullet(Bullet& b, RectangleShape w)
