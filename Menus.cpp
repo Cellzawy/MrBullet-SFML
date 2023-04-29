@@ -28,7 +28,7 @@ sf::Sprite achievements_button;
 
 // options menu
 Texture back_ground, checkbox_close, checkbox_open, volume_increase, volume_decrease;
-int volumeVariable[2] = { 50,50 }; 
+int volume_value[2] = { 50,50 };
 Text volume_presentage[2];
 bool fullscreen_close = false;
 // play menu
@@ -55,7 +55,7 @@ void Texture_loading();
 
 void Level_Evaluation(Level level[]);
 
-void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&, Font&, string);
+void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&);
 
 void hoverEffect(sf::Sprite&); // for buttons
 void hoverEffect(sf::Sprite&, sf::Texture&, sf::Texture&, sf::Text&); // for menu selection in play menu
@@ -205,8 +205,6 @@ void Play_menu()
 
 void Options_menu()
 {
-    sf::Font font;
-
     //Text
     sf::Text Audio_text("Audio", game_font, 50);
     Audio_text.setPosition(window.getSize().x / 10.666, window.getSize().y / 27);
@@ -218,14 +216,14 @@ void Options_menu()
 
     sf::Text volume_presentage[2];
     volume_presentage[0].setFont(game_font);
-    volume_presentage[0].setString(to_string(volumeVariable[0]));
+    volume_presentage[0].setString(to_string(volume_value[0]));
     volume_presentage[0].setCharacterSize(50);
     volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
     volume_presentage[0].setScale(Vector2f(1.2, 1.2));
     volume_presentage[0].setPosition(window.getSize().x / 5.052, window.getSize().y / 7.448);
 
     volume_presentage[1].setFont(game_font);
-    volume_presentage[1].setString(to_string(volumeVariable[1]));
+    volume_presentage[1].setString(to_string(volume_value[1]));
     volume_presentage[1].setCharacterSize(50);
     volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[1].getLocalBounds().height / 2);
     volume_presentage[1].setScale(Vector2f(1.2, 1.2));
@@ -301,11 +299,6 @@ void Options_menu()
     back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
 
 
-   
-
-    string font_path = "assets/HelveticaNeueCondensedBlack.ttf";
-
-
     hoverEffect(back_button.sprite);
 
     Event event;
@@ -323,11 +316,11 @@ void Options_menu()
                 Vector2i mousePosition = Mouse::getPosition(window);
 
                 //Music
-                volume_manage(volume_presentage[0], Volume_increase[0], Volume_decrease[0], volumeVariable[0], font, font_path);
-                mainmenu_music.setVolume(volumeVariable[0]);
+                volume_manage(volume_presentage[0], Volume_increase[0], Volume_decrease[0], volume_value[0]);
+                mainmenu_music.setVolume(volume_value[0]);
                 //SFX
-                volume_manage(volume_presentage[1], Volume_increase[1], Volume_decrease[1], volumeVariable[1], font, font_path);
-                SFX_click.setVolume(volumeVariable[1]);
+                volume_manage(volume_presentage[1], Volume_increase[1], Volume_decrease[1], volume_value[1]);
+                SFX_click.setVolume(volume_value[1]);
 
 
                 volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
@@ -346,7 +339,6 @@ void Options_menu()
                 {
                     SFX_click.play();
                     fullscreen_close = false;
-                    Fullscreen_text.setFillColor(Color::White);
                     window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
                 }
 
@@ -354,7 +346,6 @@ void Options_menu()
                 {
                     SFX_click.play();
                     fullscreen_close = true;
-                    Fullscreen_text.setFillColor(Color::White);
                     window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
                 }
             }
@@ -660,17 +651,9 @@ for (int i = 0; i < 5; i++)
 
 }
 
-void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down, int& volume_num, Font& font_name, string font_file_name)
+void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down, int& volume_num)
 {
 
-    font_name.loadFromFile(font_file_name);
-    text.setFont(font_name);
-    text.setString(to_string(volume_num));          //to display the volume presentage
-    text.setCharacterSize(50);
-    text.setOrigin(text.getLocalBounds().width / 2, text.getLocalBounds().height / 2);
-    text.setScale(Vector2f(1.2, 1.2));
-    
-     
             Vector2i mousePosition = Mouse::getPosition(window);
 
 

@@ -78,7 +78,7 @@ extern Button play_button, options_button, quit_button;
 // options menu
 extern Texture back_ground, checkbox_close, checkbox_open, volume_increase, volume_decrease;
 extern Text volume_presentage[2];
-extern  int volumeVariable[2];
+extern  int volume_value[2];
 extern bool fullscreen_close;
 // play menu
 
@@ -109,7 +109,7 @@ void Texture_loading();
 
 void Level_Evaluation(Level level[]);
 
-void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&, Font&, string);
+void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&);
 
 void hoverEffect(sf::Sprite&); // for buttons
 void hoverEffect(sf::Sprite&, sf::Texture&, sf::Texture&, sf::Text&); // for menu selection in play menu
