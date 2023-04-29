@@ -99,17 +99,17 @@ void constructlev3(RenderWindow& window)
 
     //shape1
     lev[3].SHAPES[0].loadFromFile("assets/Textures/rectangle1.png");
-    lev[3].shape1.setTexture(&lev[3].SHAPES[0]);
-    lev[3].shape1.setSize(Vector2f(450, 80));
-    lev[3].shape1.setOrigin(lev[3].shape1.getLocalBounds().width / 2, lev[3].shape1.getLocalBounds().height / 2);
-    lev[3].shape1.setPosition(window.getSize().x - lev[3].shape1.getSize().x / 2, 350);
+    lev[3].shape[0].setTexture(&lev[3].SHAPES[0]);
+    lev[3].shape[0].setSize(Vector2f(450, 80));
+    lev[3].shape[0].setOrigin(lev[3].shape[0].getLocalBounds().width / 2, lev[3].shape[0].getLocalBounds().height / 2);
+    lev[3].shape[0].setPosition(window.getSize().x - lev[3].shape[1].getSize().x / 2, 350);
 
     //shape2
     lev[3].SHAPES[1].loadFromFile("assets/Textures/rectangle2.png");
-    lev[3].shape2.setTexture(&lev[3].SHAPES[1]);
-    lev[3].shape2.setSize(Vector2f(200, 400));
+    lev[3].shape[1].setTexture(&lev[3].SHAPES[1]);
+    lev[3].shape[1].setSize(Vector2f(200, 400));
     //lev[3].shape2.setOrigin(lev[3].shape2.getLocalBounds().width / 2, lev[3].shape2.getLocalBounds().height / 2);
-    lev[3].shape2.setPosition(0, 400);
+    lev[3].shape[1].setPosition(0, 400);
 
     //killer
     character_init(lev[3].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", true);
@@ -119,7 +119,7 @@ void constructlev3(RenderWindow& window)
     //enemy
     character_init(lev[3].target[0], "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", true);
     character_set_scale(lev[3].target[0], 0.34);
-    character_set_position(lev[3].target[0], Vector2f(lev[3].shape1.getPosition().x - (lev[3].shape1.getSize().x / 2), lev[3].shape1.getPosition().y - 235));
+    character_set_position(lev[3].target[0], Vector2f(lev[3].shape[0].getPosition().x - (lev[3].shape[0].getSize().x / 2), lev[3].shape[0].getPosition().y - 235));
 }
 
 void constructlev4(RenderWindow& window)
@@ -131,28 +131,28 @@ void constructlev4(RenderWindow& window)
 
     //rectangle area
     lev[4].SHAPES[0].loadFromFile("assets/Textures/box.png");
-    lev[4].shape1.setTexture(&lev[4].SHAPES[0]);
-    lev[4].shape1.setSize(Vector2f(1000, 1200));
-    lev[4].shape1.setOrigin(lev[4].shape1.getSize().x / 2, lev[4].shape1.getSize().y / 2);
-    lev[4].shape1.setPosition(window.getSize().x / 2, window.getSize().y / 2 + 75);
+    lev[4].shape[0].setTexture(&lev[4].SHAPES[0]);
+    lev[4].shape[0].setSize(Vector2f(1000, 1200));
+    lev[4].shape[0].setOrigin(lev[4].shape[0].getSize().x / 2, lev[4].shape[0].getSize().y / 2);
+    lev[4].shape[0].setPosition(window.getSize().x / 2, window.getSize().y / 2 + 75);
 
     //killer
     character_init(lev[4].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[4].killer, 0.3);
-    character_set_position(lev[4].killer, Vector2f(lev[4].shape1.getPosition().x - 300, lev[4].shape1.getPosition().y + 160));
+    character_set_position(lev[4].killer, Vector2f(lev[4].shape[0].getPosition().x - 300, lev[4].shape[0].getPosition().y + 160));
 
     //targets
     character_init(lev[4].target[0], "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", true);
     character_set_scale(lev[4].target[0], 0.3);
-    character_set_position(lev[4].target[0], Vector2f(lev[4].shape1.getPosition().x + 250, lev[4].shape1.getPosition().y + 160));
+    character_set_position(lev[4].target[0], Vector2f(lev[4].shape[0].getPosition().x + 250, lev[4].shape[0].getPosition().y + 160));
 
     character_init(lev[4].target[1], "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", false);
     character_set_scale(lev[4].target[1], 0.3);
-    character_set_position(lev[4].target[1], Vector2f(lev[4].shape1.getPosition().x - 300, lev[4].shape1.getPosition().y - 390));
+    character_set_position(lev[4].target[1], Vector2f(lev[4].shape[0].getPosition().x - 300, lev[4].shape[0].getPosition().y - 390));
 
     character_init(lev[4].target[2], "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", false);
     character_set_scale(lev[4].target[2], 0.3);
-    character_set_position(lev[4].target[2], Vector2f(lev[4].shape1.getPosition().x - 100, lev[4].shape1.getPosition().y - 390));
+    character_set_position(lev[4].target[2], Vector2f(lev[4].shape[0].getPosition().x - 100, lev[4].shape[0].getPosition().y - 390));
 }
 
 void constructlev5(RenderWindow& window)
@@ -192,6 +192,7 @@ void constructlev5(RenderWindow& window)
 
 }
 
+
 void DrawingLevels(int num, RenderWindow& window)
 {
     if (num == 1) // ==> constructing level 1
@@ -228,8 +229,8 @@ void DrawingLevels(int num, RenderWindow& window)
         constructlev3(window);
         window.draw(lev[3].bg);
         window.draw(lev[3].ground);
-        window.draw(lev[3].shape1);
-        window.draw(lev[3].shape2);
+        window.draw(lev[3].shape[0]);
+        window.draw(lev[3].shape[1]);
         character_draw(lev[3].killer, window);
         character_draw(lev[3].target[0], window);
     }
@@ -239,7 +240,7 @@ void DrawingLevels(int num, RenderWindow& window)
     {
         constructlev4(window);
         window.draw(lev[4].bg);
-        window.draw(lev[4].shape1);
+        window.draw(lev[4].shape[0]);
         character_draw(lev[4].killer, window);
         for (int i = 0; i < 3; i++)
         {
@@ -261,6 +262,12 @@ void DrawingLevels(int num, RenderWindow& window)
         {
             character_draw(lev[5].target[i], window);
         }
+    }
+
+    else if (num == 11)
+    {
+        constructlev11(window);
+        window.draw(lev[11].bg);
     }
 
 }

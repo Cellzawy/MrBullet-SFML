@@ -8,8 +8,6 @@ using namespace sf;
 struct level {
     Texture BG;
 
-    Texture ENEMY1[100];
-
     Texture GROUND[10];
 
     Texture BLOCK[10];
@@ -18,7 +16,7 @@ struct level {
 
     Sprite bg;
 
-    RectangleShape ground, shape1, shape2;
+    RectangleShape ground, shape[10];
 
     RectangleShape block[10];
 
