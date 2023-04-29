@@ -112,6 +112,66 @@ sf::Event play_menu_eventloop()
     return event;
 }
 
+sf::Event options_menu_eventloop()
+{
+    Event event;
+    while (window.pollEvent(event))
+    {
+
+        //Mouse Events
+        if (event.type == Event::MouseButtonPressed)
+        {
+            if (Mouse::isButtonPressed(Mouse::Left))
+            {
+
+                Vector2i mousePosition = Mouse::getPosition(window);
+
+                //Music
+                volume_manage(volume_presentage[0], Volume_increase[0], Volume_decrease[0], volume_value[0]);
+                mainmenu_music.setVolume(volume_value[0]);
+                //SFX
+                volume_manage(volume_presentage[1], Volume_increase[1], Volume_decrease[1], volume_value[1]);
+                SFX_click.setVolume(volume_value[1]);
+
+
+                volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
+                volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
+
+
+
+                if (back_button.sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                {
+                    back_button.sprite.setTexture(back_button.Pressed_texture);
+                    SFX_click.play();
+                    current_menu = main_menu;
+                }
+
+                if (check_box_close.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && fullscreen_close == true)
+                {
+                    SFX_click.play();
+                    fullscreen_close = false;
+                    window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
+                }
+
+                else if (check_box_open.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                {
+                    SFX_click.play();
+                    fullscreen_close = true;
+                    window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
+                }
+            }
+        }
+
+        if (event.type == Event::Closed)
+        {
+            SFX_click.play();
+            window.close();
+        }
+
+    }
+    return event;
+}
+
 sf::Event classic_menu_eventloop()
 {
     sf::Event event;

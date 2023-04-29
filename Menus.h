@@ -80,6 +80,7 @@ extern Texture back_ground, checkbox_close, checkbox_open, volume_increase, volu
 extern Text volume_presentage[2];
 extern  int volume_value[2];
 extern bool fullscreen_close;
+extern Sprite check_box_close, check_box_open, Volume_increase[2], Volume_decrease[2];
 // play menu
 
 extern sf::Texture play_menu_background_texture;

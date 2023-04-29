@@ -31,6 +31,7 @@ Texture back_ground, checkbox_close, checkbox_open, volume_increase, volume_decr
 int volume_value[2] = { 50,50 };
 Text volume_presentage[2];
 bool fullscreen_close = false;
+Sprite check_box_close, check_box_open, Volume_increase[2], Volume_decrease[2];
 // play menu
 sf::Texture play_menu_background_texture;
 Menu classic_menu, duels_menu;
@@ -245,11 +246,10 @@ void Options_menu()
     sf::Text Fullscreen_text("Fullscreen", game_font, 50);
     Fullscreen_text.setOrigin(Fullscreen_text.getLocalBounds().width / 2, Fullscreen_text.getLocalBounds().height / 2);
     Fullscreen_text.setPosition(window.getSize().x / 1.828, window.getSize().y / 5.45);
-    Fullscreen_text.setFillColor(Color::White);
 
 
     //sprite
-    Sprite  Back_ground, check_box_close, check_box_open, Volume_increase[2], Volume_decrease[2];
+    Sprite  Back_ground;
 
     Back_ground.setTexture(back_ground);
     Back_ground.setScale(window.getSize().x / Back_ground.getLocalBounds().width, window.getSize().y / Back_ground.getLocalBounds().height);
@@ -301,63 +301,8 @@ void Options_menu()
 
     hoverEffect(back_button.sprite);
 
-    Event event;
-    while (window.pollEvent(event))
-    {
-       
-        //Mouse Events
-        if (event.type == Event::MouseButtonPressed)
-        {
-           
+    options_menu_eventloop();
 
-            if (Mouse::isButtonPressed(Mouse::Left))
-            {
-
-                Vector2i mousePosition = Mouse::getPosition(window);
-
-                //Music
-                volume_manage(volume_presentage[0], Volume_increase[0], Volume_decrease[0], volume_value[0]);
-                mainmenu_music.setVolume(volume_value[0]);
-                //SFX
-                volume_manage(volume_presentage[1], Volume_increase[1], Volume_decrease[1], volume_value[1]);
-                SFX_click.setVolume(volume_value[1]);
-
-
-                volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
-                volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
-
-
-
-                if (back_button.sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-                {
-                    back_button.sprite.setTexture(back_button.Pressed_texture);
-                    SFX_click.play();
-                    current_menu = main_menu;
-                }
-
-                if (check_box_close.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && fullscreen_close == true)
-                {
-                    SFX_click.play();
-                    fullscreen_close = false;
-                    window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
-                }
-
-                else if (check_box_open.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-                {
-                    SFX_click.play();
-                    fullscreen_close = true;
-                    window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
-                }
-            }
-        }
-
-            if (event.type == Event::Closed)
-            {
-                SFX_click.play();
-                window.close();
-            }
-
-    }
 
     window.draw(Back_ground);
     window.draw(Audio_text);
