@@ -10,6 +10,7 @@
 
 sf::RenderWindow window(sf::VideoMode(1920, 1080), "Mr bullet", sf::Style::Fullscreen);
 bool in_level;
+//int currentLvl = 0;
 
 // Menus test
 int main() {
@@ -41,25 +42,7 @@ int main() {
             }
         }
         for (int i = 0; i < bullets.size(); i++) {
-            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 30.f);
-            //for (int i = 0; i < bullets.size(); i++) {
-            //    if (bullets[i].bulletBody.getGlobalBounds().intersects()) {
-
-            //    }
-            //    else if (bullets[i].bulletBody.getGlobalBounds().intersects()) {
-
-            //    }
-            //    else if (bullets[i].bulletBody.getGlobalBounds().intersects()) {
-
-            //    }
-            //    else if (bullets[i].bulletBody.getGlobalBounds().intersects()) {
-
-            //    }
-            //    else if (bullets[i].bulletBody.getGlobalBounds().intersects()) {
-
-            //    }
-            //}
-
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
         }
         // drawing
 
@@ -99,26 +82,56 @@ int main() {
             character_draw(lev[1].killer, window);
             character_draw(lev[1].target[0], window);
             in_level = true;
+            currentLvl = 1;
             levels_eventloop();
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[1], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[1], bullets[i]);
+            }
         }
 
         else if (current_menu == level_2)
         {
             levels_eventloop();
             in_level = true;
-            window.close();
+            currentLvl = 2;
+            levels_eventloop();
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[1], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[1], bullets[i]);
+            }
         }
 
         else if (current_menu == level_3)
         {
             levels_eventloop();
             in_level = true;
+            currentLvl = 2;
+            levels_eventloop();
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[1], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[1], bullets[i]);
+            }
         }
 
         else if (current_menu == level_4)
         {
             levels_eventloop();
             in_level = true;
+            currentLvl = 2;
+            levels_eventloop();
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[1], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[1], bullets[i]);
+            }
         }
 
         for (int i = 0; i < bullets.size(); i++) {

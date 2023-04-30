@@ -12,4 +12,6 @@ sf::Event achievements_menu_eventloop();
 sf::Event options_menu_eventloop();
 sf::Event levels_eventloop();
 
+extern int currentLvl;
+
 #endif

@@ -5,10 +5,13 @@
 #include "Events.h"
 #include "Menus.h"
 #include "Sprites.h"
+//#include "main-game.cpp"
 #include "Physics.h"
 #include "win-lose-logic.h"
 
 using namespace sf;
+
+int currentLvl = 0;
 
 void EventListener() {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
@@ -255,15 +258,13 @@ sf::Event levels_eventloop()
             std::cout << "yes";
             Bullet newBullet;
             newBullet.bulletBody.setFillColor(sf::Color::Black);
-            newBullet.bulletBody.setRadius(8.f);
+            newBullet.bulletBody.setRadius(10.f);
             bullets.push_back(newBullet);
             //for (int i = 0; i < bullets.size(); i++) {
             //    DirectBullet(bullets[i], event, mousepos);
             //}
-            DirectBullet(bullets[bullets.size() - 1], event, mousepos);
-
+            DirectBullet(bullets[bullets.size() - 1], event, mousepos, currentLvl);
         }
     }
-
     return event;
 }

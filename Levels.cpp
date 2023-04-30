@@ -4,7 +4,7 @@
 
 using namespace sf;
 
-level lev[10];
+Lev lev[10];
 
 void constructlev1(RenderWindow& window)
 {
@@ -195,7 +195,7 @@ void constructlev5(RenderWindow& window)
 
 void DrawingLevels(int num, RenderWindow& window)
 {
-    if (num == 1) // ==> constructing level 1
+    if (num == 1) // ==> constructing Level 1
     {
 
         constructlev1(window);
@@ -208,7 +208,7 @@ void DrawingLevels(int num, RenderWindow& window)
     }
 
 
-    else if (num == 2) // ==> constructing level 2
+    else if (num == 2) // ==> constructing Level 2
     {
         constructlev2(window);
         window.draw(lev[2].bg);
@@ -224,7 +224,7 @@ void DrawingLevels(int num, RenderWindow& window)
     }
 
 
-    else if (num == 3) // ==> constructing level 3
+    else if (num == 3) // ==> constructing Level 3
     {
         constructlev3(window);
         window.draw(lev[3].bg);
@@ -236,7 +236,7 @@ void DrawingLevels(int num, RenderWindow& window)
     }
 
 
-    else if (num == 4)   // ==> constructing level 4
+    else if (num == 4)   // ==> constructing Level 4
     {
         constructlev4(window);
         window.draw(lev[4].bg);
@@ -250,7 +250,7 @@ void DrawingLevels(int num, RenderWindow& window)
     }
 
 
-    else if (num == 5) // ==> constructing level 5
+    else if (num == 5) // ==> constructing Level 5
     {
         constructlev5(window);
         window.draw(lev[5].bg);

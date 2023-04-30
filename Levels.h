@@ -2,10 +2,11 @@
 #define LEVELS
 #include <SFML/Graphics.hpp>
 #include "Sprites.h"
+//#include "Physics.h"
 
 using namespace sf;
 
-struct level {
+struct Lev {
     Texture BG;
 
     Texture GROUND[10];
@@ -24,7 +25,7 @@ struct level {
 
 };
 
-extern level lev[10];
+extern Lev lev[10];
 
 void constructlev1(RenderWindow& window);
 void constructlev2(RenderWindow& window);

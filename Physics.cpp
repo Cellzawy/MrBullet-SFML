@@ -3,7 +3,7 @@
 #include "Levels.h"
 
 using namespace sf;
-using namespace std;
+//using namespace std;
 
 //Vector2f bulletDirection;
 
@@ -23,19 +23,74 @@ Vector2f NormalizeVector(Vector2f vector) //  Gets the vector required to move t
 }
 
 
-void DirectBullet(Bullet& b, Event e, Vector2i mousep) //  Takes bullet and event from pollEvent as parameters
+void DirectBullet(Bullet& b, Event e, Vector2i mousep, int lvlNum) //  Takes bullet and event from pollEvent as parameters
 {
-
+    if (lvlNum == 0)
+        return;
     for (int i = 0; i < bullets.size(); i++) 
     {
-        //b.bulletBody.setPosition(killer.body.getPosition());                        /*- helmy -*/
+        b.bulletBody.setPosition(lev[lvlNum].killer.body.getPosition());                        /*- helmy -*/
         b.bulletDirection = b.bulletBody.getPosition() - Vector2f(mousep);
         b.bulletDirection = NormalizeVector(b.bulletDirection);
     }
 }
 
-void HandlePhysics(int levNum, Bullet b) {
-    
+void HandlePhysics(Lev& l, Bullet& b) {
+    if (b.bulletBody.getGlobalBounds().intersects(l.ground.getGlobalBounds()))
+        RicochetBullet(b, l.ground);
+    for (int i = 0; i < 10; i++) {
+        if (b.bulletBody.getGlobalBounds().intersects(l.shape[i].getGlobalBounds()))
+            RicochetBullet(b, l.shape[i]);
+    }
+    for (int i = 0; i < 10; i++) {
+        if (b.bulletBody.getGlobalBounds().intersects(l.block[i].getGlobalBounds()))
+            RicochetBullet(b, l.block[i]);
+    }
+}
+
+void CollideEnemies(Lev& l, Bullet& b) {
+    for (int i = 0; i < 10; i++) {
+        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].body.getGlobalBounds())) {
+            l.target[i].dead = true;
+            //Death Animation                                                   /* helmy */
+        }
+        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].head.getGlobalBounds())) {
+            l.target[i].dead = true;
+            //Death Animation                                                   /* helmy */
+        }
+        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].left_arm1.getGlobalBounds())) {
+            l.target[i].dead = true;
+            //Death Animation                                                   /* helmy */
+        }
+        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].left_arm2.getGlobalBounds())) {
+            l.target[i].dead = true;
+            //Death Animation                                                   /* helmy */
+        }
+        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].right_arm1.getGlobalBounds())) {
+            l.target[i].dead = true;
+            //Death Animation                                                   /* helmy */
+        }
+        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].right_arm2.getGlobalBounds())) {
+            l.target[i].dead = true;
+            //Death Animation                                                   /* helmy */
+        }
+        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].left_leg1.getGlobalBounds())) {
+            l.target[i].dead = true;
+            //Death Animation                                                   /* helmy */
+        }
+        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].left_leg2.getGlobalBounds())) {
+            l.target[i].dead = true;
+            //Death Animation                                                   /* helmy */
+        }
+        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].right_leg1.getGlobalBounds())) {
+            l.target[i].dead = true;
+            //Death Animation                                                   /* helmy */
+        }
+        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].right_leg2.getGlobalBounds())) {
+            l.target[i].dead = true;
+            //Death Animation                                                   /* helmy */
+        }
+    }
 }
 
 void RicochetBullet(Bullet& b, RectangleShape w)
