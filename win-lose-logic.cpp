@@ -7,21 +7,21 @@
 #include "Events.h"
 #include "Menus.h"
 
-void Win_panel(int score);
-void Winning_level_results(int score);
+void Win_panel();
+void Winning_level_results(int);
 void Zero_stars();
 void One_star();
 void Two_stars();
 void Three_stars();
-void DissolveEffect_three_stars(float dissolveTime);
-void DissolveEffect_won_options(float dissolveTime);
-void DissolveEffect_won_Quit(float);
+void DissolveEffect_three_stars(sf::Sprite&, sf::Sprite&, sf::Sprite&, float dissolveTime);
+void DissolveEffect_won_options(sf::Sprite&, sf::Sprite&, sf::Sprite&, float dissolveTime);
+void DissolveEffect_won_Quit(sf::Sprite&, float);
 
 void Lose_panel();
 void DissolveEffect_first_Text(sf::Text, float);
 void DissolveEffect_second_Text(sf::Text, float);
-void DissolveEffect_lost_options(float dissolveTime);
-void DissolveEffect_lost_Quit(float);
+void DissolveEffect_lost_options(sf::Sprite&, sf::Sprite&, sf::Sprite&, float dissolveTime);
+void DissolveEffect_lost_Quit(sf::Sprite&, float);
 
 void Moving_down_animation(sf::Sprite&);
 
@@ -39,10 +39,9 @@ sf::Text result_text;
 
 bool animation = true;
 
-
-
-void Win_panel(int score)
+void Win_panel()
 {
+    int x = 3;
 
     Forward.setTexture(forward_texture);
     backward.setTexture(backward_texture);
@@ -84,7 +83,6 @@ void Win_panel(int score)
     quit_to_main_menu.setTexture(quit_to_main_menu_texture);
     quit_to_main_menu.setOrigin(quit_to_main_menu.getLocalBounds().width / 2, quit_to_main_menu.getLocalBounds().height / 2);
     quit_to_main_menu.setPosition(window.getSize().x / 6.061, window.getSize().y / 1.099);
-    quit_to_main_menu.setScale(1.0f, 1.0f);
 
 
     if(animation)
@@ -93,69 +91,75 @@ void Win_panel(int score)
 
         float dissolveTime = 1.0f;
 
-        DissolveEffect_three_stars(dissolveTime);
-        Winning_level_results(score);
-        DissolveEffect_won_options(dissolveTime);
-        DissolveEffect_won_Quit(dissolveTime);
+        DissolveEffect_three_stars(first_star, second_star, third_star, dissolveTime);
+        Winning_level_results(x);
+        DissolveEffect_won_options(Forward, backward, reset, dissolveTime);
+        DissolveEffect_won_Quit(quit_to_main_menu, dissolveTime);
     }
 
     animation = false;
 
-    win_lose_panels_eventloop();
 
-    hoverEffect(quit_to_main_menu);
+    sf::Event event;
+    while(window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+        {
+            window.close();
+        }
+
+        else if (event.type == sf::Event::KeyPressed)
+        {
+            if (event.key.code == sf::Keyboard::Escape)
+            {
+                window.close();
+            }
+        }
+    }
+
 
     window.draw(win_panel);
     window.draw(first_star);
     window.draw(second_star);
     window.draw(third_star);
     window.draw(result_text);
-
-    if(current_menu != level_10)
-    {
-        window.draw(Forward);
-    }
-
-    if(current_menu != level_1)
-    {
-        window.draw(backward);
-    }
-
+    window.draw(Forward);
+    window.draw(backward);
     window.draw(reset);
     window.draw(quit_to_main_menu);
 }
 
-void DissolveEffect_three_stars(float dissolveTime)
+void DissolveEffect_three_stars(sf::Sprite& sprite1, sf::Sprite& sprite2, sf::Sprite& sprite3, float dissolveTime)
 {
     normal_eventloop();
 
-    first_star.setColor(sf::Color(255, 255, 255, 0));
-    second_star.setColor(sf::Color(255, 255, 255, 0));
-    third_star.setColor(sf::Color(255, 255, 255, 0));
+    sprite1.setColor(sf::Color(255, 255, 255, 0));
+    sprite2.setColor(sf::Color(255, 255, 255, 0));
+    sprite3.setColor(sf::Color(255, 255, 255, 0));
 
     sf::Clock dissolveClock;
 
-    while(first_star.getColor().a != 255 && second_star.getColor().a != 255 && third_star.getColor().a != 255)
+    while(sprite1.getColor().a != 255 && sprite2.getColor().a != 255 && sprite3.getColor().a != 255)
     {
 
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
-        first_star.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(dissolvePercent * 255)));
-        second_star.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(dissolvePercent * 255)));
-        third_star.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(dissolvePercent * 255)));
+        sprite1.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(dissolvePercent * 255)));
+        sprite2.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(dissolvePercent * 255)));
+        sprite3.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(dissolvePercent * 255)));
 
         if (dissolvePercent >= 1.0f)
         {
-            first_star.setColor(sf::Color(255, 255, 255, 255));
-            second_star.setColor(sf::Color(255, 255, 255, 255));
-            third_star.setColor(sf::Color(255, 255, 255, 255));
+            sprite1.setColor(sf::Color(255, 255, 255, 255));
+            sprite2.setColor(sf::Color(255, 255, 255, 255));
+            sprite3.setColor(sf::Color(255, 255, 255, 255));
         }
 
         window.clear();
         window.draw(win_panel);
-        window.draw(first_star);
-        window.draw(second_star);
-        window.draw(third_star);
+        window.draw(sprite1);
+        window.draw(sprite2);
+        window.draw(sprite3);
         window.display();
     }
 }
@@ -320,29 +324,29 @@ void Three_stars()
     }
 }
 
-void DissolveEffect_won_options(float dissolveTime)
+void DissolveEffect_won_options(sf::Sprite& sprite1, sf::Sprite& sprite2, sf::Sprite& sprite3, float dissolveTime)
 {
     normal_eventloop();
-    Forward.setColor(sf::Color(255, 255, 255, 0));
-    backward.setColor(sf::Color(255, 255, 255, 0));
-    reset.setColor(sf::Color(255, 255, 255, 0));
+    sprite1.setColor(sf::Color(255, 255, 255, 0));
+    sprite2.setColor(sf::Color(255, 255, 255, 0));
+    sprite3.setColor(sf::Color(255, 255, 255, 0));
 
     sf::Clock dissolveClock;
 
-    while(Forward.getColor().a != 255 && backward.getColor().a != 255 && reset.getColor().a != 255)
+    while(sprite1.getColor().a != 255 && sprite2.getColor().a != 255 && sprite3.getColor().a != 255)
     {
 
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
-        Forward.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
-        backward.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
-        reset.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
+        sprite1.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
+        sprite2.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
+        sprite3.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
 
         if (dissolvePercent >= 1.0f)
         {
-            Forward.setColor(sf::Color(255, 255, 255, 255));
-            backward.setColor(sf::Color(255, 255, 255, 255));
-            reset.setColor(sf::Color(255, 255, 255, 255));
+            sprite1.setColor(sf::Color(255, 255, 255, 255));
+            sprite2.setColor(sf::Color(255, 255, 255, 255));
+            sprite3.setColor(sf::Color(255, 255, 255, 255));
         }
 
     window.clear();
@@ -350,36 +354,27 @@ void DissolveEffect_won_options(float dissolveTime)
     window.draw(first_star);
     window.draw(second_star);
     window.draw(third_star);
-
-    if(current_menu != level_10)
-    {
-        window.draw(Forward);
-    }
-
-    if(current_menu != level_1)
-    {
-        window.draw(backward);
-    }
-
-    window.draw(reset);
+    window.draw(sprite1);
+    window.draw(sprite2);
+    window.draw(sprite3);
     window.display();
     }
 }
 
-void DissolveEffect_won_Quit(float dissolveTime)
+void DissolveEffect_won_Quit(sf::Sprite& quit_button, float dissolveTime)
 {
-    quit_to_main_menu.setColor(sf::Color(255, 255, 255, 0));
+    quit_button.setColor(sf::Color(255, 255, 255, 0));
 
     sf::Clock dissolveClock;
-    while(quit_to_main_menu.getColor().a != 255)
+    while(quit_button.getColor().a != 255)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
-        quit_to_main_menu.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(dissolvePercent * 255)));
+        quit_button.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(dissolvePercent * 255)));
 
         if (dissolvePercent >= 1.0f)
         {
-            quit_to_main_menu.setColor(sf::Color(255, 255, 255, 255));
+            quit_button.setColor(sf::Color(255, 255, 255, 255));
         }
 
         window.clear();
@@ -387,19 +382,10 @@ void DissolveEffect_won_Quit(float dissolveTime)
         window.draw(first_star);
         window.draw(second_star);
         window.draw(third_star);
-
-        if(current_menu != level_10)
-        {
-            window.draw(Forward);
-        }
-
-        if(current_menu != level_1)
-        {
-            window.draw(backward);
-        }
-
+        window.draw(Forward);
+        window.draw(backward);
         window.draw(reset);
-        window.draw(quit_to_main_menu);
+        window.draw(quit_button);
         window.display();
     }
 }
@@ -442,7 +428,6 @@ void Lose_panel()
     quit_to_main_menu.setTexture(quit_to_main_menu_texture);
     quit_to_main_menu.setOrigin(quit_to_main_menu.getLocalBounds().width / 2, quit_to_main_menu.getLocalBounds().height / 2);
     quit_to_main_menu.setPosition(window.getSize().x / 6.061, window.getSize().y / 1.099);
-    quit_to_main_menu.setScale(1.0f, 1.0f);
 
     if (animation)
     {
@@ -452,30 +437,34 @@ void Lose_panel()
 
         DissolveEffect_first_Text(out_of_bullets, dissolveTime);
         DissolveEffect_second_Text(Try_again, dissolveTime);
-        DissolveEffect_lost_options(dissolveTime);
-        DissolveEffect_lost_Quit(dissolveTime);
+        DissolveEffect_lost_options(Forward, backward, reset, dissolveTime);
+        DissolveEffect_lost_Quit(quit_to_main_menu, dissolveTime);
     }
 
     animation = false;
 
-    win_lose_panels_eventloop();
+    sf::Event event;
+    while(window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+        {
+            window.close();
+        }
 
-    hoverEffect(quit_to_main_menu);
+        else if (event.type == sf::Event::KeyPressed)
+        {
+            if (event.key.code == sf::Keyboard::Escape)
+            {
+                window.close();
+            }
+        }
+    }
 
     window.draw(lose_panel);
     window.draw(out_of_bullets);
     window.draw(Try_again);
-
-    if(current_menu != level_10)
-    {
-        window.draw(Forward);
-    }
-
-    if(current_menu != level_1)
-    {
-        window.draw(backward);
-    }
-
+    window.draw(Forward);
+    window.draw(backward);
     window.draw(reset);
     window.draw(quit_to_main_menu);
 }
@@ -531,85 +520,67 @@ void DissolveEffect_second_Text(sf::Text text, float dissolveTime)
     }
 }
 
-void DissolveEffect_lost_options(float dissolveTime)
+void DissolveEffect_lost_options(sf::Sprite& sprite1, sf::Sprite& sprite2, sf::Sprite& sprite3, float dissolveTime)
 {
     normal_eventloop();
-    Forward.setColor(sf::Color(255, 255, 255, 0));
-    backward.setColor(sf::Color(255, 255, 255, 0));
-    reset.setColor(sf::Color(255, 255, 255, 0));
+    sprite1.setColor(sf::Color(255, 255, 255, 0));
+    sprite2.setColor(sf::Color(255, 255, 255, 0));
+    sprite3.setColor(sf::Color(255, 255, 255, 0));
 
     sf::Clock dissolveClock;
 
-    while(Forward.getColor().a != 255 && backward.getColor().a != 255 && reset.getColor().a != 255)
+    while(sprite1.getColor().a != 255 && sprite2.getColor().a != 255 && sprite3.getColor().a != 255)
     {
 
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
-        Forward.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
-        backward.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
-        reset.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
+        sprite1.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
+        sprite2.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
+        sprite3.setColor(sf::Color(255, 255, 255, dissolvePercent * 255));
 
         if (dissolvePercent >= 1.0f)
         {
-            Forward.setColor(sf::Color(255, 255, 255, 255));
-            backward.setColor(sf::Color(255, 255, 255, 255));
-            reset.setColor(sf::Color(255, 255, 255, 255));
+            sprite1.setColor(sf::Color(255, 255, 255, 255));
+            sprite2.setColor(sf::Color(255, 255, 255, 255));
+            sprite3.setColor(sf::Color(255, 255, 255, 255));
         }
 
         window.clear();
         window.draw(lose_panel);
         window.draw(out_of_bullets);
         window.draw(Try_again);
-
-        if(current_menu != level_10)
-        {
-            window.draw(Forward);
-        }
-
-        if(current_menu != level_1)
-        {
-            window.draw(backward);
-        }
-
-        window.draw(reset);
+        window.draw(sprite1);
+        window.draw(sprite2);
+        window.draw(sprite3);
         window.display();
     }
 
 }
 
-void DissolveEffect_lost_Quit(float dissolveTime)
+void DissolveEffect_lost_Quit(sf::Sprite& quit_button, float dissolveTime)
 {
-    quit_to_main_menu.setColor(sf::Color(255, 255, 255, 0));
+    quit_button.setColor(sf::Color(255, 255, 255, 0));
 
     sf::Clock dissolveClock;
-    while(quit_to_main_menu.getColor().a != 255)
+    while(quit_button.getColor().a != 255)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
-        quit_to_main_menu.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(dissolvePercent * 255)));
+        quit_button.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(dissolvePercent * 255)));
 
         if (dissolvePercent >= 1.0f)
         {
-            quit_to_main_menu.setColor(sf::Color(255, 255, 255, 255));
+            quit_button.setColor(sf::Color(255, 255, 255, 255));
         }
 
         window.clear();
         window.draw(lose_panel);
         window.draw(out_of_bullets);
         window.draw(Try_again);
-
-        if(current_menu != level_10)
-        {
-            window.draw(Forward);
-        }
-
-        if(current_menu != level_1)
-        {
-            window.draw(backward);
-        }
-
+        window.draw(Forward);
+        window.draw(backward);
         window.draw(reset);
-        window.draw(quit_to_main_menu);
+        window.draw(quit_button);
         window.display();
     }
 }

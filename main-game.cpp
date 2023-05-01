@@ -77,18 +77,18 @@ int main() {
 
         else if (current_menu == level_1)
         {
-            window.draw(lev[0].bg);
-            window.draw(lev[0].ground);
-            character_draw(lev[0].killer, window);
-            character_draw(lev[0].target[0], window);
+            window.draw(lev[1].bg);
+            window.draw(lev[1].ground);
+            character_draw(lev[1].killer, window);
+            character_draw(lev[1].target[0], window);
             in_level = true;
-            currentLvl = 0;
+            currentLvl = 1;
             levels_eventloop();
             for (int i = 0; i < bullets.size(); i++) {
-                HandlePhysics(lev[0], bullets[i]);
+                HandlePhysics(lev[1], bullets[i]);
             }
             for (int i = 0; i < bullets.size(); i++) {
-                CollideEnemies(lev[0], bullets[i]);
+                CollideEnemies(lev[1], bullets[i]);
             }
         }
 
@@ -137,7 +137,6 @@ int main() {
         for (int i = 0; i < bullets.size(); i++) {
             window.draw(bullets[i].bulletBody);
         }
-
 
 
         window.display();

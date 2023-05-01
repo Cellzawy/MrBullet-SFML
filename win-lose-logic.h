@@ -12,22 +12,21 @@ extern sf::Text result_text;
 
 extern sf::Text out_of_bullets, Try_again;
 
-extern bool animation;
 
-void Win_panel(int score);
-void Winning_level_results(int score);
+void Win_panel();
+void Winning_level_results(int);
 void Zero_stars();
 void One_star();
 void Two_stars();
 void Three_stars();
-void DissolveEffect_three_stars(float dissolveTime);
-void DissolveEffect_won_options(float dissolveTime);
-void DissolveEffect_won_Quit(float);
+void DissolveEffect_three_stars(sf::Sprite&, sf::Sprite&, sf::Sprite&, float dissolveTime);
+void DissolveEffect_won_options(sf::Sprite&, sf::Sprite&, sf::Sprite&, float dissolveTime);
+void DissolveEffect_won_Quit(sf::Sprite&, float);
 
 void Lose_panel();
 void DissolveEffect_first_Text(sf::Text, float);
 void DissolveEffect_second_Text(sf::Text, float);
-void DissolveEffect_lost_options(float dissolveTime);
+void DissolveEffect_lost_options(sf::Sprite&, sf::Sprite&, sf::Sprite&, float dissolveTime);
 void DissolveEffect_lost_Quit(sf::Sprite&, float);
 
 void Moving_down_animation(sf::Sprite&);

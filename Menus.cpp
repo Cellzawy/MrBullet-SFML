@@ -3,11 +3,9 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "Levels.h"
 #include "Menus.h"
 #include "Events.h"
 #include "win-lose-logic.h"
-
 
 using namespace sf;
 using namespace std;
@@ -21,8 +19,6 @@ Button back_button;
 Music mainmenu_music;
 SoundBuffer SFX_click_soundbuffer;
 Sound SFX_click;
-
-Lev lev[10];
 
 // main menu
 sf::Texture main_menu_background_texture, mr_bullet_logo_texture;
@@ -43,7 +39,7 @@ Menu classic_menu, duels_menu;
 // classic menu
 sf::Texture classic_menu_background_texture;
 sf::Texture Border_hover_effect;
-
+Level level[20];
 
 // achievements menu
 sf::Texture achievements_menu_background;
@@ -58,13 +54,13 @@ void Achievements_menu();
 
 void Texture_loading();
 
-void Level_Evaluation(Lev lev[]);
+void Level_Evaluation(Level level[]);
 
 void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&);
 
 void hoverEffect(sf::Sprite&); // for buttons
 void hoverEffect(sf::Sprite&, sf::Texture&, sf::Texture&, sf::Text&); // for menu selection in play menu
-void hoverEffect(Lev lev[]); // for levels selection in classic menu
+void hoverEffect(Level level[]); // for levels selection in classic menu
 void hoverEffect(sf::Sprite&, sf::Texture&); // for achievement button in main menu
 
 
@@ -216,7 +212,7 @@ void Options_menu()
     Audio_text.setOrigin(Audio_text.getLocalBounds().width / 2, Audio_text.getLocalBounds().height / 2);
     Audio_text.setFillColor(Color(190, 95, 14));
 
-
+  
 
 
     sf::Text volume_presentage[2];
@@ -355,14 +351,14 @@ void Classic_menu()
     const int start_y = (window.getSize().y - grid_height) / 2;
 
 
-    Level_Evaluation(lev);
+    Level_Evaluation(level);
 
 
     for (int i = 0; i < num_rows * num_cols; ++i)
     {
 
 
-        lev[i].view.Level_selection.setPosition(
+        level[i].view.Level_selection.setPosition(
             start_x + (i % num_cols) * (width + gap),
             start_y + (i / num_cols) * (height + gap)
         );
@@ -389,9 +385,9 @@ void Classic_menu()
     window.draw(back_button.sprite);
     for (int i = 0; i < 10; i++)
     {
-        window.draw(lev[i].view.Level_selection);
+        window.draw(level[i].view.Level_selection);
     }
-    hoverEffect(lev);
+    hoverEffect(level);
 }
 
 void Achievements_menu()
@@ -512,65 +508,65 @@ classic_menu_background_texture.loadFromFile("assets/menus/classic_menu/backgrou
 Border_hover_effect.loadFromFile("assets/menus/classic_menu/Border_hover_effect.png");
 
 
-lev[0].view.Level_evaluation = 0;
-lev[0].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Level_1_no_stars.png");
-lev[0].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_one_star.png");
-lev[0].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_two_stars.png");
-lev[0].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_three_stars.png");
+level[0].view.Level_evaluation = 0;
+level[0].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Level_1_no_stars.png");
+level[0].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_one_star.png");
+level[0].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_two_stars.png");
+level[0].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_three_stars.png");
 
-lev[1].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_2/Lvl_2_closed.png");
-lev[1].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_2/Lvl_2_no_stars.png");
-lev[1].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_2/Lvl_2_one_star.png");
-lev[1].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_2/Lvl_2_two_stars.png");
-lev[1].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_2/Lvl_3_three_stars.png");
+level[1].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_2/Lvl_2_closed.png");
+level[1].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_2/Lvl_2_no_stars.png");
+level[1].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_2/Lvl_2_one_star.png");
+level[1].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_2/Lvl_2_two_stars.png");
+level[1].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_2/Lvl_3_three_stars.png");
 
-lev[2].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_3/Lvl_3_closed.png");
-lev[2].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_3/Lvl_3_no_stars.png");
-lev[2].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_3/Lvl_3_one_star.png");
-lev[2].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_3/Lvl_3_two_stars.png");
-lev[2].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_3/Lvl_3_three_stars.png");
+level[2].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_3/Lvl_3_closed.png");
+level[2].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_3/Lvl_3_no_stars.png");
+level[2].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_3/Lvl_3_one_star.png");
+level[2].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_3/Lvl_3_two_stars.png");
+level[2].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_3/Lvl_3_three_stars.png");
 
-lev[3].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_4/Lvl_4_closed.png");
-lev[3].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_4/Lvl_4_no_stars.png");
-lev[3].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_4/Lvl_4_one_star.png");
-lev[3].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_4/Lvl_4_two_stars.png");
-lev[3].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_4/Lvl_4_three_stars.png");
+level[3].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_4/Lvl_4_closed.png");
+level[3].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_4/Lvl_4_no_stars.png");
+level[3].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_4/Lvl_4_one_star.png");
+level[3].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_4/Lvl_4_two_stars.png");
+level[3].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_4/Lvl_4_three_stars.png");
 
-lev[4].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_5/Lvl_5_closed.png");
-lev[4].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_5/Lvl_5_no_stars.png");
-lev[4].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_5/Lvl_5_one_star.png");
-lev[4].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_5/Lvl_5_two_stars.png");
-lev[4].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_5/Lvl_5_three_stars.png");
+level[4].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_5/Lvl_5_closed.png");
+level[4].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_5/Lvl_5_no_stars.png");
+level[4].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_5/Lvl_5_one_star.png");
+level[4].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_5/Lvl_5_two_stars.png");
+level[4].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_5/Lvl_5_three_stars.png");
 
-lev[5].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_closed.png");
-lev[5].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_none_stared.png");
-lev[5].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_one_stared.png");
-lev[5].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_two_stared.png");
-lev[5].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_three_stared.png");
+level[5].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_closed.png");
+level[5].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_none_stared.png");
+level[5].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_one_stared.png");
+level[5].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_two_stared.png");
+level[5].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_three_stared.png");
 
-lev[6].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_closed.png");
-lev[6].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_none_stared.png");
-lev[6].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_one_stared.png");
-lev[6].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_two_stared.png");
-lev[6].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_three_stared.png");
+level[6].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_closed.png");
+level[6].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_none_stared.png");
+level[6].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_one_stared.png");
+level[6].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_two_stared.png");
+level[6].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_three_stared.png");
 
-lev[7].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_closed.png");
-lev[7].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_none_stared.png");
-lev[7].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_one_stared.png");
-lev[7].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_two_stared.png");
-lev[7].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_three_stared.png");
+level[7].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_closed.png");
+level[7].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_none_stared.png");
+level[7].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_one_stared.png");
+level[7].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_two_stared.png");
+level[7].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_three_stared.png");
 
-lev[8].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_closed.png");
-lev[8].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_none_stared.png");
-lev[8].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_one_stared.png");
-lev[8].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_two_stared.png");
-lev[8].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_three_stared.png");
+level[8].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_closed.png");
+level[8].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_none_stared.png");
+level[8].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_one_stared.png");
+level[8].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_two_stared.png");
+level[8].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_three_stared.png");
 
-lev[9].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_closed.png");
-lev[9].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_none_stared.png");
-lev[9].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_one_stared.png");
-lev[9].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_two_stared.png");
-lev[9].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_three_stared.png");
+level[9].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_closed.png");
+level[9].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_none_stared.png");
+level[9].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_one_stared.png");
+level[9].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_two_stared.png");
+level[9].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_three_stared.png");
 
 // achievements menu
 achievements_menu_background.loadFromFile("assets/menus/achievements_menu/background_chinese.png");
@@ -617,37 +613,37 @@ void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down,
                 volume_num -= 10;
                 text.setString(to_string(volume_num));
             }
-
-
+        
+   
 }
 
-void Level_Evaluation(Lev lev[])
+void Level_Evaluation(Level level[])
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 20; i++)
     {
-        if (lev[i].view.Level_evaluation == -1)
+        if (level[i].view.Level_evaluation == -1)
         {
-            lev[i].view.Level_selection.setTexture(lev[i].view.Level_closed_texture);
+            level[i].view.Level_selection.setTexture(level[i].view.Level_closed_texture);
         }
 
-        else if (lev[i].view.Level_evaluation == 0)
+        else if (level[i].view.Level_evaluation == 0)
         {
-            lev[i].view.Level_selection.setTexture(lev[i].view.Level_none_stared);
+            level[i].view.Level_selection.setTexture(level[i].view.Level_none_stared);
         }
 
-        else if (lev[i].view.Level_evaluation == 1)
+        else if (level[i].view.Level_evaluation == 1)
         {
-            lev[i].view.Level_selection.setTexture(lev[i].view.Level_one_stared);
+            level[i].view.Level_selection.setTexture(level[i].view.Level_one_stared);
         }
 
-        else if (lev[i].view.Level_evaluation == 2)
+        else if (level[i].view.Level_evaluation == 2)
         {
-            lev[i].view.Level_selection.setTexture(lev[i].view.Level_two_stared);
+            level[i].view.Level_selection.setTexture(level[i].view.Level_two_stared);
         }
 
-        else if (lev[i].view.Level_evaluation == 3)
+        else if (level[i].view.Level_evaluation == 3)
         {
-            lev[i].view.Level_selection.setTexture(lev[i].view.Leve_three_stared);
+            level[i].view.Level_selection.setTexture(level[i].view.Leve_three_stared);
         }
     }
 }
@@ -686,16 +682,16 @@ void hoverEffect(sf::Sprite& button)
 	}
 }
 
-void hoverEffect(Lev lev[])
+void hoverEffect(Level level[])
 {
     sf::Sprite Border;
     Border.setTexture(Border_hover_effect);
     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
     for (int i = 0; i < 20; i++)
     {
-        if (lev[i].view.Level_evaluation != -1 && lev[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+        if (level[i].view.Level_evaluation != -1 && level[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
         {
-            sf::Vector2f Level_position = lev[i].view.Level_selection.getPosition();
+            sf::Vector2f Level_position = level[i].view.Level_selection.getPosition();
             Border.setPosition(Level_position.x, Level_position.y);
             window.draw(Border);
         }
