@@ -28,6 +28,11 @@ int main() {
     mainmenu_music.play();
     mainmenu_music.setLoop(true);
     constructlev1(window);
+    constructlev2(window);
+    constructlev3(window);
+    constructlev4(window);
+    //constructlev5(window);
+    //constructlev6(window);
 
     while(window.isOpen())
     {
@@ -126,6 +131,77 @@ int main() {
             else if (lev[0].num_of_bullets == 0)
             {
                 lev[0].view.Level_evaluation = 0;
+            }
+
+
+
+            for (int i = 0; i < enemies_num; i++)
+            {
+                if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                {
+                    dead_enemies++;
+                    lev[level_index].target[i].alive = false;
+                }
+            }
+
+
+
+
+            if (dead_enemies == enemies_num)
+            {
+                current_menu = won_panel;
+            }
+
+            else if (lev[level_index].num_of_bullets == 0)
+            {
+                current_menu = lost_panel;
+            }
+
+        }
+
+        else if (current_menu == level_2)
+        {
+            int enemies_num = 8;
+            window.draw(lev[1].bg);
+            for (int i = 0; i < 10; i++)
+            {
+                window.draw(lev[1].block[i]);
+            }
+            character_draw(lev[1].killer, window);
+            for (int i = 0; i < 8; i++)
+            {
+                character_draw(lev[1].target[i], window);
+            }
+            in_level = true;
+            currentLvl = 1;
+            levels_eventloop(enemies_num);
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[1], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[1], bullets[i]);
+            }
+
+            // bullets checking
+
+            if (lev[1].num_of_bullets == 3)
+            {
+                lev[1].view.Level_evaluation = 3;
+            }
+
+            else if (lev[1].num_of_bullets == 2)
+            {
+                lev[1].view.Level_evaluation = 2;
+            }
+
+            else if (lev[1].num_of_bullets == 1)
+            {
+                lev[1].view.Level_evaluation = 1;
+            }
+
+            else if (lev[1].num_of_bullets == 0)
+            {
+                lev[1].view.Level_evaluation = 0;
             }
 
 
