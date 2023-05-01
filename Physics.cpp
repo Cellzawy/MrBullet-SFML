@@ -1,6 +1,7 @@
 #include "Physics.h"
 #include "Sprites.h"
 #include "Levels.h"
+#include <cmath>
 
 using namespace sf;
 //using namespace std;
@@ -25,9 +26,9 @@ Vector2f NormalizeVector(Vector2f vector) //  Gets the vector required to move t
 
 void DirectBullet(Bullet& b, Event e, Vector2i mousep, int lvlNum) //  Takes bullet and event from pollEvent as parameters
 {
-    if (lvlNum == 0)
+    if (lvlNum == -1)
         return;
-    for (int i = 0; i < bullets.size(); i++) 
+    for (int i = 0; i < bullets.size(); i++)
     {
         b.bulletBody.setPosition(lev[lvlNum].killer.body.getPosition());                        /*- helmy -*/
         b.bulletDirection = b.bulletBody.getPosition() - Vector2f(mousep);

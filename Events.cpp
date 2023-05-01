@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <SFML/Audio.hpp>
+#include "Levels.h"
 #include "Events.h"
 #include "Menus.h"
 #include "Sprites.h"
@@ -203,8 +204,12 @@ sf::Event classic_menu_eventloop()
             {
                 for (int i = 0; i < 10;i++)
                 {
-                    if (level[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level[i].view.Level_evaluation != -1)
+                    if (lev[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && lev[i].view.Level_evaluation != -1)
+                    {
                         current_menu = menu_type(i);
+                        level_index = i;
+                    }
+
                 }
             }
         }
@@ -240,8 +245,9 @@ sf::Event achievements_menu_eventloop()
 }
 
 
-sf::Event levels_eventloop()
+sf::Event levels_eventloop(int enemies_num)
 {
+    // event loop
     sf::Event event;
     while (window.pollEvent(event))
     {
@@ -250,7 +256,7 @@ sf::Event levels_eventloop()
             window.close();
         }
 
-        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && lev[level_index].num_of_bullets > 0)
         {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
             Vector2i mousepos = Mouse::getPosition(window);
@@ -264,7 +270,75 @@ sf::Event levels_eventloop()
             //    DirectBullet(bullets[i], event, mousepos);
             //}
             DirectBullet(bullets[bullets.size() - 1], event, mousepos, currentLvl);
+            lev[level_index].num_of_bullets--;
+
+            // win-lose logic
+
+            for (int i = 0; i < enemies_num; i++)
+            {
+                if (newBullet.bulletBody.getGlobalBounds().intersects(lev[level_index].target[i].body.getGlobalBounds()))
+                {
+                    lev[level_index].target[i].dead = true;
+                }
+            }
+        }
+
+        else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+        {
+            current_menu = classic_Mode;
+        }
+
+
+    }
+    return event;
+}
+
+sf::Event win_lose_panels_eventloop()
+{
+    sf::Event event;
+    while(window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+        {
+            window.close();
+        }
+
+        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+        {
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+            if (quit_to_main_menu.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+            {
+                animation = true;
+                current_menu = main_menu;
+                Reset();
+            }
+
+            else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 9)
+            {
+                animation = true;
+                level_index++;
+                current_menu = static_cast<menu_type>(level_index);
+                lev[level_index].view.Level_evaluation = 0;
+                Reset();
+            }
+
+            else if (backward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 0)
+            {
+                animation = true;
+                current_menu = main_menu;
+                Reset();
+            }
+
+            else if (reset.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+            {
+                current_menu = static_cast<menu_type>(level_index);
+
+                Reset();
+                animation = true;
+            }
         }
     }
+
     return event;
 }

@@ -43,6 +43,7 @@ struct Character {
     sf::Sprite right_leg1;
     sf::Sprite right_leg2;
     bool dead = false;
+    bool alive = true;
 };
 
 void character_set_position(Character &character, sf::Vector2f pos);
