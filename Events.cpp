@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <SFML/Audio.hpp>
+#include "Levels.h"
 #include "Events.h"
 #include "Menus.h"
 #include "Sprites.h"
@@ -203,7 +204,7 @@ sf::Event classic_menu_eventloop()
             {
                 for (int i = 0; i < 10;i++)
                 {
-                    if (level[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level[i].view.Level_evaluation != -1)
+                    if (lev[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && lev[i].view.Level_evaluation != -1)
                         current_menu = menu_type(i);
                 }
             }
@@ -266,5 +267,47 @@ sf::Event levels_eventloop()
             DirectBullet(bullets[bullets.size() - 1], event, mousepos, currentLvl);
         }
     }
+    return event;
+}
+
+sf::Event win_lose_panels_eventloop()
+{
+    sf::Event event;
+    while(window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+        {
+            window.close();
+        }
+
+        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+        {
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+            if (quit_to_main_menu.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+            {
+                animation = true;
+                current_menu = main_menu;
+            }
+
+            else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && current_menu != level_10)
+            {
+                animation = true;
+                current_menu = level_2;
+            }
+
+            else if (backward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && current_menu != level_1)
+            {
+                animation = true;
+                current_menu = main_menu;
+            }
+
+            else if (reset.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+            {
+                animation = true;
+            }
+        }
+    }
+
     return event;
 }

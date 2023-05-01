@@ -1,6 +1,7 @@
 #include "Physics.h"
 #include "Sprites.h"
 #include "Levels.h"
+#include <cmath>
 
 using namespace sf;
 //using namespace std;
@@ -27,7 +28,7 @@ void DirectBullet(Bullet& b, Event e, Vector2i mousep, int lvlNum) //  Takes bul
 {
     if (lvlNum == 0)
         return;
-    for (int i = 0; i < bullets.size(); i++) 
+    for (int i = 0; i < bullets.size(); i++)
     {
         b.bulletBody.setPosition(lev[lvlNum].killer.body.getPosition());                        /*- helmy -*/
         b.bulletDirection = b.bulletBody.getPosition() - Vector2f(mousep);

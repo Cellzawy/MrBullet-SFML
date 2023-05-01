@@ -11,6 +11,7 @@ sf::Event classic_menu_eventloop();
 sf::Event achievements_menu_eventloop();
 sf::Event options_menu_eventloop();
 sf::Event levels_eventloop();
+sf::Event win_lose_panels_eventloop();
 
 extern int currentLvl;
 
