@@ -316,9 +316,11 @@ sf::Event win_lose_panels_eventloop()
 
             else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 9)
             {
+                cout << level_index;
                 animation = true;
                 level_index++;
                 current_menu = static_cast<menu_type>(level_index);
+                cout << level_index;
                 lev[level_index].view.Level_evaluation = 0;
                 Reset();
             }

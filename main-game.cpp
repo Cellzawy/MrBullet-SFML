@@ -97,10 +97,7 @@ int main() {
         else if (current_menu == level_1)
         {
             int enemies_num = 1;
-            window.draw(lev[0].bg);
-            window.draw(lev[0].ground);
-            character_draw(lev[0].killer, window);
-            character_draw(lev[0].target[0], window);
+            DrawingLevels(0, window);
             in_level = true;
             currentLvl = 0;
             levels_eventloop(enemies_num);
@@ -162,16 +159,7 @@ int main() {
         else if (current_menu == level_2)
         {
             int enemies_num = 8;
-            window.draw(lev[1].bg);
-            for (int i = 0; i < 10; i++)
-            {
-                window.draw(lev[1].block[i]);
-            }
-            character_draw(lev[1].killer, window);
-            for (int i = 0; i < 8; i++)
-            {
-                character_draw(lev[1].target[i], window);
-            }
+            DrawingLevels(1, window);
             in_level = true;
             currentLvl = 1;
             levels_eventloop(enemies_num);

@@ -203,7 +203,6 @@ void DrawingLevels(int num, RenderWindow& window)
     if (num == 0) // ==> constructing Level 1
     {
 
-        constructlev1(window);
         window.draw(lev[0].bg);
         window.draw(lev[0].ground);
         character_draw(lev[0].killer, window);
@@ -215,7 +214,6 @@ void DrawingLevels(int num, RenderWindow& window)
 
     else if (num == 1) // ==> constructing Level 2
     {
-        constructlev2(window);
         window.draw(lev[1].bg);
         for (int i = 0; i < 10; i++)
         {
@@ -231,7 +229,6 @@ void DrawingLevels(int num, RenderWindow& window)
 
     else if (num == 2) // ==> constructing Level 3
     {
-        constructlev3(window);
         window.draw(lev[2].bg);
         window.draw(lev[2].ground);
         window.draw(lev[2].shape[0]);
@@ -243,7 +240,6 @@ void DrawingLevels(int num, RenderWindow& window)
 
     else if (num == 3)   // ==> constructing Level 4
     {
-        constructlev4(window);
         window.draw(lev[3].bg);
         window.draw(lev[3].shape[0]);
         character_draw(lev[3].killer, window);
@@ -257,7 +253,6 @@ void DrawingLevels(int num, RenderWindow& window)
 
     else if (num == 4) // ==> constructing Level 5
     {
-        constructlev5(window);
         window.draw(lev[4].bg);
         window.draw(lev[4].ground);
         window.draw(lev[4].block[0]);
