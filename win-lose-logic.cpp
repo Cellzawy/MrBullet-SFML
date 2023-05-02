@@ -604,6 +604,7 @@ void DissolveEffect_lost_Quit(float dissolveTime)
             window.draw(Forward);
         }
 
+
         if(level_index != 0)
         {
             window.draw(backward);
@@ -648,5 +649,29 @@ void Reset()
 
     lev[level_index].num_of_bullets = 4;
 }
+
+void stars_system(int three_stars, int two_stars, int one_star, int zero_stars)
+{
+    if (lev[level_index].num_of_bullets == three_stars)
+    {
+    lev[level_index].view.Level_evaluation = 3;
+    }
+
+    else if (lev[level_index].num_of_bullets == two_stars)
+    {
+        lev[level_index].view.Level_evaluation = 2;
+    }
+
+    else if (lev[level_index].num_of_bullets == one_star)
+    {
+        lev[level_index].view.Level_evaluation = 1;
+    }
+
+    else if (lev[level_index].num_of_bullets == zero_stars)
+    {
+        lev[level_index].view.Level_evaluation = 0;
+    }
+}
+
 
 

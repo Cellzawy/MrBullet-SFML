@@ -32,5 +32,6 @@ void DissolveEffect_lost_Quit(sf::Sprite&, float);
 
 void Moving_down_animation(sf::Sprite&);
 void Reset();
+void stars_system(int three_stars, int two_stars, int one_star, int zero_stars);
 
 #endif

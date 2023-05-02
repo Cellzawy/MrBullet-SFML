@@ -31,22 +31,27 @@ int main() {
 
     while(window.isOpen())
     {
-        if (bullets.size() != 0)
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
         {
-            for (int i = bullets.size() - 1; i >= 0; i--)
+            if (bullets.size() != 0)
             {
-                Time elapsed = bullets[i].clock.getElapsedTime();
-                if (elapsed >= seconds(5.f))
+                for (int i = bullets.size() - 1; i >= 0; i--)
                 {
-                    bullets[i].clock.restart();
-                    bullets.erase(bullets.begin() + i);
-                    std::cout << "erased";
+                    Time elapsed = bullets[i].clock.getElapsedTime();
+                    if (elapsed >= seconds(5.f))
+                    {
+                        bullets[i].clock.restart();
+                        bullets.erase(bullets.begin() + i);
+                        std::cout << "erased";
+                    }
                 }
             }
+
+            for (int i = 0; i < bullets.size(); i++) {
+                bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+            }
         }
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
-        }
+
         // drawing
 
         window.clear();
@@ -102,7 +107,7 @@ int main() {
         {
             int enemies_num = 1;
             levels_eventloop(enemies_num);
-            if (current_menu != pause_MENU)
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
             {
                 window.draw(lev[0].bg);//321356163
                 window.draw(lev[0].ground);
@@ -118,27 +123,6 @@ int main() {
                     CollideEnemies(lev[0], bullets[i]);
                 }
 
-                // bullets checking
-
-                if (lev[0].num_of_bullets == 3)
-                {
-                    lev[0].view.Level_evaluation = 3;
-                }
-
-                else if (lev[0].num_of_bullets == 2)
-                {
-                    lev[0].view.Level_evaluation = 2;
-                }
-
-                else if (lev[0].num_of_bullets == 1)
-                {
-                    lev[0].view.Level_evaluation = 1;
-                }
-
-                else if (lev[0].num_of_bullets == 0)
-                {
-                    lev[0].view.Level_evaluation = 0;
-                }
 
 
 
@@ -156,6 +140,7 @@ int main() {
 
                 if (dead_enemies == enemies_num)
                 {
+                    stars_system(3, 2, 1, 0);
                     current_menu = won_panel;
                 }
 
@@ -167,10 +152,12 @@ int main() {
             }
         }
 
-        for (int i = 0; i < bullets.size(); i++) {
-            window.draw(bullets[i].bulletBody);
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
+        {
+            for (int i = 0; i < bullets.size(); i++) {
+                window.draw(bullets[i].bulletBody);
+            }
         }
-
 
 
         window.display();

@@ -266,6 +266,7 @@ sf::Event pause_eventloop()
                 {
                     QUIT.sprite.setTexture(QUIT.Pressed_texture);
                     current_menu = classic_Mode;
+                    Reset();
                     SFX_click.play();
 
                 }
