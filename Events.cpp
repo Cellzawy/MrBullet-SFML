@@ -179,6 +179,105 @@ sf::Event options_menu_eventloop()
     return event;
 }
 
+sf::Event options_menu_pause_eventloop()
+{
+    Event event;
+    while (window.pollEvent(event))
+    {
+
+        //Mouse Events
+        if (event.type == Event::MouseButtonPressed)
+        {
+            if (Mouse::isButtonPressed(Mouse::Left))
+            {
+
+                Vector2i mousePosition = Mouse::getPosition(window);
+
+                //Music
+                volume_manage(volume_presentage[0], Volume_increase[0], Volume_decrease[0], volume_value[0]);
+                mainmenu_music.setVolume(volume_value[0]);
+                //SFX
+                volume_manage(volume_presentage[1], Volume_increase[1], Volume_decrease[1], volume_value[1]);
+                SFX_click.setVolume(volume_value[1]);
+
+
+                volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
+                volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
+
+
+
+                if (back_button.sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                {
+                    back_button.sprite.setTexture(back_button.Pressed_texture);
+                    SFX_click.play();
+                    current_menu = pause_MENU;
+                }
+
+                if (check_box_close.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && fullscreen_close == true)
+                {
+                    SFX_click.play();
+                    fullscreen_close = false;
+                    window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
+                }
+
+                else if (check_box_open.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                {
+                    SFX_click.play();
+                    fullscreen_close = true;
+                    window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
+                }
+            }
+        }
+
+        if (event.type == Event::Closed)
+        {
+            SFX_click.play();
+            window.close();
+        }
+
+    }
+    return event;
+}
+
+sf::Event pause_eventloop()
+{
+    Event event;
+    while (window.pollEvent(event))
+    {
+        if (event.type == Event::MouseButtonPressed)
+        {
+            if (Mouse::isButtonPressed(Mouse::Left))
+            {
+                Vector2i mousePosition = Mouse::getPosition(window);
+                if (Resume.sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                {
+                    Resume.sprite.setTexture(Resume.Pressed_texture);
+                    SFX_click.play();
+                    current_menu = static_cast<menu_type>(level_index);
+
+                }
+                if (optionts.sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                {
+                    optionts.sprite.setTexture(optionts.Pressed_texture);
+                    current_menu = OPTIONS_MENU_PAUSE;
+                    SFX_click.play();
+                }
+                if (QUIT.sprite.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                {
+                    QUIT.sprite.setTexture(QUIT.Pressed_texture);
+                    current_menu = classic_Mode;
+                    SFX_click.play();
+
+                }
+            }
+        }
+
+        if (event.type == Event::Closed)
+            window.close();
+    }
+    return event;
+}
+
 sf::Event classic_menu_eventloop()
 {
     sf::Event event;
@@ -285,7 +384,7 @@ sf::Event levels_eventloop(int enemies_num)
 
         else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
         {
-            current_menu = classic_Mode;
+            current_menu = pause_MENU;
         }
 
 
@@ -316,11 +415,9 @@ sf::Event win_lose_panels_eventloop()
 
             else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 9)
             {
-                cout << level_index;
                 animation = true;
                 level_index++;
                 current_menu = static_cast<menu_type>(level_index);
-                cout << level_index;
                 lev[level_index].view.Level_evaluation = 0;
                 Reset();
             }

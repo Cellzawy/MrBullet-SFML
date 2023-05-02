@@ -28,11 +28,6 @@ int main() {
     mainmenu_music.play();
     mainmenu_music.setLoop(true);
     constructlev1(window);
-    constructlev2(window);
-    constructlev3(window);
-    constructlev4(window);
-    //constructlev5(window);
-    //constructlev6(window);
 
     while(window.isOpen())
     {
@@ -72,6 +67,15 @@ int main() {
             Options_menu();
         }
 
+        else if (current_menu == pause_MENU)
+        {
+            PAUSE_MENU();
+        }
+
+        else if (current_menu == OPTIONS_MENU_PAUSE)
+        {
+            Options_menu_Pause();
+        }
 
         else if (current_menu == classic_Mode)
         {
@@ -97,127 +101,71 @@ int main() {
         else if (current_menu == level_1)
         {
             int enemies_num = 1;
-            DrawingLevels(0, window);
-            in_level = true;
-            currentLvl = 0;
             levels_eventloop(enemies_num);
-            for (int i = 0; i < bullets.size(); i++) {
-                HandlePhysics(lev[0], bullets[i]);
-            }
-            for (int i = 0; i < bullets.size(); i++) {
-                CollideEnemies(lev[0], bullets[i]);
-            }
-
-            // bullets checking
-
-            if (lev[0].num_of_bullets == 3)
+            if (current_menu != pause_MENU)
             {
-                lev[0].view.Level_evaluation = 3;
-            }
+                window.draw(lev[0].bg);//321356163
+                window.draw(lev[0].ground);
+                character_draw(lev[0].killer, window);
+                character_draw(lev[0].target[0], window);
+                in_level = true;
+                currentLvl = 0;
 
-            else if (lev[0].num_of_bullets == 2)
-            {
-                lev[0].view.Level_evaluation = 2;
-            }
-
-            else if (lev[0].num_of_bullets == 1)
-            {
-                lev[0].view.Level_evaluation = 1;
-            }
-
-            else if (lev[0].num_of_bullets == 0)
-            {
-                lev[0].view.Level_evaluation = 0;
-            }
-
-
-
-            for (int i = 0; i < enemies_num; i++)
-            {
-                if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
-                {
-                    dead_enemies++;
-                    lev[level_index].target[i].alive = false;
+                for (int i = 0; i < bullets.size(); i++) {
+                    HandlePhysics(lev[0], bullets[i]);
                 }
-            }
-
-
-
-
-            if (dead_enemies == enemies_num)
-            {
-                current_menu = won_panel;
-            }
-
-            else if (lev[level_index].num_of_bullets == 0)
-            {
-                current_menu = lost_panel;
-            }
-
-        }
-
-        else if (current_menu == level_2)
-        {
-            int enemies_num = 8;
-            DrawingLevels(1, window);
-            in_level = true;
-            currentLvl = 1;
-            levels_eventloop(enemies_num);
-            for (int i = 0; i < bullets.size(); i++) {
-                HandlePhysics(lev[1], bullets[i]);
-            }
-            for (int i = 0; i < bullets.size(); i++) {
-                CollideEnemies(lev[1], bullets[i]);
-            }
-
-            // bullets checking
-
-            if (lev[1].num_of_bullets == 3)
-            {
-                lev[1].view.Level_evaluation = 3;
-            }
-
-            else if (lev[1].num_of_bullets == 2)
-            {
-                lev[1].view.Level_evaluation = 2;
-            }
-
-            else if (lev[1].num_of_bullets == 1)
-            {
-                lev[1].view.Level_evaluation = 1;
-            }
-
-            else if (lev[1].num_of_bullets == 0)
-            {
-                lev[1].view.Level_evaluation = 0;
-            }
-
-
-
-            for (int i = 0; i < enemies_num; i++)
-            {
-                if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
-                {
-                    dead_enemies++;
-                    lev[level_index].target[i].alive = false;
+                for (int i = 0; i < bullets.size(); i++) {
+                    CollideEnemies(lev[0], bullets[i]);
                 }
+
+                // bullets checking
+
+                if (lev[0].num_of_bullets == 3)
+                {
+                    lev[0].view.Level_evaluation = 3;
+                }
+
+                else if (lev[0].num_of_bullets == 2)
+                {
+                    lev[0].view.Level_evaluation = 2;
+                }
+
+                else if (lev[0].num_of_bullets == 1)
+                {
+                    lev[0].view.Level_evaluation = 1;
+                }
+
+                else if (lev[0].num_of_bullets == 0)
+                {
+                    lev[0].view.Level_evaluation = 0;
+                }
+
+
+
+                for (int i = 0; i < enemies_num; i++)
+                {
+                    if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                    {
+                        dead_enemies++;
+                        lev[level_index].target[i].alive = false;
+                    }
+                }
+
+
+
+
+                if (dead_enemies == enemies_num)
+                {
+                    current_menu = won_panel;
+                }
+
+                else if (lev[level_index].num_of_bullets == 0)  ///32131563
+                {
+                    current_menu = lost_panel;
+                }
+
             }
-
-
-
-
-            if (dead_enemies == enemies_num)
-            {
-                current_menu = won_panel;
-            }
-
-            else if (lev[level_index].num_of_bullets == 0)
-            {
-                current_menu = lost_panel;
-            }
-
         }
-
 
         for (int i = 0; i < bullets.size(); i++) {
             window.draw(bullets[i].bulletBody);

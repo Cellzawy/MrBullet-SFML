@@ -10,7 +10,7 @@ using namespace std;
 
 enum menu_type {
     level_1, level_2, level_3, level_4, level_5,level_6, level_7, level_8, level_9, level_10,
-    main_menu, play_menu, options_menu, classic_Mode, achievements_menu, won_panel, lost_panel
+    main_menu, play_menu, options_menu, classic_Mode, achievements_menu, won_panel, lost_panel , pause_MENU, OPTIONS_MENU_PAUSE
 };
 
 struct Button{
@@ -89,6 +89,16 @@ extern Text volume_presentage[2];
 extern  int volume_value[2];
 extern bool fullscreen_close;
 extern Sprite check_box_close, check_box_open, Volume_increase[2], Volume_decrease[2];
+
+
+// options menu pause 
+extern Texture options_menu_background;
+
+// Pause menu
+
+extern Texture pause_back_ground, Rec_background, pause;
+extern Button Resume, optionts, QUIT;
+
 // play menu
 
 extern sf::Texture play_menu_background_texture;
@@ -113,7 +123,8 @@ void Play_menu();
 void Options_menu();
 void Classic_menu();
 void Achievements_menu();
-
+void Options_menu_Pause();
+void PAUSE_MENU();
 void Texture_loading();
 
 void Level_Evaluation(Lev lev[]);

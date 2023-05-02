@@ -36,6 +36,15 @@ int volume_value[2] = { 50,50 };
 Text volume_presentage[2];
 bool fullscreen_close = false;
 Sprite check_box_close, check_box_open, Volume_increase[2], Volume_decrease[2];
+
+// Pause menu
+Texture pause_back_ground, Rec_background, pause;
+Button Resume, optionts, QUIT;
+
+// options menu pause 
+sf::Texture options_menu_background;
+
+
 // play menu
 sf::Texture play_menu_background_texture;
 Menu classic_menu, duels_menu;
@@ -327,6 +336,183 @@ void Options_menu()
         window.draw(check_box_close);
 }
 
+void Options_menu_Pause()
+{
+    //Text
+
+    sf::Text Audio_text("Audio", game_font, 50);
+    Audio_text.setPosition(window.getSize().x / 10.666, window.getSize().y / 27);
+    Audio_text.setOrigin(Audio_text.getLocalBounds().width / 2, Audio_text.getLocalBounds().height / 2);
+    Audio_text.setFillColor(Color(235, 50, 35));
+
+
+
+
+    sf::Text volume_presentage[2];
+    volume_presentage[0].setFont(game_font);
+    volume_presentage[0].setString(to_string(volume_value[0]));
+    volume_presentage[0].setCharacterSize(50);
+    volume_presentage[0].setOrigin(volume_presentage[0].getLocalBounds().width / 2, volume_presentage[0].getLocalBounds().height / 2);
+    volume_presentage[0].setScale(Vector2f(1.2, 1.2));
+    volume_presentage[0].setPosition(window.getSize().x / 5.052, window.getSize().y / 7.448);
+
+    volume_presentage[1].setFont(game_font);
+    volume_presentage[1].setString(to_string(volume_value[1]));
+    volume_presentage[1].setCharacterSize(50);
+    volume_presentage[1].setOrigin(volume_presentage[1].getLocalBounds().width / 2, volume_presentage[1].getLocalBounds().height / 2);
+    volume_presentage[1].setScale(Vector2f(1.2, 1.2));
+    volume_presentage[1].setPosition(window.getSize().x / 5.052, window.getSize().y / 4.102);
+
+    sf::Text Music_Text("Music", game_font, 50);
+    Music_Text.setOrigin(Music_Text.getLocalBounds().width / 2, Music_Text.getLocalBounds().height / 2);
+    Music_Text.setPosition(window.getSize().x / 19.2, window.getSize().y / 7.75);
+
+    sf::Text SFX_Text("SFX", game_font, 50);
+    SFX_Text.setOrigin(SFX_Text.getLocalBounds().width / 2, SFX_Text.getLocalBounds().height); //to center the text
+    SFX_Text.setPosition(window.getSize().x / 19.2, window.getSize().y / 3.75);
+
+    sf::Text video_text("Video", game_font, 50);
+    video_text.setOrigin(video_text.getLocalBounds().width / 2, video_text.getLocalBounds().height / 2);
+    video_text.setPosition(window.getSize().x / 1.828, window.getSize().y / 21.6);
+    video_text.setFillColor(Color(235, 50, 35));
+
+    sf::Text Fullscreen_text("Fullscreen", game_font, 50);
+    Fullscreen_text.setOrigin(Fullscreen_text.getLocalBounds().width / 2, Fullscreen_text.getLocalBounds().height / 2);
+    Fullscreen_text.setPosition(window.getSize().x / 1.828, window.getSize().y / 5.45);
+
+
+    //sprite
+    Sprite  Back_ground;
+
+    Back_ground.setTexture(options_menu_background);
+    Back_ground.setScale(window.getSize().x / Back_ground.getLocalBounds().width, window.getSize().y / Back_ground.getLocalBounds().height);
+
+
+    check_box_close.setTexture(checkbox_close);
+    check_box_close.setScale(Vector2f(0.5, .5));
+    check_box_close.setPosition(window.getSize().x / 1.6, window.getSize().y / 5.837);
+
+
+    check_box_open.setTexture(checkbox_open);
+    check_box_open.setScale(Vector2f(0.5, .5));
+    check_box_open.setPosition(window.getSize().x / 1.6, window.getSize().y / 5.837);
+
+
+
+    Volume_increase[0].setTexture(volume_increase);
+    Volume_increase[0].setPosition(window.getSize().x / 3.918, window.getSize().y / 6);
+    Volume_increase[0].setOrigin(Volume_increase[0].getLocalBounds().width / 2, Volume_increase[0].getLocalBounds().height);
+
+
+    Volume_decrease[0].setTexture(volume_decrease);
+    Volume_decrease[0].setPosition(window.getSize().x / 6.4, window.getSize().y / 6.353);
+    Volume_decrease[0].setOrigin(Volume_decrease[0].getLocalBounds().width / 2, Volume_decrease[0].getLocalBounds().height);
+
+
+
+
+    Volume_increase[1].setTexture(volume_increase);
+    Volume_increase[1].setPosition(window.getSize().x / 3.918, window.getSize().y / 3.6);
+    Volume_increase[1].setOrigin(Volume_increase[1].getLocalBounds().width / 2, Volume_increase[1].getLocalBounds().height);
+
+
+
+
+    Volume_decrease[1].setTexture(volume_decrease);
+    Volume_decrease[1].setPosition(window.getSize().x / 6.4, window.getSize().y / 3.724);
+    Volume_decrease[1].setOrigin(Volume_decrease[1].getLocalBounds().width / 2, Volume_decrease[1].getLocalBounds().height);
+
+
+    back_button.sprite.setTexture(back_button.Default_texture);
+    back_button.sprite.setOrigin(back_button.sprite.getLocalBounds().width / 2, back_button.sprite.getLocalBounds().height / 2);
+    back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
+
+
+    hoverEffect(back_button.sprite);
+
+    options_menu_pause_eventloop();
+
+
+    window.draw(Back_ground);
+    window.draw(Audio_text);
+    window.draw(Music_Text);
+    window.draw(SFX_Text);
+    window.draw(video_text);
+    window.draw(Fullscreen_text);
+    window.draw(Volume_increase[0]);
+    window.draw(Volume_decrease[0]);
+    window.draw(volume_presentage[0]);
+    window.draw(Volume_increase[1]);
+    window.draw(Volume_decrease[1]);
+    window.draw(volume_presentage[1]);
+    window.draw(back_button.sprite);
+    if (fullscreen_close == false)
+        window.draw(check_box_open);
+    else
+        window.draw(check_box_close);
+}
+
+
+void PAUSE_MENU()
+{
+
+    //Text
+    Text PAUSE_Word("Pause", game_font, 50);
+    PAUSE_Word.setOrigin(PAUSE_Word.getLocalBounds().width / 2, PAUSE_Word.getLocalBounds().height / 2);
+    PAUSE_Word.setScale(1.5, 1.5);
+    PAUSE_Word.setPosition(window.getSize().x / 2.021, window.getSize().y / 8.307);
+
+    //Sprite
+    Sprite  Back_ground, Rec_Background;
+
+    Resume.sprite.setTexture(Resume.Default_texture);
+    optionts.sprite.setTexture(optionts.Default_texture);
+    QUIT.sprite.setTexture(QUIT.Default_texture);
+
+    Back_ground.setTexture(pause_back_ground);
+    Rec_Background.setTexture(Rec_background);
+
+    Back_ground.setScale(window.getSize().x / Back_ground.getLocalBounds().width, window.getSize().y / Back_ground.getLocalBounds().height);
+
+    Resume.sprite.setPosition(window.getSize().x / 2, window.getSize().y / 3);
+    Resume.sprite.setOrigin(Resume.sprite.getLocalBounds().width / 2, Resume.sprite.getLocalBounds().height / 2);
+
+    optionts.sprite.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+    optionts.sprite.setOrigin(optionts.sprite.getLocalBounds().width / 2, optionts.sprite.getLocalBounds().height / 2);
+
+    QUIT.sprite.setPosition(window.getSize().x / 2, window.getSize().y / 1.5);
+    QUIT.sprite.setOrigin(QUIT.sprite.getLocalBounds().width / 2, QUIT.sprite.getLocalBounds().height / 2);
+
+
+    Rec_Background.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+    Rec_Background.setOrigin(Rec_Background.getLocalBounds().width / 2, Rec_Background.getLocalBounds().height / 2);
+    Rec_Background.setScale(.6, 0.5);
+
+
+
+
+
+    pause_eventloop();
+
+    hoverEffect(Resume.sprite);
+    hoverEffect(optionts.sprite);
+    hoverEffect(QUIT.sprite);
+
+
+
+
+    window.draw(Back_ground);
+    window.draw(Rec_Background);
+    window.draw(Resume.sprite);
+    window.draw(optionts.sprite);
+    window.draw(QUIT.sprite);
+    window.draw(PAUSE_Word);
+
+
+}
+
+
+
 void Classic_menu()
 {
     // background
@@ -484,13 +670,28 @@ quit_button.Pressed_texture.loadFromFile("assets/menus/main_menu/Quit_button_pre
 
 
 // options menu
-int volumeVariable[2] = { 50,50 };
 
 back_ground.loadFromFile("assets/menus/options_menu/background_western.png");
 checkbox_close.loadFromFile("assets/menus/options_menu/switch_off.png");
 checkbox_open.loadFromFile("assets/menus/options_menu/switch_on.png");
 volume_increase.loadFromFile("assets/menus/options_menu/Volume_increase.png");
 volume_decrease.loadFromFile("assets/menus/options_menu/Volume_decrease.png");
+
+
+// options menu pause 
+
+options_menu_background.loadFromFile("assets/menus/pause_menu/background_vampire.png");
+
+// Pause menu
+
+Resume.Default_texture.loadFromFile("assets/menus/pause_menu/Resume_button.png");
+Resume.Pressed_texture.loadFromFile("assets/menus/pause_menu/Resume_button_pressed.png");
+optionts.Default_texture.loadFromFile("assets/menus/pause_menu/Options_button.png");
+optionts.Pressed_texture.loadFromFile("assets/menus/pause_menu/Options_button_pressed.png");
+QUIT.Default_texture.loadFromFile("assets/menus/pause_menu/Quit_button.png");
+QUIT.Pressed_texture.loadFromFile("assets/menus/pause_menu/Quit_button_pressed.png");
+Rec_background.loadFromFile("assets/menus/pause_menu/Transparent-screen.png");
+pause_back_ground.loadFromFile("assets/menus/pause_menu/background_prison.png");
 
 
 // play menu
@@ -610,12 +811,16 @@ void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down,
             {
                 volume_num += 10;
                 text.setString(to_string(volume_num));
+                SFX_click.setVolume(volume_value[1]);
+                SFX_click.play();
             }
 
             else if (volume_down.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && volume_num > 0)
             {
                 volume_num -= 10;
                 text.setString(to_string(volume_num));
+                SFX_click.setVolume(volume_value[1]);
+                SFX_click.play();
             }
 
 
