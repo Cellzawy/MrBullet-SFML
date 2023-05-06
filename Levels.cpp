@@ -11,7 +11,7 @@ int level_index;
 void constructlev1(RenderWindow& window)
 {
     // background
-    lev[0].BG.loadFromFile("assets/Backgrounds/background_city (1).png");
+    lev[0].BG.loadFromFile("assets/Backgrounds/background_city.png");
     lev[0].bg.setTexture(lev[0].BG);
     lev[0].bg.setScale(4, 1.2);
 
@@ -163,19 +163,19 @@ void constructlev4(RenderWindow& window)
 void constructlev5(RenderWindow& window)
 {
     // Background
-    lev[4].BG.loadFromFile("assets/Textures/background_city.png");
+    lev[4].BG.loadFromFile("assets/Backgrounds/background_city.png");
     lev[4].bg.setTexture(lev[4].BG);
     lev[4].bg.setScale(4, 1.2);
 
     // ground
-    lev[4].GROUND[0].loadFromFile("assets/Textures/ground2.png");
+    lev[4].GROUND[0].loadFromFile("assets/Textures/rectangle1.png");
     lev[4].ground.setTexture(&lev[4].GROUND[0]);
     lev[4].ground.setSize(Vector2f(window.getSize().x, window.getSize().y));
     lev[4].ground.setOrigin(lev[4].ground.getSize().x / 2, lev[4].ground.getSize().y / 2);
     lev[4].ground.setPosition(window.getSize().x / 2, window.getSize().y / 1.85);
 
     // blocks
-    lev[4].BLOCK[0].loadFromFile("assets/Textures/rect2.png");
+    lev[4].BLOCK[0].loadFromFile("assets/Textures/rectangle2.png");
     lev[4].block[0].setTexture(&lev[4].BLOCK[0]);
     lev[4].block[0].setSize(Vector2f(200, 380));
     lev[4].block[0].setOrigin(lev[4].block[0].getSize().x / 2, lev[4].block[0].getSize().y / 2);
@@ -196,6 +196,7 @@ void constructlev5(RenderWindow& window)
 
 
 }
+
 
 void DrawingLevels(int num, RenderWindow& window)
 {
