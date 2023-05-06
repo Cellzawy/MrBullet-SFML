@@ -617,8 +617,6 @@ void DissolveEffect_lost_Quit(float dissolveTime)
 }
 
 
-
-
 void Moving_down_animation(sf::Sprite& panel)
 {
     sf::Clock delay;

@@ -11,7 +11,7 @@ int level_index;
 void constructlev1(RenderWindow& window)
 {
     // background
-    lev[0].BG.loadFromFile("assets/Backgrounds/background_city.png");
+    lev[0].BG.loadFromFile("assets/Backgrounds/background_city (1).png");
     lev[0].bg.setTexture(lev[0].BG);
     lev[0].bg.setScale(4, 1.2);
 
@@ -196,7 +196,6 @@ void constructlev5(RenderWindow& window)
 
 
 }
-
 
 void DrawingLevels(int num, RenderWindow& window)
 {

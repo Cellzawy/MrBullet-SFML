@@ -115,6 +115,7 @@ int main() {
                 character_draw(lev[0].target[0], window);
                 in_level = true;
                 currentLvl = 0;
+                levels_background();
 
                 for (int i = 0; i < bullets.size(); i++) {
                     HandlePhysics(lev[0], bullets[i]);
