@@ -355,42 +355,61 @@ sf::Event levels_eventloop(int enemies_num)
             window.close();
         }
 
-        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && lev[level_index].num_of_bullets > 0)
+        //Mouse Events
+        if (event.type == Event::MouseButtonPressed)
         {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-            Vector2i mousepos = Mouse::getPosition(window);
-            //CircleShape newBullet(10.f);
-            std::cout << "yes";
-            Bullet newBullet;
-            newBullet.bulletBody.setFillColor(sf::Color::Black);
-            newBullet.bulletBody.setRadius(10.f);
-            bullets.push_back(newBullet);
-            //for (int i = 0; i < bullets.size(); i++) {
-            //    DirectBullet(bullets[i], event, mousepos);
-            //}
-            DirectBullet(bullets[bullets.size() - 1], event, mousepos, level_index);
-            lev[level_index].num_of_bullets--;
-
-            // win-lose logic
-
-            for (int i = 0; i < enemies_num; i++)
+            cout << Mouse::getPosition().x << "\t" << Mouse::getPosition().y << endl;
+            if (Mouse::isButtonPressed(Mouse::Left))
             {
-                if (newBullet.bulletBody.getGlobalBounds().intersects(lev[level_index].target[i].body.getGlobalBounds()))
+
+                Vector2i mousePosition = Mouse::getPosition(window);
+
+
+                if (Replay.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
                 {
-                    lev[level_index].target[i].dead = true;
+                    Reset();
                 }
+
+                else if (Pause_menu_button.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                {
+                    current_menu = pause_MENU;
+                }
+                else if (lev[level_index].num_of_bullets > 0)
+                {
+                    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                    Vector2i mousepos = Mouse::getPosition(window);
+                    //CircleShape newBullet(10.f);
+                    std::cout << "yes";
+                    Bullet newBullet;
+                    newBullet.bulletBody.setFillColor(sf::Color::Black);
+                    newBullet.bulletBody.setRadius(10.f);
+                    bullets.push_back(newBullet);
+                    //for (int i = 0; i < bullets.size(); i++) {
+                    //    DirectBullet(bullets[i], event, mousepos);
+                    //}
+                    DirectBullet(bullets[bullets.size() - 1], event, mousepos, level_index);
+                    lev[level_index].num_of_bullets--;
+
+                    // win-lose logic
+
+                    for (int i = 0; i < enemies_num; i++)
+                    {
+                        if (newBullet.bulletBody.getGlobalBounds().intersects(lev[level_index].target[i].body.getGlobalBounds()))
+                        {
+                            lev[level_index].target[i].dead = true;
+                        }
+
+
+                    }
+                }
+
             }
         }
 
-        else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-        {
-            current_menu = pause_MENU;
-        }
-
-
     }
-    return event;
+return event;
 }
+
 
 sf::Event win_lose_panels_eventloop()
 {

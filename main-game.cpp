@@ -28,10 +28,13 @@ int main() {
     mainmenu_music.play();
     mainmenu_music.setLoop(true);
     constructlev1(window);
+    constructlev2(window);
+    constructlev3(window);
+    constructlev4(window);
+    bool level_complete = false;
     int currentLvl;
 
-
-    while(window.isOpen())
+    while (window.isOpen())
     {
         if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
         {
@@ -40,18 +43,20 @@ int main() {
                 for (int i = bullets.size() - 1; i >= 0; i--)
                 {
                     Time elapsed = bullets[i].clock.getElapsedTime();
+                    level_complete = false;
                     if (elapsed >= seconds(5.f))
                     {
                         bullets[i].clock.restart();
                         bullets.erase(bullets.begin() + i);
                         std::cout << "erased";
+                        level_complete = true;
                     }
                 }
             }
 
-            for (int i = 0; i < bullets.size(); i++) {
-                bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
-            }
+            //for (int i = 0; i < bullets.size(); i++) {
+            //    bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+            //}
         }
 
         // drawing
@@ -150,13 +155,150 @@ int main() {
                     current_menu = won_panel;
                 }
 
-                else if (lev[level_index].num_of_bullets == 0)  ///32131563
+                else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
                 {
                     current_menu = lost_panel;
                 }
 
             }
         }
+
+        else if (current_menu == level_2)
+        {
+            int enemies_num = 8;
+            levels_eventloop(enemies_num);
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
+            {
+                DrawingLevels(1, window);
+                in_level = true;
+                currentLvl = 2;
+
+                for (int i = 0; i < bullets.size(); i++) {
+                    HandlePhysics(lev[1], bullets[i]);
+                }
+                for (int i = 0; i < bullets.size(); i++) {
+                    CollideEnemies(lev[1], bullets[i]);
+                }
+
+
+
+
+                for (int i = 0; i < enemies_num; i++)
+                {
+                    if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                    {
+                        dead_enemies++;
+                        lev[level_index].target[i].alive = false;
+                    }
+                }
+
+
+
+
+                if (dead_enemies == enemies_num)
+                {
+                    stars_system(3, 2, 1, 0);
+                    current_menu = won_panel;
+                }
+
+                else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
+                {
+                    current_menu = lost_panel;
+                }
+
+            }
+        }
+        else if (current_menu == level_3)
+        {
+            int enemies_num = 1;
+            levels_eventloop(enemies_num);
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
+            {
+                DrawingLevels(2, window);
+                in_level = true;
+                currentLvl = 2;
+
+                for (int i = 0; i < bullets.size(); i++) {
+                    HandlePhysics(lev[2], bullets[i]);
+                }
+                for (int i = 0; i < bullets.size(); i++) {
+                    CollideEnemies(lev[2], bullets[i]);
+                }
+
+
+
+
+                for (int i = 0; i < enemies_num; i++)
+                {
+                    if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                    {
+                        dead_enemies++;
+                        lev[level_index].target[i].alive = false;
+                    }
+                }
+
+
+
+
+                if (dead_enemies == enemies_num)
+                {
+                    stars_system(3, 2, 1, 0);
+                    current_menu = won_panel;
+                }
+
+                else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
+                {
+                    current_menu = lost_panel;
+                }
+
+            }
+        }
+        else if (current_menu == level_4)
+        {
+            int enemies_num = 3;
+            levels_eventloop(enemies_num);
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
+            {
+                DrawingLevels(3, window);
+                in_level = true;
+                currentLvl = 3;
+
+                for (int i = 0; i < bullets.size(); i++) {
+                    HandlePhysics(lev[3], bullets[i]);
+                }
+                for (int i = 0; i < bullets.size(); i++) {
+                    CollideEnemies(lev[3], bullets[i]);
+                }
+
+
+
+
+                for (int i = 0; i < enemies_num; i++)
+                {
+                    if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                    {
+                        dead_enemies++;
+                        lev[level_index].target[i].alive = false;
+                    }
+                }
+
+
+
+
+                if (dead_enemies == enemies_num)
+                {
+                    stars_system(3, 2, 1, 0);
+                    current_menu = won_panel;
+                }
+
+                else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
+                {
+                    current_menu = lost_panel;
+                }
+
+            }
+        }
+
         if (in_level) {
             levels_background();
         }

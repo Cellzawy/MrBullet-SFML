@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Sprites.h"
 #include "Levels.h"
+#include "Physics.h"
 #include "Menus.h"
 
 using namespace sf;
@@ -35,7 +36,6 @@ void constructlev1(RenderWindow& window)
     character_set_position(lev[0].target[0], Vector2f(1720, lev[0].ground.getPosition().y - (lev[0].ground.getLocalBounds().height) * 1.4));
 
     // bullets
-    lev[0].num_of_bullets = 4;
 }
 
 void constructlev2(RenderWindow& window)
@@ -86,6 +86,8 @@ void constructlev2(RenderWindow& window)
         character_set_scale(lev[1].target[i], 0.4);
         character_set_position(lev[1].target[i], Vector2f(lev[1].block[i + 1].getPosition().x - 50, lev[1].block[i + 1].getPosition().y - 295));
     }
+
+
 }
 
 void constructlev3(RenderWindow& window)
@@ -125,6 +127,7 @@ void constructlev3(RenderWindow& window)
     character_init(lev[2].target[0], "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", true);
     character_set_scale(lev[2].target[0], 0.34);
     character_set_position(lev[2].target[0], Vector2f(lev[2].shape[0].getPosition().x - (lev[2].shape[0].getSize().x / 2), lev[2].shape[0].getPosition().y - 235));
+    
 }
 
 void constructlev4(RenderWindow& window)
@@ -140,6 +143,16 @@ void constructlev4(RenderWindow& window)
     lev[3].shape[0].setSize(Vector2f(1000, 1200));
     lev[3].shape[0].setOrigin(lev[3].shape[0].getSize().x / 2, lev[3].shape[0].getSize().y / 2);
     lev[3].shape[0].setPosition(window.getSize().x / 2, window.getSize().y / 2 + 75);
+    lev[3].shape[1].setSize(Vector2f(140, 1064));
+    lev[3].shape[1].setPosition(Vector2f(460, 15));
+    lev[3].shape[2].setSize(Vector2f(720, 180));
+    lev[3].shape[2].setPosition(Vector2f(600, 15));
+    lev[3].shape[3].setSize(Vector2f(140, 1064));
+    lev[3].shape[3].setPosition(Vector2f(1320, 15));
+    lev[3].shape[4].setSize(Vector2f(720, 180));
+    lev[3].shape[4].setPosition(Vector2f(600, 950));
+    lev[3].shape[5].setSize(Vector2f(460, 332));
+    lev[3].shape[5].setPosition(Vector2f(600, 408));
 
     //killer
     character_init(lev[3].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
@@ -206,7 +219,20 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[0].ground);
         character_draw(lev[0].killer, window);
         character_draw(lev[0].target[0], window);
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            window.draw(bullets[i].bulletBody);
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            HandlePhysics(lev[0], bullets[i]);
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            CollideEnemies(lev[0], bullets[i]);
+        }
         levels_background();
+        lev[0].num_of_bullets = 4;
     }
 
 
@@ -218,11 +244,25 @@ void DrawingLevels(int num, RenderWindow& window)
             window.draw(lev[1].block[i]);
         }
         character_draw(lev[1].killer, window);
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+        }
         for (int i = 0; i < 8; i++)
         {
             character_draw(lev[1].target[i], window);
         }
+        for (int i = 0; i < bullets.size(); i++) {
+            window.draw(bullets[i].bulletBody);
+        }
+
+        for (int i = 0; i < bullets.size(); i++) {
+            HandlePhysics(lev[1], bullets[i]);
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            CollideEnemies(lev[1], bullets[i]);
+        }
         levels_background();
+        lev[1].num_of_bullets = 7;
     }
 
 
@@ -233,8 +273,22 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[2].shape[0]);
         window.draw(lev[2].shape[1]);
         character_draw(lev[2].killer, window);
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+        }
         character_draw(lev[2].target[0], window);
+        for (int i = 0; i < bullets.size(); i++) {
+            window.draw(bullets[i].bulletBody);
+        }
+
+        for (int i = 0; i < bullets.size(); i++) {
+            HandlePhysics(lev[2], bullets[i]);
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            CollideEnemies(lev[2], bullets[i]);
+        }
         levels_background();
+        lev[2].num_of_bullets = 4;
 
     }
 
@@ -248,7 +302,21 @@ void DrawingLevels(int num, RenderWindow& window)
         {
             character_draw(lev[3].target[i], window);
         }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            window.draw(bullets[i].bulletBody);
+        }
+
+        for (int i = 0; i < bullets.size(); i++) {
+            HandlePhysics(lev[3], bullets[i]);
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            CollideEnemies(lev[3], bullets[i]);
+        }
         levels_background();
+        lev[3].num_of_bullets = 6;
 
     }
 
@@ -264,6 +332,20 @@ void DrawingLevels(int num, RenderWindow& window)
         {
             character_draw(lev[4].target[i], window);
         }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            window.draw(bullets[i].bulletBody);
+        }
+
+        for (int i = 0; i < bullets.size(); i++) {
+            HandlePhysics(lev[4], bullets[i]);
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            CollideEnemies(lev[4], bullets[i]);
+        }
+
         levels_background();
     }
 }
