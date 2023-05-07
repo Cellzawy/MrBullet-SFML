@@ -12,6 +12,7 @@
 
 using namespace sf;
 
+int currentLvl = 0;
 
 void EventListener() {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
@@ -343,7 +344,6 @@ sf::Event achievements_menu_eventloop()
     return event;
 }
 
-
 sf::Event levels_eventloop(int enemies_num)
 {
     // event loop
@@ -354,37 +354,60 @@ sf::Event levels_eventloop(int enemies_num)
         {
             window.close();
         }
-
-        else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && lev[level_index].num_of_bullets > 0)
-        {
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-            Vector2i mousepos = Mouse::getPosition(window);
-            //CircleShape newBullet(10.f);
-            std::cout << "yes";
-            Bullet newBullet;
-            newBullet.bulletBody.setFillColor(sf::Color::Black);
-            newBullet.bulletBody.setRadius(10.f);
-            bullets.push_back(newBullet);
-            //for (int i = 0; i < bullets.size(); i++) {
-            //    DirectBullet(bullets[i], event, mousepos);
-            //}
-            DirectBullet(bullets[bullets.size() - 1], event, mousepos, level_index);
-            lev[level_index].num_of_bullets--;
-
-            // win-lose logic
-
-            for (int i = 0; i < enemies_num; i++)
+        if(event.type=Event::MouseButtonPressed)
+        { 
+        //Mouse Events
+            if (event.type == Event::MouseButtonPressed)
             {
-                if (newBullet.bulletBody.getGlobalBounds().intersects(lev[level_index].target[i].body.getGlobalBounds()))
+                if (Mouse::isButtonPressed(Mouse::Left))
                 {
-                    lev[level_index].target[i].dead = true;
+
+                    Vector2i mousePosition = Mouse::getPosition(window);
+
+
+                    if (Replay.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                    {
+                        Reset();
+                    }
+
+                    else if (Pause_menu_button.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+                    {
+                        current_menu = pause_MENU;
+                    }
+                    else if (lev[level_index].num_of_bullets > 0)
+                    {
+                        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                        Vector2i mousepos = Mouse::getPosition(window);
+                        //CircleShape newBullet(10.f);
+                        std::cout << "yes";
+                        Bullet newBullet;
+                        newBullet.bulletBody.setFillColor(sf::Color::Black);
+                        newBullet.bulletBody.setRadius(10.f);
+                        bullets.push_back(newBullet);
+                        //for (int i = 0; i < bullets.size(); i++) {
+                        //    DirectBullet(bullets[i], event, mousepos);
+                        //}
+                        DirectBullet(bullets[bullets.size() - 1], event, mousepos, currentLvl);
+                        lev[level_index].num_of_bullets--;
+
+                        // win-lose logic
+
+                        for (int i = 0; i < enemies_num; i++)
+                        {
+                            if (newBullet.bulletBody.getGlobalBounds().intersects(lev[level_index].target[i].body.getGlobalBounds()))
+                            {
+                                lev[level_index].target[i].dead = true;
+                            }
+
+
+                        }
+                    }
+
                 }
             }
-        }
-
-        else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-        {
-            current_menu = pause_MENU;
+            
+       
+            
         }
 
 
@@ -415,18 +438,15 @@ sf::Event win_lose_panels_eventloop()
 
             else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 9)
             {
-                Reset();
                 animation = true;
                 level_index++;
                 current_menu = static_cast<menu_type>(level_index);
                 lev[level_index].view.Level_evaluation = 0;
                 Reset();
-
             }
 
             else if (backward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 0)
             {
-                Reset();
                 animation = true;
                 current_menu = main_menu;
                 Reset();
