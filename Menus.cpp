@@ -49,13 +49,6 @@ sf::Texture options_menu_background;
 sf::Texture play_menu_background_texture;
 Menu classic_menu, duels_menu;
 
-// levels_background
-Texture pause_menu_button;
-Texture Bullet_texture;
-Sprite Replay;
-Sprite Pause_menu_button;
-Sprite Bullet_Sprite;
-
 // classic menu
 sf::Texture classic_menu_background_texture;
 sf::Texture Border_hover_effect;
@@ -518,23 +511,6 @@ void PAUSE_MENU()
 
 }
 
-void levels_background()
-{
-    Replay.setTexture(reset_texture);
-    Replay.setOrigin(Replay.getLocalBounds().width / 2, Replay.getLocalBounds().height / 2);
-    Replay.setPosition(Vector2f(1800, 75));
-    Replay.setScale(0.5, 0.5);
-
-    Pause_menu_button.setTexture(pause_menu_button);
-    Pause_menu_button.setOrigin(Pause_menu_button.getLocalBounds().width / 2, Pause_menu_button.getLocalBounds().height / 2);
-    Pause_menu_button.setPosition(Vector2f(80, 70));
-    Pause_menu_button.setScale(0.22, 0.22);
-    // poll event
-
-
-    window.draw(Replay);
-    window.draw(Pause_menu_button);
-}
 
 
 void Classic_menu()
@@ -729,10 +705,6 @@ classic_menu.Hovered_texture.loadFromFile("assets/menus/play_menu/Classic_mode_h
 
 duels_menu.Default_texture.loadFromFile("assets/menus/play_menu/Duels.png");
 duels_menu.Hovered_texture.loadFromFile("assets/menus/play_menu/Duels_hovered.png");
-
-// Level
-pause_menu_button.loadFromFile("assets/menus/Level/IconViewTypeList.png");
-Bullet_texture.loadFromFile("assets/menus/Level/bullet.png");
 
 
 // classic menu
