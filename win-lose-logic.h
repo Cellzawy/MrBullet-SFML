@@ -24,11 +24,11 @@ void DissolveEffect_three_stars(float dissolveTime);
 void DissolveEffect_won_options(float dissolveTime);
 void DissolveEffect_won_Quit(float);
 
-void Lose_panel();
+void Lose_panel(int lvl);
 void DissolveEffect_first_Text(sf::Text, float);
 void DissolveEffect_second_Text(sf::Text, float);
 void DissolveEffect_lost_options(float dissolveTime);
-void DissolveEffect_lost_Quit(sf::Sprite&, float);
+void DissolveEffect_lost_Quit(float);
 
 void Moving_down_animation(sf::Sprite&);
 void Reset();

@@ -11,7 +11,7 @@
 
 sf::RenderWindow window(sf::VideoMode(1920, 1080), "Mr bullet", sf::Style::Fullscreen);
 bool in_level;
-//int currentLvl = 0;
+int currentLvl = 0;
 
 
 
@@ -28,6 +28,8 @@ int main() {
     mainmenu_music.play();
     mainmenu_music.setLoop(true);
     constructlev1(window);
+    int currentLvl;
+
 
     while(window.isOpen())
     {
@@ -58,37 +60,44 @@ int main() {
 
         if (current_menu == main_menu)
         {
+            in_level = false;
             Main_menu();
         }
 
         else if (current_menu == play_menu)
         {
+            in_level = false;
             Play_menu();
         }
 
 
         else if (current_menu == options_menu)
         {
+            in_level = false;
             Options_menu();
         }
 
         else if (current_menu == pause_MENU)
         {
+            in_level = false;
             PAUSE_MENU();
         }
 
         else if (current_menu == OPTIONS_MENU_PAUSE)
         {
+            in_level = false;
             Options_menu_Pause();
         }
 
         else if (current_menu == classic_Mode)
         {
+            in_level = false;
             Classic_menu();
         }
 
         else if (current_menu == achievements_menu)
         {
+            in_level = false;
             Achievements_menu();
         }
 
@@ -99,7 +108,7 @@ int main() {
 
         else if (current_menu == lost_panel)
         {
-            Lose_panel();
+            Lose_panel(currentLvl);
         }
 
 
@@ -109,13 +118,9 @@ int main() {
             levels_eventloop(enemies_num);
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
             {
-                window.draw(lev[0].bg);//321356163
-                window.draw(lev[0].ground);
-                character_draw(lev[0].killer, window);
-                character_draw(lev[0].target[0], window);
+                DrawingLevels(0, window);
                 in_level = true;
                 currentLvl = 0;
-                levels_background();
 
                 for (int i = 0; i < bullets.size(); i++) {
                     HandlePhysics(lev[0], bullets[i]);
@@ -151,6 +156,9 @@ int main() {
                 }
 
             }
+        }
+        if (in_level) {
+            levels_background();
         }
 
         if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))

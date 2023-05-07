@@ -11,7 +11,7 @@ int level_index;
 void constructlev1(RenderWindow& window)
 {
     // background
-    lev[0].BG.loadFromFile("assets/Backgrounds/background_city (1).png");
+    lev[0].BG.loadFromFile("assets/Backgrounds/background_city.png");
     lev[0].bg.setTexture(lev[0].BG);
     lev[0].bg.setScale(4, 1.2);
 
@@ -206,8 +206,7 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[0].ground);
         character_draw(lev[0].killer, window);
         character_draw(lev[0].target[0], window);
-
-
+        levels_background();
     }
 
 
@@ -223,6 +222,7 @@ void DrawingLevels(int num, RenderWindow& window)
         {
             character_draw(lev[1].target[i], window);
         }
+        levels_background();
     }
 
 
@@ -234,6 +234,8 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[2].shape[1]);
         character_draw(lev[2].killer, window);
         character_draw(lev[2].target[0], window);
+        levels_background();
+
     }
 
 
@@ -246,6 +248,7 @@ void DrawingLevels(int num, RenderWindow& window)
         {
             character_draw(lev[3].target[i], window);
         }
+        levels_background();
 
     }
 
@@ -261,5 +264,6 @@ void DrawingLevels(int num, RenderWindow& window)
         {
             character_draw(lev[4].target[i], window);
         }
+        levels_background();
     }
 }

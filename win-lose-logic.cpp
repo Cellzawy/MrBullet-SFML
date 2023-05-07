@@ -44,12 +44,10 @@ bool animation = true;
 
 void Win_panel(int score)
 {
-
+    DrawingLevels(level_index, window);
     Forward.setTexture(forward_texture);
     backward.setTexture(backward_texture);
     reset.setTexture(reset_texture);
-
-
     win_panel.setTexture(win_panel_texture);
 
 
@@ -88,7 +86,7 @@ void Win_panel(int score)
     quit_to_main_menu.setScale(1.0f, 1.0f);
 
 
-    if(animation)
+    if (animation)
     {
         Moving_down_animation(win_panel);
 
@@ -112,12 +110,12 @@ void Win_panel(int score)
     window.draw(third_star);
     window.draw(result_text);
 
-    if(level_index != 9)
+    if (level_index != 9)
     {
         window.draw(Forward);
     }
 
-    if(level_index != 0)
+    if (level_index != 0)
     {
         window.draw(backward);
     }
@@ -136,7 +134,7 @@ void DissolveEffect_three_stars(float dissolveTime)
 
     sf::Clock dissolveClock;
 
-    while(first_star.getColor().a != 255 && second_star.getColor().a != 255 && third_star.getColor().a != 255)
+    while (first_star.getColor().a != 255 && second_star.getColor().a != 255 && third_star.getColor().a != 255)
     {
 
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
@@ -153,6 +151,7 @@ void DissolveEffect_three_stars(float dissolveTime)
         }
 
         window.clear();
+        DrawingLevels(level_index, window);
         window.draw(win_panel);
         window.draw(first_star);
         window.draw(second_star);
@@ -164,6 +163,7 @@ void DissolveEffect_three_stars(float dissolveTime)
 void Winning_level_results(int result)
 {
     window.clear();
+    DrawingLevels(level_index, window);
     window.draw(win_panel);
     window.draw(first_star);
     window.draw(second_star);
@@ -200,6 +200,7 @@ void Zero_stars()
     result_text.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
     window.clear();
+    DrawingLevels(level_index, window);
     window.draw(win_panel);
     window.draw(first_star);
     window.draw(second_star);
@@ -217,7 +218,7 @@ void One_star()
 
 
     sf::Clock delay;
-    while(delay.getElapsedTime().asMilliseconds() < 800)
+    while (delay.getElapsedTime().asMilliseconds() < 800)
     {
         if (delay.getElapsedTime().asMilliseconds() > 500)
         {
@@ -226,6 +227,7 @@ void One_star()
     }
 
     window.clear();
+    DrawingLevels(level_index, window);
     window.draw(win_panel);
     window.draw(first_star);
     window.draw(second_star);
@@ -250,6 +252,7 @@ void Two_stars()
             first_star.setTexture(star_texture);
 
             window.clear();
+            DrawingLevels(level_index, window);
             window.draw(win_panel);
             window.draw(first_star);
             window.draw(second_star);
@@ -261,6 +264,7 @@ void Two_stars()
                 second_star.setTexture(star_texture);
 
                 window.clear();
+                DrawingLevels(level_index, window);
                 window.draw(win_panel);
                 window.draw(first_star);
                 window.draw(second_star);
@@ -281,35 +285,38 @@ void Three_stars()
 
 
     sf::Clock delay;
-    while(delay.getElapsedTime().asMilliseconds() < 1400)
+    while (delay.getElapsedTime().asMilliseconds() < 1400)
     {
-        if(delay.getElapsedTime().asMilliseconds() > 400)
+        if (delay.getElapsedTime().asMilliseconds() > 400)
         {
             first_star.setTexture(star_texture);
 
             window.clear();
+            DrawingLevels(level_index, window);
             window.draw(win_panel);
             window.draw(first_star);
             window.draw(second_star);
             window.draw(third_star);
             window.display();
 
-            if(delay.getElapsedTime().asMilliseconds() > 800)
+            if (delay.getElapsedTime().asMilliseconds() > 800)
             {
                 second_star.setTexture(star_texture);
 
                 window.clear();
+                DrawingLevels(level_index, window);
                 window.draw(win_panel);
                 window.draw(first_star);
                 window.draw(second_star);
                 window.draw(third_star);
                 window.display();
 
-                if(delay.getElapsedTime().asMilliseconds() > 1200)
+                if (delay.getElapsedTime().asMilliseconds() > 1200)
                 {
                     third_star.setTexture(star_texture);
 
                     window.clear();
+                    DrawingLevels(level_index, window);
                     window.draw(win_panel);
                     window.draw(first_star);
                     window.draw(second_star);
@@ -330,7 +337,7 @@ void DissolveEffect_won_options(float dissolveTime)
 
     sf::Clock dissolveClock;
 
-    while(Forward.getColor().a != 255 && backward.getColor().a != 255 && reset.getColor().a != 255)
+    while (Forward.getColor().a != 255 && backward.getColor().a != 255 && reset.getColor().a != 255)
     {
 
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
@@ -346,24 +353,25 @@ void DissolveEffect_won_options(float dissolveTime)
             reset.setColor(sf::Color(255, 255, 255, 255));
         }
 
-    window.clear();
-    window.draw(win_panel);
-    window.draw(first_star);
-    window.draw(second_star);
-    window.draw(third_star);
+        window.clear();
+        DrawingLevels(level_index, window);
+        window.draw(win_panel);
+        window.draw(first_star);
+        window.draw(second_star);
+        window.draw(third_star);
 
-    if(level_index != 9)
-    {
-        window.draw(Forward);
-    }
+        if (level_index != 9)
+        {
+            window.draw(Forward);
+        }
 
-    if(level_index != 0)
-    {
-        window.draw(backward);
-    }
+        if (level_index != 0)
+        {
+            window.draw(backward);
+        }
 
-    window.draw(reset);
-    window.display();
+        window.draw(reset);
+        window.display();
     }
 }
 
@@ -372,7 +380,7 @@ void DissolveEffect_won_Quit(float dissolveTime)
     quit_to_main_menu.setColor(sf::Color(255, 255, 255, 0));
 
     sf::Clock dissolveClock;
-    while(quit_to_main_menu.getColor().a != 255)
+    while (quit_to_main_menu.getColor().a != 255)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
@@ -384,17 +392,18 @@ void DissolveEffect_won_Quit(float dissolveTime)
         }
 
         window.clear();
+        DrawingLevels(level_index, window);
         window.draw(win_panel);
         window.draw(first_star);
         window.draw(second_star);
         window.draw(third_star);
 
-        if(level_index != 9)
+        if (level_index != 9)
         {
             window.draw(Forward);
         }
 
-        if(level_index != 0)
+        if (level_index != 0)
         {
             window.draw(backward);
         }
@@ -409,8 +418,9 @@ void DissolveEffect_won_Quit(float dissolveTime)
 sf::Text out_of_bullets("YOU'RE OUT OF \n     BULLETS", game_font, 55), Try_again("TRY AGAIN?", game_font, 55);
 
 
-void Lose_panel()
+void Lose_panel(int lvl)
 {
+    DrawingLevels(lvl, window);
     lose_panel.setTexture(lose_panel_texture);
 
     Forward.setTexture(forward_texture);
@@ -434,7 +444,7 @@ void Lose_panel()
     Forward.setOrigin(Forward.getLocalBounds().width / 2, Forward.getLocalBounds().height / 2);
     Forward.setPosition(window.getSize().x / 1.701, window.getSize().y / 1.339);
 
-    backward.setOrigin(backward.getLocalBounds().width /2, backward.getLocalBounds().height / 2);
+    backward.setOrigin(backward.getLocalBounds().width / 2, backward.getLocalBounds().height / 2);
     backward.setPosition(window.getSize().x / 2.427, window.getSize().y / 1.339);
 
     reset.setOrigin(reset.getLocalBounds().width / 2, reset.getLocalBounds().height / 2);
@@ -467,12 +477,12 @@ void Lose_panel()
     window.draw(out_of_bullets);
     window.draw(Try_again);
 
-    if(level_index != 9)
+    if (level_index != 9)
     {
         window.draw(Forward);
     }
 
-    if(level_index != 0)
+    if (level_index != 0)
     {
         window.draw(backward);
     }
@@ -488,7 +498,7 @@ void DissolveEffect_first_Text(sf::Text text, float dissolveTime)
     text.setFillColor(sf::Color(147, 22, 22, 0));
 
     sf::Clock dissolveClock;
-    while(text.getFillColor().a != 255)
+    while (text.getFillColor().a != 255)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
@@ -500,6 +510,7 @@ void DissolveEffect_first_Text(sf::Text text, float dissolveTime)
         }
 
         window.clear();
+        DrawingLevels(level_index, window);
         window.draw(lose_panel);
         window.draw(text);
         window.display();
@@ -513,7 +524,7 @@ void DissolveEffect_second_Text(sf::Text text, float dissolveTime)
     text.setFillColor(sf::Color(147, 22, 22, 0));
 
     sf::Clock dissolveClock;
-    while(text.getFillColor().a != 255)
+    while (text.getFillColor().a != 255)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
@@ -525,6 +536,7 @@ void DissolveEffect_second_Text(sf::Text text, float dissolveTime)
         }
 
         window.clear();
+        DrawingLevels(level_index, window);
         window.draw(lose_panel);
         window.draw(out_of_bullets);
         window.draw(text);
@@ -541,7 +553,7 @@ void DissolveEffect_lost_options(float dissolveTime)
 
     sf::Clock dissolveClock;
 
-    while(Forward.getColor().a != 255 && backward.getColor().a != 255 && reset.getColor().a != 255)
+    while (Forward.getColor().a != 255 && backward.getColor().a != 255 && reset.getColor().a != 255)
     {
 
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
@@ -558,16 +570,17 @@ void DissolveEffect_lost_options(float dissolveTime)
         }
 
         window.clear();
+        DrawingLevels(level_index, window);
         window.draw(lose_panel);
         window.draw(out_of_bullets);
         window.draw(Try_again);
 
-        if(level_index != 9)
+        if (level_index != 9)
         {
             window.draw(Forward);
         }
 
-        if(level_index != 0)
+        if (level_index != 0)
         {
             window.draw(backward);
         }
@@ -583,7 +596,7 @@ void DissolveEffect_lost_Quit(float dissolveTime)
     quit_to_main_menu.setColor(sf::Color(255, 255, 255, 0));
 
     sf::Clock dissolveClock;
-    while(quit_to_main_menu.getColor().a != 255)
+    while (quit_to_main_menu.getColor().a != 255)
     {
         float dissolvePercent = dissolveClock.getElapsedTime().asSeconds() / dissolveTime;
 
@@ -595,17 +608,18 @@ void DissolveEffect_lost_Quit(float dissolveTime)
         }
 
         window.clear();
+        DrawingLevels(level_index, window);
         window.draw(lose_panel);
         window.draw(out_of_bullets);
         window.draw(Try_again);
 
-        if(level_index != 9)
+        if (level_index != 9)
         {
             window.draw(Forward);
         }
 
 
-        if(level_index != 0)
+        if (level_index != 0)
         {
             window.draw(backward);
         }
@@ -617,6 +631,8 @@ void DissolveEffect_lost_Quit(float dissolveTime)
 }
 
 
+
+
 void Moving_down_animation(sf::Sprite& panel)
 {
     sf::Clock delay;
@@ -625,6 +641,7 @@ void Moving_down_animation(sf::Sprite& panel)
     {
         normal_eventloop();
         window.clear();
+        DrawingLevels(level_index, window);
         if (delay.getElapsedTime().asSeconds() > 1)
         {
             panel.move(0, window.getSize().y / 50);
@@ -652,7 +669,7 @@ void stars_system(int three_stars, int two_stars, int one_star, int zero_stars)
 {
     if (lev[level_index].num_of_bullets == three_stars)
     {
-    lev[level_index].view.Level_evaluation = 3;
+        lev[level_index].view.Level_evaluation = 3;
     }
 
     else if (lev[level_index].num_of_bullets == two_stars)
