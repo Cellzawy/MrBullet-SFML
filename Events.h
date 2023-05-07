@@ -15,5 +15,6 @@ sf::Event pause_eventloop();
 sf::Event levels_eventloop(int num_of_enemies);
 sf::Event win_lose_panels_eventloop();
 sf::Event options_menu_pause_eventloop();
+extern int currentLvl;
 
 #endif

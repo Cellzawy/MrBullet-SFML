@@ -104,6 +104,13 @@ extern Button Resume, optionts, QUIT;
 extern sf::Texture play_menu_background_texture;
 extern Menu classic_menu, duels_menu;
 
+// levels_background
+extern Texture pause_menu_button;
+extern Texture Bullet_texture;
+extern Sprite Replay;
+extern Sprite Pause_menu_button;
+extern Sprite Bullet_Sprite;
+
 // classic menu
 extern sf::Texture classic_menu_background_texture;
 extern sf::Texture Border_hover_effect;  // the levels struct is in the Levels.h file
@@ -119,21 +126,33 @@ extern sf::RenderWindow window;
 
 
 void Main_menu();
+
 void Play_menu();
+
 void Options_menu();
+
 void Classic_menu();
+
 void Achievements_menu();
+
 void Options_menu_Pause();
+
 void PAUSE_MENU();
+
 void Texture_loading();
+
+void levels_background();
 
 void Level_Evaluation(Lev lev[]);
 
 void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&);
 
 void hoverEffect(sf::Sprite&); // for buttons
+
 void hoverEffect(sf::Sprite&, sf::Texture&, sf::Texture&, sf::Text&); // for menu selection in play menu
+
 void hoverEffect(Lev lev[]); // for levels selection in classic menu
+
 void hoverEffect(sf::Sprite&, sf::Texture&); // for achievement button in main menu
 
 #endif
