@@ -44,10 +44,12 @@ bool animation = true;
 
 void Win_panel(int score)
 {
-    DrawingLevels(level_index, window);
+
     Forward.setTexture(forward_texture);
     backward.setTexture(backward_texture);
     reset.setTexture(reset_texture);
+
+
     win_panel.setTexture(win_panel_texture);
 
 
@@ -151,7 +153,6 @@ void DissolveEffect_three_stars(float dissolveTime)
         }
 
         window.clear();
-        DrawingLevels(level_index, window);
         window.draw(win_panel);
         window.draw(first_star);
         window.draw(second_star);
@@ -163,7 +164,6 @@ void DissolveEffect_three_stars(float dissolveTime)
 void Winning_level_results(int result)
 {
     window.clear();
-    DrawingLevels(level_index, window);
     window.draw(win_panel);
     window.draw(first_star);
     window.draw(second_star);
@@ -200,7 +200,6 @@ void Zero_stars()
     result_text.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
     window.clear();
-    DrawingLevels(level_index, window);
     window.draw(win_panel);
     window.draw(first_star);
     window.draw(second_star);
@@ -227,7 +226,6 @@ void One_star()
     }
 
     window.clear();
-    DrawingLevels(level_index, window);
     window.draw(win_panel);
     window.draw(first_star);
     window.draw(second_star);
@@ -252,7 +250,6 @@ void Two_stars()
             first_star.setTexture(star_texture);
 
             window.clear();
-            DrawingLevels(level_index, window);
             window.draw(win_panel);
             window.draw(first_star);
             window.draw(second_star);
@@ -264,7 +261,6 @@ void Two_stars()
                 second_star.setTexture(star_texture);
 
                 window.clear();
-                DrawingLevels(level_index, window);
                 window.draw(win_panel);
                 window.draw(first_star);
                 window.draw(second_star);
@@ -292,7 +288,6 @@ void Three_stars()
             first_star.setTexture(star_texture);
 
             window.clear();
-            DrawingLevels(level_index, window);
             window.draw(win_panel);
             window.draw(first_star);
             window.draw(second_star);
@@ -304,7 +299,6 @@ void Three_stars()
                 second_star.setTexture(star_texture);
 
                 window.clear();
-                DrawingLevels(level_index, window);
                 window.draw(win_panel);
                 window.draw(first_star);
                 window.draw(second_star);
@@ -316,7 +310,6 @@ void Three_stars()
                     third_star.setTexture(star_texture);
 
                     window.clear();
-                    DrawingLevels(level_index, window);
                     window.draw(win_panel);
                     window.draw(first_star);
                     window.draw(second_star);
@@ -354,7 +347,6 @@ void DissolveEffect_won_options(float dissolveTime)
         }
 
     window.clear();
-    DrawingLevels(level_index, window);
     window.draw(win_panel);
     window.draw(first_star);
     window.draw(second_star);
@@ -392,7 +384,6 @@ void DissolveEffect_won_Quit(float dissolveTime)
         }
 
         window.clear();
-        DrawingLevels(level_index, window);
         window.draw(win_panel);
         window.draw(first_star);
         window.draw(second_star);
@@ -418,9 +409,8 @@ void DissolveEffect_won_Quit(float dissolveTime)
 sf::Text out_of_bullets("YOU'RE OUT OF \n     BULLETS", game_font, 55), Try_again("TRY AGAIN?", game_font, 55);
 
 
-void Lose_panel(int lvl)
+void Lose_panel()
 {
-    DrawingLevels(lvl, window);
     lose_panel.setTexture(lose_panel_texture);
 
     Forward.setTexture(forward_texture);
@@ -510,7 +500,6 @@ void DissolveEffect_first_Text(sf::Text text, float dissolveTime)
         }
 
         window.clear();
-        DrawingLevels(level_index, window);
         window.draw(lose_panel);
         window.draw(text);
         window.display();
@@ -536,7 +525,6 @@ void DissolveEffect_second_Text(sf::Text text, float dissolveTime)
         }
 
         window.clear();
-        DrawingLevels(level_index, window);
         window.draw(lose_panel);
         window.draw(out_of_bullets);
         window.draw(text);
@@ -570,7 +558,6 @@ void DissolveEffect_lost_options(float dissolveTime)
         }
 
         window.clear();
-        DrawingLevels(level_index, window);
         window.draw(lose_panel);
         window.draw(out_of_bullets);
         window.draw(Try_again);
@@ -608,7 +595,6 @@ void DissolveEffect_lost_Quit(float dissolveTime)
         }
 
         window.clear();
-        DrawingLevels(level_index, window);
         window.draw(lose_panel);
         window.draw(out_of_bullets);
         window.draw(Try_again);
@@ -631,8 +617,6 @@ void DissolveEffect_lost_Quit(float dissolveTime)
 }
 
 
-
-
 void Moving_down_animation(sf::Sprite& panel)
 {
     sf::Clock delay;
@@ -641,7 +625,6 @@ void Moving_down_animation(sf::Sprite& panel)
     {
         normal_eventloop();
         window.clear();
-        DrawingLevels(level_index, window);
         if (delay.getElapsedTime().asSeconds() > 1)
         {
             panel.move(0, window.getSize().y / 50);

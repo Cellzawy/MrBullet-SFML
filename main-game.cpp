@@ -28,12 +28,6 @@ int main() {
     mainmenu_music.play();
     mainmenu_music.setLoop(true);
     constructlev1(window);
-    constructlev2(window);
-    constructlev3(window);
-    constructlev4(window);
-    constructlev5(window);
-    bool level_complete = false;
-    int currentLvl;
 
     while(window.isOpen())
     {
@@ -44,13 +38,11 @@ int main() {
                 for (int i = bullets.size() - 1; i >= 0; i--)
                 {
                     Time elapsed = bullets[i].clock.getElapsedTime();
-                    level_complete = false;
                     if (elapsed >= seconds(5.f))
                     {
                         bullets[i].clock.restart();
                         bullets.erase(bullets.begin() + i);
                         std::cout << "erased";
-                        level_complete = true;
                     }
                 }
             }
@@ -107,8 +99,7 @@ int main() {
 
         else if (current_menu == lost_panel)
         {
-            //DrawingLevels(0, window);
-            Lose_panel(currentLvl);
+            Lose_panel();
         }
 
 
@@ -118,9 +109,13 @@ int main() {
             levels_eventloop(enemies_num);
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
             {
+                window.draw(lev[0].bg);//321356163
+                window.draw(lev[0].ground);
+                character_draw(lev[0].killer, window);
+                character_draw(lev[0].target[0], window);
                 in_level = true;
                 currentLvl = 0;
-                DrawingLevels(currentLvl, window);
+                levels_background();
 
                 for (int i = 0; i < bullets.size(); i++) {
                     HandlePhysics(lev[0], bullets[i]);
@@ -150,142 +145,7 @@ int main() {
                     current_menu = won_panel;
                 }
 
-                else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
-                {
-                    current_menu = lost_panel;
-                }
-
-            }
-        }
-        else if (current_menu == level_2)
-        {
-            int enemies_num = 8;
-            levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
-            {
-                in_level = true;
-                currentLvl = 1;
-                DrawingLevels(currentLvl, window);
-
-                for (int i = 0; i < bullets.size(); i++) {
-                    HandlePhysics(lev[currentLvl], bullets[i]);
-                }
-                for (int i = 0; i < bullets.size(); i++) {
-                    CollideEnemies(lev[currentLvl], bullets[i]);
-                }
-
-
-
-
-                for (int i = 0; i < enemies_num; i++)
-                {
-                    if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
-                    {
-                        dead_enemies++;
-                        lev[level_index].target[i].alive = false;
-                    }
-                }
-
-
-
-
-                if (dead_enemies == enemies_num)
-                {
-                    stars_system(3, 2, 1, 0);
-                    current_menu = won_panel;
-                }
-
-                else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
-                {
-                    current_menu = lost_panel;
-                }
-
-            }
-        }
-        else if (current_menu == level_3)
-        {
-            int enemies_num = 1;
-            levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
-            {
-                in_level = true;
-                currentLvl = 2;
-                DrawingLevels(currentLvl, window);
-
-                for (int i = 0; i < bullets.size(); i++) {
-                    HandlePhysics(lev[currentLvl], bullets[i]);
-                }
-                for (int i = 0; i < bullets.size(); i++) {
-                    CollideEnemies(lev[currentLvl], bullets[i]);
-                }
-
-
-
-
-                for (int i = 0; i < enemies_num; i++)
-                {
-                    if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
-                    {
-                        dead_enemies++;
-                        lev[level_index].target[i].alive = false;
-                    }
-                }
-
-
-
-
-                if (dead_enemies == enemies_num)
-                {
-                    stars_system(3, 2, 1, 0);
-                    current_menu = won_panel;
-                }
-
-                else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
-                {
-                    current_menu = lost_panel;
-                }
-
-            }
-        }
-        else if (current_menu == level_4)
-        {
-            int enemies_num = 1;
-            levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
-            {
-                in_level = true;
-                currentLvl = 3;
-                DrawingLevels(currentLvl, window);
-
-                for (int i = 0; i < bullets.size(); i++) {
-                    HandlePhysics(lev[currentLvl], bullets[i]);
-                }
-                for (int i = 0; i < bullets.size(); i++) {
-                    CollideEnemies(lev[currentLvl], bullets[i]);
-                }
-
-
-
-
-                for (int i = 0; i < enemies_num; i++)
-                {
-                    if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
-                    {
-                        dead_enemies++;
-                        lev[level_index].target[i].alive = false;
-                    }
-                }
-
-
-
-
-                if (dead_enemies == enemies_num)
-                {
-                    stars_system(3, 2, 1, 0);
-                    current_menu = won_panel;
-                }
-
-                else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
+                else if (lev[level_index].num_of_bullets == 0)  ///32131563
                 {
                     current_menu = lost_panel;
                 }
