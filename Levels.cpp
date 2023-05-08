@@ -26,6 +26,7 @@ void constructlev1(RenderWindow& window)
     // Charachters
 
     //killer
+    lev[0].killer.has_gun = true;
     character_init(lev[0].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[0].killer, 0.4);
     character_set_position(lev[0].killer, Vector2f(200, lev[0].ground.getPosition().y - (lev[0].ground.getLocalBounds().height) * 1.41));

@@ -119,6 +119,7 @@ int main() {
 
         else if (current_menu == level_1)
         {
+            character_rotate_arm(lev[0].killer, sf::Mouse::getPosition());
             int enemies_num = 1;
             levels_eventloop(enemies_num);
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))

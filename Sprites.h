@@ -42,13 +42,15 @@ struct Character {
     sf::Sprite left_leg2;
     sf::Sprite right_leg1;
     sf::Sprite right_leg2;
+    sf::RectangleShape gun;
     bool dead = false;
     bool alive = true;
+    bool has_gun = false;
 };
 
 void character_set_position(Character &character, sf::Vector2f pos);
 void character_set_scale(Character &character, float scale);
 void character_init(Character &character, std::string head_path, std::string body_path, bool flip);
 void character_draw(Character &character, sf::RenderWindow &window);
-
+void character_rotate_arm(Character &character, sf::Vector2i mouse_position);
 #endif
