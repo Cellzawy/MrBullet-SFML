@@ -8,6 +8,7 @@ using namespace sf;
 
 int dead_enemies = 0;
 int level_index;
+float bulletSpeed = 25.f;
 
 void constructlev1(RenderWindow& window)
 {
@@ -124,6 +125,8 @@ void constructlev2(RenderWindow& window)
     lev[1].Bullets[2].setTexture(Bullet_texture);
     lev[1].Bullets[3].setTexture(Bullet_texture);
     lev[1].Bullets[4].setTexture(Bullet_texture);
+    lev[1].Bullets[5].setTexture(Bullet_texture);
+    lev[1].Bullets[6].setTexture(Bullet_texture);
 
 
     lev[1].Bullets[0].setPosition(Vector2f(850, 55));
@@ -134,12 +137,12 @@ void constructlev2(RenderWindow& window)
     lev[1].Bullets[1].setPosition(Vector2f(900, 55));
     lev[1].Bullets[1].setOrigin(lev[1].Bullets[1].getLocalBounds().width / 2, lev[1].Bullets[1].getLocalBounds().height / 2);
     lev[1].Bullets[1].setScale(.25, .25);
-    lev[1].Bullets[1].setColor(Color(240, 150, 25));
+    lev[1].Bullets[1].setColor(Color::Black);
 
     lev[1].Bullets[2].setPosition(Vector2f(950, 55));
     lev[1].Bullets[2].setOrigin(lev[1].Bullets[2].getLocalBounds().width / 2, lev[1].Bullets[2].getLocalBounds().height / 2);
     lev[1].Bullets[2].setScale(.25, .25);
-    lev[1].Bullets[2].setColor(Color(240, 150, 25));
+    lev[1].Bullets[2].setColor(Color::Black);
 
     lev[1].Bullets[3].setPosition(Vector2f(1000, 55));
     lev[1].Bullets[3].setOrigin(lev[1].Bullets[3].getLocalBounds().width / 2, lev[1].Bullets[3].getLocalBounds().height / 2);
@@ -151,8 +154,18 @@ void constructlev2(RenderWindow& window)
     lev[1].Bullets[4].setScale(.25, .25);
     lev[1].Bullets[4].setColor(Color(240, 150, 25));
 
-    lev[1].Return_num = 5;
-    lev[1].num_of_bullets = 5;
+    lev[1].Bullets[5].setPosition(Vector2f(1100, 55));
+    lev[1].Bullets[5].setOrigin(lev[1].Bullets[5].getLocalBounds().width / 2, lev[1].Bullets[5].getLocalBounds().height / 2);
+    lev[1].Bullets[5].setScale(.25, .25);
+    lev[1].Bullets[5].setColor(Color(240, 150, 25));
+
+    lev[1].Bullets[6].setPosition(Vector2f(1150, 55));
+    lev[1].Bullets[6].setOrigin(lev[1].Bullets[6].getLocalBounds().width / 2, lev[1].Bullets[6].getLocalBounds().height / 2);
+    lev[1].Bullets[6].setScale(.25, .25);
+    lev[1].Bullets[6].setColor(Color(240, 150, 25));
+
+    lev[1].Return_num = 7;
+    lev[1].num_of_bullets = 7;
 }
 
 void constructlev3(RenderWindow& window)
@@ -192,7 +205,7 @@ void constructlev3(RenderWindow& window)
     character_init(lev[2].target[0], "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", true);
     character_set_scale(lev[2].target[0], 0.34);
     character_set_position(lev[2].target[0], Vector2f(lev[2].shape[0].getPosition().x - (lev[2].shape[0].getSize().x / 2), lev[2].shape[0].getPosition().y - 235));
-    
+
     // bullets
     lev[2].Bullets[0].setTexture(Bullet_texture);
     lev[2].Bullets[1].setTexture(Bullet_texture);
@@ -323,6 +336,7 @@ void constructlev5(RenderWindow& window)
     lev[4].block[0].setPosition(lev[4].ground.getSize().x / 2 + 540, lev[4].ground.getSize().y - 853);
 
     //killer
+    lev[0].killer.has_gun = true;
     character_init(lev[4].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[4].killer, 0.4);
     character_set_position(lev[4].killer, Vector2f(lev[4].ground.getSize().x / 8, lev[4].ground.getPosition().y + 30));
@@ -347,16 +361,15 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[0].ground);
         character_draw(lev[0].killer, window);
         character_draw(lev[0].target[0], window);
-
         for (int i = 0; i < lev[level_index].num_of_bullets; i++)
         {
             window.draw(lev[level_index].Bullets[i]);
         }
         for (int i = 0; i < bullets.size(); i++) {
-            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * bulletSpeed);
         }
         for (int i = 0; i < bullets.size(); i++) {
-            window.draw(bullets[i].bulletBody);
+            window.draw(bullets[i].b);
         }
         for (int i = 0; i < bullets.size(); i++) {
             HandlePhysics(lev[0], bullets[i]);
@@ -365,26 +378,23 @@ void DrawingLevels(int num, RenderWindow& window)
             CollideEnemies(lev[0], bullets[i]);
         }
         levels_background();
-     
     }
 
 
     else if (num == 1) // ==> constructing Level 2
     {
         window.draw(lev[1].bg);
-
         for (int i = 0; i < lev[level_index].num_of_bullets; i++)
         {
             window.draw(lev[level_index].Bullets[i]);
         }
-
         for (int i = 0; i < 10; i++)
         {
             window.draw(lev[1].block[i]);
         }
         character_draw(lev[1].killer, window);
         for (int i = 0; i < bullets.size(); i++) {
-            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * bulletSpeed);
         }
         for (int i = 0; i < 8; i++)
         {
@@ -401,7 +411,6 @@ void DrawingLevels(int num, RenderWindow& window)
             CollideEnemies(lev[1], bullets[i]);
         }
         levels_background();
-       
     }
 
 
@@ -412,16 +421,14 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[2].shape[0]);
         window.draw(lev[2].shape[1]);
         character_draw(lev[2].killer, window);
-
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * bulletSpeed);
+        }
+        character_draw(lev[2].target[0], window);
         for (int i = 0; i < lev[level_index].num_of_bullets; i++)
         {
             window.draw(lev[level_index].Bullets[i]);
         }
-
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
-        }
-        character_draw(lev[2].target[0], window);
         for (int i = 0; i < bullets.size(); i++) {
             window.draw(bullets[i].bulletBody);
         }
@@ -433,7 +440,6 @@ void DrawingLevels(int num, RenderWindow& window)
             CollideEnemies(lev[2], bullets[i]);
         }
         levels_background();
-     
 
     }
 
@@ -442,6 +448,11 @@ void DrawingLevels(int num, RenderWindow& window)
     {
         window.draw(lev[3].bg);
         window.draw(lev[3].shape[0]);
+        window.draw(lev[3].shape[1]);
+        window.draw(lev[3].shape[2]);
+        window.draw(lev[3].shape[3]);
+        window.draw(lev[3].shape[4]);
+        window.draw(lev[3].shape[5]);
         character_draw(lev[3].killer, window);
         for (int i = 0; i < lev[level_index].num_of_bullets; i++)
         {
@@ -452,7 +463,7 @@ void DrawingLevels(int num, RenderWindow& window)
             character_draw(lev[3].target[i], window);
         }
         for (int i = 0; i < bullets.size(); i++) {
-            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * bulletSpeed);
         }
         for (int i = 0; i < bullets.size(); i++) {
             window.draw(bullets[i].bulletBody);
@@ -465,7 +476,6 @@ void DrawingLevels(int num, RenderWindow& window)
             CollideEnemies(lev[3], bullets[i]);
         }
         levels_background();
-   
 
     }
 
@@ -475,19 +485,19 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[4].bg);
         window.draw(lev[4].ground);
         window.draw(lev[4].block[0]);
-         for (int i = 0; i < lev[level_index].num_of_bullets; i++)
+
+        character_draw(lev[4].killer, window);
+        for (int i = 0; i < lev[level_index].num_of_bullets; i++)
         {
             window.draw(lev[level_index].Bullets[i]);
         }
-
-        character_draw(lev[4].killer, window);
         for (int i = 0; i < 2; i++)
         {
             character_draw(lev[4].target[i], window);
         }
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
-        }
+        //for (int i = 0; i < bullets.size(); i++) {
+        //    bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * bulletSpeed);
+        //}
         for (int i = 0; i < bullets.size(); i++) {
             window.draw(bullets[i].bulletBody);
         }

@@ -28,6 +28,7 @@ struct Menu{
 struct Achievment
 {
   bool is_open = false;
+  bool is_closed = true;
   sf::Texture locked_texture;
   sf::Texture unlocked_texture;
   sf::Sprite sprite;
@@ -55,19 +56,22 @@ struct Lev {
 
     Sprite bg;
 
-    Sprite Bullets[5];
-
     RectangleShape ground, shape[10];
 
     RectangleShape block[10];
 
     int num_of_bullets;
 
-    int Return_num;
-
     Character killer, target[100];
 
     Levels_view view;
+
+    bool is_finished = false;
+
+    Sprite Bullets[7];
+
+    int Return_num;
+
 };
 
 extern Lev lev[10];
@@ -84,7 +88,6 @@ extern SoundBuffer shoot_soundbuffer;
 extern Sound shoot;
 extern SoundBuffer Restart_soundbuffer;
 extern Sound Restart_sound;
-extern Lev lev[10];
 
 // main menu
 extern sf::Texture main_menu_background_texture, mr_bullet_logo_texture;
@@ -118,7 +121,6 @@ extern Sprite Replay;
 extern Sprite Pause_menu_button;
 extern Sprite Bullet_Sprite;
 
-
 // classic menu
 extern sf::Texture classic_menu_background_texture;
 extern sf::Texture Border_hover_effect;  // the levels struct is in the Levels.h file
@@ -147,11 +149,17 @@ void Options_menu_Pause();
 
 void PAUSE_MENU();
 
+void ReadFile();
+
+void WriteFile();
+
 void Texture_loading();
 
 void levels_background();
 
 void Level_Evaluation(Lev lev[]);
+
+void Achievements_checking();
 
 void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&);
 

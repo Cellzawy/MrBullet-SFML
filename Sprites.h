@@ -13,10 +13,13 @@ extern RectangleShape wall2;
 extern RectangleShape wall3;
 extern RectangleShape wall4;
 extern RectangleShape box;
+extern Sprite crosshair;
+extern Texture crosshairTx;
 extern RectangleShape walls[];
 
 struct Bullet {
     CircleShape bulletBody;
+    RectangleShape b;
     Vector2f bulletDirection;
     Clock clock;
 };

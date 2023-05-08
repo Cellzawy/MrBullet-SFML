@@ -11,6 +11,8 @@
 #include "win-lose-logic.h"
 
 using namespace sf;
+sf::VertexArray line(sf::Lines, 2);
+Texture tx;
 
 
 void EventListener() {
@@ -25,6 +27,7 @@ sf::Event normal_eventloop()
     {
         if (event.type == sf::Event::Closed)
         {
+            WriteFile();
             window.close();
         }
     }
@@ -40,6 +43,7 @@ sf::Event main_menu_eventloop()
         if (event.type == sf::Event::Closed)
         {
             SFX_click.play();
+            WriteFile();
             window.close();
         }
 
@@ -53,6 +57,7 @@ sf::Event main_menu_eventloop()
             {
                 SFX_click.play();
                 quit_button.sprite.setTexture(quit_button.Pressed_texture);
+                WriteFile();
                 window.close();
 
             }
@@ -93,6 +98,7 @@ sf::Event play_menu_eventloop()
         if (event.type == sf::Event::Closed)
         {
             SFX_click.play();
+            WriteFile();
             window.close();
         }
 
@@ -171,6 +177,7 @@ sf::Event options_menu_eventloop()
         if (event.type == Event::Closed)
         {
             SFX_click.play();
+            WriteFile();
             window.close();
         }
 
@@ -231,6 +238,7 @@ sf::Event options_menu_pause_eventloop()
         if (event.type == Event::Closed)
         {
             SFX_click.play();
+            WriteFile();
             window.close();
         }
 
@@ -272,8 +280,10 @@ sf::Event pause_eventloop()
             }
         }
 
-        if (event.type == Event::Closed)
+        if (event.type == Event::Closed) {
+            WriteFile();
             window.close();
+        }
     }
     return event;
 }
@@ -286,7 +296,9 @@ sf::Event classic_menu_eventloop()
         if (event.type == sf::Event::Closed)
         {
             SFX_click.play();
+            WriteFile();
             window.close();
+
         }
 
         else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
@@ -324,6 +336,7 @@ sf::Event achievements_menu_eventloop()
     {
         if (event.type == sf::Event::Closed)
         {
+            WriteFile();
             window.close();
         }
 
@@ -352,6 +365,7 @@ sf::Event levels_eventloop(int enemies_num)
     {
         if (event.type == sf::Event::Closed)
         {
+            WriteFile();
             window.close();
         }
 
@@ -391,7 +405,7 @@ sf::Event levels_eventloop(int enemies_num)
                     //for (int i = 0; i < bullets.size(); i++) {
                     //    DirectBullet(bullets[i], event, mousepos);
                     //}
-                    DirectBullet(bullets[bullets.size() - 1], event, mousepos, level_index);
+                    DirectBullet(bullets[bullets.size() - 1], event, mousepos, level_index, gunPos);
                     lev[level_index].num_of_bullets--;
 
                     // win-lose logic
@@ -411,7 +425,7 @@ sf::Event levels_eventloop(int enemies_num)
         }
 
     }
-return event;
+    return event;
 }
 
 
@@ -420,8 +434,11 @@ sf::Event win_lose_panels_eventloop()
     sf::Event event;
     while (window.pollEvent(event))
     {
+        line[0].position = sf::Vector2f(0, 0);
+        line[1].position = sf::Vector2f(0, 0);
         if (event.type == sf::Event::Closed)
         {
+            WriteFile();
             window.close();
         }
 
@@ -451,7 +468,8 @@ sf::Event win_lose_panels_eventloop()
             {
                 Reset();
                 animation = true;
-                current_menu = main_menu;
+                level_index--;
+                current_menu = static_cast<menu_type>(level_index);
                 Reset();
             }
 
@@ -460,12 +478,12 @@ sf::Event win_lose_panels_eventloop()
                 current_menu = static_cast<menu_type>(level_index);
 
                 Reset();
-                Restart_sound.setVolume(volume_value[1]);
-                Restart_sound.play();
                 animation = true;
+                Reset();
             }
         }
     }
 
     return event;
 }
+

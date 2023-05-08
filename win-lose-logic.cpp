@@ -17,7 +17,7 @@ void DissolveEffect_three_stars(float dissolveTime);
 void DissolveEffect_won_options(float dissolveTime);
 void DissolveEffect_won_Quit(float);
 
-void Lose_panel();
+void Lose_panel(int lvl);
 void DissolveEffect_first_Text(sf::Text, float);
 void DissolveEffect_second_Text(sf::Text, float);
 void DissolveEffect_lost_options(float dissolveTime);
@@ -655,17 +655,26 @@ void Moving_down_animation(sf::Sprite& panel)
 void Reset()
 {
     dead_enemies = 0;
-  
-    
-        lev[level_index].num_of_bullets = lev[level_index].Return_num ;
-    
+    lev[level_index].num_of_bullets = lev[level_index].Return_num;
     for (int i = 0; i < 100; i++)
     {
         lev[level_index].target[i].alive = true;
         lev[level_index].target[i].dead = false;
     }
+    cout << lev[level_index].num_of_bullets << endl;
 
-    //lev[level_index].num_of_bullets = 4;
+    if (level_index == 0)
+        constructlev1(window);
+    else if (level_index == 1)
+        constructlev2(window);
+    else if (level_index == 2)
+        constructlev3(window);
+    else if (level_index == 3)
+        constructlev4(window);
+    else if (level_index == 4)
+        constructlev5(window);
+    cout << lev[level_index].num_of_bullets << endl;
+
 }
 
 void stars_system(int three_stars, int two_stars, int one_star, int zero_stars)

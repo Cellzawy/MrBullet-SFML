@@ -6,6 +6,7 @@
 #include "Levels.h"
 #include "Menus.h"
 #include "Events.h"
+#include "Sounds.h"
 //#include "Levels.cpp"
 #include "win-lose-logic.h"
 
@@ -14,21 +15,19 @@ bool in_level;
 int currentLvl = 0;
 
 
-
 // Menus test
 int main() {
+    sprites();
+    BufferSounds();
+    SetSounds();
     window.setFramerateLimit(60);
+    crosshairTx.loadFromFile("assets/Textures/crosshair.png");
 
     Texture_loading();
     SFX_click.setBuffer(SFX_click_soundbuffer);
     shoot.setBuffer(shoot_soundbuffer);
     Restart_sound.setBuffer(Restart_soundbuffer);
-   
-    for (int i = 0; i < lev[level_index].num_of_bullets; i++)
-    {
-        window.draw(lev[level_index].Bullets[i]);
-    }
-    
+
     mainmenu_music.openFromFile("assets/sounds/main_music.ogg");
     mainmenu_music.setVolume(volume_value[0]);
     mainmenu_music.play();
@@ -39,9 +38,16 @@ int main() {
     constructlev4(window);
     bool level_complete = false;
     int currentLvl;
+    bool drawLine = true;
 
     while (window.isOpen())
     {
+        sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+
+        line[0].position = sf::Vector2f(lev[level_index].killer.gun.getPosition());
+        line[1].position = sf::Vector2f(mouse_position.x, mouse_position.y);
+
+        gunPos = lev[level_index].killer.gun.getPosition();
         if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
         {
             if (bullets.size() != 0)
@@ -60,9 +66,11 @@ int main() {
                 }
             }
 
-            //for (int i = 0; i < bullets.size(); i++) {
-            //    bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
-            //}
+            for (int i = 0; i < bullets.size(); i++) {
+                //bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
+                bullets[i].b.setPosition(bullets[i].bulletBody.getPosition());
+
+            }
         }
 
         // drawing
@@ -125,6 +133,7 @@ int main() {
 
         else if (current_menu == level_1)
         {
+            drawLine = true;
             character_rotate_arm(lev[0].killer, sf::Mouse::getPosition());
             int enemies_num = 1;
             levels_eventloop(enemies_num);
@@ -141,7 +150,8 @@ int main() {
                     CollideEnemies(lev[0], bullets[i]);
                 }
 
-                
+
+
 
                 for (int i = 0; i < enemies_num; i++)
                 {
@@ -157,8 +167,13 @@ int main() {
 
                 if (dead_enemies == enemies_num)
                 {
+                    lev[0].is_finished = true;
+                    achievements[0].is_open = true;
+                    Achievements_checking();
                     stars_system(3, 2, 1, 0);
                     current_menu = won_panel;
+                    drawLine = false;
+
                 }
 
                 else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
@@ -171,6 +186,7 @@ int main() {
 
         else if (current_menu == level_2)
         {
+            drawLine = true;
             int enemies_num = 8;
             levels_eventloop(enemies_num);
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
@@ -186,8 +202,8 @@ int main() {
                     CollideEnemies(lev[1], bullets[i]);
                 }
 
-               
-               
+
+
 
                 for (int i = 0; i < enemies_num; i++)
                 {
@@ -205,6 +221,8 @@ int main() {
                 {
                     stars_system(3, 2, 1, 0);
                     current_menu = won_panel;
+                    drawLine = false;
+
                 }
 
                 else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
@@ -216,6 +234,7 @@ int main() {
         }
         else if (current_menu == level_3)
         {
+            drawLine = true;
             int enemies_num = 1;
             levels_eventloop(enemies_num);
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
@@ -250,6 +269,8 @@ int main() {
                 {
                     stars_system(3, 2, 1, 0);
                     current_menu = won_panel;
+                    drawLine = false;
+
                 }
 
                 else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
@@ -261,6 +282,7 @@ int main() {
         }
         else if (current_menu == level_4)
         {
+            drawLine = true;
             int enemies_num = 3;
             levels_eventloop(enemies_num);
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
@@ -295,6 +317,7 @@ int main() {
                 {
                     stars_system(3, 2, 1, 0);
                     current_menu = won_panel;
+                    drawLine = false;
                 }
 
                 else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
@@ -306,18 +329,23 @@ int main() {
         }
 
         if (in_level) {
+            if (lev[level_index + 1].view.Level_evaluation < 0) {
+                lev[level_index + 1].view.Level_evaluation = 0;
+            }
             levels_background();
+            if (drawLine)
+                window.draw(line);
+
         }
 
         if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
         {
             for (int i = 0; i < bullets.size(); i++) {
                 window.draw(bullets[i].bulletBody);
+                window.draw(bullets[i].b);
+
             }
         }
-
-        
-
         window.display();
     }
 

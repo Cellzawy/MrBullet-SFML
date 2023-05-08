@@ -142,11 +142,13 @@
     <ClCompile Include="main-game.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="Sounds.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="win-lose-logic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Events.h" />
+    <ClInclude Include="Sounds.h" />
     <ClInclude Include="Levels.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Physics.h" />

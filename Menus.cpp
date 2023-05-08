@@ -7,6 +7,7 @@
 #include "Menus.h"
 #include "Events.h"
 #include "win-lose-logic.h"
+#include <fstream>
 
 
 using namespace sf;
@@ -25,6 +26,7 @@ SoundBuffer shoot_soundbuffer;
 Sound shoot;
 SoundBuffer Restart_soundbuffer;
 Sound Restart_sound;
+
 Lev lev[10];
 
 // main menu
@@ -85,6 +87,8 @@ void hoverEffect(sf::Sprite&); // for buttons
 void hoverEffect(sf::Sprite&, sf::Texture&, sf::Texture&, sf::Text&); // for menu selection in play menu
 void hoverEffect(Lev lev[]); // for levels selection in classic menu
 void hoverEffect(sf::Sprite&, sf::Texture&); // for achievement button in main menu
+
+
 
 
 void Main_menu()
@@ -523,6 +527,10 @@ void PAUSE_MENU()
 
 void levels_background()
 {
+    crosshair.setTexture(crosshairTx);
+    crosshair.setOrigin(crosshair.getLocalBounds().width / 2, crosshair.getLocalBounds().height / 2);
+    crosshair.setPosition(Mouse::getPosition().x, Mouse::getPosition().y);
+    crosshair.setScale(0.5, 0.5);
     Replay.setTexture(reset_texture);
     Replay.setOrigin(Replay.getLocalBounds().width / 2, Replay.getLocalBounds().height / 2);
     Replay.setPosition(Vector2f(1800, 75));
@@ -533,8 +541,7 @@ void levels_background()
     Pause_menu_button.setPosition(Vector2f(80, 70));
     Pause_menu_button.setScale(0.22, 0.22);
     // poll event
-
-
+    window.draw(crosshair);
     window.draw(Replay);
     window.draw(Pause_menu_button);
 }
@@ -655,18 +662,52 @@ void Achievements_menu()
     window.draw(back_button.sprite);
 }
 
+void ReadFile() {
+    string myText;
+    // Read from the text file
+    ifstream saveFile("save.txt");
+    int levNum = 0;
+    // Use a while loop together with the getline() function to read the file line by line
+    while (getline(saveFile, myText)) {
+        lev[levNum].view.Level_evaluation = stoi(myText);
+        levNum++;
+    }
+
+    // Close the file
+    saveFile.close();
+
+}
+
+void WriteFile() {
+        // Create and open a text file
+        ofstream myfile("save.txt");
+        int levNum = 0;
+        if (myfile.is_open())
+        {
+            string str;
+            while (str != "-1") {
+                str = to_string(lev[levNum].view.Level_evaluation);
+                myfile << str << endl;
+                levNum++;
+            }
+            myfile.close();
+        }
+        else cerr << "Unable to open file";
+
+}
+
 void Texture_loading()
 {
 // general
-
+shoot_soundbuffer.loadFromFile("assets/sounds/shoot.ogg");
+Restart_soundbuffer.loadFromFile("assets/sounds/restart.ogg");
 game_font.loadFromFile("assets/HelveticaNeueCondensedBlack.ttf");
 
 back_button.Default_texture.loadFromFile("assets/menus/Back_button.png");
 back_button.Pressed_texture.loadFromFile("assets/menus/Back_button_pressed.png");
 
 SFX_click_soundbuffer.loadFromFile("assets/sounds/SFX_click.ogg");
-shoot_soundbuffer.loadFromFile("assets/sounds/shoot.ogg");
-Restart_soundbuffer.loadFromFile("assets/sounds/restart.ogg");
+
 // win lose panels
 
 win_panel_texture.loadFromFile("assets/win_lose_panels/win_panel.png");
@@ -735,17 +776,18 @@ duels_menu.Default_texture.loadFromFile("assets/menus/play_menu/Duels.png");
 duels_menu.Hovered_texture.loadFromFile("assets/menus/play_menu/Duels_hovered.png");
 
 // Level
-pause_menu_button.loadFromFile("IconViewTypeList.png");
-Bullet_texture.loadFromFile("bullet.png");
+pause_menu_button.loadFromFile("assets/menus/Level/IconViewTypeList.png");
+Bullet_texture.loadFromFile("assets/menus/Level/bullet.png");
 
 
 // classic menu
 
+ReadFile();
 classic_menu_background_texture.loadFromFile("assets/menus/classic_menu/background_city_night.png");
 Border_hover_effect.loadFromFile("assets/menus/classic_menu/Border_hover_effect.png");
 
 
-lev[0].view.Level_evaluation = 0;
+//lev[0].view.Level_evaluation = 0;
 lev[0].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Level_1_no_stars.png");
 lev[0].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_one_star.png");
 lev[0].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_two_stars.png");
@@ -885,6 +927,53 @@ void Level_Evaluation(Lev lev[])
         else if (lev[i].view.Level_evaluation == 3)
         {
             lev[i].view.Level_selection.setTexture(lev[i].view.Leve_three_stared);
+        }
+    }
+}
+
+void Achievements_checking()
+{
+    // first kill
+    if (lev[0].is_finished && achievements[0].is_open && achievements[0].is_closed)
+    {
+        achievements[0].sprite.setTexture(achievements[0].unlocked_texture);
+        achievements[0].is_closed = false;
+    }
+
+    //duels
+
+
+    //halfway there
+    if (lev[4].is_finished && achievements[2].is_closed && achievements[2].is_open)
+    {
+        achievements[2].sprite.setTexture(achievements[2].unlocked_texture);
+        achievements[2].is_closed = false;
+    }
+
+    // it ends for now
+    if (lev[9].is_finished && achievements[3].is_closed && achievements[3].is_open)
+    {
+        achievements[3].sprite.setTexture(achievements[3].unlocked_texture);
+        achievements[3].is_closed = false;
+    }
+
+    // asassin
+    int ace_levels = 0;
+
+    if (lev[9].view.Level_evaluation == 3)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            if (lev[i].view.Level_evaluation == 3)
+            {
+                ace_levels++;
+            }
+        }
+
+        if (ace_levels == 20 && achievements[4].is_closed)
+        {
+            achievements[4].sprite.setTexture(achievements[4].unlocked_texture);
+            achievements[4].is_closed = false;
         }
     }
 }

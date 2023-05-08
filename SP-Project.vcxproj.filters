@@ -36,6 +36,9 @@
     <ClCompile Include="main-game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sounds.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprites.h">
@@ -54,6 +57,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="win-lose-logic.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sounds.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

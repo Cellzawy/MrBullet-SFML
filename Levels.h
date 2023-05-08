@@ -9,6 +9,7 @@ using namespace sf;
 
 extern int dead_enemies;
 extern int level_index;
+extern sf::VertexArray line;
 
 void constructlev1(RenderWindow& window);
 void constructlev2(RenderWindow& window);
