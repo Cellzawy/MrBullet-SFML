@@ -368,6 +368,8 @@ sf::Event levels_eventloop(int enemies_num)
                 if (Replay.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
                 {
                     Reset();
+                    Restart_sound.setVolume(volume_value[1]);
+                    Restart_sound.play();
                 }
 
                 else if (Pause_menu_button.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
@@ -376,6 +378,8 @@ sf::Event levels_eventloop(int enemies_num)
                 }
                 else if (lev[level_index].num_of_bullets > 0)
                 {
+                    shoot.setVolume(volume_value[1]);
+                    shoot.play();
                     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
                     Vector2i mousepos = Mouse::getPosition(window);
                     //CircleShape newBullet(10.f);
@@ -456,6 +460,8 @@ sf::Event win_lose_panels_eventloop()
                 current_menu = static_cast<menu_type>(level_index);
 
                 Reset();
+                Restart_sound.setVolume(volume_value[1]);
+                Restart_sound.play();
                 animation = true;
             }
         }

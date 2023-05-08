@@ -21,7 +21,10 @@ Button back_button;
 Music mainmenu_music;
 SoundBuffer SFX_click_soundbuffer;
 Sound SFX_click;
-
+SoundBuffer shoot_soundbuffer;
+Sound shoot;
+SoundBuffer Restart_soundbuffer;
+Sound Restart_sound;
 Lev lev[10];
 
 // main menu
@@ -662,7 +665,8 @@ back_button.Default_texture.loadFromFile("assets/menus/Back_button.png");
 back_button.Pressed_texture.loadFromFile("assets/menus/Back_button_pressed.png");
 
 SFX_click_soundbuffer.loadFromFile("assets/sounds/SFX_click.ogg");
-
+shoot_soundbuffer.loadFromFile("assets/sounds/shoot.ogg");
+Restart_soundbuffer.loadFromFile("assets/sounds/restart.ogg");
 // win lose panels
 
 win_panel_texture.loadFromFile("assets/win_lose_panels/win_panel.png");
@@ -731,8 +735,8 @@ duels_menu.Default_texture.loadFromFile("assets/menus/play_menu/Duels.png");
 duels_menu.Hovered_texture.loadFromFile("assets/menus/play_menu/Duels_hovered.png");
 
 // Level
-pause_menu_button.loadFromFile("assets/menus/Level/IconViewTypeList.png");
-Bullet_texture.loadFromFile("assets/menus/Level/bullet.png");
+pause_menu_button.loadFromFile("IconViewTypeList.png");
+Bullet_texture.loadFromFile("bullet.png");
 
 
 // classic menu

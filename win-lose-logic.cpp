@@ -655,7 +655,10 @@ void Moving_down_animation(sf::Sprite& panel)
 void Reset()
 {
     dead_enemies = 0;
-
+  
+    
+        lev[level_index].num_of_bullets = lev[level_index].Return_num ;
+    
     for (int i = 0; i < 100; i++)
     {
         lev[level_index].target[i].alive = true;

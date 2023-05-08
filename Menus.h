@@ -55,11 +55,15 @@ struct Lev {
 
     Sprite bg;
 
+    Sprite Bullets[5];
+
     RectangleShape ground, shape[10];
 
     RectangleShape block[10];
 
     int num_of_bullets;
+
+    int Return_num;
 
     Character killer, target[100];
 
@@ -76,7 +80,10 @@ extern Button back_button;
 extern Music mainmenu_music;
 extern SoundBuffer SFX_click_soundbuffer;
 extern Sound SFX_click;
-
+extern SoundBuffer shoot_soundbuffer;
+extern Sound shoot;
+extern SoundBuffer Restart_soundbuffer;
+extern Sound Restart_sound;
 extern Lev lev[10];
 
 // main menu
@@ -110,6 +117,7 @@ extern Texture Bullet_texture;
 extern Sprite Replay;
 extern Sprite Pause_menu_button;
 extern Sprite Bullet_Sprite;
+
 
 // classic menu
 extern sf::Texture classic_menu_background_texture;

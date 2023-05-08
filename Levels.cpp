@@ -37,6 +37,36 @@ void constructlev1(RenderWindow& window)
     character_set_position(lev[0].target[0], Vector2f(1720, lev[0].ground.getPosition().y - (lev[0].ground.getLocalBounds().height) * 1.4));
 
     // bullets
+    lev[0].Bullets[0].setTexture(Bullet_texture);
+    lev[0].Bullets[1].setTexture(Bullet_texture);
+    lev[0].Bullets[2].setTexture(Bullet_texture);
+    lev[0].Bullets[3].setTexture(Bullet_texture);
+    lev[0].Bullets[4].setTexture(Bullet_texture);
+
+
+    lev[0].Bullets[0].setPosition(Vector2f(850, 55));
+    lev[0].Bullets[0].setOrigin(lev[0].Bullets[0].getLocalBounds().width / 2, lev[0].Bullets[0].getLocalBounds().height / 2);
+    lev[0].Bullets[0].setScale(.25, .25);
+    lev[0].Bullets[0].setColor(Color::Black);
+
+    lev[0].Bullets[1].setPosition(Vector2f(900, 55));
+    lev[0].Bullets[1].setOrigin(lev[0].Bullets[1].getLocalBounds().width / 2, lev[0].Bullets[1].getLocalBounds().height / 2);
+    lev[0].Bullets[1].setScale(.25, .25);
+    lev[0].Bullets[1].setColor(Color::Black);
+
+    lev[0].Bullets[2].setPosition(Vector2f(950, 55));
+    lev[0].Bullets[2].setOrigin(lev[0].Bullets[2].getLocalBounds().width / 2, lev[0].Bullets[2].getLocalBounds().height / 2);
+    lev[0].Bullets[2].setScale(.25, .25);
+    lev[0].Bullets[2].setColor(Color::Black);
+
+    lev[0].Bullets[3].setPosition(Vector2f(1000, 55));
+    lev[0].Bullets[3].setOrigin(lev[0].Bullets[3].getLocalBounds().width / 2, lev[0].Bullets[3].getLocalBounds().height / 2);
+    lev[0].Bullets[3].setScale(.25, .25);
+    lev[0].Bullets[3].setColor(Color(240, 150, 25));
+
+
+    lev[0].Return_num = 4;
+    lev[0].num_of_bullets = 4;
 }
 
 void constructlev2(RenderWindow& window)
@@ -88,7 +118,41 @@ void constructlev2(RenderWindow& window)
         character_set_position(lev[1].target[i], Vector2f(lev[1].block[i + 1].getPosition().x - 50, lev[1].block[i + 1].getPosition().y - 295));
     }
 
+    // bullets
+    lev[1].Bullets[0].setTexture(Bullet_texture);
+    lev[1].Bullets[1].setTexture(Bullet_texture);
+    lev[1].Bullets[2].setTexture(Bullet_texture);
+    lev[1].Bullets[3].setTexture(Bullet_texture);
+    lev[1].Bullets[4].setTexture(Bullet_texture);
 
+
+    lev[1].Bullets[0].setPosition(Vector2f(850, 55));
+    lev[1].Bullets[0].setOrigin(lev[1].Bullets[0].getLocalBounds().width / 2, lev[1].Bullets[0].getLocalBounds().height / 2);
+    lev[1].Bullets[0].setScale(.25, .25);
+    lev[1].Bullets[0].setColor(Color::Black);
+
+    lev[1].Bullets[1].setPosition(Vector2f(900, 55));
+    lev[1].Bullets[1].setOrigin(lev[1].Bullets[1].getLocalBounds().width / 2, lev[1].Bullets[1].getLocalBounds().height / 2);
+    lev[1].Bullets[1].setScale(.25, .25);
+    lev[1].Bullets[1].setColor(Color(240, 150, 25));
+
+    lev[1].Bullets[2].setPosition(Vector2f(950, 55));
+    lev[1].Bullets[2].setOrigin(lev[1].Bullets[2].getLocalBounds().width / 2, lev[1].Bullets[2].getLocalBounds().height / 2);
+    lev[1].Bullets[2].setScale(.25, .25);
+    lev[1].Bullets[2].setColor(Color(240, 150, 25));
+
+    lev[1].Bullets[3].setPosition(Vector2f(1000, 55));
+    lev[1].Bullets[3].setOrigin(lev[1].Bullets[3].getLocalBounds().width / 2, lev[1].Bullets[3].getLocalBounds().height / 2);
+    lev[1].Bullets[3].setScale(.25, .25);
+    lev[1].Bullets[3].setColor(Color(240, 150, 25));
+
+    lev[1].Bullets[4].setPosition(Vector2f(1050, 55));
+    lev[1].Bullets[4].setOrigin(lev[1].Bullets[4].getLocalBounds().width / 2, lev[1].Bullets[4].getLocalBounds().height / 2);
+    lev[1].Bullets[4].setScale(.25, .25);
+    lev[1].Bullets[4].setColor(Color(240, 150, 25));
+
+    lev[1].Return_num = 5;
+    lev[1].num_of_bullets = 5;
 }
 
 void constructlev3(RenderWindow& window)
@@ -129,6 +193,37 @@ void constructlev3(RenderWindow& window)
     character_set_scale(lev[2].target[0], 0.34);
     character_set_position(lev[2].target[0], Vector2f(lev[2].shape[0].getPosition().x - (lev[2].shape[0].getSize().x / 2), lev[2].shape[0].getPosition().y - 235));
     
+    // bullets
+    lev[2].Bullets[0].setTexture(Bullet_texture);
+    lev[2].Bullets[1].setTexture(Bullet_texture);
+    lev[2].Bullets[2].setTexture(Bullet_texture);
+    lev[2].Bullets[3].setTexture(Bullet_texture);
+    lev[2].Bullets[4].setTexture(Bullet_texture);
+
+
+    lev[2].Bullets[0].setPosition(Vector2f(850, 55));
+    lev[2].Bullets[0].setOrigin(lev[2].Bullets[0].getLocalBounds().width / 2, lev[2].Bullets[0].getLocalBounds().height / 2);
+    lev[2].Bullets[0].setScale(.25, .25);
+    lev[2].Bullets[0].setColor(Color::Black);
+
+    lev[2].Bullets[1].setPosition(Vector2f(900, 55));
+    lev[2].Bullets[1].setOrigin(lev[2].Bullets[1].getLocalBounds().width / 2, lev[2].Bullets[1].getLocalBounds().height / 2);
+    lev[2].Bullets[1].setScale(.25, .25);
+    lev[2].Bullets[1].setColor(Color::Black);
+
+    lev[2].Bullets[2].setPosition(Vector2f(950, 55));
+    lev[2].Bullets[2].setOrigin(lev[2].Bullets[2].getLocalBounds().width / 2, lev[2].Bullets[2].getLocalBounds().height / 2);
+    lev[2].Bullets[2].setScale(.25, .25);
+    lev[2].Bullets[2].setColor(Color::Black);
+
+    lev[2].Bullets[3].setPosition(Vector2f(1000, 55));
+    lev[2].Bullets[3].setOrigin(lev[2].Bullets[3].getLocalBounds().width / 2, lev[2].Bullets[3].getLocalBounds().height / 2);
+    lev[2].Bullets[3].setScale(.25, .25);
+    lev[2].Bullets[3].setColor(Color(240, 150, 25));
+
+
+    lev[2].Return_num = 4;
+    lev[2].num_of_bullets = 4;
 }
 
 void constructlev4(RenderWindow& window)
@@ -172,6 +267,38 @@ void constructlev4(RenderWindow& window)
     character_init(lev[3].target[2], "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", false);
     character_set_scale(lev[3].target[2], 0.3);
     character_set_position(lev[3].target[2], Vector2f(lev[3].shape[0].getPosition().x - 100, lev[3].shape[0].getPosition().y - 390));
+
+    // bullets
+    lev[3].Bullets[0].setTexture(Bullet_texture);
+    lev[3].Bullets[1].setTexture(Bullet_texture);
+    lev[3].Bullets[2].setTexture(Bullet_texture);
+    lev[3].Bullets[3].setTexture(Bullet_texture);
+    lev[3].Bullets[4].setTexture(Bullet_texture);
+
+
+    lev[3].Bullets[0].setPosition(Vector2f(850, 55));
+    lev[3].Bullets[0].setOrigin(lev[3].Bullets[0].getLocalBounds().width / 2, lev[3].Bullets[0].getLocalBounds().height / 2);
+    lev[3].Bullets[0].setScale(.25, .25);
+    lev[3].Bullets[0].setColor(Color::Black);
+
+    lev[3].Bullets[1].setPosition(Vector2f(900, 55));
+    lev[3].Bullets[1].setOrigin(lev[3].Bullets[1].getLocalBounds().width / 2, lev[3].Bullets[1].getLocalBounds().height / 2);
+    lev[3].Bullets[1].setScale(.25, .25);
+    lev[3].Bullets[1].setColor(Color::Black);
+
+    lev[3].Bullets[2].setPosition(Vector2f(950, 55));
+    lev[3].Bullets[2].setOrigin(lev[3].Bullets[2].getLocalBounds().width / 2, lev[3].Bullets[2].getLocalBounds().height / 2);
+    lev[3].Bullets[2].setScale(.25, .25);
+    lev[3].Bullets[2].setColor(Color::Black);
+
+    lev[3].Bullets[3].setPosition(Vector2f(1000, 55));
+    lev[3].Bullets[3].setOrigin(lev[3].Bullets[3].getLocalBounds().width / 2, lev[3].Bullets[3].getLocalBounds().height / 2);
+    lev[3].Bullets[3].setScale(.25, .25);
+    lev[3].Bullets[3].setColor(Color(240, 150, 25));
+
+
+    lev[3].Return_num = 4;
+    lev[3].num_of_bullets = 4;
 }
 
 void constructlev5(RenderWindow& window)
@@ -220,6 +347,11 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[0].ground);
         character_draw(lev[0].killer, window);
         character_draw(lev[0].target[0], window);
+
+        for (int i = 0; i < lev[level_index].num_of_bullets; i++)
+        {
+            window.draw(lev[level_index].Bullets[i]);
+        }
         for (int i = 0; i < bullets.size(); i++) {
             bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
         }
@@ -233,13 +365,19 @@ void DrawingLevels(int num, RenderWindow& window)
             CollideEnemies(lev[0], bullets[i]);
         }
         levels_background();
-        lev[0].num_of_bullets = 4;
+     
     }
 
 
     else if (num == 1) // ==> constructing Level 2
     {
         window.draw(lev[1].bg);
+
+        for (int i = 0; i < lev[level_index].num_of_bullets; i++)
+        {
+            window.draw(lev[level_index].Bullets[i]);
+        }
+
         for (int i = 0; i < 10; i++)
         {
             window.draw(lev[1].block[i]);
@@ -263,7 +401,7 @@ void DrawingLevels(int num, RenderWindow& window)
             CollideEnemies(lev[1], bullets[i]);
         }
         levels_background();
-        lev[1].num_of_bullets = 7;
+       
     }
 
 
@@ -274,6 +412,12 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[2].shape[0]);
         window.draw(lev[2].shape[1]);
         character_draw(lev[2].killer, window);
+
+        for (int i = 0; i < lev[level_index].num_of_bullets; i++)
+        {
+            window.draw(lev[level_index].Bullets[i]);
+        }
+
         for (int i = 0; i < bullets.size(); i++) {
             bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 20.f);
         }
@@ -289,7 +433,7 @@ void DrawingLevels(int num, RenderWindow& window)
             CollideEnemies(lev[2], bullets[i]);
         }
         levels_background();
-        lev[2].num_of_bullets = 4;
+     
 
     }
 
@@ -299,6 +443,10 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[3].bg);
         window.draw(lev[3].shape[0]);
         character_draw(lev[3].killer, window);
+        for (int i = 0; i < lev[level_index].num_of_bullets; i++)
+        {
+            window.draw(lev[level_index].Bullets[i]);
+        }
         for (int i = 0; i < 3; i++)
         {
             character_draw(lev[3].target[i], window);
@@ -317,7 +465,7 @@ void DrawingLevels(int num, RenderWindow& window)
             CollideEnemies(lev[3], bullets[i]);
         }
         levels_background();
-        lev[3].num_of_bullets = 6;
+   
 
     }
 
@@ -327,6 +475,10 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[4].bg);
         window.draw(lev[4].ground);
         window.draw(lev[4].block[0]);
+         for (int i = 0; i < lev[level_index].num_of_bullets; i++)
+        {
+            window.draw(lev[level_index].Bullets[i]);
+        }
 
         character_draw(lev[4].killer, window);
         for (int i = 0; i < 2; i++)

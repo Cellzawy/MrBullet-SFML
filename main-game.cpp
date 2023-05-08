@@ -20,9 +20,15 @@ int main() {
     window.setFramerateLimit(60);
 
     Texture_loading();
-
     SFX_click.setBuffer(SFX_click_soundbuffer);
-
+    shoot.setBuffer(shoot_soundbuffer);
+    Restart_sound.setBuffer(Restart_soundbuffer);
+   
+    for (int i = 0; i < lev[level_index].num_of_bullets; i++)
+    {
+        window.draw(lev[level_index].Bullets[i]);
+    }
+    
     mainmenu_music.openFromFile("assets/sounds/main_music.ogg");
     mainmenu_music.setVolume(volume_value[0]);
     mainmenu_music.play();
@@ -135,8 +141,7 @@ int main() {
                     CollideEnemies(lev[0], bullets[i]);
                 }
 
-
-
+                
 
                 for (int i = 0; i < enemies_num; i++)
                 {
@@ -181,8 +186,8 @@ int main() {
                     CollideEnemies(lev[1], bullets[i]);
                 }
 
-
-
+               
+               
 
                 for (int i = 0; i < enemies_num; i++)
                 {
@@ -311,6 +316,7 @@ int main() {
             }
         }
 
+        
 
         window.display();
     }
