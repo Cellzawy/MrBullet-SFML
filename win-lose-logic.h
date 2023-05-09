@@ -4,6 +4,7 @@
 extern sf::Texture win_panel_texture, lose_panel_texture;
 extern sf::Texture star_texture, empty_star_texture, forward_texture, backward_texture, reset_texture;
 extern sf::Texture quit_to_main_menu_texture;
+extern sf::Texture blur_effect_texture;
 
 extern sf::Sprite Forward, backward, first_star, second_star, third_star, reset;
 extern sf::Sprite win_panel, lose_panel;
@@ -31,6 +32,7 @@ void DissolveEffect_lost_options(float dissolveTime);
 void DissolveEffect_lost_Quit(float);
 
 void Moving_down_animation(sf::Sprite&);
+void Blur_effect(float dissolveTime);
 void Reset();
 void stars_system(int three_stars, int two_stars, int one_star, int zero_stars);
 

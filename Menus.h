@@ -37,6 +37,7 @@ struct Achievment
 
 struct Levels_view {
     int Level_evaluation = -1;  // from -1 to 3
+    int highest_score = -1;
     Texture Level_closed_texture;  // Level_evaluation = -1
     Texture Level_none_stared; // Leve_evaluation = 0
     Texture Level_one_stared;   // Level_evaluation = 1
@@ -101,7 +102,7 @@ extern bool fullscreen_close;
 extern Sprite check_box_close, check_box_open, Volume_increase[2], Volume_decrease[2];
 
 
-// options menu pause 
+// options menu pause
 extern Texture options_menu_background;
 
 // Pause menu
@@ -160,6 +161,8 @@ void levels_background();
 void Level_Evaluation(Lev lev[]);
 
 void Achievements_checking();
+
+void Achievements_texture(Achievment achieve[]);
 
 void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&);
 

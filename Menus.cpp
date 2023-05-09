@@ -46,7 +46,7 @@ Sprite check_box_close, check_box_open, Volume_increase[2], Volume_decrease[2];
 Texture pause_back_ground, Rec_background, pause;
 Button Resume, optionts, QUIT;
 
-// options menu pause 
+// options menu pause
 sf::Texture options_menu_background;
 
 
@@ -653,6 +653,7 @@ void Achievements_menu()
     achievements_menu_eventloop();
 
     // drawing
+    Achievements_texture(achievements);
 
     window.draw(background);
     for (int i = 0; i < 5; i++)
@@ -719,6 +720,7 @@ forward_texture.loadFromFile("assets/win_lose_panels/Forward_texture.png");
 backward_texture.loadFromFile("assets/win_lose_panels/Backward_texture.png");
 reset_texture.loadFromFile("assets/win_lose_panels/Reset_button.png");
 quit_to_main_menu_texture.loadFromFile("assets/win_lose_panels/Quit_To_Main_Menu.png");
+blur_effect_texture.loadFromFile("assets/win_lose_panels/blur_effect.png");
 
 // main menu
 
@@ -747,7 +749,7 @@ volume_increase.loadFromFile("assets/menus/options_menu/Volume_increase.png");
 volume_decrease.loadFromFile("assets/menus/options_menu/Volume_decrease.png");
 
 
-// options menu pause 
+// options menu pause
 
 options_menu_background.loadFromFile("assets/menus/pause_menu/background_vampire.png");
 
@@ -788,6 +790,7 @@ Border_hover_effect.loadFromFile("assets/menus/classic_menu/Border_hover_effect.
 
 
 //lev[0].view.Level_evaluation = 0;
+lev[0].view.highest_score = lev[0].view.Level_evaluation;
 lev[0].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Level_1_no_stars.png");
 lev[0].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_one_star.png");
 lev[0].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_two_stars.png");
@@ -904,27 +907,27 @@ void Level_Evaluation(Lev lev[])
 {
     for (int i = 0; i < 10; i++)
     {
-        if (lev[i].view.Level_evaluation == -1)
+        if (lev[i].view.highest_score == -1)
         {
             lev[i].view.Level_selection.setTexture(lev[i].view.Level_closed_texture);
         }
 
-        else if (lev[i].view.Level_evaluation == 0)
+        else if (lev[i].view.highest_score == 0)
         {
             lev[i].view.Level_selection.setTexture(lev[i].view.Level_none_stared);
         }
 
-        else if (lev[i].view.Level_evaluation == 1)
+        else if (lev[i].view.highest_score == 1)
         {
             lev[i].view.Level_selection.setTexture(lev[i].view.Level_one_stared);
         }
 
-        else if (lev[i].view.Level_evaluation == 2)
+        else if (lev[i].view.highest_score == 2)
         {
             lev[i].view.Level_selection.setTexture(lev[i].view.Level_two_stared);
         }
 
-        else if (lev[i].view.Level_evaluation == 3)
+        else if (lev[i].view.highest_score == 3)
         {
             lev[i].view.Level_selection.setTexture(lev[i].view.Leve_three_stared);
         }
@@ -974,6 +977,17 @@ void Achievements_checking()
         {
             achievements[4].sprite.setTexture(achievements[4].unlocked_texture);
             achievements[4].is_closed = false;
+        }
+    }
+}
+
+void Achievements_texture(Achievment achieve[])
+{
+    for (int i = 0; i < 5; i++)
+    {
+        if (achieve[i].is_open)
+        {
+            achieve[i].sprite.setTexture(achieve[i].unlocked_texture);
         }
     }
 }
