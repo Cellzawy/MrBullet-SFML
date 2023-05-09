@@ -776,7 +776,7 @@ duels_menu.Default_texture.loadFromFile("assets/menus/play_menu/Duels.png");
 duels_menu.Hovered_texture.loadFromFile("assets/menus/play_menu/Duels_hovered.png");
 
 // Level
-pause_menu_button.loadFromFile("assets/menus/Level/IconViewTypeList.png");
+pause_menu_button.loadFromFile("assets/menus/Level/pause_button.png");
 Bullet_texture.loadFromFile("assets/menus/Level/bullet.png");
 
 
