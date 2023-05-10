@@ -3,12 +3,18 @@
 #include "Levels.h"
 #include "Physics.h"
 #include "Menus.h"
+#include <cmath>
 
 using namespace sf;
 
 int dead_enemies = 0;
 int level_index;
 float bulletSpeed = 25.f;
+int blockDirection[4] = { 0,1,2,3 };  // direction of the block movement (0 = right, 1 = down, 2 = left, 3 = up)
+float blockSpeed = 8.0f;
+float angle = 0.0f;   //used in level (16)
+float radius = 290.0f;
+float speed = 0.04f;
 
 void constructlev1(RenderWindow& window)
 {
