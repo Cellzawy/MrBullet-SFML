@@ -44,10 +44,10 @@ int main() {
     {
         sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
 
-        line[0].position = sf::Vector2f(lev[level_index].killer.gun.getPosition());
+        line[0].position = lev[level_index].killer.bullet_pos;
         line[1].position = sf::Vector2f(mouse_position.x, mouse_position.y);
 
-        gunPos = lev[level_index].killer.gun.getPosition();
+        gunPos = lev[level_index].killer.bullet_pos;
         if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
         {
             if (bullets.size() != 0)

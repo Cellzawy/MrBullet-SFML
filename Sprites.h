@@ -49,6 +49,8 @@ struct Character {
     bool dead = false;
     bool alive = true;
     bool has_gun = false;
+    sf::Vector2f bullet_pos;
+    float arm_scale;
 };
 
 void character_set_position(Character &character, sf::Vector2f pos);

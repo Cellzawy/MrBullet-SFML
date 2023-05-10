@@ -112,6 +112,7 @@ void character_set_position(Character &character, sf::Vector2f pos) {
     }
 }
 void character_set_scale(Character &character, float scale) {
+    character.arm_scale = scale;
     character.head.setScale(sf::Vector2f(scale, scale));
     character.body.setScale(sf::Vector2f(scale, scale));
     character.left_arm1.setScale(sf::Vector2f(scale, scale));
@@ -175,8 +176,8 @@ void character_draw(Character &character, sf::RenderWindow &window) {
 }
 
 void character_rotate_arm(Character &character, sf::Vector2i mouse_position) {
-    double x = sf::Mouse::getPosition().x - window.getPosition().x - character.left_arm1.getGlobalBounds().left;
-    double y = sf::Mouse::getPosition().y - window.getPosition().y - character.left_arm1.getGlobalBounds().top - character.head.getGlobalBounds().height;
+    double x = sf::Mouse::getPosition().x - window.getPosition().x - character.gun.getPosition().x;
+    double y = sf::Mouse::getPosition().y - window.getPosition().y - character.gun.getPosition().y;
     const double PI = 3.14159265;
     double degree = 0;
     degree = atan(y / x) * 180 / PI;
@@ -186,4 +187,15 @@ void character_rotate_arm(Character &character, sf::Vector2i mouse_position) {
     character.left_arm1.setRotation(degree - 90);
     character.left_arm2.setRotation(degree - 90);
     character.gun.setRotation(degree - 90);
+
+    double bx = 250 * character.arm_scale;
+    double by = -45 * character.arm_scale;
+    double blen = sqrt(pow(bx, 2) + pow(by, 2));
+    double bdeg = atan(by / bx) + atan(y / x);
+    if (x < 0) {
+        bdeg = bdeg + PI;
+    }
+    bx = blen * cos(bdeg);
+    by = blen * sin(bdeg);
+    character.bullet_pos = character.gun.getPosition() + sf::Vector2f(bx, by);
 }
