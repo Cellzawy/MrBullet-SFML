@@ -16,6 +16,7 @@ float angle = 0.0f;   //used in level (16)
 float radius = 290.0f;
 float speed = 0.02f;
 
+
 void constructlev1(RenderWindow& window)
 {
     // background
@@ -113,6 +114,7 @@ void constructlev2(RenderWindow& window)
     //Characters
 
     //killer
+    lev[1].killer.has_gun = true;
     character_init(lev[1].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[1].killer, 0.4);
     character_set_position(lev[1].killer, Vector2f(lev[1].block[0].getPosition().x - 50, lev[1].block[0].getPosition().y - 300));
@@ -203,6 +205,7 @@ void constructlev3(RenderWindow& window)
     lev[2].shape[1].setPosition(0, 400);
 
     //killer
+    lev[2].killer.has_gun = true;
     character_init(lev[2].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", true);
     character_set_scale(lev[2].killer, 0.34);
     character_set_position(lev[2].killer, Vector2f(window.getSize().x - 200, lev[2].ground.getPosition().y - (lev[2].ground.getLocalBounds().height) * 1.3));
@@ -270,6 +273,7 @@ void constructlev4(RenderWindow& window)
     lev[3].shape[5].setPosition(Vector2f(600, 408));
 
     //killer
+    lev[3].killer.has_gun = true;
     character_init(lev[3].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[3].killer, 0.3);
     character_set_position(lev[3].killer, Vector2f(lev[3].shape[0].getPosition().x - 300, lev[3].shape[0].getPosition().y + 160));

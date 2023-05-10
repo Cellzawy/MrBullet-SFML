@@ -165,12 +165,10 @@ int main() {
         {
             Lose_panel(currentLvl);
         }
-
-
         else if (current_menu == level_1)
         {
-            drawLine = true;
             character_rotate_arm(lev[0].killer, sf::Mouse::getPosition());
+            drawLine = true;
             int enemies_num = 1;
             levels_eventloop(enemies_num);
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
@@ -222,6 +220,7 @@ int main() {
 
         else if (current_menu == level_2)
         {
+            character_rotate_arm(lev[1].killer, sf::Mouse::getPosition());
             drawLine = true;
             int enemies_num = 8;
             levels_eventloop(enemies_num);
@@ -270,6 +269,7 @@ int main() {
         }
         else if (current_menu == level_3)
         {
+            character_rotate_arm(lev[2].killer, sf::Mouse::getPosition());
             drawLine = true;
             int enemies_num = 1;
             levels_eventloop(enemies_num);
@@ -318,6 +318,7 @@ int main() {
         }
         else if (current_menu == level_4)
         {
+            character_rotate_arm(lev[3].killer, sf::Mouse::getPosition());
             drawLine = true;
             int enemies_num = 3;
             levels_eventloop(enemies_num);

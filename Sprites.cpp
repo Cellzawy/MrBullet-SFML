@@ -191,6 +191,9 @@ void character_rotate_arm(Character &character, sf::Vector2i mouse_position) {
 
     double bx = 250 * character.arm_scale;
     double by = -45 * character.arm_scale;
+    if (character.flip) {
+        by += 90 * character.arm_scale;
+    }
     double blen = sqrt(pow(bx, 2) + pow(by, 2));
     double bdeg = atan(by / bx) + atan(y / x);
     if (x < 0) {
