@@ -684,6 +684,37 @@ void constructlev15(RenderWindow& window) {
     //character_set_position(lev[15].target[0], Vector2f(lev[15].block[0].getPosition().x + 20, lev[15].block[0].getPosition().y - 150));
 }
 
+void constructOneVSone(RenderWindow& window) {
+
+    //background
+    lev[16].BG.loadFromFile("assets/Backgrounds/background_egypt.png");
+    lev[16].bg.setTexture(lev[16].BG);
+    lev[16].bg.setScale(4, 1.2);
+
+    //blocks
+    for (int i = 0; i < 4; i++) {
+        lev[16].BLOCK[i].loadFromFile("assets/Textures/square.png");
+        lev[16].block[i].setTexture(&lev[16].BLOCK[i]);
+        lev[16].block[i].setSize(Vector2f(150, 50));
+    }
+    lev[16].block[0].setPosition(Vector2f(400, 750));
+    lev[16].block[1].setPosition(Vector2f(1420, 750));
+    lev[16].block[2].setPosition(Vector2f(960, 300));
+    lev[16].block[2].setRotation(90.f);
+    lev[16].block[3].setPosition(Vector2f(960, 700));
+    lev[16].block[3].setRotation(90.f);
+
+
+    character_init(lev[16].killer, "assets/Characters/Killer/killer_caveman_head.png", "assets/Characters/Killer/pulp_fiction_body.png", true);
+    character_set_scale(lev[16].killer, 0.34);
+    // character_set_position(lev[16].killer, Vector2f(lev[16].block[1].getPosition().x + 50, lev[16].block[1].getPosition().y - 200));
+
+    character_init(lev[16].target[0], "assets/Characters/Killer/killer_nicky_larson_head.png", "assets/Characters/Killer/pulp_fiction_body.png", false);
+    character_set_scale(lev[16].target[0], 0.34);
+    //character_set_position(lev[16].target[0], Vector2f(lev[16].block[0].getPosition().x + 20, lev[16].block[0].getPosition().y - 200));
+}
+
+
 void DrawingLevels(int num, RenderWindow& window)
 {
     if (num == 0) // ==> constructing Level 1
@@ -832,7 +863,7 @@ void DrawingLevels(int num, RenderWindow& window)
         {
             character_draw(lev[5].target[i], window);
         }
-        }
+    }
 
 
     else if (num == 5) // ==> constructing level 6
@@ -844,7 +875,7 @@ void DrawingLevels(int num, RenderWindow& window)
         {
             character_draw(lev[6].target[i], window);
         }
-        }
+    }
 
 
     else if (num == 6) // ==> constructing level 7
@@ -853,7 +884,7 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[7].shape[0]);
         character_draw(lev[7].killer, window);
         character_draw(lev[7].target[0], window);
-        }
+    }
 
 
     else if (num == 7) // ==> constructing level 8
@@ -876,7 +907,7 @@ void DrawingLevels(int num, RenderWindow& window)
 
 
 
-        }
+    }
 
 
     else if (num == 8) // ==> constructing level 9
@@ -888,7 +919,7 @@ void DrawingLevels(int num, RenderWindow& window)
         {
             character_draw(lev[9].target[i], window);
         }
-        }
+    }
 
 
     else if (num == 9) // ==> constructing level 10
@@ -897,7 +928,7 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[10].ground);
         character_draw(lev[10].killer, window);
         character_draw(lev[10].target[0], window);
-        }
+    }
 
 
     else if (num == 10) // ==> constructing level 11
@@ -928,7 +959,7 @@ void DrawingLevels(int num, RenderWindow& window)
         character_draw(lev[11].killer, window);
 
 
-        }
+    }
 
 
     else if (num == 11) // ==> constructing level 12
@@ -1028,7 +1059,7 @@ void DrawingLevels(int num, RenderWindow& window)
         }
         window.draw(lev[12].block[4]);
         character_draw(lev[12].killer, window);
-        }
+    }
 
 
     else if (num == 12) // ==> constructing level 13
@@ -1058,7 +1089,7 @@ void DrawingLevels(int num, RenderWindow& window)
         }
 
         character_draw(lev[13].killer, window);
-        }
+    }
 
 
     else if (num == 13) // ==> constructing level 14
@@ -1080,7 +1111,7 @@ void DrawingLevels(int num, RenderWindow& window)
         character_draw(lev[14].killer, window);
         character_draw(lev[14].target[0], window);
 
-        }
+    }
 
 
     else if (num == 14) // ==> constructing level 15
@@ -1154,6 +1185,68 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[15].block[3]);
         character_draw(lev[15].target[0], window);
         character_draw(lev[15].killer, window);
+    }
+
+
+    else if (num == 16) // ==> one V one level
+    {
+        static int x1 = 400;
+        static int y1 = 220;
+        static int x2 = 1400;
+        static int y2 = 900;
+        static int speed = 10;
+        static string direction1 = "down";
+        static string direction2 = "up";
+
+        // Move block1
+        if (direction1 == "down")
+        {
+            y1 += speed;
+            if (y1 >= 900)
+            {
+                direction1 = "up";
+            }
         }
+        else if (direction1 == "up")
+        {
+            y1 -= speed;
+            if (y1 <= 220)
+            {
+                direction1 = "down";
+            }
+        }
+        lev[16].block[0].setPosition(x1, y1);
+
+        // Move block2
+        if (direction2 == "up")
+        {
+            y2 -= speed;
+            if (y2 <= 220)
+            {
+                direction2 = "down";
+            }
+        }
+        else if (direction2 == "down")
+        {
+            y2 += speed;
+            if (y2 >= 900)
+            {
+                direction2 = "up";
+            }
+        }
+        lev[16].block[1].setPosition(x2, y2);
+
+        character_set_position(lev[16].killer, Vector2f(lev[16].block[1].getPosition().x + 50, lev[16].block[1].getPosition().y - 200));
+        character_set_position(lev[16].target[0], Vector2f(lev[16].block[0].getPosition().x + 20, lev[16].block[0].getPosition().y - 200));
+        // Draw the blocks and background to the window
+        window.draw(lev[16].bg);
+        for (int i = 0; i < 4; i++)
+        {
+            window.draw(lev[16].block[i]);
+        }
+        character_draw(lev[16].killer, window);
+        character_draw(lev[16].target[0], window);
+
+    }
 
 }
