@@ -42,18 +42,22 @@ void DirectBullet(Bullet& b, Event e, Vector2i mousep, int lvlNum, Vector2f gunP
 void HandlePhysics(Lev& l, Bullet& b) {
     if (b.bulletBody.getGlobalBounds().intersects(l.ground.getGlobalBounds())) {
         RicochetBullet(b, l.ground);
+
+        ricochet.setVolume(volume_value[1]);
         ricochet.play();
     }
     for (int i = 0; i < 10; i++) {
         if (b.bulletBody.getGlobalBounds().intersects(l.shape[i].getGlobalBounds())) {
             RicochetBullet(b, l.shape[i]);
             if (l.shape[i].getSize() != Vector2f(1000, 1200))
+                ricochet.setVolume(volume_value[1]);
                 ricochet.play();
         }
     }
     for (int i = 0; i < 10; i++) {
         if (b.bulletBody.getGlobalBounds().intersects(l.block[i].getGlobalBounds())) {
             RicochetBullet(b, l.block[i]);
+            ricochet.setVolume(volume_value[1]);
             ricochet.play();
         }
     }
@@ -75,6 +79,7 @@ void CollideEnemies(Lev& l, Bullet& b) {
             if (l.target[i].dead == true && l.target[i].alive == true)
             {
                 character_dead(l.target[i]);
+                scream.setVolume(volume_value[1]);
                 scream.play();
             }
             //Death Animation                                                   /* helmy */

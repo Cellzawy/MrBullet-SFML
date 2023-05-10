@@ -32,6 +32,9 @@ int main() {
     mainmenu_music.setVolume(volume_value[0]);
     mainmenu_music.play();
     mainmenu_music.setLoop(true);
+    for (int i = 0; i < 15; i++) {
+        lev[i].killer.has_gun = true;
+    }
     constructlev1(window);
     constructlev2(window);
     constructlev3(window);
@@ -88,7 +91,6 @@ int main() {
             in_level = false;
             Play_menu();
         }
-
 
         else if (current_menu == options_menu)
         {
@@ -179,16 +181,19 @@ int main() {
                 else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
                 {
                     current_menu = lost_panel;
+                   
+
                 }
 
             }
         }
-
         else if (current_menu == level_2)
         {
             drawLine = true;
             int enemies_num = 8;
             levels_eventloop(enemies_num);
+            character_rotate_arm(lev[1].killer, sf::Mouse::getPosition());
+
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(1, window);
@@ -237,6 +242,8 @@ int main() {
             drawLine = true;
             int enemies_num = 1;
             levels_eventloop(enemies_num);
+            character_rotate_arm(lev[2].killer, sf::Mouse::getPosition());
+
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(2, window);
@@ -284,6 +291,8 @@ int main() {
         {
             drawLine = true;
             int enemies_num = 3;
+            character_rotate_arm(lev[3].killer, sf::Mouse::getPosition());
+
             levels_eventloop(enemies_num);
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {

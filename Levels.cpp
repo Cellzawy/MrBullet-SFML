@@ -811,11 +811,6 @@ void DrawingLevels(int num, RenderWindow& window)
     {
         window.draw(lev[3].bg);
         window.draw(lev[3].shape[0]);
-        window.draw(lev[3].shape[1]);
-        window.draw(lev[3].shape[2]);
-        window.draw(lev[3].shape[3]);
-        window.draw(lev[3].shape[4]);
-        window.draw(lev[3].shape[5]);
         character_draw(lev[3].killer, window);
         for (int i = 0; i < lev[level_index].num_of_bullets; i++)
         {
