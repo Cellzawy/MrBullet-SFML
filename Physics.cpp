@@ -32,7 +32,7 @@ void DirectBullet(Bullet& b, Event e, Vector2i mousep, int lvlNum, Vector2f gunP
         return;
     for (int i = 0; i < bullets.size(); i++)
     {
-        b.bulletBody.setPosition(gunPos);                        /*- helmy -*/
+        b.bulletBody.setPosition(gunPos);
         b.bulletDirection = b.bulletBody.getPosition() - Vector2f(mousep);
         b.bulletDirection = NormalizeVector(b.bulletDirection);
         shoot.play();
@@ -74,6 +74,7 @@ void CollideEnemies(Lev& l, Bullet& b) {
             l.target[i].dead = true;
             if (l.target[i].dead == true && l.target[i].alive == true)
             {
+                character_dead(l.target[i]);
                 scream.play();
             }
             //Death Animation                                                   /* helmy */

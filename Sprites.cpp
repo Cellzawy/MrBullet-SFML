@@ -199,3 +199,7 @@ void character_rotate_arm(Character &character, sf::Vector2i mouse_position) {
     by = blen * sin(bdeg);
     character.bullet_pos = character.gun.getPosition() + sf::Vector2f(bx, by);
 }
+
+void character_dead(Character& character) {
+
+}

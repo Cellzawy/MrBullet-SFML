@@ -58,4 +58,5 @@ void character_set_scale(Character &character, float scale);
 void character_init(Character &character, std::string head_path, std::string body_path, bool flip);
 void character_draw(Character &character, sf::RenderWindow &window);
 void character_rotate_arm(Character &character, sf::Vector2i mouse_position);
+void character_dead(Character& character);
 #endif
