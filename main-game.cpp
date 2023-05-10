@@ -48,7 +48,7 @@ int main() {
         line[1].position = sf::Vector2f(mouse_position.x, mouse_position.y);
 
         gunPos = lev[level_index].killer.bullet_pos;
-        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
         {
             if (bullets.size() != 0)
             {
@@ -137,7 +137,7 @@ int main() {
             character_rotate_arm(lev[0].killer, sf::Mouse::getPosition());
             int enemies_num = 1;
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(0, window);
                 in_level = true;
@@ -189,7 +189,7 @@ int main() {
             drawLine = true;
             int enemies_num = 8;
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(1, window);
                 in_level = true;
@@ -237,7 +237,7 @@ int main() {
             drawLine = true;
             int enemies_num = 1;
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(2, window);
                 in_level = true;
@@ -285,7 +285,7 @@ int main() {
             drawLine = true;
             int enemies_num = 3;
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(3, window);
                 in_level = true;
@@ -338,7 +338,7 @@ int main() {
 
         }
 
-        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(9))
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
         {
             for (int i = 0; i < bullets.size(); i++) {
                 window.draw(bullets[i].bulletBody);

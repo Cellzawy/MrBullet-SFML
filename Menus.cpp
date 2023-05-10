@@ -27,7 +27,7 @@ Sound shoot;
 SoundBuffer Restart_soundbuffer;
 Sound Restart_sound;
 
-Lev lev[10];
+Lev lev[15];
 
 // main menu
 sf::Texture main_menu_background_texture, mr_bullet_logo_texture;
@@ -565,7 +565,7 @@ void Classic_menu()
     const int width = 150;
     const int height = 150;
     const int gap = 30;
-    const int num_rows = 2;
+    const int num_rows = 3;
     const int num_cols = 5;
 
     const int grid_width = (num_cols * width) + ((num_cols - 1) * gap);
@@ -607,7 +607,7 @@ void Classic_menu()
 
     window.draw(classic_menu_background);
     window.draw(back_button.sprite);
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 15; i++)
     {
         window.draw(lev[i].view.Level_selection);
     }
@@ -778,7 +778,7 @@ duels_menu.Default_texture.loadFromFile("assets/menus/play_menu/Duels.png");
 duels_menu.Hovered_texture.loadFromFile("assets/menus/play_menu/Duels_hovered.png");
 
 // Level
-pause_menu_button.loadFromFile("assets/menus/Level/pause_button.png");
+pause_menu_button.loadFromFile("assets/menus/Level/pause button.png");
 Bullet_texture.loadFromFile("assets/menus/Level/bullet.png");
 
 
@@ -824,7 +824,7 @@ lev[5].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_6/L
 lev[5].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_none_stared.png");
 lev[5].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_one_stared.png");
 lev[5].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_two_stared.png");
-lev[5].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_three_stared.png");
+lev[5].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_6/Lvl_6_three_stars.png");
 
 lev[6].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_closed.png");
 lev[6].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_7/Lvl_7_none_stared.png");
@@ -836,7 +836,7 @@ lev[7].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_8/L
 lev[7].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_none_stared.png");
 lev[7].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_one_stared.png");
 lev[7].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_two_stared.png");
-lev[7].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_three_stared.png");
+lev[7].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_8/Lvl_8_three_stars.png");
 
 lev[8].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_closed.png");
 lev[8].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_9/Lvl_9_none_stared.png");
@@ -849,6 +849,36 @@ lev[9].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl
 lev[9].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_one_stared.png");
 lev[9].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_two_stared.png");
 lev[9].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_10/Lvl_10_three_stared.png");
+
+lev[10].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_11/Lvl_11_closed.png");
+lev[10].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_11/Lvl_11_none_stared.png");
+lev[10].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_11/Lvl_11_one_stared.png");
+lev[10].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_11/Lvl_11_two_stared.png");
+lev[10].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_11/Lvl_11_three_stared.png");
+
+lev[11].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_12/Lvl_12_closed.png");
+lev[11].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_12/Lvl_12_none_stared.png");
+lev[11].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_12/Lvl_12_one_stared.png");
+lev[11].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_12/Lvl_12_two_stared.png");
+lev[11].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_12/Lvl_12_three_stared.png");
+
+lev[12].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_13/Lvl_13_closed.png");
+lev[12].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_13/Lvl_13_none_stared.png");
+lev[12].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_13/Lvl_13_one_stared.png");
+lev[12].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_13/Lvl_13_two_stared.png");
+lev[12].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_13/Lvl_13_three_stared.png");
+
+lev[13].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_14/Lvl_14_closed.png");
+lev[13].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_14/Lvl_14_none_stared.png");
+lev[13].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_14/Lvl_14_one_stared.png");
+lev[13].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_14/Lvl_14_two_stared.png");
+lev[13].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_14/Lvl_14_three_stared.png");
+
+lev[14].view.Level_closed_texture.loadFromFile("assets/menus/classic_menu/Lvl_15/Lvl_15_closed.png");
+lev[14].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_15/Lvl_15_none_stared.png");
+lev[14].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_15/Lvl_15_one_stared.png");
+lev[14].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_15/Lvl_15_two_stared.png");
+lev[14].view.Leve_three_stared.loadFromFile("assets/menus/classic_menu/Lvl_15/Lvl_15_three_stared.png");
 
 // achievements menu
 achievements_menu_background.loadFromFile("assets/menus/achievements_menu/background_chinese.png");
@@ -905,7 +935,7 @@ void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down,
 
 void Level_Evaluation(Lev lev[])
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 15; i++)
     {
         if (lev[i].view.highest_score == -1)
         {
@@ -947,14 +977,14 @@ void Achievements_checking()
 
 
     //halfway there
-    if (lev[4].is_finished && achievements[2].is_closed && achievements[2].is_open)
+    if (lev[7].is_finished && achievements[2].is_closed && achievements[2].is_open)
     {
         achievements[2].sprite.setTexture(achievements[2].unlocked_texture);
         achievements[2].is_closed = false;
     }
 
     // it ends for now
-    if (lev[9].is_finished && achievements[3].is_closed && achievements[3].is_open)
+    if (lev[14].is_finished && achievements[3].is_closed && achievements[3].is_open)
     {
         achievements[3].sprite.setTexture(achievements[3].unlocked_texture);
         achievements[3].is_closed = false;
@@ -963,9 +993,9 @@ void Achievements_checking()
     // asassin
     int ace_levels = 0;
 
-    if (lev[9].view.Level_evaluation == 3)
+    if (lev[14].view.Level_evaluation == 3)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 14; i++)
         {
             if (lev[i].view.Level_evaluation == 3)
             {
@@ -973,7 +1003,7 @@ void Achievements_checking()
             }
         }
 
-        if (ace_levels == 20 && achievements[4].is_closed)
+        if (ace_levels == 15 && achievements[4].is_closed)
         {
             achievements[4].sprite.setTexture(achievements[4].unlocked_texture);
             achievements[4].is_closed = false;
@@ -1031,9 +1061,9 @@ void hoverEffect(Lev lev[])
     sf::Sprite Border;
     Border.setTexture(Border_hover_effect);
     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 15; i++)
     {
-        if (lev[i].view.Level_evaluation != -1 && lev[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+        if (lev[i].view.highest_score != -1 && lev[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
         {
             sf::Vector2f Level_position = lev[i].view.Level_selection.getPosition();
             Border.setPosition(Level_position.x, Level_position.y);

@@ -46,6 +46,11 @@ bool animation = true;
 
 void Win_panel(int score)
 {
+    if (lev[level_index + 1].view.highest_score == -1)
+    {
+        lev[level_index + 1].view.highest_score = 0;
+    }
+
     DrawingLevels(level_index, window);
     Forward.setTexture(forward_texture);
     backward.setTexture(backward_texture);
@@ -664,7 +669,7 @@ void Moving_down_animation(sf::Sprite& panel)
         window.clear();
         DrawingLevels(level_index, window);
         window.draw(blur_effect);
-        if (delay.getElapsedTime().asSeconds() > 1)
+        if (delay.getElapsedTime().asSeconds() > 0.25)
         {
             panel.move(0, window.getSize().y / 50);
             window.draw(panel);

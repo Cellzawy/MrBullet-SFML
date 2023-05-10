@@ -313,9 +313,9 @@ sf::Event classic_menu_eventloop()
             }
             else
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 15; i++)
                 {
-                    if (lev[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && lev[i].view.Level_evaluation != -1)
+                    if (lev[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && lev[i].view.highest_score != -1)
                     {
                         current_menu = menu_type(i);
                         level_index = i;
