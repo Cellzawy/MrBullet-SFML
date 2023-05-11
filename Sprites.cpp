@@ -152,6 +152,7 @@ void character_init(Character &character, std::string head_path, std::string bod
     character.left_leg2.setColor(sf::Color(255, 255, 255, 255));
     character.right_leg1.setColor(sf::Color(255, 255, 255, 255));
     character.right_leg2.setColor(sf::Color(255, 255, 255, 255));
+    character.gun.setFillColor(sf::Color(255, 255, 255, 255));
 
     character.head.setTextureRect(sf::IntRect(34, 45, 179, 163));
     character.body.setTextureRect(sf::IntRect(203, 51, 216, 235));
@@ -255,4 +256,5 @@ void character_dead(Character &character) {
     character.left_leg2.setColor(sf::Color(0, 0, 0, 0));
     character.right_leg1.setColor(sf::Color(0, 0, 0, 0));
     character.right_leg2.setColor(sf::Color(0, 0, 0, 0));
+    character.gun.setFillColor(sf::Color(0, 0, 0, 0));
 }
