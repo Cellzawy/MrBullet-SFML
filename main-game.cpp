@@ -4,14 +4,17 @@
 #include "Sprites.h"
 #include "Physics.h"
 #include "Levels.h"
+#include "1v1.h"
 #include "Menus.h"
 #include "Events.h"
 #include "Sounds.h"
+#include "1v1.h"
 //#include "Levels.cpp"
 #include "win-lose-logic.h"
 
 sf::RenderWindow window(sf::VideoMode(1920, 1080), "Mr bullet", sf::Style::Fullscreen);
 bool in_level;
+bool shot;
 int currentLvl = 0;
 
 
@@ -39,9 +42,25 @@ int main() {
     constructlev2(window);
     constructlev3(window);
     constructlev4(window);
+    constructlev5(window);
+    //constructlev6(window);
+    //constructlev7(window);
+    //constructlev8(window);
+    //constructlev9(window);
+    //constructlev10(window);
+    //constructlev11(window);
+    //constructlev12(window);
+    //constructlev13(window);
+    //constructlev14(window);
+    //constructlev15(window);
+    //constructlev6(window);
+    //constructlev7(window);
+    //constructlev8(window);
     bool level_complete = false;
     int currentLvl;
     bool drawLine = true;
+    character_init(playerOne, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
+    character_init(playerTwo, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", true);
 
     while (window.isOpen())
     {
@@ -50,12 +69,16 @@ int main() {
         line[0].position = lev[level_index].killer.bullet_pos;
         line[1].position = sf::Vector2f(mouse_position.x, mouse_position.y);
 
-        gunPos = lev[level_index].killer.bullet_pos;
-        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
+        //gunPos = lev[level_index].killer.bullet_pos;
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14) || current_menu == Duels)
         {
             if (bullets.size() != 0)
             {
-                for (int i = bullets.size() - 1; i >= 0; i--)
+                //if (current_menu == Duels)
+                //{
+                //    lev[level_index].num_of_bullets = 1;
+                //}
+                for (int i = bullets.size() - 1; i > 0; i--)
                 {
                     Time elapsed = bullets[i].clock.getElapsedTime();
                     level_complete = false;
@@ -64,7 +87,14 @@ int main() {
                         bullets[i].clock.restart();
                         bullets.erase(bullets.begin() + i);
                         std::cout << "erased";
+
                         level_complete = true;
+                        if (current_menu == Duels)
+                        {
+                            playerOne.turn = !playerOne.turn;
+                            shot = false;
+                            collided = true;
+                        }
                     }
                 }
             }
@@ -84,13 +114,17 @@ int main() {
         {
             in_level = false;
             Main_menu();
+
         }
 
         else if (current_menu == play_menu)
         {
             in_level = false;
             Play_menu();
+            lev[level_index].num_of_bullets = 1;
+
         }
+
 
         else if (current_menu == options_menu)
         {
@@ -181,19 +215,16 @@ int main() {
                 else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
                 {
                     current_menu = lost_panel;
-                   
-
                 }
 
             }
         }
+
         else if (current_menu == level_2)
         {
             drawLine = true;
             int enemies_num = 8;
             levels_eventloop(enemies_num);
-            character_rotate_arm(lev[1].killer, sf::Mouse::getPosition());
-
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(1, window);
@@ -242,8 +273,6 @@ int main() {
             drawLine = true;
             int enemies_num = 1;
             levels_eventloop(enemies_num);
-            character_rotate_arm(lev[2].killer, sf::Mouse::getPosition());
-
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(2, window);
@@ -291,8 +320,6 @@ int main() {
         {
             drawLine = true;
             int enemies_num = 3;
-            character_rotate_arm(lev[3].killer, sf::Mouse::getPosition());
-
             levels_eventloop(enemies_num);
             if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
@@ -336,23 +363,57 @@ int main() {
 
             }
         }
+        else if (current_menu == Duels)
+        {
+            lev[level_index].num_of_bullets = 1;
+            if (playerOne.turn)
+            {
+                character_rotate_arm(playerOne, sf::Mouse::getPosition());
+            }
+            else {
+                character_rotate_arm(playerTwo, sf::Mouse::getPosition());
+
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 25.f);
+            }
+            window.draw(lev[0].bg);
+            window.draw(lev[0].ground);
+            duels();
+            healthBar(playerOne, playerTwo);
+            Duels_eventLoop();
+            if (playerOne.turn)
+            {
+                if (collided)
+                {
+                    collision(bullets[bullets.size() - 1], playerTwo);
+                }
+            }
+            else
+            {
+                if (collided)
+                {
+                    collision(bullets[bullets.size() - 1], playerOne);
+                }
+            }
+        }
 
         if (in_level) {
-            if (lev[level_index + 1].view.Level_evaluation < 0) {
-                lev[level_index + 1].view.Level_evaluation = 0;
-            }
+            //if (lev[level_index + 1].view.Level_evaluation < 0) {
+            //    lev[level_index + 1].view.Level_evaluation = 0;
+            //}
+            character_rotate_arm(lev[level_index].killer, sf::Mouse::getPosition());
             levels_background();
             if (drawLine)
                 window.draw(line);
 
         }
 
-        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14) || current_menu == Duels)
         {
             for (int i = 0; i < bullets.size(); i++) {
                 window.draw(bullets[i].bulletBody);
                 window.draw(bullets[i].b);
-
             }
         }
         window.display();

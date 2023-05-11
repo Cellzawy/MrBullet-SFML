@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+extern bool shot;
 
 void EventListener();
 sf::Event normal_eventloop();
@@ -15,5 +16,6 @@ sf::Event pause_eventloop();
 sf::Event levels_eventloop(int num_of_enemies);
 sf::Event win_lose_panels_eventloop();
 sf::Event options_menu_pause_eventloop();
+sf::Event Duels_eventLoop();
 
 #endif

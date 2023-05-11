@@ -17,7 +17,6 @@ extern sf::Sound gameOver;
 extern sf::Sound ricochet;
 extern sf::Sound three_strars;
 
-
 int BufferSounds();
 void SetSounds();
 #endif

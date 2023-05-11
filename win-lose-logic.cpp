@@ -209,8 +209,9 @@ void Zero_stars()
     result_text.setFont(game_font);
     result_text.setOrigin(result_text.getLocalBounds().width / 2, result_text.getLocalBounds().height / 2);
     result_text.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+
     sf::Clock delay;
-   
+
     window.clear();
     DrawingLevels(level_index, window);
     window.draw(blur_effect);
@@ -237,10 +238,6 @@ void One_star()
         if (delay.getElapsedTime().asMilliseconds() > 400)
         {
             first_star.setTexture(star_texture);
-
-            
-
-
         }
     }
 
@@ -263,15 +260,12 @@ void Two_stars()
     result_text.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
     sf::Clock delay;
-    three_strars.setVolume(volume_value[1]);
-    three_strars.play();
+
     while (delay.getElapsedTime().asMilliseconds() < 1000)
     {
-        if (delay.getElapsedTime().asMilliseconds() > 200)
+        if (delay.getElapsedTime().asMilliseconds() > 400)
         {
             first_star.setTexture(star_texture);
-            
-
 
             window.clear();
             DrawingLevels(level_index, window);
@@ -282,10 +276,9 @@ void Two_stars()
             window.draw(third_star);
             window.display();
 
-            if (delay.getElapsedTime().asMilliseconds() > 200)
+            if (delay.getElapsedTime().asMilliseconds() > 800)
             {
                 second_star.setTexture(star_texture);
-                
 
                 window.clear();
                 DrawingLevels(level_index, window);
@@ -310,11 +303,9 @@ void Three_stars()
 
 
     sf::Clock delay;
-    three_strars.setVolume(volume_value[1]);
-    three_strars.play();
     while (delay.getElapsedTime().asMilliseconds() < 1400)
     {
-        if (delay.getElapsedTime().asMilliseconds() > 200)
+        if (delay.getElapsedTime().asMilliseconds() > 400)
         {
             first_star.setTexture(star_texture);
 
@@ -327,7 +318,7 @@ void Three_stars()
             window.draw(third_star);
             window.display();
 
-            if (delay.getElapsedTime().asMilliseconds() > 200)
+            if (delay.getElapsedTime().asMilliseconds() > 800)
             {
                 second_star.setTexture(star_texture);
 
@@ -340,12 +331,9 @@ void Three_stars()
                 window.draw(third_star);
                 window.display();
 
-                if (delay.getElapsedTime().asMilliseconds() > 200)
+                if (delay.getElapsedTime().asMilliseconds() > 1200)
                 {
                     third_star.setTexture(star_texture);
-                }
-                
-
 
                     window.clear();
                     DrawingLevels(level_index, window);
@@ -358,7 +346,7 @@ void Three_stars()
                 }
             }
         }
-   
+    }
 }
 
 void DissolveEffect_won_options(float dissolveTime)
@@ -497,8 +485,7 @@ void Lose_panel(int lvl)
         float dissolveTime = 1.0f;
         Blur_effect(dissolveTime);
         Moving_down_animation(lose_panel);
-        gameOver.setVolume(volume_value[1]);
-        gameOver.play();
+
         DissolveEffect_first_Text(out_of_bullets, dissolveTime);
         DissolveEffect_second_Text(Try_again, dissolveTime);
         DissolveEffect_lost_options(dissolveTime);
@@ -751,12 +738,9 @@ void Reset()
         std::cout << "erased";
     }
 }
+
 void stars_system(int three_stars, int two_stars, int one_star, int zero_stars)
 {
-    if (lev[level_index].view.Level_evaluation > lev[level_index].view.highest_score)
-    {
-        lev[level_index].view.highest_score = lev[level_index].view.Level_evaluation;
-    }
 
     if (lev[level_index].num_of_bullets >= three_stars)
     {
@@ -777,6 +761,12 @@ void stars_system(int three_stars, int two_stars, int one_star, int zero_stars)
     {
         lev[level_index].view.Level_evaluation = 0;
     }
+
+    if (lev[level_index].view.Level_evaluation > lev[level_index].view.highest_score)
+    {
+        lev[level_index].view.highest_score = lev[level_index].view.Level_evaluation;
+    }
+
 }
 
 

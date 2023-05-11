@@ -8,7 +8,6 @@ using namespace sf;
 //using namespace std;
 
 //Vector2f bulletDirection;
-Vector2f gunPos = Vector2f(0, 0);
 
 float dot(sf::Vector2f v1, sf::Vector2f v2)
 {
@@ -26,13 +25,13 @@ Vector2f NormalizeVector(Vector2f vector) //  Gets the vector required to move t
 }
 
 
-void DirectBullet(Bullet& b, Event e, Vector2i mousep, int lvlNum, Vector2f gunPos) //  Takes bullet and event from pollEvent as parameters
+void DirectBullet(Bullet& b, Event e, Vector2i mousep, int lvlNum, Vector2f gunPos, Character playerShooting) //  Takes bullet and event from pollEvent as parameters
 {
     if (lvlNum == -1)
         return;
     for (int i = 0; i < bullets.size(); i++)
     {
-        b.bulletBody.setPosition(gunPos);
+        b.bulletBody.setPosition(playerShooting.bullet_pos);
         b.bulletDirection = b.bulletBody.getPosition() - Vector2f(mousep);
         b.bulletDirection = NormalizeVector(b.bulletDirection);
         shoot.play();
@@ -42,16 +41,16 @@ void DirectBullet(Bullet& b, Event e, Vector2i mousep, int lvlNum, Vector2f gunP
 void HandlePhysics(Lev& l, Bullet& b) {
     if (b.bulletBody.getGlobalBounds().intersects(l.ground.getGlobalBounds())) {
         RicochetBullet(b, l.ground);
-
         ricochet.setVolume(volume_value[1]);
         ricochet.play();
     }
     for (int i = 0; i < 10; i++) {
         if (b.bulletBody.getGlobalBounds().intersects(l.shape[i].getGlobalBounds())) {
             RicochetBullet(b, l.shape[i]);
-            if (l.shape[i].getSize() != Vector2f(1000, 1200))
+            if (l.shape[i].getSize() != Vector2f(1000, 1200)) {
                 ricochet.setVolume(volume_value[1]);
                 ricochet.play();
+            }
         }
     }
     for (int i = 0; i < 10; i++) {
@@ -79,7 +78,6 @@ void CollideEnemies(Lev& l, Bullet& b) {
             if (l.target[i].dead == true && l.target[i].alive == true)
             {
                 character_dead(l.target[i]);
-                scream.setVolume(volume_value[1]);
                 scream.play();
             }
             //Death Animation                                                   /* helmy */

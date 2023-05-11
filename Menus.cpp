@@ -3,11 +3,13 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <fstream>
 #include "Levels.h"
 #include "Menus.h"
 #include "Events.h"
 #include "win-lose-logic.h"
-#include <fstream>
+#include "1v1.h"
+
 
 
 using namespace sf;
@@ -28,6 +30,22 @@ SoundBuffer Restart_soundbuffer;
 Sound Restart_sound;
 
 Lev lev[15];
+
+//1v1
+//Texture victory_texture;
+//Texture victory_texture_2;
+//Texture restart_texture;
+//Texture back_texture;
+//Texture hundred_health_texture;
+//Texture seventy_health_texture;
+//Texture forty_health_texture;
+//Texture ten_health_texture;
+//Texture zero_health_texture;
+//Texture hundred_health_texture_2;
+//Texture seventy_health_texture_2;
+//Texture forty_health_texture_2;
+//Texture ten_health_texture_2;
+//Texture zero_health_texture_2;
 
 // main menu
 sf::Texture main_menu_background_texture, mr_bullet_logo_texture;
@@ -670,7 +688,10 @@ void ReadFile() {
     int levNum = 0;
     // Use a while loop together with the getline() function to read the file line by line
     while (getline(saveFile, myText)) {
-        lev[levNum].view.Level_evaluation = stoi(myText);
+        //if (levNum == 0 && myText == "-1") {
+        //    lev[levNum].view.highest_score = 0;
+        //}
+        lev[levNum].view.highest_score = stoi(myText);
         levNum++;
     }
 
@@ -687,7 +708,7 @@ void WriteFile() {
         {
             string str;
             while (str != "-1") {
-                str = to_string(lev[levNum].view.Level_evaluation);
+                str = to_string(lev[levNum].view.highest_score);
                 myfile << str << endl;
                 levNum++;
             }
@@ -708,6 +729,54 @@ back_button.Default_texture.loadFromFile("assets/menus/Back_button.png");
 back_button.Pressed_texture.loadFromFile("assets/menus/Back_button_pressed.png");
 
 SFX_click_soundbuffer.loadFromFile("assets/sounds/SFX_click.ogg");
+
+//1v1
+victory_texture.loadFromFile("assets/1v1/fotor_2023-5-6_21_25_1.png");
+victory_menu.setTexture(&victory_texture);
+
+
+victory_texture_2.loadFromFile("assets/1v1/fotor_2023-5-6_23_24_19.png");
+victory_menu_2.setTexture(&victory_texture_2);
+
+
+restart_texture.loadFromFile("assets/1v1/Reset_button.png");
+restart.setTexture(&restart_texture);
+
+
+back_texture.loadFromFile("assets/1v1/Quit_To_Main_Menu.png");
+back.setTexture(&back_texture);
+
+hundred_health_texture.loadFromFile("assets/1v1/100_health.png");
+hundred_health.setTexture(&hundred_health_texture);
+
+seventy_health_texture.loadFromFile("assets/1v1/75_health.png");
+seventy_health.setTexture(&seventy_health_texture);
+
+forty_health_texture.loadFromFile("assets/1v1/25_health.png");
+forty_health.setTexture(&forty_health_texture);
+
+ten_health_texture.loadFromFile("assets/1v1/15_health.png");
+ten_health.setTexture(&ten_health_texture);
+
+zero_health_texture.loadFromFile("assets/1v1/0_health.png");
+zero_health.setTexture(&zero_health_texture);
+
+hundred_health_texture_2.loadFromFile("assets/1v1/100_health.png");
+hundred_health_2.setTexture(&hundred_health_texture_2);
+
+seventy_health_texture_2.loadFromFile("assets/1v1/75_health.png");
+seventy_health_2.setTexture(&seventy_health_texture_2);
+
+forty_health_texture_2.loadFromFile("assets/1v1/25_health.png");
+forty_health_2.setTexture(&forty_health_texture_2);
+
+ten_health_texture_2.loadFromFile("assets/1v1/15_health.png");
+ten_health_2.setTexture(&ten_health_texture_2);
+
+zero_health_texture_2.loadFromFile("assets/1v1/0_health.png");
+zero_health_2.setTexture(&zero_health_texture_2);
+
+
 
 // win lose panels
 
@@ -784,13 +853,13 @@ Bullet_texture.loadFromFile("assets/menus/Level/bullet.png");
 
 // classic menu
 
-ReadFile();
 classic_menu_background_texture.loadFromFile("assets/menus/classic_menu/background_city_night.png");
 Border_hover_effect.loadFromFile("assets/menus/classic_menu/Border_hover_effect.png");
 
 
-//lev[0].view.Level_evaluation = 0;
-lev[0].view.highest_score = lev[0].view.Level_evaluation;
+lev[0].view.Level_evaluation = 0;
+ReadFile();
+//lev[0].view.highest_score = lev[0].view.Level_evaluation;
 lev[0].view.Level_none_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Level_1_no_stars.png");
 lev[0].view.Level_one_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_one_star.png");
 lev[0].view.Level_two_stared.loadFromFile("assets/menus/classic_menu/Lvl_1/Lvl_1_two_stars.png");

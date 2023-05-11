@@ -9,10 +9,12 @@
 //#include "main-game.cpp"
 #include "Physics.h"
 #include "win-lose-logic.h"
+#include "1v1.h"
 
 using namespace sf;
 sf::VertexArray line(sf::Lines, 2);
 Texture tx;
+//bool shot = false;
 
 
 void EventListener() {
@@ -117,6 +119,11 @@ sf::Event play_menu_eventloop()
             {
                 SFX_click.play();
                 current_menu = classic_Mode;
+            }
+            else if (duels_menu.sprite.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+            {
+                SFX_click.play();
+                current_menu = Duels;
             }
         }
     }
@@ -273,8 +280,9 @@ sf::Event pause_eventloop()
                 {
                     QUIT.sprite.setTexture(QUIT.Pressed_texture);
                     current_menu = classic_Mode;
-                    Reset();
+                    //Reset();
                     SFX_click.play();
+                    lev[level_index].num_of_bullets = 1;
 
                 }
             }
@@ -319,6 +327,7 @@ sf::Event classic_menu_eventloop()
                     {
                         current_menu = menu_type(i);
                         level_index = i;
+                        Reset();
                     }
 
                 }
@@ -405,7 +414,7 @@ sf::Event levels_eventloop(int enemies_num)
                     //for (int i = 0; i < bullets.size(); i++) {
                     //    DirectBullet(bullets[i], event, mousepos);
                     //}
-                    DirectBullet(bullets[bullets.size() - 1], event, mousepos, level_index, gunPos);
+                    DirectBullet(bullets[bullets.size() - 1], event, mousepos, level_index, lev[level_index].killer.bullet_pos, lev[level_index].killer);
                     lev[level_index].num_of_bullets--;
 
                     // win-lose logic
@@ -450,7 +459,8 @@ sf::Event win_lose_panels_eventloop()
             {
                 animation = true;
                 current_menu = main_menu;
-                Reset();
+                //Reset();
+                lev[level_index].num_of_bullets = 2;
             }
 
             else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 9)
@@ -486,4 +496,67 @@ sf::Event win_lose_panels_eventloop()
 
     return event;
 }
+sf::Event Duels_eventLoop()
+{
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        if (playerOne.dead == false && playerTwo.dead == false) {
+            lev[level_index].num_of_bullets = 1;
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && lev[level_index].num_of_bullets > 0 && shot == false)
+            {
+                
+                shot = true;
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                Vector2i mousepos = Mouse::getPosition(window);
+                std::cout << "yes";
+                Bullet newBullet;
+                newBullet.bulletBody.setFillColor(sf::Color::Black);
+                newBullet.bulletBody.setRadius(10.f);
+                bullets.push_back(newBullet);
 
+                lev[level_index].num_of_bullets--;
+                cout << 1 << endl;
+                if (playerOne.turn)
+                {
+                    DirectBullet(bullets[bullets.size() - 1], event, mousepos, level_index, playerOne.bullet_pos, playerOne);
+                    character_rotate_arm(playerOne, sf::Mouse::getPosition());
+
+                }
+                else
+                {
+                    DirectBullet(bullets[bullets.size() - 1], event, mousepos, level_index, playerTwo.bullet_pos, playerTwo);
+                    character_rotate_arm(playerTwo, sf::Mouse::getPosition());
+
+                }
+                
+            }
+        }
+
+        switch (event.type)
+        {
+        case sf::Event::MouseButtonPressed:
+            if (event.mouseButton.button == sf::Mouse::Left)
+            {
+                sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                if (restart.getGlobalBounds().contains(mousePos))
+                {
+                    if (playerOne.dead == true || playerTwo.dead == true)
+                    {
+                        resetDuels();
+                    }
+                }
+                if (back.getGlobalBounds().contains(mousePos))
+                {
+                    if (playerOne.dead == true || playerTwo.dead == true)
+                    {
+                        current_menu = main_menu;
+                        resetDuels();
+                    }
+                }
+            }
+            break;
+        }
+    }
+    return event;
+}

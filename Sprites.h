@@ -16,6 +16,7 @@ extern RectangleShape box;
 extern Sprite crosshair;
 extern Texture crosshairTx;
 extern RectangleShape walls[];
+//extern Bullet duelsbullet;
 
 struct Bullet {
     CircleShape bulletBody;
@@ -51,6 +52,8 @@ struct Character {
     bool has_gun = false;
     sf::Vector2f bullet_pos;
     float arm_scale;
+    int health = 100;
+    bool turn = true;
 };
 
 void character_set_position(Character &character, sf::Vector2f pos);

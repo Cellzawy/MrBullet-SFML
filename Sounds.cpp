@@ -12,6 +12,7 @@ sf::SoundBuffer screamSound4;
 sf::SoundBuffer gameOverSound;
 sf::SoundBuffer ricochetSound;
 sf::SoundBuffer three_strars_buffer;
+
 sf::Sound scream;
 //sf::Sound shoot;
 sf::Sound gameOver;
@@ -34,8 +35,8 @@ int BufferSounds() {
 	if (!ricochetSound.loadFromFile("assets/sounds/ricochet.ogg"))
 		return -1;
 	if (!three_strars_buffer.loadFromFile("assets/sounds/win-star.ogg"));
-	return -1;
-	
+		return -1;
+
 }
 
 void SetSounds() {
@@ -44,5 +45,5 @@ void SetSounds() {
 	gameOver.setBuffer(gameOverSound);
 	ricochet.setBuffer(ricochetSound);
 	three_strars.setBuffer(three_strars_buffer);
-	
+
 }
