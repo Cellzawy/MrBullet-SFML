@@ -142,6 +142,17 @@ void character_init(Character &character, std::string head_path, std::string bod
     character.right_leg1.setTexture(character.body_texture);
     character.right_leg2.setTexture(character.body_texture);
 
+    character.head.setColor(sf::Color(255, 255, 255, 255));
+    character.body.setColor(sf::Color(255, 255, 255, 255));
+    character.left_arm1.setColor(sf::Color(255, 255, 255, 255));
+    character.left_arm2.setColor(sf::Color(255, 255, 255, 255));
+    character.right_arm1.setColor(sf::Color(255, 255, 255, 255));
+    character.right_arm2.setColor(sf::Color(255, 255, 255, 255));
+    character.left_leg1.setColor(sf::Color(255, 255, 255, 255));
+    character.left_leg2.setColor(sf::Color(255, 255, 255, 255));
+    character.right_leg1.setColor(sf::Color(255, 255, 255, 255));
+    character.right_leg2.setColor(sf::Color(255, 255, 255, 255));
+
     character.head.setTextureRect(sf::IntRect(34, 45, 179, 163));
     character.body.setTextureRect(sf::IntRect(203, 51, 216, 235));
     character.left_arm1.setTextureRect(sf::IntRect(50, 50, 54, 145));

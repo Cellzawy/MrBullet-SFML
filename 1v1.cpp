@@ -6,7 +6,7 @@
 #include "Menus.h"
 #include "Events.h"
 #include "win-lose-logic.h"
-
+#include "Sounds.h"
 
 using namespace std;
 using namespace sf;
@@ -134,6 +134,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
             shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -145,6 +147,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
             shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -156,6 +160,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
             shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -167,6 +173,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
             shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -178,6 +186,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
             shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -189,6 +199,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
             shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -200,6 +212,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
             shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -211,6 +225,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
             shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -222,6 +238,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
             shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -233,6 +251,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
            shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
         }
         
         //Death Animation                                                   /* helmy */
