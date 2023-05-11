@@ -3,6 +3,7 @@
 #include <SFML/Audio.hpp>
 #include <cmath>
 #include "Menus.h"
+#include <iostream>
 
 //  Shapes & sprites declaration:
 Bullet duelsbullet;
@@ -158,6 +159,8 @@ void character_init(Character &character, std::string head_path, std::string bod
     character_set_scale(character, 1);
     character.flip = flip;
     character_set_position(character, sf::Vector2f(0, 0));
+    character.steam_texture.loadFromFile("assets/steam.png");
+    character.steam.setTexture(character.steam_texture);
 }
 
 void character_draw(Character &character, sf::RenderWindow &window) {
@@ -173,6 +176,9 @@ void character_draw(Character &character, sf::RenderWindow &window) {
     window.draw(character.left_arm2);
     if (character.has_gun) {
         window.draw(character.gun);
+    }
+    if (character.framex != 0 || character.framey != 0) {
+        window.draw(character.steam);
     }
 }
 
@@ -204,6 +210,38 @@ void character_rotate_arm(Character &character, sf::Vector2i mouse_position) {
     character.bullet_pos = character.gun.getPosition() + sf::Vector2f(bx, by);
 }
 
-void character_dead(Character& character) {
-
+void character_dead(Character &character) {
+    /*character.framex += 0.1;
+    while (character.framex != 0 || character.framey != 0) {
+    float time = character.clock.getElapsedTime().asMicroseconds();
+    character.clock.restart();
+    time /= 650;
+    if (time > 20) {
+        time = 20;
+    }
+        
+    character.framex += 0.040 * time;
+    if (character.framex >= 8) {
+        character.framey++;
+        character.framex = 0;
+    }
+    if (character.framey == 8) {
+        character.framex = 0;
+        character.framey = 0;
+    }
+    character.steam.setTextureRect(sf::IntRect(
+        128 * int(character.framex), 146 * int(character.framey), 128, 146));
+        window.draw(character.steam);
+        window.display();
+    }*/
+    character.head.setColor(sf::Color(0, 0, 0, 0));
+    character.body.setColor(sf::Color(0, 0, 0, 0));
+    character.left_arm1.setColor(sf::Color(0, 0, 0, 0));
+    character.left_arm2.setColor(sf::Color(0, 0, 0, 0));
+    character.right_arm1.setColor(sf::Color(0, 0, 0, 0));
+    character.right_arm2.setColor(sf::Color(0, 0, 0, 0));
+    character.left_leg1.setColor(sf::Color(0, 0, 0, 0));
+    character.left_leg2.setColor(sf::Color(0, 0, 0, 0));
+    character.right_leg1.setColor(sf::Color(0, 0, 0, 0));
+    character.right_leg2.setColor(sf::Color(0, 0, 0, 0));
 }
