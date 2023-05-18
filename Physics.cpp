@@ -42,14 +42,16 @@ void HandlePhysics(Lev& l, Bullet& b) {
     if (b.bulletBody.getGlobalBounds().intersects(l.ground.getGlobalBounds())) {
         RicochetBullet(b, l.ground);
         ricochet.setVolume(volume_value[1]);
-        ricochet.play();
+        if (b.b.getGlobalBounds().intersects(l.ground.getGlobalBounds()))
+            ricochet.play();
     }
     for (int i = 0; i < 10; i++) {
         if (b.bulletBody.getGlobalBounds().intersects(l.shape[i].getGlobalBounds())) {
             RicochetBullet(b, l.shape[i]);
             if (l.shape[i].getSize() != Vector2f(1000, 1200)) {
                 ricochet.setVolume(volume_value[1]);
-                ricochet.play();
+                if (b.b.getGlobalBounds().intersects(l.shape[i].getGlobalBounds()))
+                    ricochet.play();
             }
         }
     }
@@ -57,23 +59,24 @@ void HandlePhysics(Lev& l, Bullet& b) {
         if (b.bulletBody.getGlobalBounds().intersects(l.block[i].getGlobalBounds())) {
             RicochetBullet(b, l.block[i]);
             ricochet.setVolume(volume_value[1]);
-            ricochet.play();
+            if (b.b.getGlobalBounds().intersects(l.block[i].getGlobalBounds()))
+                ricochet.play();
         }
     }
 }
 
 void CollideEnemies(Lev& l, Bullet& b) {
     for (int i = 0; i < 10; i++) {
-        if (b.bulletBody.getGlobalBounds().intersects(l.target[i].body.getGlobalBounds()) ||
-            b.bulletBody.getGlobalBounds().intersects(l.target[i].head.getGlobalBounds()) ||
-            b.bulletBody.getGlobalBounds().intersects(l.target[i].left_arm1.getGlobalBounds()) ||
-            b.bulletBody.getGlobalBounds().intersects(l.target[i].left_arm2.getGlobalBounds()) ||
-            b.bulletBody.getGlobalBounds().intersects(l.target[i].right_arm1.getGlobalBounds()) ||
-            b.bulletBody.getGlobalBounds().intersects(l.target[i].right_arm2.getGlobalBounds()) ||
-            b.bulletBody.getGlobalBounds().intersects(l.target[i].left_leg1.getGlobalBounds()) ||
-            b.bulletBody.getGlobalBounds().intersects(l.target[i].left_leg2.getGlobalBounds()) ||
-            b.bulletBody.getGlobalBounds().intersects(l.target[i].right_leg1.getGlobalBounds()) ||
-            b.bulletBody.getGlobalBounds().intersects(l.target[i].right_leg2.getGlobalBounds())) {
+        if (b.b.getGlobalBounds().intersects(l.target[i].body.getGlobalBounds()) ||
+            b.b.getGlobalBounds().intersects(l.target[i].head.getGlobalBounds()) ||
+            b.b.getGlobalBounds().intersects(l.target[i].left_arm1.getGlobalBounds()) ||
+            b.b.getGlobalBounds().intersects(l.target[i].left_arm2.getGlobalBounds()) ||
+            b.b.getGlobalBounds().intersects(l.target[i].right_arm1.getGlobalBounds()) ||
+            b.b.getGlobalBounds().intersects(l.target[i].right_arm2.getGlobalBounds()) ||
+            b.b.getGlobalBounds().intersects(l.target[i].left_leg1.getGlobalBounds()) ||
+            b.b.getGlobalBounds().intersects(l.target[i].left_leg2.getGlobalBounds()) ||
+            b.b.getGlobalBounds().intersects(l.target[i].right_leg1.getGlobalBounds()) ||
+            b.b.getGlobalBounds().intersects(l.target[i].right_leg2.getGlobalBounds())) {
             l.target[i].dead = true;
             if (l.target[i].dead == true && l.target[i].alive == true)
             {
@@ -88,7 +91,7 @@ void CollideEnemies(Lev& l, Bullet& b) {
 void RicochetBullet(Bullet& b, RectangleShape w)
 {
     // Check if the bullet is colliding with the wall
-    if (b.bulletBody.getGlobalBounds().intersects(w.getGlobalBounds()))
+    if (b.b.getGlobalBounds().intersects(w.getGlobalBounds()))
     {
         FloatRect bBounds = b.bulletBody.getGlobalBounds();
         FloatRect wBounds = w.getGlobalBounds();
@@ -96,11 +99,11 @@ void RicochetBullet(Bullet& b, RectangleShape w)
         // Determine which side the bullet is colliding with
         if (bBounds.top < wBounds.top) // colliding with top side
         {
-            b.bulletDirection.y = abs(b.bulletDirection.y); // flip y component to go down
+            b.bulletDirection.y = abs(b.bulletDirection.y); // flip y component to go up
         }
         else if (bBounds.top + bBounds.height > wBounds.top + wBounds.height) // colliding with bottom side
         {
-            b.bulletDirection.y = -abs(b.bulletDirection.y); // flip y component to go up
+            b.bulletDirection.y = -abs(b.bulletDirection.y); // flip y component to go down
         }
 
         if (bBounds.left < wBounds.left) // colliding with left side

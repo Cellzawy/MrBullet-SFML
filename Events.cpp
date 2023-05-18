@@ -321,13 +321,23 @@ sf::Event classic_menu_eventloop()
             }
             else
             {
+                /*
+                */
                 for (int i = 0; i < 15; i++)
                 {
                     if (lev[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && lev[i].view.highest_score != -1)
                     {
                         current_menu = menu_type(i);
-                        level_index = i;
-                        Reset();
+                        if (i == 4)
+                            level_index = 10;
+                        else if (i == 5)
+                            level_index = 12;
+                        else
+                            level_index = i;
+                            std::cout << level_index << endl;
+                            Reset();
+                        //}
+
                     }
 
                 }
@@ -409,7 +419,12 @@ sf::Event levels_eventloop(int enemies_num)
                     std::cout << "yes";
                     Bullet newBullet;
                     newBullet.bulletBody.setFillColor(sf::Color::Black);
-                    newBullet.bulletBody.setRadius(10.f);
+                    newBullet.bulletBody.setRadius(50.f);
+                    newBullet.bulletBody.setOrigin(newBullet.bulletBody.getLocalBounds().width / 2, newBullet.bulletBody.getLocalBounds().height / 2);
+                    newBullet.b.setRadius(10.f);
+                    newBullet.b.setOrigin(newBullet.b.getLocalBounds().width / 2, newBullet.b.getLocalBounds().height / 2);
+                    newBullet.b.setPosition(newBullet.bulletBody.getPosition());
+                    newBullet.b.setFillColor(Color::Black);
                     bullets.push_back(newBullet);
                     //for (int i = 0; i < bullets.size(); i++) {
                     //    DirectBullet(bullets[i], event, mousepos);
@@ -443,6 +458,7 @@ sf::Event win_lose_panels_eventloop()
     sf::Event event;
     while (window.pollEvent(event))
     {
+
         line[0].position = sf::Vector2f(0, 0);
         line[1].position = sf::Vector2f(0, 0);
         if (event.type == sf::Event::Closed)
@@ -460,15 +476,26 @@ sf::Event win_lose_panels_eventloop()
                 animation = true;
                 current_menu = main_menu;
                 //Reset();
+                //for (int i = bullets.size() - 1; i > 0; i--)
+                //{
+                //    bullets[i].clock.restart();
+                //    bullets.erase(bullets.begin() + i);
+                //    std::cout << "erased";
+                //}
                 lev[level_index].num_of_bullets = 2;
             }
 
-            else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 9)
+            else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 10)
             {
                 Reset();
                 animation = true;
                 level_index++;
-                current_menu = static_cast<menu_type>(level_index);
+                if (level_index == 4) {
+                    level_index = 10;
+                    current_menu = static_cast<menu_type>(4);
+                }
+                else
+                    current_menu = static_cast<menu_type>(level_index);
                 lev[level_index].view.Level_evaluation = 0;
                 Reset();
 
@@ -479,13 +506,23 @@ sf::Event win_lose_panels_eventloop()
                 Reset();
                 animation = true;
                 level_index--;
-                current_menu = static_cast<menu_type>(level_index);
+                if (level_index == 4) {
+                    level_index = 10;
+                    current_menu = static_cast<menu_type>(4);
+                }
+                else
+                    current_menu = static_cast<menu_type>(level_index);
                 Reset();
             }
 
             else if (reset.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
-                current_menu = static_cast<menu_type>(level_index);
+                if (level_index == 10)
+                    current_menu = static_cast<menu_type>(4);
+                else if (level_index == 12)
+                    current_menu = static_cast<menu_type>(5);
+                else
+                    current_menu = static_cast<menu_type>(level_index);
 
                 Reset();
                 animation = true;
@@ -501,22 +538,34 @@ sf::Event Duels_eventLoop()
     sf::Event event;
     while (window.pollEvent(event))
     {
+        if (event.type == sf::Event::Closed)
+        {
+            WriteFile();
+            window.close();
+        }
         if (playerOne.dead == false && playerTwo.dead == false) {
             lev[level_index].num_of_bullets = 1;
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && lev[level_index].num_of_bullets > 0 && shot == false)
             {
                 
+
                 shot = true;
                 sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
                 Vector2i mousepos = Mouse::getPosition(window);
                 std::cout << "yes";
                 Bullet newBullet;
                 newBullet.bulletBody.setFillColor(sf::Color::Black);
-                newBullet.bulletBody.setRadius(10.f);
+                newBullet.bulletBody.setRadius(50.f);
+                newBullet.bulletBody.setOrigin(newBullet.bulletBody.getLocalBounds().width / 2, newBullet.bulletBody.getLocalBounds().height / 2);
+                newBullet.b.setRadius(10.f);
+                newBullet.b.setOrigin(newBullet.b.getLocalBounds().width / 2, newBullet.b.getLocalBounds().height / 2);
+                newBullet.b.setPosition(newBullet.bulletBody.getPosition());
+                newBullet.b.setFillColor(Color::Black);
                 bullets.push_back(newBullet);
 
                 lev[level_index].num_of_bullets--;
                 cout << 1 << endl;
+                
                 if (playerOne.turn)
                 {
                     DirectBullet(bullets[bullets.size() - 1], event, mousepos, level_index, playerOne.bullet_pos, playerOne);

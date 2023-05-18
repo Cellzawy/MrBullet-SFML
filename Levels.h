@@ -26,6 +26,8 @@ void constructlev12(RenderWindow& window);
 void constructlev13(RenderWindow& window);
 void constructlev14(RenderWindow& window);
 void constructlev15(RenderWindow& window);
+void constructOneVSone(RenderWindow& window);
+
 void DrawingLevels(int num, RenderWindow& window);
 
 #endif

@@ -717,6 +717,7 @@ void Reset()
     {
         lev[level_index].target[i].alive = true;
         lev[level_index].target[i].dead = false;
+        character_show(lev[level_index].target[i]);
     }
     cout << lev[level_index].num_of_bullets << endl;
 

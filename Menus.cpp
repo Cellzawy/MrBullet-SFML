@@ -29,7 +29,7 @@ Sound shoot;
 SoundBuffer Restart_soundbuffer;
 Sound Restart_sound;
 
-Lev lev[15];
+Lev lev[17];
 
 //1v1
 //Texture victory_texture;
@@ -583,7 +583,7 @@ void Classic_menu()
     const int width = 150;
     const int height = 150;
     const int gap = 30;
-    const int num_rows = 3;
+    const int num_rows = 1;
     const int num_cols = 5;
 
     const int grid_width = (num_cols * width) + ((num_cols - 1) * gap);
@@ -625,7 +625,7 @@ void Classic_menu()
 
     window.draw(classic_menu_background);
     window.draw(back_button.sprite);
-    for (int i = 0; i < 15; i++)
+    for (int i = 0; i < 5; i++)
     {
         window.draw(lev[i].view.Level_selection);
     }

@@ -8,6 +8,8 @@
 #include "win-lose-logic.h"
 #include "Sounds.h"
 
+
+
 using namespace std;
 using namespace sf;
 
@@ -103,6 +105,39 @@ void healthBar(Character playerOneHealth,Character playerTwoHealth)
 
 void resetDuels()
 {
+    //Bullet newBullet;
+    //newBullet.bulletBody.setFillColor(sf::Color::Black);
+    //newBullet.bulletBody.setRadius(50.f);
+    //newBullet.bulletBody.setOrigin(newBullet.bulletBody.getLocalBounds().width / 2, newBullet.bulletBody.getLocalBounds().height / 2);
+    //newBullet.b.setRadius(10.f);
+    //newBullet.b.setOrigin(newBullet.b.getLocalBounds().width / 2, newBullet.b.getLocalBounds().height / 2);
+    //newBullet.b.setPosition(newBullet.bulletBody.getPosition());
+    //newBullet.b.setFillColor(Color::Black);
+    //bullets.push_back(newBullet);
+    playerOne.head.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.body.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.left_arm1.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.left_arm2.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.right_arm1.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.right_arm2.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.left_leg1.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.left_leg2.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.right_leg1.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.right_leg2.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.gun.setFillColor(sf::Color(0, 0, 0, 255));
+
+    playerTwo.head.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.body.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.left_arm1.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.left_arm2.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.right_arm1.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.right_arm2.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.left_leg1.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.left_leg2.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.right_leg1.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.right_leg2.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.gun.setFillColor(sf::Color(0, 0, 0, 255));
+
     playerOne.health = 100;
     playerTwo.health = 100;
 
@@ -111,22 +146,31 @@ void resetDuels()
     playerOne.alive = true;
     playerTwo.alive = true;
 
+    for (int i = bullets.size() - 1; i > 0; i--)
+    {
+        bullets[i].clock.restart();
+        bullets.erase(bullets.begin() + i);
+        std::cout << "erased";
+
+
+    }
+
     window.draw(lev[0].bg);
     window.draw(lev[0].ground);
-
+    
     character_set_scale(playerOne, 0.4);
-    character_set_position(playerOne, Vector2f(200.0f, lev[0].ground.getPosition().y - (lev[0].ground.getLocalBounds().height) * 1.41));
-    character_draw(playerOne, window);
+    character_set_position(playerOne, Vector2f(lev[16].block[1].getPosition().x + 50, lev[16].block[1].getPosition().y - 200));
+    //character_draw(playerOne, window);
 
     character_set_scale(playerTwo, 0.4);
-    character_set_position(playerTwo, Vector2f(1800.0f, lev[0].ground.getPosition().y - (lev[0].ground.getLocalBounds().height) * 1.41));
-    character_draw(playerTwo, window);
+    character_set_position(playerTwo, Vector2f(lev[16].block[0].getPosition().x + 20, lev[16].block[0].getPosition().y - 200));
+    //character_draw(playerTwo, window);
     
 }
 
 void collision (Bullet& b, Character& shotPlayer)
 {
-    if (b.bulletBody.getGlobalBounds().intersects(shotPlayer.body.getGlobalBounds())) {
+    if (b.b.getGlobalBounds().intersects(shotPlayer.body.getGlobalBounds())) {
         shotPlayer.health -= 30;
         collided = false;
         if (shotPlayer.health <= 0) 
@@ -139,7 +183,20 @@ void collision (Bullet& b, Character& shotPlayer)
         }
         //Death Animation                                                   /* helmy */
     }
-    else if (b.bulletBody.getGlobalBounds().intersects(shotPlayer.head.getGlobalBounds())) {
+    else if (b.b.getGlobalBounds().intersects(shotPlayer.head.getGlobalBounds())) {
+        shotPlayer.health -= 60;
+        collided = false;
+        if (shotPlayer.health <= 0)
+        {
+            shotPlayer.health = 0;
+            shotPlayer.dead = true;
+            shotPlayer.alive = false;
+            character_dead(shotPlayer);
+            scream.play();
+        }
+        //Death Animation                                                   /* helmy */
+    }
+    else if (b.b.getGlobalBounds().intersects(shotPlayer.left_arm1.getGlobalBounds())) {
         shotPlayer.health -= 30;
         collided = false;
         if (shotPlayer.health <= 0)
@@ -152,7 +209,7 @@ void collision (Bullet& b, Character& shotPlayer)
         }
         //Death Animation                                                   /* helmy */
     }
-    else if (b.bulletBody.getGlobalBounds().intersects(shotPlayer.left_arm1.getGlobalBounds())) {
+    else if (b.b.getGlobalBounds().intersects(shotPlayer.left_arm2.getGlobalBounds())) {
         shotPlayer.health -= 30;
         collided = false;
         if (shotPlayer.health <= 0)
@@ -165,7 +222,7 @@ void collision (Bullet& b, Character& shotPlayer)
         }
         //Death Animation                                                   /* helmy */
     }
-    else if (b.bulletBody.getGlobalBounds().intersects(shotPlayer.left_arm2.getGlobalBounds())) {
+    else if (b.b.getGlobalBounds().intersects(shotPlayer.right_arm1.getGlobalBounds())) {
         shotPlayer.health -= 30;
         collided = false;
         if (shotPlayer.health <= 0)
@@ -178,7 +235,7 @@ void collision (Bullet& b, Character& shotPlayer)
         }
         //Death Animation                                                   /* helmy */
     }
-    else if (b.bulletBody.getGlobalBounds().intersects(shotPlayer.right_arm1.getGlobalBounds())) {
+    else if (b.b.getGlobalBounds().intersects(shotPlayer.right_arm2.getGlobalBounds())) {
         shotPlayer.health -= 30;
         collided = false;
         if (shotPlayer.health <= 0)
@@ -191,7 +248,7 @@ void collision (Bullet& b, Character& shotPlayer)
         }
         //Death Animation                                                   /* helmy */
     }
-    else if (b.bulletBody.getGlobalBounds().intersects(shotPlayer.right_arm2.getGlobalBounds())) {
+    else if (b.b.getGlobalBounds().intersects(shotPlayer.left_leg1.getGlobalBounds())) {
         shotPlayer.health -= 30;
         collided = false;
         if (shotPlayer.health <= 0)
@@ -204,7 +261,7 @@ void collision (Bullet& b, Character& shotPlayer)
         }
         //Death Animation                                                   /* helmy */
     }
-    else if (b.bulletBody.getGlobalBounds().intersects(shotPlayer.left_leg1.getGlobalBounds())) {
+    else if (b.b.getGlobalBounds().intersects(shotPlayer.left_leg2.getGlobalBounds())) {
         shotPlayer.health -= 30;
         collided = false;
         if (shotPlayer.health <= 0)
@@ -217,7 +274,7 @@ void collision (Bullet& b, Character& shotPlayer)
         }
         //Death Animation                                                   /* helmy */
     }
-    else if (b.bulletBody.getGlobalBounds().intersects(shotPlayer.left_leg2.getGlobalBounds())) {
+    else if (b.b.getGlobalBounds().intersects(shotPlayer.right_leg1.getGlobalBounds())) {
         shotPlayer.health -= 30;
         collided = false;
         if (shotPlayer.health <= 0)
@@ -230,20 +287,7 @@ void collision (Bullet& b, Character& shotPlayer)
         }
         //Death Animation                                                   /* helmy */
     }
-    else if (b.bulletBody.getGlobalBounds().intersects(shotPlayer.right_leg1.getGlobalBounds())) {
-        shotPlayer.health -= 30;
-        collided = false;
-        if (shotPlayer.health <= 0)
-        {
-            shotPlayer.health = 0;
-            shotPlayer.dead = true;
-            shotPlayer.alive = false;
-            character_dead(shotPlayer);
-            scream.play();
-        }
-        //Death Animation                                                   /* helmy */
-    }
-    else  if (b.bulletBody.getGlobalBounds().intersects(shotPlayer.right_leg2.getGlobalBounds())) {
+    else  if (b.b.getGlobalBounds().intersects(shotPlayer.right_leg2.getGlobalBounds())) {
         shotPlayer.health -= 30;
         collided = false;
         if (shotPlayer.health <= 0)
@@ -251,8 +295,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.health = 0;
             shotPlayer.dead = true;
            shotPlayer.alive = false;
-            character_dead(shotPlayer);
-            scream.play();
+           character_dead(shotPlayer);
+           scream.play();
         }
         
         //Death Animation                                                   /* helmy */
@@ -275,17 +319,18 @@ void duels()
     back.setOrigin(235.5f, 51.f);
     back.setPosition(960.0f, 770.0f);
 
-   
     character_set_scale(playerOne, 0.4);
-    character_set_position(playerOne, Vector2f(200.0f, lev[0].ground.getPosition().y - (lev[0].ground.getLocalBounds().height) * 1.41));
+    //character_set_position(playerOne, Vector2f(200.0f, lev[0].ground.getPosition().y - (lev[0].ground.getLocalBounds().height) * 1.41));
+    character_set_scale(playerTwo, 0.4);
+    //character_set_position(playerTwo, Vector2f(1800.0f, lev[0].ground.getPosition().y - (lev[0].ground.getLocalBounds().height) * 1.41));
+    /*
     character_draw(playerOne, window);
 
-    character_set_scale(playerTwo, 0.4);
-    character_set_position(playerTwo, Vector2f(1800.0f, lev[0].ground.getPosition().y - (lev[0].ground.getLocalBounds().height) * 1.41));
-    character_draw(playerTwo, window);
+    character_draw(playerTwo, window);*/
 
 
 
+   
 
     if (playerTwo.dead)
     {

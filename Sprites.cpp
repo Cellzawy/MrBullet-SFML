@@ -3,7 +3,6 @@
 #include <SFML/Audio.hpp>
 #include <cmath>
 #include "Menus.h"
-#include <iostream>
 
 //  Shapes & sprites declaration:
 Bullet duelsbullet;
@@ -142,17 +141,7 @@ void character_init(Character &character, std::string head_path, std::string bod
     character.right_leg1.setTexture(character.body_texture);
     character.right_leg2.setTexture(character.body_texture);
 
-    character.head.setColor(sf::Color(255, 255, 255, 255));
-    character.body.setColor(sf::Color(255, 255, 255, 255));
-    character.left_arm1.setColor(sf::Color(255, 255, 255, 255));
-    character.left_arm2.setColor(sf::Color(255, 255, 255, 255));
-    character.right_arm1.setColor(sf::Color(255, 255, 255, 255));
-    character.right_arm2.setColor(sf::Color(255, 255, 255, 255));
-    character.left_leg1.setColor(sf::Color(255, 255, 255, 255));
-    character.left_leg2.setColor(sf::Color(255, 255, 255, 255));
-    character.right_leg1.setColor(sf::Color(255, 255, 255, 255));
-    character.right_leg2.setColor(sf::Color(255, 255, 255, 255));
-    character.gun.setFillColor(sf::Color(255, 255, 255, 255));
+    character_show(character);
 
     character.head.setTextureRect(sf::IntRect(34, 45, 179, 163));
     character.body.setTextureRect(sf::IntRect(203, 51, 216, 235));
@@ -222,7 +211,7 @@ void character_rotate_arm(Character &character, sf::Vector2i mouse_position) {
     character.bullet_pos = character.gun.getPosition() + sf::Vector2f(bx, by);
 }
 
-void character_dead(Character &character) {
+void character_dead(Character& character) {
     /*character.framex += 0.1;
     while (character.framex != 0 || character.framey != 0) {
     float time = character.clock.getElapsedTime().asMicroseconds();
@@ -231,7 +220,7 @@ void character_dead(Character &character) {
     if (time > 20) {
         time = 20;
     }
-        
+
     character.framex += 0.040 * time;
     if (character.framex >= 8) {
         character.framey++;
@@ -257,4 +246,18 @@ void character_dead(Character &character) {
     character.right_leg1.setColor(sf::Color(0, 0, 0, 0));
     character.right_leg2.setColor(sf::Color(0, 0, 0, 0));
     character.gun.setFillColor(sf::Color(0, 0, 0, 0));
+}
+
+void character_show(Character& character) {
+    character.head.setColor(sf::Color(255, 255, 255, 255));
+    character.body.setColor(sf::Color(255, 255, 255, 255));
+    character.left_arm1.setColor(sf::Color(255, 255, 255, 255));
+    character.left_arm2.setColor(sf::Color(255, 255, 255, 255));
+    character.right_arm1.setColor(sf::Color(255, 255, 255, 255));
+    character.right_arm2.setColor(sf::Color(255, 255, 255, 255));
+    character.left_leg1.setColor(sf::Color(255, 255, 255, 255));
+    character.left_leg2.setColor(sf::Color(255, 255, 255, 255));
+    character.right_leg1.setColor(sf::Color(255, 255, 255, 255));
+    character.right_leg2.setColor(sf::Color(255, 255, 255, 255));
+    character.gun.setFillColor(sf::Color(0, 0, 0, 255));
 }
