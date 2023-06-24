@@ -111,6 +111,7 @@ void character_set_position(Character &character, sf::Vector2f pos) {
         character.right_leg1.setPosition(character.left_leg1.getPosition() + sf::Vector2f(83 * character.head.getScale().x, 0));
         character.right_leg2.setPosition(character.right_leg1.getPosition() + sf::Vector2f(0, character.left_leg1.getGlobalBounds().height - 45 * character.head.getScale().x));
     }
+    character.player_arrow.setPosition(character.head.getPosition() + sf::Vector2f(15 * character.head.getScale().y, -character.player_arrow.getGlobalBounds().height - 30 * character.head.getScale().y));
 }
 void character_set_scale(Character &character, float scale) {
     character.arm_scale = scale;
@@ -125,6 +126,9 @@ void character_set_scale(Character &character, float scale) {
     character.right_leg1.setScale(sf::Vector2f(scale, scale));
     character.right_leg2.setScale(sf::Vector2f(scale, scale));
     character.gun.setScale(sf::Vector2f(scale, scale));
+    if (character.player_arrow_exist) {
+        character.player_arrow.setScale(sf::Vector2f(scale, scale));
+    }
 }
 void character_init(Character &character, std::string head_path, std::string body_path, bool flip) {
     character.head_texture.loadFromFile(head_path);
@@ -181,6 +185,18 @@ void character_draw(Character &character, sf::RenderWindow &window) {
     if (character.framex != 0 || character.framey != 0) {
         window.draw(character.steam);
     }
+    if (character.show_player_arrow) {
+        window.draw(character.player_arrow);
+    }
+}
+
+void character_set_player_arrow(Character& character, std::string player_arrow_path) {
+    character.player_arrow_texture.loadFromFile(player_arrow_path);
+    character.player_arrow.setTexture(character.player_arrow_texture);
+    character.player_arrow_exist = true;
+}
+void character_show_player_arrow(Character& character, bool show_player_arrow) {
+    character.show_player_arrow = show_player_arrow;
 }
 
 void character_rotate_arm(Character &character, sf::Vector2i mouse_position) {

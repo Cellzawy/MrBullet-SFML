@@ -35,6 +35,7 @@ struct Character {
     bool flip;
     sf::Texture head_texture;
     sf::Texture body_texture;
+
     sf::Sprite head;
     sf::Sprite body;
     sf::Sprite left_arm1;
@@ -46,6 +47,7 @@ struct Character {
     sf::Sprite right_leg1;
     sf::Sprite right_leg2;
     sf::RectangleShape gun;
+
     bool dead = false;
     bool alive = true;
     bool has_gun = false;
@@ -57,6 +59,11 @@ struct Character {
     sf::Sprite steam;
     sf::Clock clock;
     double framex = 0, framey = 0;
+
+    sf::Texture player_arrow_texture;
+    sf::Sprite player_arrow;
+    bool show_player_arrow = false;
+    bool player_arrow_exist = false;
 };
 
 void character_set_position(Character &character, sf::Vector2f pos);
@@ -66,4 +73,6 @@ void character_draw(Character &character, sf::RenderWindow &window);
 void character_rotate_arm(Character &character, sf::Vector2i mouse_position);
 void character_dead(Character& character);
 void character_show(Character& character);
+void character_set_player_arrow(Character& character, std::string player_arrow_path);
+void character_show_player_arrow(Character& character, bool show_player_arrow);
 #endif
