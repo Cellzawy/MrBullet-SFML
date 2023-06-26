@@ -330,18 +330,9 @@ sf::Event classic_menu_eventloop()
                     if (lev[i].view.Level_selection.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && lev[i].view.highest_score != -1)
                     {
                         current_menu = menu_type(i);
-                        if (i == 4)
-                            level_index = 10;
-                        else if (i == 5)
-                            level_index = 12;
-                        else
-                            level_index = i;
-                            std::cout << level_index << endl;
-                            Reset();
-                        //}
-
+                        level_index = i;
+                        Reset();
                     }
-
                 }
             }
         }
