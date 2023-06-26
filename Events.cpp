@@ -169,6 +169,7 @@ sf::Event options_menu_eventloop()
                 {
                     SFX_click.play();
                     fullscreen_close = false;
+                    window.setFramerateLimit(60);
                     window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
                 }
 
@@ -176,6 +177,7 @@ sf::Event options_menu_eventloop()
                 {
                     SFX_click.play();
                     fullscreen_close = true;
+                    window.setFramerateLimit(60);
                     window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
                 }
             }
@@ -458,7 +460,6 @@ sf::Event win_lose_panels_eventloop()
     sf::Event event;
     while (window.pollEvent(event))
     {
-
         line[0].position = sf::Vector2f(0, 0);
         line[1].position = sf::Vector2f(0, 0);
         if (event.type == sf::Event::Closed)
@@ -476,26 +477,15 @@ sf::Event win_lose_panels_eventloop()
                 animation = true;
                 current_menu = main_menu;
                 //Reset();
-                //for (int i = bullets.size() - 1; i > 0; i--)
-                //{
-                //    bullets[i].clock.restart();
-                //    bullets.erase(bullets.begin() + i);
-                //    std::cout << "erased";
-                //}
                 lev[level_index].num_of_bullets = 2;
             }
 
-            else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 10)
+            else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 9)
             {
                 Reset();
                 animation = true;
                 level_index++;
-                if (level_index == 4) {
-                    level_index = 10;
-                    current_menu = static_cast<menu_type>(4);
-                }
-                else
-                    current_menu = static_cast<menu_type>(level_index);
+                current_menu = static_cast<menu_type>(level_index);
                 lev[level_index].view.Level_evaluation = 0;
                 Reset();
 
@@ -506,23 +496,13 @@ sf::Event win_lose_panels_eventloop()
                 Reset();
                 animation = true;
                 level_index--;
-                if (level_index == 4) {
-                    level_index = 10;
-                    current_menu = static_cast<menu_type>(4);
-                }
-                else
-                    current_menu = static_cast<menu_type>(level_index);
+                current_menu = static_cast<menu_type>(level_index);
                 Reset();
             }
 
             else if (reset.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
             {
-                if (level_index == 10)
-                    current_menu = static_cast<menu_type>(4);
-                else if (level_index == 12)
-                    current_menu = static_cast<menu_type>(5);
-                else
-                    current_menu = static_cast<menu_type>(level_index);
+                current_menu = static_cast<menu_type>(level_index);
 
                 Reset();
                 animation = true;
@@ -533,6 +513,7 @@ sf::Event win_lose_panels_eventloop()
 
     return event;
 }
+
 sf::Event Duels_eventLoop()
 {
     sf::Event event;

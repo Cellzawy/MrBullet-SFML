@@ -55,7 +55,7 @@ sf::Sprite achievements_button;
 
 // options menu
 Texture back_ground, checkbox_close, checkbox_open, volume_increase, volume_decrease;
-int volume_value[2] = { 50,50 };
+int volume_value[2] = { 0,50 };
 Text volume_presentage[2];
 bool fullscreen_close = false;
 Sprite check_box_close, check_box_open, Volume_increase[2], Volume_decrease[2];
@@ -464,7 +464,6 @@ void Options_menu_Pause()
 
     options_menu_pause_eventloop();
 
-
     window.draw(Back_ground);
     window.draw(Audio_text);
     window.draw(Music_Text);
@@ -583,7 +582,7 @@ void Classic_menu()
     const int width = 150;
     const int height = 150;
     const int gap = 30;
-    const int num_rows = 1;
+    const int num_rows = 3;
     const int num_cols = 5;
 
     const int grid_width = (num_cols * width) + ((num_cols - 1) * gap);
@@ -625,7 +624,7 @@ void Classic_menu()
 
     window.draw(classic_menu_background);
     window.draw(back_button.sprite);
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 15; i++)
     {
         window.draw(lev[i].view.Level_selection);
     }

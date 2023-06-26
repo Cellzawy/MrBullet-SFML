@@ -43,25 +43,20 @@ int main() {
     constructlev3(window);
     constructlev4(window);
     constructlev5(window);
+    constructlev6(window);
+    constructlev7(window);
+    constructlev8(window);
+    constructlev9(window);
+    constructlev10(window);
     constructlev11(window);
     constructlev12(window);
     constructlev13(window);
     constructlev14(window);
     constructlev15(window);
     constructOneVSone(window);
-    //constructlev6(window);
-    //constructlev7(window);
-    //constructlev8(window);
-    //constructlev9(window);
-    //constructlev10(window);
-    //constructlev11(window);
-    //constructlev12(window);
-    //constructlev13(window);
-    //constructlev14(window);
-    //constructlev15(window);
-    //constructlev6(window);
-    //constructlev7(window);
-    //constructlev8(window);
+    
+    
+    
     bool level_complete = false;
     int currentLvl;
     bool drawLine = true;
@@ -242,7 +237,6 @@ int main() {
 
             }
         }
-
         else if (current_menu == level_2)
         {
             drawLine = true;
@@ -401,7 +395,293 @@ int main() {
 
             }
         }
+        else if (current_menu == level_5)
+        {
+        drawLine = true;
+        int enemies_num = 2;
+        character_rotate_arm(lev[4].killer, sf::Mouse::getPosition());
 
+        levels_eventloop(enemies_num);
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
+        {
+            DrawingLevels(4, window);
+            in_level = true;
+            currentLvl = 5;
+
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[4], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[4], bullets[i]);
+            }
+
+
+            for (int i = 0; i < enemies_num; i++)
+            {
+                if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                {
+                    dead_enemies++;
+                    lev[level_index].target[i].alive = false;
+                }
+            }
+
+
+
+
+            if (dead_enemies == enemies_num)
+            {
+                stars_system(3, 2, 1, 0);
+                current_menu = won_panel;
+                drawLine = false;
+            }
+
+            else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
+            {
+                current_menu = lost_panel;
+            }
+
+        }
+ }
+        else if (current_menu == level_6)
+        {
+        drawLine = true;
+        int enemies_num = 15;
+        character_rotate_arm(lev[5].killer, sf::Mouse::getPosition());
+
+        levels_eventloop(enemies_num);
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
+        {
+            DrawingLevels(5, window);
+            in_level = true;
+            currentLvl = 6;
+
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[5], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[5], bullets[i]);
+            }
+
+
+            for (int i = 0; i < enemies_num; i++)
+            {
+                if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                {
+                    dead_enemies++;
+                    lev[level_index].target[i].alive = false;
+                }
+            }
+
+
+
+
+            if (dead_enemies == enemies_num)
+            {
+                stars_system(3, 2, 1, 0);
+                current_menu = won_panel;
+                drawLine = false;
+            }
+
+            else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
+            {
+                current_menu = lost_panel;
+            }
+
+        }
+
+        }
+        else if (current_menu == level_7)
+        {
+        drawLine = true;
+        int enemies_num = 1;
+        character_rotate_arm(lev[6].killer, sf::Mouse::getPosition());
+
+        levels_eventloop(enemies_num);
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
+        {
+            DrawingLevels(6, window);
+            in_level = true;
+            currentLvl = 7;
+
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[6], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[6], bullets[i]);
+            }
+
+
+            for (int i = 0; i < enemies_num; i++)
+            {
+                if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                {
+                    dead_enemies++;
+                    lev[level_index].target[i].alive = false;
+                }
+            }
+
+
+
+
+            if (dead_enemies == enemies_num)
+            {
+                stars_system(3, 2, 1, 0);
+                current_menu = won_panel;
+                drawLine = false;
+            }
+
+            else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
+            {
+                current_menu = lost_panel;
+            }
+
+        }
+
+        }
+        else if (current_menu == level_8)
+        {
+        drawLine = true;
+        int enemies_num = 15;
+        character_rotate_arm(lev[7].killer, sf::Mouse::getPosition());
+
+        levels_eventloop(enemies_num);
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
+        {
+            DrawingLevels(7, window);
+            in_level = true;
+            currentLvl = 8;
+
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[7], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[7], bullets[i]);
+            }
+
+
+            for (int i = 0; i < enemies_num; i++)
+            {
+                if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                {
+                    dead_enemies++;
+                    lev[level_index].target[i].alive = false;
+                }
+            }
+
+
+
+
+            if (dead_enemies == enemies_num)
+            {
+                stars_system(3, 2, 1, 0);
+                current_menu = won_panel;
+                drawLine = false;
+            }
+
+            else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
+            {
+                current_menu = lost_panel;
+            }
+
+        }
+
+        }
+        else if (current_menu == level_9)
+        {
+        drawLine = true;
+        int enemies_num = 2;
+        character_rotate_arm(lev[8].killer, sf::Mouse::getPosition());
+
+        levels_eventloop(enemies_num);
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
+        {
+            DrawingLevels(8, window);
+            in_level = true;
+            currentLvl = 9;
+
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[8], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[8], bullets[i]);
+            }
+
+
+            for (int i = 0; i < enemies_num; i++)
+            {
+                if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                {
+                    dead_enemies++;
+                    lev[level_index].target[i].alive = false;
+                }
+            }
+
+
+
+
+            if (dead_enemies == enemies_num)
+            {
+                stars_system(3, 2, 1, 0);
+                current_menu = won_panel;
+                drawLine = false;
+            }
+
+            else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
+            {
+                current_menu = lost_panel;
+            }
+
+        }
+
+        }
+        else if (current_menu == level_10)
+        {
+        drawLine = true;
+        int enemies_num = 1;
+        character_rotate_arm(lev[9].killer, sf::Mouse::getPosition());
+
+        levels_eventloop(enemies_num);
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
+        {
+            DrawingLevels(9, window);
+            in_level = true;
+            currentLvl = 10;
+
+            for (int i = 0; i < bullets.size(); i++) {
+                HandlePhysics(lev[9], bullets[i]);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                CollideEnemies(lev[9], bullets[i]);
+            }
+
+
+            for (int i = 0; i < enemies_num; i++)
+            {
+                if (lev[level_index].target[i].alive && lev[level_index].target[i].dead)
+                {
+                    dead_enemies++;
+                    lev[level_index].target[i].alive = false;
+                }
+            }
+
+
+
+
+            if (dead_enemies == enemies_num)
+            {
+                stars_system(3, 2, 1, 0);
+                current_menu = won_panel;
+                drawLine = false;
+            }
+
+            else if (lev[level_index].num_of_bullets == 0 && level_complete && bullets.size() == 0)  ///32131563
+            {
+                current_menu = lost_panel;
+            }
+
+        }
+
+        }
         else if (current_menu == level_11)
         {
             drawLine = true;
@@ -450,7 +730,6 @@ int main() {
             }
 
         }
-
         else if (current_menu == level_12)
         {
             drawLine = true;
@@ -499,7 +778,6 @@ int main() {
             }
 
         }
-
         else if (current_menu == level_13)
         {
             drawLine = true;
@@ -548,7 +826,6 @@ int main() {
             }
 
         }
-
         else if (current_menu == level_14)
         {
             drawLine = true;
@@ -597,7 +874,6 @@ int main() {
             }
 
         }
-
         else if (current_menu == level_15)
         {
             drawLine = true;
