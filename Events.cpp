@@ -471,7 +471,7 @@ sf::Event win_lose_panels_eventloop()
                 lev[level_index].num_of_bullets = 2;
             }
 
-            else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 9)
+            else if (Forward.getGlobalBounds().contains(mousePosition.x, mousePosition.y) && level_index != 14)
             {
                 Reset();
                 animation = true;

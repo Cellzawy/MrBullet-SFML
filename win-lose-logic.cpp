@@ -119,7 +119,7 @@ void Win_panel(int score)
     window.draw(third_star);
     window.draw(result_text);
 
-    if (level_index != 9)
+    if (level_index != 14)
     {
         window.draw(Forward);
     }
@@ -382,7 +382,7 @@ void DissolveEffect_won_options(float dissolveTime)
         window.draw(second_star);
         window.draw(third_star);
 
-        if (level_index != 9)
+        if (level_index != 14)
         {
             window.draw(Forward);
         }
@@ -421,7 +421,7 @@ void DissolveEffect_won_Quit(float dissolveTime)
         window.draw(second_star);
         window.draw(third_star);
 
-        if (level_index != 9)
+        if (level_index != 14)
         {
             window.draw(Forward);
         }
@@ -503,7 +503,7 @@ void Lose_panel(int lvl)
     window.draw(out_of_bullets);
     window.draw(Try_again);
 
-    if (level_index != 9)
+    if (level_index != 14)
     {
         window.draw(Forward);
     }
@@ -604,7 +604,7 @@ void DissolveEffect_lost_options(float dissolveTime)
         window.draw(out_of_bullets);
         window.draw(Try_again);
 
-        if (level_index != 9)
+        if (level_index != 14)
         {
             window.draw(Forward);
         }
@@ -643,7 +643,7 @@ void DissolveEffect_lost_Quit(float dissolveTime)
         window.draw(out_of_bullets);
         window.draw(Try_again);
 
-        if (level_index != 9)
+        if (level_index != 14)
         {
             window.draw(Forward);
         }
