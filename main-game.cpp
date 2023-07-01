@@ -191,7 +191,7 @@ int main() {
             character_rotate_arm(lev[0].killer, sf::Mouse::getPosition());
             int enemies_num = 1;
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(4))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(0, window);
                 in_level = true;
@@ -242,7 +242,7 @@ int main() {
             drawLine = true;
             int enemies_num = 8;
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(4))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(1, window);
                 in_level = true;
@@ -290,7 +290,7 @@ int main() {
             drawLine = true;
             int enemies_num = 1;
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(4))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(2, window);
                 in_level = true;
@@ -338,7 +338,7 @@ int main() {
             drawLine = true;
             int enemies_num = 3;
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(4))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(3, window);
                 in_level = true;
@@ -689,7 +689,7 @@ int main() {
             character_rotate_arm(lev[10].killer, sf::Mouse::getPosition());
 
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(4))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(10, window);
                 in_level = true;
@@ -737,7 +737,7 @@ int main() {
             character_rotate_arm(lev[11].killer, sf::Mouse::getPosition());
 
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(4))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(11, window);
                 in_level = true;
@@ -785,7 +785,7 @@ int main() {
             character_rotate_arm(lev[12].killer, sf::Mouse::getPosition());
 
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(4))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(12, window);
                 in_level = true;
@@ -833,7 +833,7 @@ int main() {
             character_rotate_arm(lev[13].killer, sf::Mouse::getPosition());
 
             levels_eventloop(enemies_num);
-            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(4))
+            if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14))
             {
                 DrawingLevels(13, window);
                 in_level = true;
