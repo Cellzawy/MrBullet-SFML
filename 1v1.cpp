@@ -7,6 +7,7 @@
 #include "Events.h"
 #include "win-lose-logic.h"
 #include "Sounds.h"
+#include <ctime>
 
 
 
@@ -179,7 +180,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.dead = true;
             shotPlayer.alive = false;
             character_dead(shotPlayer);
-            scream.play();
+            srand(std::time(nullptr));
+            screams[rand() % 10].play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -192,7 +194,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.dead = true;
             shotPlayer.alive = false;
             character_dead(shotPlayer);
-            scream.play();
+            srand(std::time(nullptr));
+            screams[rand() % 10].play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -205,7 +208,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.dead = true;
             shotPlayer.alive = false;
             character_dead(shotPlayer);
-            scream.play();
+            srand(std::time(nullptr));
+            screams[rand() % 10].play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -218,7 +222,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.dead = true;
             shotPlayer.alive = false;
             character_dead(shotPlayer);
-            scream.play();
+            srand(std::time(nullptr));
+            screams[rand() % 10].play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -231,7 +236,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.dead = true;
             shotPlayer.alive = false;
             character_dead(shotPlayer);
-            scream.play();
+            srand(std::time(nullptr));
+            screams[rand() % 10].play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -244,7 +250,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.dead = true;
             shotPlayer.alive = false;
             character_dead(shotPlayer);
-            scream.play();
+            srand(std::time(nullptr));
+            screams[rand() % 10].play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -257,7 +264,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.dead = true;
             shotPlayer.alive = false;
             character_dead(shotPlayer);
-            scream.play();
+            srand(std::time(nullptr));
+            screams[rand() % 10].play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -270,7 +278,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.dead = true;
             shotPlayer.alive = false;
             character_dead(shotPlayer);
-            scream.play();
+            srand(std::time(nullptr));
+            screams[rand() % 10].play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -283,7 +292,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.dead = true;
             shotPlayer.alive = false;
             character_dead(shotPlayer);
-            scream.play();
+            srand(std::time(nullptr));
+            screams[rand() % 10].play();
         }
         //Death Animation                                                   /* helmy */
     }
@@ -296,7 +306,8 @@ void collision (Bullet& b, Character& shotPlayer)
             shotPlayer.dead = true;
            shotPlayer.alive = false;
            character_dead(shotPlayer);
-           scream.play();
+           srand(std::time(nullptr));
+           screams[rand() % 10].play();
         }
         
         //Death Animation                                                   /* helmy */

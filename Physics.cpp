@@ -3,6 +3,7 @@
 #include "Levels.h"
 #include "Sounds.h"
 #include <cmath>
+#include <ctime>
 
 using namespace sf;
 //using namespace std;
@@ -81,7 +82,8 @@ void CollideEnemies(Lev& l, Bullet& b) {
             if (l.target[i].dead == true && l.target[i].alive == true)
             {
                 character_dead(l.target[i]);
-                scream.play();
+                srand(std::time(nullptr));
+                screams[rand() % 10].play();
             }
             //Death Animation                                                   /* helmy */
         }

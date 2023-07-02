@@ -717,7 +717,6 @@ void constructlev11(RenderWindow& window) {
         lev[10].BLOCK[i].loadFromFile("assets/Textures/pyr_block.png");
         lev[10].block[i].setTexture(&lev[10].BLOCK[i]);
         lev[10].block[i].setSize(Vector2f(100, 50));
-        //lev[10].block[1].setPosition(Vector2f(860, 540));
     }
 
     //targets
@@ -811,7 +810,6 @@ void constructlev12(RenderWindow& window) {
     for (int i = 0; i < 4; i++) {
         character_init(lev[11].target[i], "assets/Characters/ninja_head.png", "assets/Characters/ninja_body.png", false);
         character_set_scale(lev[11].target[i], 0.22);
-        //character_set_position(lev[12].target[i], Vector2f(lev[12].block[i].getPosition().x + 20, lev[12].block[i].getPosition().y - 150));
     }
     // bullets
     for (int i = 0; i < 6; i++) {
@@ -1482,7 +1480,7 @@ void DrawingLevels(int num, RenderWindow& window)
             }
 
             // Set the position of targets above the blocks
-            for (int i = 0; i <= 3; i++) {
+            for (int i = 0; i < 4; i++) {
                 character_set_position(lev[11].target[i], Vector2f(lev[11].block[i].getPosition().x + 20, lev[11].block[i].getPosition().y - 130));
             }
         }

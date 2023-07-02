@@ -5,15 +5,13 @@
 
 
 sf::SoundBuffer shootSound;
-sf::SoundBuffer screamSound1;
-sf::SoundBuffer screamSound2;
-sf::SoundBuffer screamSound3;
-sf::SoundBuffer screamSound4;
+
+sf::SoundBuffer screamSounds[10];
 sf::SoundBuffer gameOverSound;
 sf::SoundBuffer ricochetSound;
 sf::SoundBuffer three_strars_buffer;
 
-sf::Sound scream;
+sf::Sound screams[10];
 //sf::Sound shoot;
 sf::Sound gameOver;
 sf::Sound ricochet;
@@ -22,13 +20,25 @@ sf::Sound three_strars;
 int BufferSounds() {
 	//if (!shootSound.loadFromFile("assets/sounds/shoot.ogg"))
 	//	return -1;
-	if (!screamSound1.loadFromFile("assets/sounds/Screams/scream-04.ogg"))
+	if (!screamSounds[0].loadFromFile("assets/sounds/Screams/scream-04.ogg"))
 		return -1;
-	if (!screamSound2.loadFromFile("assets/sounds/Screams/scream-06.ogg"))
+	if (!screamSounds[1].loadFromFile("assets/sounds/Screams/scream-06.ogg"))
 		return -1;
-	if (!screamSound3.loadFromFile("assets/sounds/Screams/scream-25.ogg"))
+	if (!screamSounds[2].loadFromFile("assets/sounds/Screams/scream-25.ogg"))
 		return -1;
-	if (!screamSound4.loadFromFile("assets/sounds/Screams/scream-24.ogg"))
+	if (!screamSounds[3].loadFromFile("assets/sounds/Screams/scream-24.ogg"))
+		return -1;
+	if (!screamSounds[4].loadFromFile("assets/sounds/Screams/scream-22.ogg"))
+		return -1;
+	if (!screamSounds[5].loadFromFile("assets/sounds/Screams/scream-17.ogg"))
+		return -1;
+	if (!screamSounds[6].loadFromFile("assets/sounds/Screams/scream-13.ogg"))
+		return -1;
+	if (!screamSounds[7].loadFromFile("assets/sounds/Screams/scream-01.ogg"))
+		return -1;
+	if (!screamSounds[8].loadFromFile("assets/sounds/Screams/scream-16.ogg"))
+		return -1;
+	if (!screamSounds[9].loadFromFile("assets/sounds/Screams/scream-10.ogg"))
 		return -1;
 	if (!gameOverSound.loadFromFile("assets/sounds/mrjump-gameover.ogg"))
 		return -1;
@@ -39,8 +49,12 @@ int BufferSounds() {
 
 }
 
+
+
 void SetSounds() {
-	scream.setBuffer(screamSound4);
+	for (int i = 0; i < 10; i++) {
+		screams[i].setBuffer(screamSounds[i]);
+	}
 	//shoot.setBuffer(shootSound);
 	gameOver.setBuffer(gameOverSound);
 	ricochet.setBuffer(ricochetSound);

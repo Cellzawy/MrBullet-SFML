@@ -744,10 +744,10 @@ int main() {
                 currentLvl = 12;
 
                 for (int i = 0; i < bullets.size(); i++) {
-                    HandlePhysics(lev[12], bullets[i]);
+                    HandlePhysics(lev[11], bullets[i]);
                 }
                 for (int i = 0; i < bullets.size(); i++) {
-                    CollideEnemies(lev[12], bullets[i]);
+                    CollideEnemies(lev[11], bullets[i]);
                 }
 
 
