@@ -46,7 +46,7 @@ void HandlePhysics(Lev& l, Bullet& b) {
         if (b.b.getGlobalBounds().intersects(l.ground.getGlobalBounds()))
             ricochet.play();
     }
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
         if (b.bulletBody.getGlobalBounds().intersects(l.shape[i].getGlobalBounds())) {
             RicochetBullet(b, l.shape[i]);
             if (l.shape[i].getSize() != Vector2f(1000, 1200)) {
@@ -56,7 +56,7 @@ void HandlePhysics(Lev& l, Bullet& b) {
             }
         }
     }
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
         if (b.bulletBody.getGlobalBounds().intersects(l.block[i].getGlobalBounds())) {
             RicochetBullet(b, l.block[i]);
             ricochet.setVolume(volume_value[1]);
@@ -67,7 +67,7 @@ void HandlePhysics(Lev& l, Bullet& b) {
 }
 
 void CollideEnemies(Lev& l, Bullet& b) {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 15; i++) {
         if (b.b.getGlobalBounds().intersects(l.target[i].body.getGlobalBounds()) ||
             b.b.getGlobalBounds().intersects(l.target[i].head.getGlobalBounds()) ||
             b.b.getGlobalBounds().intersects(l.target[i].left_arm1.getGlobalBounds()) ||

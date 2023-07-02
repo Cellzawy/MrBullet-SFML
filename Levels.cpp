@@ -434,7 +434,7 @@ void constructlev6(RenderWindow& window)
 
     lev[5].block[20].setSize(Vector2f(200, 100));
     lev[5].block[20].setFillColor(Color::Cyan);
-    lev[5].block[20].setPosition(Vector2f(880, 840));
+    lev[5].block[20].setPosition(Vector2f(880, 830));
 
 
     //killer
@@ -1382,7 +1382,7 @@ void DrawingLevels(int num, RenderWindow& window)
     {
         window.draw(lev[5].bg);
         window.draw(lev[5].zigzagshape);
-        /*for (int i = 0; i < 21; i++)
+       /* for (int i = 0; i < 21; i++)
         {
             window.draw(lev[5].block[i]);
         }*/
