@@ -56,11 +56,11 @@ struct Lev {
 
     Texture SHAPES[10];
 
-    Sprite bg;
+    Sprite bg, zigzagshape, box, groundSP;
 
     RectangleShape ground, shape[10];
 
-    RectangleShape block[10];
+    RectangleShape block[30];
 
     int num_of_bullets;
 

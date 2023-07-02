@@ -326,35 +326,49 @@ void constructlev4(RenderWindow& window)
 void constructlev5(RenderWindow& window)
 {
     // Background
-    lev[4].BG.loadFromFile("assets/Backgrounds/background_city.png");
+    lev[4].BG.loadFromFile("assets/Textures/background_city.png");
     lev[4].bg.setTexture(lev[4].BG);
     lev[4].bg.setScale(4, 1.2);
 
     // ground
     lev[4].GROUND[0].loadFromFile("assets/Textures/ground2.png");
-    lev[4].ground.setTexture(&lev[4].GROUND[0]);
-    lev[4].ground.setSize(Vector2f(window.getSize().x, window.getSize().y));
-    lev[4].ground.setOrigin(lev[4].ground.getSize().x / 2, lev[4].ground.getSize().y / 2);
-    lev[4].ground.setPosition(window.getSize().x / static_cast<float>(2), window.getSize().y / 1.85);
+    lev[4].groundSP.setTexture(lev[4].GROUND[0]);
+    lev[4].groundSP.setScale(2, 0.9);
 
     // blocks 
     lev[4].BLOCK[0].loadFromFile("assets/Textures/Rectangle.png");
     lev[4].block[0].setTexture(&lev[4].BLOCK[0]);
     lev[4].block[0].setSize(Vector2f(500, 75));
     lev[4].block[0].setOrigin(lev[4].block[0].getSize().x / 2, lev[4].block[0].getSize().y / 2);
-    lev[4].block[0].setPosition(lev[4].ground.getSize().x / 2, lev[4].ground.getSize().y - 850);
+    lev[4].block[0].setPosition(Vector2f(200, 200));
+
+    //hidden rectangles
+
+    for (int i = 1; i < 4; i++)
+    {
+        lev[4].block[i].setFillColor(Color::Cyan);
+    }
+    lev[4].block[1].setSize(Vector2f(1850, 75));
+    lev[4].block[1].setPosition(Vector2f(0, 905));
+
+    lev[4].block[2].setSize(Vector2f(460, 250));
+    lev[4].block[2].setPosition(Vector2f(630, 660));
+
+    lev[4].block[3].setSize(Vector2f(100, 600));
+    lev[4].block[3].setPosition(Vector2f(1740, 400));
+
 
     //killer
     character_init(lev[4].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[4].killer, 0.4);
-    character_set_position(lev[4].killer, Vector2f(lev[4].ground.getSize().x / 8, lev[4].ground.getPosition().y + 30));
+    character_set_position(lev[4].killer, Vector2f(lev[4].groundSP.getGlobalBounds().width / 8, lev[4].ground.getGlobalBounds().height + 662));
 
     //targets
     for (int i = 0; i < 2; i++)
     {
         character_init(lev[4].target[i], "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", true);
         character_set_scale(lev[4].target[i], 0.35);
-        character_set_position(lev[4].target[i], Vector2f(lev[4].ground.getPosition().x + (i * 250), lev[4].ground.getPosition().y + 60));
+        character_set_position(lev[4].target[i], Vector2f(lev[4].groundSP.getGlobalBounds().width - 1200 + (400 * i), lev[4].ground.getGlobalBounds().height + 690));
     }
     // bullets
     lev[4].Bullets[0].setTexture(Bullet_texture);
@@ -398,29 +412,48 @@ void constructlev6(RenderWindow& window)
     lev[5].bg.setScale(4, 1.2);
 
     //ground
-    lev[5].GROUND[1].loadFromFile("assets/Textures/ZIGZAG_ground(2).png");
-    lev[5].ground.setTexture(&lev[5].GROUND[1]);
-    lev[5].ground.setSize(Vector2f(window.getSize().x, window.getSize().y));
-    lev[5].ground.setOrigin(lev[5].ground.getSize().x / 2, lev[5].ground.getSize().y / 2);
-    lev[5].ground.setPosition(lev[5].ground.getSize().x / 2, window.getSize().y - 200);
+    lev[5].GROUND[1].loadFromFile("assets/Textures/zigzgag-ground.png");
+    lev[5].zigzagshape.setTexture(lev[5].GROUND[1]);
+    lev[5].zigzagshape.setScale(0.8, 0.7);
+    //lev[5].zigzagshape.setOrigin(window.getSize().x / 2, window.getSize().y / 2);
+    lev[5].zigzagshape.setPosition(1, 300);
+
+    //hidden rectangles
+    for (int i = 0; i < 10; i++)
+    {
+        lev[5].block[i].setSize(Vector2f((91 * (i + 1)) + (15 * i), 200));
+        lev[5].block[i].setFillColor(Color::Cyan);
+        lev[5].block[i].setPosition(Vector2f(1, lev[5].zigzagshape.getPosition().y + (i * 68)));
+    }
+    for (int i = 10; i < 20; i++)
+    {
+        lev[5].block[i].setSize(Vector2f((91 * ((i - 10) + 1)) + (15 * i), 200));
+        lev[5].block[i].setFillColor(Color::Cyan);
+        lev[5].block[i].setPosition(Vector2f(1829 - (91 * (i - 10)) - (15 * (i - 10)), lev[5].zigzagshape.getPosition().y + ((i - 10) * 68)));
+    }
+
+    lev[5].block[20].setSize(Vector2f(200, 100));
+    lev[5].block[20].setFillColor(Color::Cyan);
+    lev[5].block[20].setPosition(Vector2f(880, 840));
+
 
     //killer
     character_init(lev[5].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[5].killer, 0.3);
-    character_set_position(lev[5].killer, Vector2f(25, lev[5].ground.getPosition().y - lev[5].ground.getSize().y / 1.5));
+    character_set_position(lev[5].killer, Vector2f(25, lev[5].zigzagshape.getPosition().y - 175));
 
     //targets
     for (int i = 0; i < 7; i++)
     {
         character_init(lev[5].target[i], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", true);
         character_set_scale(lev[5].target[i], 0.27);
-        character_set_position(lev[5].target[i], Vector2f(120 + (110 * i), lev[5].ground.getPosition().y - lev[5].ground.getSize().y / 1.7 + (i * 70)));
+        character_set_position(lev[5].target[i], Vector2f(120 + (110 * i), lev[5].zigzagshape.getPosition().y + (i * 68) - 98));
     }
     for (int i = 7; i < 15; i++)
     {
         character_init(lev[5].target[i], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", true);
         character_set_scale(lev[5].target[i], 0.27);
-        character_set_position(lev[5].target[i], Vector2f(lev[5].ground.getOrigin().x + 135 + (110 * (i - 7)), lev[5].ground.getPosition().y - (215) - ((i - 7) * 70)));
+        character_set_position(lev[5].target[i], Vector2f(1100 + (110 * (i - 7)), 610 - ((i - 7) * 68)));
     }
     // bullets
     for (int i = 0; i < 4; i++) {
@@ -463,20 +496,49 @@ void constructlev7(RenderWindow& window)
 
     //box
     lev[6].SHAPES[0].loadFromFile("assets/Textures/box2.png");
-    lev[6].shape[0].setTexture(&lev[6].SHAPES[0]);
-    lev[6].shape[0].setSize(Vector2f(window.getSize().x / 2, window.getSize().y));
-    lev[6].shape[0].setPosition(window.getSize().x - (0.75 * window.getSize().x), 1);
+    lev[6].box.setTexture(lev[6].SHAPES[0]);
+    lev[6].box.setScale(0.8, 0.58);
+    lev[6].box.setPosition(window.getSize().x - (0.75 * window.getSize().x), 1);
+
+    //hidden rectangles
+    for (int i = 0; i < 11; i++)
+    {
+        lev[6].block[i].setFillColor(Color::Cyan);
+        if (i < 4)
+        {
+            lev[6].block[i].setSize(Vector2f(300, 100));
+        }
+        else if (i >= 4 && i < 6)
+        {
+            lev[6].block[i].setSize(Vector2f(100, 1000));
+        }
+        lev[6].block[6].setSize(Vector2f(550, 150));
+        lev[6].block[7].setSize(Vector2f(450, 150));
+        lev[6].block[8].setSize(Vector2f(450, 150));
+        lev[6].block[9].setSize(Vector2f(550, 150));
+        lev[6].block[10].setSize(Vector2f(100, 300));
+    }
+    lev[6].block[0].setPosition(Vector2f(550, 150));
+    lev[6].block[1].setPosition(Vector2f(550, 500));
+    lev[6].block[2].setPosition(Vector2f(550, 665));
+    lev[6].block[3].setPosition(Vector2f(550, 1020));
+    lev[6].block[4].setPosition(Vector2f(510, 100));
+    lev[6].block[5].setPosition(Vector2f(1350, 100));
+    lev[6].block[6].setPosition(Vector2f(820, 180));
+    lev[6].block[7].setPosition(Vector2f(820, 412));
+    lev[6].block[8].setPosition(Vector2f(820, 710));
+    lev[6].block[9].setPosition(Vector2f(820, 925));
+    lev[6].block[10].setPosition(Vector2f(1170, 425));
 
     //killer
     character_init(lev[6].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[6].killer, 0.3);
-    character_set_position(lev[6].killer, Vector2f(window.getSize().x - (0.75 * window.getSize().x) + 150, lev[6].shape[0].getSize().y - 310));
+    character_set_position(lev[6].killer, Vector2f(window.getSize().x - (0.75 * window.getSize().x) + 150, 835));
 
     //target
     character_init(lev[6].target[0], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", false);
     character_set_scale(lev[6].target[0], 0.3);
-    character_set_position(lev[6].target[0], Vector2f(window.getSize().x - (0.75 * window.getSize().x) + 150, lev[6].shape[0].getSize().y - 810));
-
+    character_set_position(lev[6].target[0], Vector2f(window.getSize().x - (0.75 * window.getSize().x) + 150, 317));
     // bullets
     for (int i = 0; i < 4; i++) {
         lev[6].Bullets[i].setTexture(Bullet_texture);
@@ -517,29 +579,48 @@ void constructlev8(RenderWindow& window)
     lev[7].bg.setScale(4, 1.2);
 
     //ground
-    lev[7].GROUND[1].loadFromFile("assets/Textures/ZIGZAG_ground(2).png");
-    lev[7].ground.setTexture(&lev[7].GROUND[1]);
-    lev[7].ground.setSize(Vector2f(window.getSize().x, window.getSize().y));
-    lev[7].ground.setOrigin(lev[7].ground.getSize().x / 2, lev[7].ground.getSize().y / 2);
-    lev[7].ground.setPosition(lev[7].ground.getSize().x / 2, window.getSize().y - 200);
+    lev[7].GROUND[1].loadFromFile("assets/Textures/zigzgag-ground.png");
+    lev[7].zigzagshape.setTexture(lev[7].GROUND[1]);
+    lev[7].zigzagshape.setScale(0.8, 0.7);
+    //lev[7].zigzagshape.setOrigin(window.getSize().x / 2, window.getSize().y / 2);
+    lev[7].zigzagshape.setPosition(1, 300);
+
+    //hidden rectangles
+    for (int i = 0; i < 10; i++)
+    {
+        lev[7].block[i].setSize(Vector2f((91 * (i + 1)) + (15 * i), 200));
+        lev[7].block[i].setFillColor(Color::Cyan);
+        lev[7].block[i].setPosition(Vector2f(1, lev[7].zigzagshape.getPosition().y + (i * 68)));
+    }
+    for (int i = 10; i < 20; i++)
+    {
+        lev[7].block[i].setSize(Vector2f((91 * ((i - 10) + 1)) + (15 * i), 200));
+        lev[7].block[i].setFillColor(Color::Cyan);
+        lev[7].block[i].setPosition(Vector2f(1829 - (91 * (i - 10)) - (15 * (i - 10)), lev[7].zigzagshape.getPosition().y + ((i - 10) * 68)));
+    }
+
+    lev[7].block[20].setSize(Vector2f(200, 100));
+    lev[7].block[20].setFillColor(Color::Cyan);
+    lev[7].block[20].setPosition(Vector2f(880, 840));
+
 
     //killer
     character_init(lev[7].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[7].killer, 0.3);
-    character_set_position(lev[7].killer, Vector2f(25, lev[7].ground.getPosition().y - lev[7].ground.getSize().y / 1.5));
+    character_set_position(lev[7].killer, Vector2f(25, lev[7].zigzagshape.getPosition().y - 175));
 
     //targets
     for (int i = 0; i < 7; i++)
     {
         character_init(lev[7].target[i], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", true);
         character_set_scale(lev[7].target[i], 0.27);
-        character_set_position(lev[7].target[i], Vector2f(120 + (110 * i), lev[7].ground.getPosition().y - lev[7].ground.getSize().y / 1.7 + (i * 70)));
+        character_set_position(lev[7].target[i], Vector2f(120 + (110 * i), lev[7].zigzagshape.getPosition().y + (i * 68) - 98));
     }
     for (int i = 7; i < 15; i++)
     {
         character_init(lev[7].target[i], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", true);
         character_set_scale(lev[7].target[i], 0.27);
-        character_set_position(lev[7].target[i], Vector2f(lev[7].ground.getOrigin().x + 135 + (110 * (i - 7)), lev[7].ground.getPosition().y - (215) - ((i - 7) * 70)));
+        character_set_position(lev[7].target[i], Vector2f(1100 + (110 * (i - 7)), 610 - ((i - 7) * 68)));
     }
     //moving rect
     lev[7].SHAPES[0].loadFromFile("assets/Textures/rect3.png");
@@ -586,26 +667,69 @@ void constructlev9(RenderWindow& window)
     lev[8].bg.setScale(4, 1.2);
 
     //box
-    lev[8].SHAPES[0].loadFromFile("assets/Textures/box&ground.png");
-    lev[8].shape[0].setTexture(&lev[8].SHAPES[0]);
-    lev[8].shape[0].setSize(Vector2f(window.getSize().x, window.getSize().y));
-    lev[8].shape[0].setOrigin(lev[8].shape[0].getSize().x / 2, lev[8].shape[0].getSize().y / 2);
-    lev[8].shape[0].setPosition(Vector2f(1920 / 2, 1080 / 2));
+    lev[8].SHAPES[0].loadFromFile("assets/Textures/box&ground2.png");
+    lev[8].box.setTexture(lev[9].SHAPES[0]);
+    lev[8].box.setScale(0.75, 0.62);
+
+    //hidden rectangles
+    for (int i = 0; i < 15; i++)
+    {
+        lev[8].block[i].setFillColor(Color::Cyan);
+    }
+    lev[8].block[0].setSize(Vector2f(300, 100));
+    lev[8].block[0].setPosition(Vector2f(50, 950));
+
+    lev[8].block[1].setSize(Vector2f(115, 750));
+    lev[8].block[1].setPosition(Vector2f(1, 1));
+
+    lev[8].block[2].setSize(Vector2f(50, 300));
+    lev[8].block[2].setPosition(Vector2f(1, 750));
+
+    lev[8].block[3].setSize(Vector2f(100, 300));
+    lev[8].block[3].setPosition(Vector2f(350, 750));
+
+    lev[8].block[4].setSize(Vector2f(100, 1200));
+    lev[8].block[4].setPosition(Vector2f(1675, 1));
+
+    lev[8].block[5].setSize(Vector2f(545, 170));
+    lev[8].block[5].setPosition(Vector2f(350, 700));
+
+    lev[8].block[6].setSize(Vector2f(780, 100));
+    lev[8].block[6].setPosition(Vector2f(895, 837));
+
+    lev[8].block[7].setSize(Vector2f(60, 500));
+    lev[8].block[7].setPosition(Vector2f(290, 245));
+
+    lev[8].block[8].setSize(Vector2f(800, 137));
+    lev[8].block[8].setPosition(Vector2f(1, 1));
+
+    lev[8].block[9].setSize(Vector2f(300, 505));
+    lev[8].block[9].setPosition(Vector2f(600, 1));
+
+    lev[8].block[10].setSize(Vector2f(190, 564));
+    lev[8].block[10].setPosition(Vector2f(520, 1));
+
+    lev[8].block[11].setSize(Vector2f(75, 100));
+    lev[8].block[11].setPosition(Vector2f(100, 123));
+
+    lev[8].block[12].setSize(Vector2f(75, 100));
+    lev[8].block[12].setPosition(Vector2f(460, 123));
 
     //killer
     character_init(lev[8].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[8].killer, 0.35);
-    character_set_position(lev[8].killer, Vector2f(lev[8].shape[0].getPosition().x - 785, lev[8].shape[0].getPosition().y + 180));
+    character_set_position(lev[8].killer, Vector2f(170, 730));
 
     //target1
     character_init(lev[8].target[0], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", true);
     character_set_scale(lev[8].target[0], 0.3);
-    character_set_position(lev[8].target[0], Vector2f(lev[8].shape[0].getPosition().x - 160, lev[8].shape[0].getPosition().y - 30));
+    character_set_position(lev[8].target[0], Vector2f(750, 518));
 
     //target2
     character_init(lev[8].target[1], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", true);
     character_set_scale(lev[8].target[1], 1.3);
-    character_set_position(lev[8].target[1], Vector2f(lev[8].shape[0].getPosition().x + 400, lev[9].shape[0].getPosition().y - 500));
+    character_set_position(lev[8].target[1], Vector2f(1350, 40));
+
     // bullets
     for (int i = 0; i < 4; i++) {
         lev[8].Bullets[i].setTexture(Bullet_texture);
@@ -1231,8 +1355,12 @@ void DrawingLevels(int num, RenderWindow& window)
 
 
         window.draw(lev[4].bg);
-        window.draw(lev[4].ground);
+        window.draw(lev[4].groundSP);
         window.draw(lev[4].block[0]);
+        /*for (int i = 1; i < 4; i++)
+         {
+             window.draw(lev[4].block[i]);
+         }*/
 
         character_draw(lev[4].killer, window);
 
@@ -1253,8 +1381,11 @@ void DrawingLevels(int num, RenderWindow& window)
     else if (num == 5) // ==> constructing level 6
     {
         window.draw(lev[5].bg);
-        window.draw(lev[5].ground);
-      
+        window.draw(lev[5].zigzagshape);
+        /*for (int i = 0; i < 21; i++)
+        {
+            window.draw(lev[5].block[i]);
+        }*/
         character_draw(lev[5].killer, window);
         for (int i = 0; i < bullets.size(); i++) {
             bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * bulletSpeed);
@@ -1274,7 +1405,11 @@ void DrawingLevels(int num, RenderWindow& window)
     {
     
         window.draw(lev[6].bg);
-        window.draw(lev[6].shape[0]);
+        window.draw(lev[6].box);
+        /*for (int i = 0; i < 11; i++)
+        {
+            window.draw(lev[6].block[i]);
+        }*/
         character_draw(lev[6].killer, window);
         character_draw(lev[6].target[0], window);
         for (int i = 0; i < bullets.size(); i++) {
@@ -1301,9 +1436,14 @@ void DrawingLevels(int num, RenderWindow& window)
         }
 
         window.draw(lev[7].bg);
-        window.draw(lev[7].ground);
+        window.draw(lev[7].zigzagshape);
         character_draw(lev[7].killer, window);
        
+       /* for (int i = 0; i < 21; i++)
+        {
+            window.draw(lev[7].block[i]);
+        }*/
+
         window.draw(lev[7].shape[0]);
 
         for (int i = 0; i < 15; i++)
@@ -1323,9 +1463,13 @@ void DrawingLevels(int num, RenderWindow& window)
 
     else if (num == 8) // ==> constructing level 9
     {
-   
         window.draw(lev[8].bg);
-        window.draw(lev[8].shape[0]);
+        window.draw(lev[8].box);
+        /*for (int i = 0; i < 15; i++)
+        {
+            window.draw(lev[8].block[i]);
+        }*/
+
         character_draw(lev[8].killer, window);
         for (int i = 0; i < 2; i++)
         {
