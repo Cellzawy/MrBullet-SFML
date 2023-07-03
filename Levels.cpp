@@ -1206,6 +1206,9 @@ void constructOneVSone_one(RenderWindow& window) {
     lev[16].BG.loadFromFile("assets/Backgrounds/background_egypt.png");
     lev[16].bg.setTexture(lev[16].BG);
     lev[16].bg.setScale(4, 1.2);
+    character_set_player_arrow(playerOne, "assets/P1_turn.png");
+    character_set_player_arrow(playerTwo, "assets/P2_turn.png");
+    character_show_player_arrow(playerOne, true);
 
     //blocks
     for (int i = 0; i < 4; i++) {

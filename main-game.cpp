@@ -104,6 +104,13 @@ int main() {
                         if (current_menu == Dules_1)
                         {
                             playerOne.turn = !playerOne.turn;
+                            if (playerOne.turn) {
+                                character_show_player_arrow(playerOne, true);
+                                character_show_player_arrow(playerTwo, false);
+                            } else {
+                                character_show_player_arrow(playerOne, false);
+                                character_show_player_arrow(playerTwo, true);
+                            }
                             shot = false;
                             collided = true;
                         }
