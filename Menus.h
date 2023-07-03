@@ -66,7 +66,7 @@ struct Lev {
 
     Texture SHAPES[10];
 
-    Sprite bg, zigzagshape, box, groundSP;
+    Sprite bg, zigzagshape, box, groundSP[10];
 
     RectangleShape ground, shape[10];
 
@@ -86,7 +86,7 @@ struct Lev {
 
 };
 
-extern Lev lev[17];
+extern Lev lev[19];
 
 extern menu_type current_menu;
 

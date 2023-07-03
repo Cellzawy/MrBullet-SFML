@@ -13,6 +13,7 @@ int level_index;
 float bulletSpeed = 25.f;
 int blockDirection[4] = { 0,1,2,3 };  // direction of the block movement (0 = right, 1 = down, 2 = left, 3 = up)
 float blockSpeed = 3.0f;
+float blockSpeed2 = 13.0f;
 float angle = 0.0f;   //used in level (16)
 float radius = 290.0f;
 float speed = 0.02f;
@@ -332,14 +333,13 @@ void constructlev5(RenderWindow& window)
 
     // ground
     lev[4].GROUND[0].loadFromFile("assets/Textures/ground2.png");
-    lev[4].groundSP.setTexture(lev[4].GROUND[0]);
-    lev[4].groundSP.setScale(2, 0.9);
+    lev[4].groundSP[0].setTexture(lev[4].GROUND[0]);
+    lev[4].groundSP[0].setScale(2, 0.9);
 
     // blocks 
     lev[4].BLOCK[0].loadFromFile("assets/Textures/Rectangle.png");
     lev[4].block[0].setTexture(&lev[4].BLOCK[0]);
     lev[4].block[0].setSize(Vector2f(500, 75));
-    lev[4].block[0].setOrigin(lev[4].block[0].getSize().x / 2, lev[4].block[0].getSize().y / 2);
     lev[4].block[0].setPosition(Vector2f(200, 200));
 
     //hidden rectangles
@@ -361,14 +361,14 @@ void constructlev5(RenderWindow& window)
     //killer
     character_init(lev[4].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
     character_set_scale(lev[4].killer, 0.4);
-    character_set_position(lev[4].killer, Vector2f(lev[4].groundSP.getGlobalBounds().width / 8, lev[4].ground.getGlobalBounds().height + 662));
+    character_set_position(lev[4].killer, Vector2f(lev[4].groundSP[0].getGlobalBounds().width / 8, 662));
 
     //targets
     for (int i = 0; i < 2; i++)
     {
         character_init(lev[4].target[i], "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", true);
         character_set_scale(lev[4].target[i], 0.35);
-        character_set_position(lev[4].target[i], Vector2f(lev[4].groundSP.getGlobalBounds().width - 1200 + (400 * i), lev[4].ground.getGlobalBounds().height + 690));
+        character_set_position(lev[4].target[i], Vector2f(lev[4].groundSP[0].getGlobalBounds().width - 1200 + (400 * i), 690));
     }
     // bullets
     lev[4].Bullets[0].setTexture(Bullet_texture);
@@ -401,7 +401,6 @@ void constructlev5(RenderWindow& window)
 
     lev[4].Return_num = 4;
     lev[4].num_of_bullets = 4;
-
 }
 
 void constructlev6(RenderWindow& window)
@@ -664,72 +663,77 @@ void constructlev9(RenderWindow& window)
     lev[8].bg.setTexture(lev[8].BG);
     lev[8].bg.setScale(4, 1.2);
 
-    //box
-    lev[8].SHAPES[0].loadFromFile("assets/Textures/box&ground2.png");
-    lev[8].box.setTexture(lev[9].SHAPES[0]);
-    lev[8].box.setScale(0.75, 0.62);
+    //ground
+    lev[8].SHAPES[0].loadFromFile("assets/Textures/groundlev9.png");
+    lev[8].SHAPES[1].loadFromFile("assets/Textures/groundlev9flipped.png");
+
+    lev[8].groundSP[0].setTexture(lev[8].SHAPES[0]);
+    lev[8].groundSP[0].setScale(0.8, 0.8);
+    lev[8].groundSP[0].setPosition(960, 0);
+
+    lev[8].groundSP[1].setTexture(lev[8].SHAPES[1]);
+    lev[8].groundSP[1].setScale(0.8, 0.8);
+    lev[8].groundSP[1].setPosition(0, 0);
+
+    //blocks
+    lev[8].BLOCK[0].loadFromFile("assets/Textures/Block2.png");
+    for (int i = 0; i < 2; i++)
+    {
+        lev[8].block[i].setTexture(&lev[8].BLOCK[0]);
+        lev[8].block[i].setSize(Vector2f(90, 210));
+        lev[8].block[i].setPosition(Vector2f(450 + (i * 850), 80));
+    }
+    for (int i = 2; i < 5; i++)
+    {
+        lev[8].block[i].setTexture(&lev[8].BLOCK[0]);
+        lev[8].block[i].setSize(Vector2f(70, 140));
+        lev[8].block[i].setRotation(90);
+        lev[8].block[i].setPosition(Vector2f(360 + ((i - 2) * 1325), 280));
+    }
+    lev[8].block[4].setPosition(Vector2f(985, 550));
 
     //hidden rectangles
-    for (int i = 0; i < 15; i++)
+    for (int i = 5; i < 8; i++)
     {
         lev[8].block[i].setFillColor(Color::Cyan);
     }
-    lev[8].block[0].setSize(Vector2f(300, 100));
-    lev[8].block[0].setPosition(Vector2f(50, 950));
+    lev[8].block[5].setSize(Vector2f(1950, 400));
+    lev[8].block[5].setPosition(Vector2f(1, 840));
 
-    lev[8].block[1].setSize(Vector2f(115, 750));
-    lev[8].block[1].setPosition(Vector2f(1, 1));
+    lev[8].block[6].setSize(Vector2f(230, 900));
+    lev[8].block[6].setPosition(Vector2f(1, 1));
 
-    lev[8].block[2].setSize(Vector2f(50, 300));
-    lev[8].block[2].setPosition(Vector2f(1, 750));
+    lev[8].block[7].setSize(Vector2f(300, 900));
+    lev[8].block[7].setPosition(Vector2f(1685, 1));
 
-    lev[8].block[3].setSize(Vector2f(100, 300));
-    lev[8].block[3].setPosition(Vector2f(350, 750));
-
-    lev[8].block[4].setSize(Vector2f(100, 1200));
-    lev[8].block[4].setPosition(Vector2f(1675, 1));
-
-    lev[8].block[5].setSize(Vector2f(545, 170));
-    lev[8].block[5].setPosition(Vector2f(350, 700));
-
-    lev[8].block[6].setSize(Vector2f(780, 100));
-    lev[8].block[6].setPosition(Vector2f(895, 837));
-
-    lev[8].block[7].setSize(Vector2f(60, 500));
-    lev[8].block[7].setPosition(Vector2f(290, 245));
-
-    lev[8].block[8].setSize(Vector2f(800, 137));
-    lev[8].block[8].setPosition(Vector2f(1, 1));
-
-    lev[8].block[9].setSize(Vector2f(300, 505));
-    lev[8].block[9].setPosition(Vector2f(600, 1));
-
-    lev[8].block[10].setSize(Vector2f(190, 564));
-    lev[8].block[10].setPosition(Vector2f(520, 1));
-
-    lev[8].block[11].setSize(Vector2f(75, 100));
-    lev[8].block[11].setPosition(Vector2f(100, 123));
-
-    lev[8].block[12].setSize(Vector2f(75, 100));
-    lev[8].block[12].setPosition(Vector2f(460, 123));
 
     //killer
     character_init(lev[8].killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
-    character_set_scale(lev[8].killer, 0.35);
-    character_set_position(lev[8].killer, Vector2f(170, 730));
+    character_set_scale(lev[8].killer, 0.3);
+    character_set_position(lev[8].killer, Vector2f(880, 365));
 
     //target1
-    character_init(lev[8].target[0], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", true);
+    character_init(lev[8].target[0], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", false);
     character_set_scale(lev[8].target[0], 0.3);
-    character_set_position(lev[8].target[0], Vector2f(750, 518));
+    character_set_position(lev[8].target[0], Vector2f(250, 655));
 
     //target2
     character_init(lev[8].target[1], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", true);
-    character_set_scale(lev[8].target[1], 1.3);
-    character_set_position(lev[8].target[1], Vector2f(1350, 40));
+    character_set_scale(lev[8].target[1], 0.3);
+    character_set_position(lev[8].target[1], Vector2f(1600, 655));
+
+    //target3
+    character_init(lev[8].target[2], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", false);
+    character_set_scale(lev[8].target[2], 0.3);
+    character_set_position(lev[8].target[2], Vector2f(250, 100));
+
+    //target4
+    character_init(lev[8].target[3], "assets/Characters/zombie_head.png", "assets/Characters/zombie_body.png", true);
+    character_set_scale(lev[8].target[3], 0.3);
+    character_set_position(lev[8].target[3], Vector2f(1600, 100));
 
     // bullets
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 7; i++) {
         lev[8].Bullets[i].setTexture(Bullet_texture);
     }
 
@@ -754,9 +758,24 @@ void constructlev9(RenderWindow& window)
     lev[8].Bullets[3].setScale(.25, .25);
     lev[8].Bullets[3].setColor(Color(240, 150, 25));
 
+    lev[8].Bullets[4].setPosition(Vector2f(1050, 55));
+    lev[8].Bullets[4].setOrigin(lev[8].Bullets[4].getLocalBounds().width / 2, lev[8].Bullets[4].getLocalBounds().height / 2);
+    lev[8].Bullets[4].setScale(.25, .25);
+    lev[8].Bullets[4].setColor(Color(240, 150, 25));
 
-    lev[8].Return_num = 4;
-    lev[8].num_of_bullets = 4;
+    lev[8].Bullets[5].setPosition(Vector2f(1100, 55));
+    lev[8].Bullets[5].setOrigin(lev[8].Bullets[5].getLocalBounds().width / 2, lev[8].Bullets[5].getLocalBounds().height / 2);
+    lev[8].Bullets[5].setScale(.25, .25);
+    lev[8].Bullets[5].setColor(Color(240, 150, 25));
+
+    lev[8].Bullets[6].setPosition(Vector2f(1150, 55));
+    lev[8].Bullets[6].setOrigin(lev[8].Bullets[6].getLocalBounds().width / 2, lev[8].Bullets[6].getLocalBounds().height / 2);
+    lev[8].Bullets[6].setScale(.25, .25);
+    lev[8].Bullets[6].setColor(Color(240, 150, 25));
+
+
+    lev[8].Return_num = 7;
+    lev[8].num_of_bullets = 7;
 }
 
 void constructlev10(RenderWindow& window)
@@ -1212,7 +1231,6 @@ void constructOneVSone(RenderWindow& window) {
 
 }
 
-
 void DrawingLevels(int num, RenderWindow& window)
 {
     if (num == 0) // ==> constructing Level 1
@@ -1342,23 +1360,23 @@ void DrawingLevels(int num, RenderWindow& window)
 
     else if (num == 4) // ==> constructing level 5
     {
-        lev[4].block[0].move(blockSpeed, 0.0f);
-       
+        lev[4].block[0].move(blockSpeed2, 0.0f);
+
         if (lev[4].block[0].getPosition().x < 150 || lev[4].block[0].getPosition().x > 1100)
         {
             // Reverse the vertical movement direction
-            blockSpeed *= -1;
+            blockSpeed2 *= -1;
         }
 
 
 
         window.draw(lev[4].bg);
-        window.draw(lev[4].groundSP);
+        window.draw(lev[4].groundSP[0]);
         window.draw(lev[4].block[0]);
-        /*for (int i = 1; i < 4; i++)
-         {
-             window.draw(lev[4].block[i]);
-         }*/
+        // for (int i = 1; i < 4; i++)
+        //{
+        //    window.draw(lev[4].block[i]);
+        //} 
 
         character_draw(lev[4].killer, window);
 
@@ -1380,10 +1398,10 @@ void DrawingLevels(int num, RenderWindow& window)
     {
         window.draw(lev[5].bg);
         window.draw(lev[5].zigzagshape);
-       /* for (int i = 0; i < 21; i++)
-        {
-            window.draw(lev[5].block[i]);
-        }*/
+        /* for (int i = 0; i < 21; i++)
+         {
+             window.draw(lev[5].block[i]);
+         }*/
         character_draw(lev[5].killer, window);
         for (int i = 0; i < bullets.size(); i++) {
             bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * bulletSpeed);
@@ -1401,7 +1419,7 @@ void DrawingLevels(int num, RenderWindow& window)
 
     else if (num == 6) // ==> constructing level 7
     {
-    
+
         window.draw(lev[6].bg);
         window.draw(lev[6].box);
         for (int i = 0; i < 11; i++)
@@ -1422,10 +1440,10 @@ void DrawingLevels(int num, RenderWindow& window)
 
     else if (num == 7) // ==> constructing level 8
     {
-    for (int i = 0; i < lev[level_index].num_of_bullets; i++)
-    {
-        window.draw(lev[level_index].Bullets[i]);
-    }
+        for (int i = 0; i < lev[level_index].num_of_bullets; i++)
+        {
+            window.draw(lev[level_index].Bullets[i]);
+        }
         lev[7].shape[0].move(0.f, blockSpeed);
         if (lev[7].shape[0].getPosition().y < 100 || lev[7].shape[0].getPosition().y + lev[7].shape[0].getSize().y > window.getSize().y - 170)
         {
@@ -1436,11 +1454,11 @@ void DrawingLevels(int num, RenderWindow& window)
         window.draw(lev[7].bg);
         window.draw(lev[7].zigzagshape);
         character_draw(lev[7].killer, window);
-       
-       /* for (int i = 0; i < 21; i++)
-        {
-            window.draw(lev[7].block[i]);
-        }*/
+
+        /* for (int i = 0; i < 21; i++)
+         {
+             window.draw(lev[7].block[i]);
+         }*/
 
         window.draw(lev[7].shape[0]);
 
@@ -1461,18 +1479,40 @@ void DrawingLevels(int num, RenderWindow& window)
 
     else if (num == 8) // ==> constructing level 9
     {
+        lev[8].block[0].move(0.f, blockSpeed2);
+        lev[8].block[1].move(0.f, blockSpeed2);
+
+        if (lev[8].block[0].getPosition().y < 50 || lev[8].block[0].getPosition().y > 650)
+        {
+            // Reverse the vertical movement direction
+            blockSpeed2 *= -1;
+        }
+        else if (lev[8].block[1].getPosition().y < 50 || lev[8].block[1].getPosition().y > 650)
+        {
+            // Reverse the vertical movement direction
+            blockSpeed2 *= -1;
+        }
+
         window.draw(lev[8].bg);
-        window.draw(lev[8].box);
-        /*for (int i = 0; i < 15; i++)
+        window.draw(lev[8].groundSP[0]);
+        window.draw(lev[8].groundSP[1]);
+
+        for (int i = 0; i < 5; i++)
         {
             window.draw(lev[8].block[i]);
-        }*/
+        }
+
+        /* for (int i = 5; i < 8; i++)
+        {
+            window.draw(lev[8].block[i]);
+        } */
 
         character_draw(lev[8].killer, window);
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
         {
             character_draw(lev[8].target[i], window);
         }
+
         for (int i = 0; i < bullets.size(); i++) {
             bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * bulletSpeed);
         }
@@ -1485,7 +1525,7 @@ void DrawingLevels(int num, RenderWindow& window)
 
     else if (num == 9) // ==> constructing level 10
     {
-    
+
         window.draw(lev[9].bg);
         window.draw(lev[9].ground);
         character_draw(lev[9].killer, window);
@@ -1504,7 +1544,7 @@ void DrawingLevels(int num, RenderWindow& window)
     {
 
         window.draw(lev[10].bg);
-        
+
         // Calculate the positions of the blocks and targets using a loop
         for (int i = 1; i <= 3; i++) {
             float x = radius * cos(angle + (i - 1) * 90);
@@ -1533,7 +1573,7 @@ void DrawingLevels(int num, RenderWindow& window)
         for (int i = 0; i < bullets.size(); i++) {
             bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * bulletSpeed);
         }
-       
+
     }
 
 
@@ -1541,7 +1581,7 @@ void DrawingLevels(int num, RenderWindow& window)
     {
         // Loop through each block
 
-        
+
         for (int i = 0; i < 4; i++) {
 
             // Move blocks according to their direction
@@ -1653,7 +1693,7 @@ void DrawingLevels(int num, RenderWindow& window)
         float x2 = radius * cos(angle + 90);
         float y2 = radius * sin(angle + 90);
 
-        
+
 
         lev[12].block[1].setPosition(860 + x, 540 + y);
         character_set_position(lev[12].target[0], Vector2f(890 + x, 390 + y));
@@ -1692,7 +1732,7 @@ void DrawingLevels(int num, RenderWindow& window)
             // Reverse the vertical movement direction
             blockSpeed *= -1;
         }
-       
+
         character_set_position(lev[13].target[0], Vector2f(lev[13].block[0].getPosition().x + 20, lev[13].block[0].getPosition().y - 150));
         window.draw(lev[13].bg);
         window.draw(lev[13].ground);
@@ -1720,7 +1760,7 @@ void DrawingLevels(int num, RenderWindow& window)
         static int speed = 14;
         static string direction = "down";
 
-       
+
 
         if (direction == "down")
         {

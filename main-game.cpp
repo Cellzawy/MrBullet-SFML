@@ -613,7 +613,7 @@ int main() {
         else if (current_menu == level_9)
         {
         drawLine = true;
-        int enemies_num = 2;
+        int enemies_num = 4;
         character_rotate_arm(lev[8].killer, sf::Mouse::getPosition());
 
         levels_eventloop(enemies_num);

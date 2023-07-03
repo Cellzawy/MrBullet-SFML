@@ -268,6 +268,30 @@ void healthBar(Character playerOneHealth,Character playerTwoHealth)
 
 void resetDuels()
 {
+    playerOne.head.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.body.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.left_arm1.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.left_arm2.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.right_arm1.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.right_arm2.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.left_leg1.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.left_leg2.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.right_leg1.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.right_leg2.setColor(sf::Color(255, 255, 255, 255));
+    playerOne.gun.setFillColor(sf::Color(0, 0, 0, 255));
+
+    playerTwo.head.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.body.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.left_arm1.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.left_arm2.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.right_arm1.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.right_arm2.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.left_leg1.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.left_leg2.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.right_leg1.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.right_leg2.setColor(sf::Color(255, 255, 255, 255));
+    playerTwo.gun.setFillColor(sf::Color(0, 0, 0, 255));
+
 
     playerOne.health = 100;
     playerTwo.health = 100;
@@ -278,8 +302,6 @@ void resetDuels()
     playerTwo.alive = true;
 
 
-    window.draw(lev[0].bg);
-    window.draw(lev[0].ground);
     
     character_set_scale(playerOne, 0.4);
     character_set_position(playerOne, Vector2f(lev[16].block[1].getPosition().x + 50, lev[16].block[1].getPosition().y - 200));
