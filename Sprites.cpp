@@ -98,6 +98,7 @@ void character_set_position(Character &character, sf::Vector2f pos) {
 
         character.left_leg1.setPosition(character.right_leg1.getPosition() + sf::Vector2f(83 * character.head.getScale().y, 0));
         character.left_leg2.setPosition(character.left_leg1.getPosition() + sf::Vector2f(-27 * character.head.getScale().y, character.right_leg1.getGlobalBounds().height - 45 * character.head.getScale().y));
+        character.player_arrow.setPosition(character.head.getPosition() + sf::Vector2f(10 * character.head.getScale().y, -character.player_arrow.getGlobalBounds().height - 30 * character.head.getScale().y));
     } else {
         character.head.setPosition(pos + sf::Vector2f(character.body.getGlobalBounds().width / 2 - character.head.getGlobalBounds().width / 2 + 4 * character.head.getScale().x, 0));
         character.body.setPosition(pos + sf::Vector2f(0, character.head.getGlobalBounds().height));
@@ -110,8 +111,8 @@ void character_set_position(Character &character, sf::Vector2f pos) {
         character.left_leg2.setPosition(character.left_leg1.getPosition() + sf::Vector2f(0, character.left_leg1.getGlobalBounds().height - 45 * character.head.getScale().x));
         character.right_leg1.setPosition(character.left_leg1.getPosition() + sf::Vector2f(83 * character.head.getScale().x, 0));
         character.right_leg2.setPosition(character.right_leg1.getPosition() + sf::Vector2f(0, character.left_leg1.getGlobalBounds().height - 45 * character.head.getScale().x));
+        character.player_arrow.setPosition(character.head.getPosition() + sf::Vector2f(10 * character.head.getScale().y, -character.player_arrow.getGlobalBounds().height - 30 * character.head.getScale().y));
     }
-    character.player_arrow.setPosition(character.head.getPosition() + sf::Vector2f(15 * character.head.getScale().y, -character.player_arrow.getGlobalBounds().height - 30 * character.head.getScale().y));
 }
 void character_set_scale(Character &character, float scale) {
     character.arm_scale = scale;
