@@ -86,7 +86,7 @@ struct Lev {
 
 };
 
-extern Lev lev[19];
+extern Lev lev[20];
 
 extern menu_type current_menu;
 

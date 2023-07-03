@@ -1200,15 +1200,12 @@ void constructlev15(RenderWindow& window) {
     lev[14].num_of_bullets = 4;
 }
 
-void constructOneVSone(RenderWindow& window) {
+void constructOneVSone_one(RenderWindow& window) {
 
     //background
     lev[16].BG.loadFromFile("assets/Backgrounds/background_egypt.png");
     lev[16].bg.setTexture(lev[16].BG);
     lev[16].bg.setScale(4, 1.2);
-    character_set_player_arrow(playerOne, "assets/P1_turn.png");
-    character_set_player_arrow(playerTwo, "assets/P2_turn.png");
-    character_show_player_arrow(playerOne, true);
 
     //blocks
     for (int i = 0; i < 4; i++) {
@@ -1233,6 +1230,82 @@ void constructOneVSone(RenderWindow& window) {
     //character_set_position(lev[16].target[0], Vector2f(lev[16].block[0].getPosition().x + 20, lev[16].block[0].getPosition().y - 200));
 
 }
+
+void constructOneVSone_two(RenderWindow& window) {
+
+    lev[17].BG.loadFromFile("assets/Backgrounds/background_vampire.png");
+    lev[17].bg.setTexture(lev[17].BG);
+    lev[17].bg.setScale(4, 1.2);
+
+
+    lev[17].BLOCK[1].loadFromFile("assets/Textures/pyr_block.png");
+
+    for (int i = 1; i <= 2; i++) {
+        lev[17].block[i].setTexture(&lev[17].BLOCK[1]);
+        lev[17].block[i].setSize(Vector2f(100, 50));
+    }
+    lev[17].BLOCK[3].loadFromFile("assets/Textures/ground_tokyo_1.png");
+    lev[17].block[3].setTexture(&lev[17].BLOCK[3]);
+    lev[17].block[3].setSize(Vector2f(110, 20));
+    lev[17].block[3].setPosition(Vector2f(950, 390));
+    lev[17].block[3].setRotation(90.0f);
+
+    lev[17].BLOCK[4].loadFromFile("assets/Textures/ground_tokyo_1.png");
+    lev[17].block[4].setTexture(&lev[17].BLOCK[4]);
+    lev[17].block[4].setSize(Vector2f(110, 20));
+    lev[17].block[4].setPosition(Vector2f(950, 610));
+    lev[17].block[4].setRotation(90.0f);
+
+
+}
+
+void constructOneVSone_three(RenderWindow& window)
+{
+
+        // Load level 18 background
+        lev[18].BG.loadFromFile("assets/Backgrounds/background_snow_forest.png");
+        lev[18].bg.setTexture(lev[18].BG);
+        lev[18].bg.setScale(4, 1.2);
+
+        // Load and position level 18 blocks
+        for (int i = 0; i < 4; i++) {
+            lev[18].BLOCK[i].loadFromFile("assets/Textures/square.png");
+            lev[18].block[i].setTexture(&lev[18].BLOCK[i]);
+            lev[18].block[i].setSize(Vector2f(150, 50));
+            //lev[18].block[i].setPosition(Vector2f(600, 750));
+            lev[18].block[i].setRotation(90.f);
+        }
+        for (int i = 4; i <= 5; i++) {
+            lev[18].BLOCK[i].loadFromFile("assets/Textures/square.png");
+            lev[18].block[i].setTexture(&lev[18].BLOCK[i]);
+            lev[18].block[i].setSize(Vector2f(150, 50));
+            lev[18].block[i].setPosition(Vector2f((i == 4) ? 150 : 1600, 540));
+        }
+        for (int i = 0; i <= 1; i++) {
+            //character_init(lev[18].target[i], "ninja_head.png", "ninja_body.png", false);
+            //character_set_scale(lev[18].target[i], 0.25);
+            //character_set_position(lev[18].target[0], Vector2f(lev[18].block[1].getPosition().x + 20, lev[18].block[1].getPosition().y - 150));
+        }
+    }
+
+void constructOneVSone_four(RenderWindow& window) {
+
+    lev[19].BG.loadFromFile("assets/Backgrounds/background_halloween.png");
+    lev[19].bg.setTexture(lev[19].BG);
+    lev[19].bg.setScale(4, 1.2);
+
+    lev[19].BLOCK[0].loadFromFile("assets/Textures/square.png");
+    lev[19].block[0].setTexture(&lev[19].BLOCK[0]);
+    lev[19].block[0].setSize(Vector2f(150, 50));
+    lev[19].block[0].setPosition(Vector2f(600, 750));
+
+    lev[19].BLOCK[1].loadFromFile("assets/Textures/square.png");
+    lev[19].block[1].setTexture(&lev[19].BLOCK[1]);
+    lev[19].block[1].setSize(Vector2f(150, 50));
+    lev[19].block[1].setPosition(Vector2f(600, 750));
+
+}
+
 
 void DrawingLevels(int num, RenderWindow& window)
 {
@@ -1906,4 +1979,225 @@ void DrawingLevels(int num, RenderWindow& window)
 
     }
 
-}
+   
+    else if (num == 17) {
+
+    // Construct level 17
+    constructOneVSone_two(window);
+
+    // Draw the background
+    window.draw(lev[17].bg);
+
+
+    float x = 420.0f * cos(angle);
+    float y = 300.0f * sin(angle);
+    float x2 = 420.0f * -cos(angle);
+    float y2 = 300.0f * -sin(angle);
+    lev[17].block[1].setPosition(1100 + x, 540 + y);
+    lev[17].block[2].setPosition(700 + x2, 540 + y2);
+    character_set_scale(playerOne, 0.5);
+    character_set_scale(playerTwo, 0.5);
+    character_set_position(playerOne, Vector2f(1030 + x, 300 + y));
+    character_set_position(playerTwo, Vector2f(600 + x2, 300 + y2));
+
+
+    // Increment the angle
+    angle += 0.5;
+
+
+    for (int i = 1; i <= 4; i++) {
+        window.draw(lev[17].block[i]);
+    }
+
+    character_draw(playerOne, window);
+    character_draw(playerTwo, window);
+
+    levels_background();
+
+        }
+
+
+    else if (num == 18) {
+    constructOneVSone_three(window);
+    window.clear(Color::Black);
+    static int x1 = 450;
+    static int y1 = 0;
+    static int x2 = 1450;
+    static int y2 = 900;
+    static int x3 = 750;
+    static int y3 = 900;
+    static int x4 = 1150;
+    static int y4 = 0;
+    static int speed = 20;
+    static string direction1 = "down";
+    static string direction2 = "up";
+    static string direction3 = "up";
+    static string direction4 = "down";
+
+    // Move block1
+    if (direction1 == "down")
+    {
+        y1 += speed;
+        if (y1 >= 900)
+        {
+            direction1 = "up";
+        }
+    }
+    else if (direction1 == "up")
+    {
+        y1 -= speed;
+        if (y1 <= 0)
+        {
+            direction1 = "down";
+        }
+    }
+    lev[18].block[0].setPosition(x1, y1);
+
+    // Move block4
+    if (direction4 == "down")
+    {
+        y4 += speed;
+        if (y4 >= 900)
+        {
+            direction4 = "up";
+        }
+    }
+    else if (direction4 == "up")
+    {
+        y4 -= speed;
+        if (y4 <= 0)
+        {
+            direction4 = "down";
+        }
+    }
+    lev[18].block[3].setPosition(x4, y4);
+
+
+    // Move block2
+    if (direction2 == "up")
+    {
+        y2 -= speed;
+        if (y2 <= 0)
+        {
+            direction2 = "down";
+        }
+    }
+    else if (direction2 == "down")
+    {
+        y2 += speed;
+        if (y2 >= 900)
+        {
+            direction2 = "up";
+        }
+    }
+    lev[18].block[1].setPosition(x2, y2);
+
+    // Move block3
+    if (direction3 == "up")
+    {
+        y3 -= speed;
+        if (y3 <= 0)
+        {
+            direction3 = "down";
+        }
+    }
+    else if (direction3 == "down")
+    {
+        y3 += speed;
+        if (y3 >= 900)
+        {
+            direction3 = "up";
+        }
+    }
+    lev[18].block[2].setPosition(x3, y3);
+
+    // Draw the blocks and background to the window
+    window.draw(lev[18].bg);
+    for (int i = 0; i < 6; i++) {
+        window.draw(lev[18].block[i]);
+    }
+    for (int i = 0; i <= 1; i++) {
+        //character_draw(lev[18].target[i], window);
+    }
+
+
+    character_draw(playerOne, window);
+    character_draw(playerTwo, window);
+
+
+    levels_background();
+
+        }
+
+
+    else if (num == 19) {
+    constructOneVSone_four(window);
+
+    // Static variables for block position and movement
+    static int x1 = 0;
+    static int y1 = 200;
+    static int x2 = 1800;
+    static int y2 = 500;
+    static int speed = 20;
+    static string direction1 = "right";
+    static string direction2 = "left";
+
+    // Move block according to its direction
+    if (direction1 == "right") {
+        x1 += speed;
+        if (x1 >= 1800) {
+            x1 = 0;
+            y1 = 600;// reset position to 0
+            direction1 = "right2"; // start moving right again
+        }
+    }
+    else if (direction1 == "right2") {
+        x1 += speed;
+        if (x1 >= 1800) {
+            x1 = 0;
+            y1 = 200;
+            direction1 = "right";
+        }
+    }
+
+    lev[19].block[0].setPosition(x1, y1);
+
+    if (direction2 == "left") {
+        x2 -= speed;
+        if (x2 <= 0) {
+            x2 = 1800;
+            y2 = 950;
+            direction2 = "left2"; // start moving left again
+        }
+    }
+    else if (direction2 == "left2") {
+        x2 -= speed;
+        if (x2 <= 0) {
+            x2 = 1800;
+            y2 = 500;
+            direction2 = "left";
+        }
+    }
+
+    lev[19].block[1].setPosition(x2, y2);
+
+    // Draw level elements
+    window.clear(Color::Black);
+    window.draw(lev[19].bg);
+    for (int i = 0; i <= 1; i++) {
+        window.draw(lev[19].block[i]);
+    }
+    for (int i = 0; i <= 1; i++) {
+        //character_set_position(lev[19].target[i], Vector2f(lev[19].block[i].getPosition().x + 20, lev[19].block[i].getPosition().y - 130));
+    }
+
+    character_draw(playerOne, window);
+    character_draw(playerTwo, window);
+
+
+    levels_background();
+        }
+
+    }
+
+ 

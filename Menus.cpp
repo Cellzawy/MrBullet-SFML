@@ -29,7 +29,7 @@ Sound shoot;
 SoundBuffer Restart_soundbuffer;
 Sound Restart_sound;
 
-Lev lev[19];
+Lev lev[20];
 
 //1v1
 //Texture victory_texture;

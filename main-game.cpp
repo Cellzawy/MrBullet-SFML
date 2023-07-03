@@ -53,8 +53,11 @@ int main() {
     constructlev13(window);
     constructlev14(window);
     constructlev15(window);
-    constructOneVSone(window);
-    
+
+    constructOneVSone_one(window);
+    constructOneVSone_two(window);
+    constructOneVSone_three(window);
+    constructOneVSone_four(window);
     
     
     bool level_complete = false;
@@ -101,13 +104,6 @@ int main() {
                         if (current_menu == Dules_1)
                         {
                             playerOne.turn = !playerOne.turn;
-                            if (playerOne.turn) {
-                                character_show_player_arrow(playerOne, true);
-                                character_show_player_arrow(playerTwo, false);
-                            } else {
-                                character_show_player_arrow(playerOne, false);
-                                character_show_player_arrow(playerTwo, true);
-                            }
                             shot = false;
                             collided = true;
                         }
@@ -1005,6 +1001,158 @@ int main() {
             }
         }
 
+        else if (current_menu == Dules_2)
+        {
+        if (bullets.size() == 0) {
+            Bullet newBullet;
+            newBullet.bulletBody.setFillColor(sf::Color::Black);
+            newBullet.bulletBody.setRadius(50.f);
+            newBullet.bulletBody.setOrigin(newBullet.bulletBody.getLocalBounds().width / 2, newBullet.bulletBody.getLocalBounds().height / 2);
+            newBullet.b.setRadius(10.f);
+            newBullet.b.setOrigin(newBullet.b.getLocalBounds().width / 2, newBullet.b.getLocalBounds().height / 2);
+            newBullet.b.setPosition(newBullet.bulletBody.getPosition());
+            newBullet.b.setFillColor(Color::Black);
+            bullets.push_back(newBullet);
+        }
+        //lev[level_index].num_of_bullets = 1;
+        window.draw(Pause_menu_button);
+        levels_background();
+        if (playerOne.turn)
+        {
+            character_rotate_arm(playerOne, sf::Mouse::getPosition());
+        }
+        else {
+            character_rotate_arm(playerTwo, sf::Mouse::getPosition());
+
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 25.f);
+        }
+        DrawingLevels(17, window);
+        for (int i = 0; i < bullets.size(); i++) {
+            HandlePhysics(lev[16], bullets[i]);
+        }
+        duels();
+        healthBar(playerOne, playerTwo);
+        Duels_eventLoop();
+        if (playerOne.turn)
+        {
+            if (collided)
+            {
+                collision(bullets[bullets.size() - 1], playerTwo);
+            }
+        }
+        else
+        {
+            if (collided)
+            {
+                collision(bullets[bullets.size() - 1], playerOne);
+            }
+        }
+        }
+
+        else if (current_menu == Dules_3)
+        {
+        if (bullets.size() == 0) {
+            Bullet newBullet;
+            newBullet.bulletBody.setFillColor(sf::Color::Black);
+            newBullet.bulletBody.setRadius(50.f);
+            newBullet.bulletBody.setOrigin(newBullet.bulletBody.getLocalBounds().width / 2, newBullet.bulletBody.getLocalBounds().height / 2);
+            newBullet.b.setRadius(10.f);
+            newBullet.b.setOrigin(newBullet.b.getLocalBounds().width / 2, newBullet.b.getLocalBounds().height / 2);
+            newBullet.b.setPosition(newBullet.bulletBody.getPosition());
+            newBullet.b.setFillColor(Color::Black);
+            bullets.push_back(newBullet);
+        }
+        //lev[level_index].num_of_bullets = 1;
+        window.draw(Pause_menu_button);
+        levels_background();
+        if (playerOne.turn)
+        {
+            character_rotate_arm(playerOne, sf::Mouse::getPosition());
+        }
+        else {
+            character_rotate_arm(playerTwo, sf::Mouse::getPosition());
+
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 25.f);
+        }
+        DrawingLevels(18, window);
+        for (int i = 0; i < bullets.size(); i++) {
+            HandlePhysics(lev[16], bullets[i]);
+        }
+        duels();
+        healthBar(playerOne, playerTwo);
+        Duels_eventLoop();
+        if (playerOne.turn)
+        {
+            if (collided)
+            {
+                collision(bullets[bullets.size() - 1], playerTwo);
+            }
+        }
+        else
+        {
+            if (collided)
+            {
+                collision(bullets[bullets.size() - 1], playerOne);
+            }
+        }
+        }
+
+        else if (current_menu == Dules_4)
+        {
+        if (bullets.size() == 0) {
+            Bullet newBullet;
+            newBullet.bulletBody.setFillColor(sf::Color::Black);
+            newBullet.bulletBody.setRadius(50.f);
+            newBullet.bulletBody.setOrigin(newBullet.bulletBody.getLocalBounds().width / 2, newBullet.bulletBody.getLocalBounds().height / 2);
+            newBullet.b.setRadius(10.f);
+            newBullet.b.setOrigin(newBullet.b.getLocalBounds().width / 2, newBullet.b.getLocalBounds().height / 2);
+            newBullet.b.setPosition(newBullet.bulletBody.getPosition());
+            newBullet.b.setFillColor(Color::Black);
+            bullets.push_back(newBullet);
+        }
+        //lev[level_index].num_of_bullets = 1;
+        window.draw(Pause_menu_button);
+        levels_background();
+        if (playerOne.turn)
+        {
+            character_rotate_arm(playerOne, sf::Mouse::getPosition());
+        }
+        else {
+            character_rotate_arm(playerTwo, sf::Mouse::getPosition());
+
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets[i].bulletBody.setPosition(bullets[i].bulletBody.getPosition() - bullets[i].bulletDirection * 25.f);
+        }
+        DrawingLevels(19, window);
+        for (int i = 0; i < bullets.size(); i++) {
+            HandlePhysics(lev[16], bullets[i]);
+        }
+        duels();
+        healthBar(playerOne, playerTwo);
+        Duels_eventLoop();
+        if (playerOne.turn)
+        {
+            if (collided)
+            {
+                collision(bullets[bullets.size() - 1], playerTwo);
+            }
+        }
+        else
+        {
+            if (collided)
+            {
+                collision(bullets[bullets.size() - 1], playerOne);
+            }
+        }
+        }
+
+
+
         if (in_level) {
             //if (lev[level_index + 1].view.Level_evaluation < 0) {
             //    lev[level_index + 1].view.Level_evaluation = 0;
@@ -1029,110 +1177,4 @@ int main() {
 	return 0;
 }
 
-/*
-// Levels test
-int main() {
-    RenderWindow window(VideoMode(1920, 1080), "Levels");
-    int levCounter = 1;
 
-    // GAME loop
-    while (window.isOpen())
-    {
-        Event ev;
-        while (window.pollEvent(ev))
-        {
-            if (ev.type == Event::Closed)
-                window.close();
-            if (ev.type == Event::KeyPressed) {
-                if (ev.key.code == Keyboard::Right) {
-                    levCounter++;
-                    if (levCounter > 4) {
-                        levCounter = 1;
-                    }
-                }
-            }
-        }
-
-        window.clear();
-        DrawingLevels(levCounter, window);
-        window.display();
-    }
-}
-*/
-
-/*
-// Physics and Sprites test
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
-    bullet.setPosition(200, 200);
-    window.setFramerateLimit(60);
-    sf::Color window_color(50, 50, 50);
-
-    Character killer, target;
-
-    character_init(killer, "assets/Characters/Killer/killer_head.png", "assets/Characters/Killer/hitman_body.png", false);
-    character_set_scale(killer, 0.4);
-    character_set_position(killer, sf::Vector2f(100, 700));
-    character_init(target, "assets/Characters/gangster_head.png", "assets/Characters/black_suit_body.png", true);
-    character_set_scale(target, 0.4);
-    character_set_position(target, sf::Vector2f(1620, 700));
-    sprites();
-    while (window.isOpen())
-    {
-        // Moving the bullet
-        Vector2i mousepos = Mouse::getPosition(window);
-        bullet.setPosition(bullet.getPosition() - bulletDirection * 10.f);
-
-        // Ricochet the bullet
-        if (bullet.getGlobalBounds().intersects(wall1.getGlobalBounds())) {
-            RicochetBullet(bullet, wall1);
-        }
-        if (bullet.getGlobalBounds().intersects(wall2.getGlobalBounds())) {
-            RicochetBullet(bullet, wall2);
-        }
-        if (bullet.getGlobalBounds().intersects(wall3.getGlobalBounds())) {
-            RicochetBullet(bullet, wall3);
-        }
-        if (bullet.getGlobalBounds().intersects(wall4.getGlobalBounds())) {
-            RicochetBullet(bullet, wall4);
-        }
-
-        if (bullet.getGlobalBounds().intersects(box.getGlobalBounds())) {
-            RicochetBullet(bullet, box);
-        }
-        if (bullet.getGlobalBounds().intersects(ring.getGlobalBounds())) {
-            RicochetBullet(bullet, ring);
-        }
-
-        sf::Event event;
-
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-
-            if (event.mouseButton.button == Mouse::Left) {
-                cout << "yes";
-                DirectBullet(bullet, event, mousepos);
-            }
-
-        }
-
-
-        window.clear(window_color);
-        window.draw(bullet);
-        window.draw(wall1);
-        window.draw(wall2);
-        window.draw(wall3);
-        window.draw(wall4);
-        window.draw(box);
-        window.draw(ring);
-        character_draw(killer, window);
-        character_draw(target, window);
-        //window.draw(triangle);
-        window.display();
-    }
-    return 0;
-}
-*/
