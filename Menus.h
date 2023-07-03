@@ -11,7 +11,8 @@ using namespace std;
 enum menu_type {
     level_1, level_2, level_3, level_4, level_5, level_6, level_7, level_8, level_9, level_10, level_11, level_12
     , level_13,  level_14, level_15,
-    main_menu, play_menu, options_menu, classic_Mode, achievements_menu, won_panel, lost_panel , pause_MENU, OPTIONS_MENU_PAUSE, Duels
+    main_menu, play_menu, options_menu, classic_Mode, achievements_menu, won_panel, lost_panel , pause_MENU, OPTIONS_MENU_PAUSE , duelsPause , duelsOption, Dules_1, Dules_2, Dules_3, Dules_4, player_one_MENU, player_two_MENU
+    , maps_1v1
 };
 
 struct Button{
@@ -19,6 +20,15 @@ struct Button{
     sf::Texture Pressed_texture;
     sf::Sprite sprite;
 };
+
+struct Hovered_button
+{
+    Sprite sprite;
+    Texture original;
+    Texture hovered;
+    Texture chosen;
+};
+
 
 struct Menu{
     sf::Texture Default_texture;
@@ -127,6 +137,27 @@ extern Sprite Bullet_Sprite;
 extern sf::Texture classic_menu_background_texture;
 extern sf::Texture Border_hover_effect;  // the levels struct is in the Levels.h file
 
+// choose_player_menu
+extern bool chosen;
+extern Hovered_button
+character_one, character_two, character_three, character_four, character_five, character_six, character_seven, character_eight;
+extern Hovered_button
+Character_ONE, Character_TWO, Character_THREE, Character_FOUR, Character_FIVE, Character_SIX, Character_SEVEN, Character_EIGHT;
+extern Sprite Choose_Player_Back_Ground;
+extern Texture choose_player_back_ground;
+
+
+
+//1v1_maps
+
+extern Texture   maps_1v1_player_back_ground, maps_one_1v1_back_ground, maps_two_1v1_back_ground, maps_three_1v1_back_ground, maps_four_1v1_back_ground;
+extern Hovered_button MAP_1, MAP_2, MAP_3, MAP_4;
+extern Sprite MAPS_1v1_player_back_ground;
+extern bool chose_dules_1 ,
+chose_dules_2 ,
+chose_dules_3 ,
+chose_dules_4 ;
+
 
 // achievements menu
 extern sf::Texture achievements_menu_background;
@@ -149,6 +180,12 @@ void Achievements_menu();
 
 void Options_menu_Pause();
 
+void player_one_menu();
+
+void player_two_menu();
+
+void MAPS_1v1();
+
 void PAUSE_MENU();
 
 void ReadFile();
@@ -169,10 +206,14 @@ void volume_manage(sf::Text&, sf::Sprite, sf::Sprite, int&);
 
 void hoverEffect(sf::Sprite&); // for buttons
 
+void hoverEffect(sf::Sprite& option, sf::Texture& original, sf::Texture& hovered);
+
 void hoverEffect(sf::Sprite&, sf::Texture&, sf::Texture&, sf::Text&); // for menu selection in play menu
 
 void hoverEffect(Lev lev[]); // for levels selection in classic menu
 
 void hoverEffect(sf::Sprite&, sf::Texture&); // for achievement button in main menu
+
+void hoverEffect(sf::Sprite& option, sf::Texture& original, sf::Texture& hovered, sf::Texture& clicked, sf::Event& event);
 
 #endif

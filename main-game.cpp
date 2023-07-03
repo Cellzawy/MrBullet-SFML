@@ -60,8 +60,8 @@ int main() {
     bool level_complete = false;
     int currentLvl;
     bool drawLine = true;
-    character_init(playerOne, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", false);
-    character_init(playerTwo, "assets/Characters/Killer/killer_head.png", "assets/Characters/blue_suit_body.png", true);
+
+
 
     while (window.isOpen())
     {
@@ -71,7 +71,7 @@ int main() {
         line[1].position = sf::Vector2f(mouse_position.x, mouse_position.y);
 
         //gunPos = lev[level_index].killer.bullet_pos;
-        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14) || current_menu == Duels)
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14) || current_menu == Dules_1)
         {
             if (bullets.size() != 0)
             {
@@ -98,7 +98,7 @@ int main() {
                         std::cout << "erased";
 
                         level_complete = true;
-                        if (current_menu == Duels)
+                        if (current_menu == Dules_1)
                         {
                             playerOne.turn = !playerOne.turn;
                             shot = false;
@@ -134,6 +134,30 @@ int main() {
 
         }
 
+        else if (current_menu == player_one_MENU)
+        {
+            player_one_menu();
+        }
+
+        else if (current_menu == player_two_MENU)
+        {
+            player_two_menu();
+        }
+
+        else if (current_menu == maps_1v1)
+        {
+            MAPS_1v1();
+        }
+
+        else if (current_menu == duelsPause)
+        {
+            duelsPauseMenu();
+        }
+
+        else if (current_menu == duelsOption)
+        {
+            duelsOptionMenu();
+        }
 
         else if (current_menu == options_menu)
         {
@@ -924,7 +948,7 @@ int main() {
         }
 
 
-        else if (current_menu == Duels)
+        else if (current_menu == Dules_1)
         {
             if (bullets.size() == 0) {
                 Bullet newBullet;
@@ -985,7 +1009,7 @@ int main() {
 
         }
 
-        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14) || current_menu == Duels)
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14) || current_menu == Dules_1)
         {
             for (int i = 0; i < bullets.size(); i++) {
                 //window.draw(bullets[i].bulletBody);

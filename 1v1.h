@@ -5,6 +5,9 @@ void duels();
 void collision (Bullet& b, Character& shotPlayer);
 void resetDuels();
 void healthBar(Character playerOneHealth, Character playerTwoHealth);
+void duelsPauseMenu();
+void duelsOptionMenu();
+
 
 extern RectangleShape back;
 extern RectangleShape victory_menu;

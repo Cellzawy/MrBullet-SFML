@@ -83,6 +83,25 @@ Sprite Bullet_Sprite;
 sf::Texture classic_menu_background_texture;
 sf::Texture Border_hover_effect;
 
+// choose_player_menu
+bool chosen = false;
+Hovered_button
+character_one, character_two, character_three, character_four, character_five, character_six, character_seven, character_eight;
+Hovered_button
+Character_ONE, Character_TWO, Character_THREE, Character_FOUR, Character_FIVE, Character_SIX, Character_SEVEN, Character_EIGHT;
+Sprite Choose_Player_Back_Ground;
+Texture choose_player_back_ground;
+
+
+//1v1_maps
+
+Texture   maps_1v1_player_back_ground, maps_one_1v1_back_ground, maps_two_1v1_back_ground, maps_three_1v1_back_ground, maps_four_1v1_back_ground;
+Hovered_button MAP_1, MAP_2, MAP_3, MAP_4;
+Sprite MAPS_1v1_player_back_ground;
+bool chose_dules_1=false, 
+chose_dules_2 = false,
+chose_dules_3 = false,
+chose_dules_4 = false;
 
 // achievements menu
 sf::Texture achievements_menu_background;
@@ -520,9 +539,6 @@ void PAUSE_MENU()
     Rec_Background.setScale(.6, 0.5);
 
 
-
-
-
     pause_eventloop();
 
     hoverEffect(Resume.sprite);
@@ -680,6 +696,224 @@ void Achievements_menu()
     window.draw(back_button.sprite);
 }
 
+
+
+void player_one_menu()
+{
+
+
+    window.setFramerateLimit(60);
+
+
+    //Text
+
+    Text player_one("player one", game_font, 50);
+    player_one.setOrigin(player_one.getLocalBounds().width / 2, player_one.getLocalBounds().height / 2);
+    player_one.setScale(1.5, 1.5);
+    player_one.setPosition(Vector2f(930, 130));
+
+
+    //Sprite
+
+    Character_ONE.sprite.setTexture(character_one.original);
+    Character_ONE.sprite.setOrigin(Character_ONE.sprite.getLocalBounds().width / 2, Character_ONE.sprite.getLocalBounds().height / 2);
+    Character_ONE.sprite.setScale(1.25, 1.25);
+    Character_ONE.sprite.setPosition(Vector2f(400, 400));
+
+    Character_TWO.sprite.setTexture(character_two.original);
+    Character_TWO.sprite.setOrigin(Character_TWO.sprite.getLocalBounds().width / 2, Character_TWO.sprite.getLocalBounds().height / 2);
+    Character_TWO.sprite.setScale(1.25, 1.25);
+    Character_TWO.sprite.setPosition(Vector2f(760, 400));
+
+    Character_THREE.sprite.setTexture(character_three.original);
+    Character_THREE.sprite.setOrigin(Character_THREE.sprite.getLocalBounds().width / 2, Character_THREE.sprite.getLocalBounds().height / 2);
+    Character_THREE.sprite.setScale(1.25, 1.25);
+    Character_THREE.sprite.setPosition(Vector2f(1120, 400));
+
+    Character_FOUR.sprite.setTexture(character_four.original);
+    Character_FOUR.sprite.setOrigin(Character_FOUR.sprite.getLocalBounds().width / 2, Character_FOUR.sprite.getLocalBounds().height / 2);
+    Character_FOUR.sprite.setScale(1.25, 1.25);
+    Character_FOUR.sprite.setPosition(Vector2f(1480, 400));
+
+    Character_FIVE.sprite.setTexture(character_five.original);
+    Character_FIVE.sprite.setOrigin(Character_FIVE.sprite.getLocalBounds().width / 2, Character_FIVE.sprite.getLocalBounds().height / 2);
+    Character_FIVE.sprite.setScale(1.25, 1.25);
+    Character_FIVE.sprite.setPosition(Vector2f(400, 800));
+
+    Character_SIX.sprite.setTexture(character_six.original);
+    Character_SIX.sprite.setOrigin(Character_SIX.sprite.getLocalBounds().width / 2, Character_SIX.sprite.getLocalBounds().height / 2);
+    Character_SIX.sprite.setScale(1.25, 1.25);
+    Character_SIX.sprite.setPosition(Vector2f(760, 800));
+
+    Character_SEVEN.sprite.setTexture(character_seven.original);
+    Character_SEVEN.sprite.setOrigin(Character_SEVEN.sprite.getLocalBounds().width / 2, Character_SEVEN.sprite.getLocalBounds().height / 2);
+    Character_SEVEN.sprite.setScale(1.25, 1.25);
+    Character_SEVEN.sprite.setPosition(Vector2f(1120, 800));
+
+    Character_EIGHT.sprite.setTexture(character_eight.original);
+    Character_EIGHT.sprite.setOrigin(Character_EIGHT.sprite.getLocalBounds().width / 2, Character_EIGHT.sprite.getLocalBounds().height / 2);
+    Character_EIGHT.sprite.setScale(1.25, 1.25);
+    Character_EIGHT.sprite.setPosition(Vector2f(1480, 800));
+
+
+    back_button.sprite.setTexture(back_button.Default_texture);
+    back_button.sprite.setOrigin(back_button.sprite.getLocalBounds().width / 2, back_button.sprite.getLocalBounds().height / 2);
+    back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
+
+
+
+
+    Choose_Player_Back_Ground.setTexture(choose_player_back_ground);
+    Choose_Player_Back_Ground.setScale(4, 4);
+    Choose_Player_Back_Ground.setPosition(1, 2);
+    Choose_Player_Back_Ground.setColor(Color::Blue);
+
+
+
+    player_one_menu_eventloop();
+
+    Event event;
+
+    hoverEffect(Character_ONE.sprite, character_one.original, character_one.hovered, character_one.chosen, event);
+    hoverEffect(Character_TWO.sprite, character_two.original, character_two.hovered, character_two.chosen, event);
+    hoverEffect(Character_THREE.sprite, character_three.original, character_three.hovered, character_three.chosen, event);
+    hoverEffect(Character_FOUR.sprite, character_four.original, character_four.hovered, character_four.chosen, event);
+    hoverEffect(Character_FIVE.sprite, character_five.original, character_five.hovered, character_five.chosen, event);
+    hoverEffect(Character_SIX.sprite, character_six.original, character_six.hovered, character_six.chosen, event);
+    hoverEffect(Character_EIGHT.sprite, character_eight.original, character_eight.hovered, character_eight.chosen, event);
+    hoverEffect(Character_SEVEN.sprite, character_seven.original, character_seven.hovered, character_seven.chosen, event);
+
+    hoverEffect(back_button.sprite);
+
+
+    window.draw(Choose_Player_Back_Ground);
+    if (chosen)
+        player_one.setFillColor(Color::Blue);
+
+    window.draw(back_button.sprite);
+    window.draw(player_one);
+    window.draw(Character_ONE.sprite);
+    window.draw(Character_TWO.sprite);
+    window.draw(Character_THREE.sprite);
+    window.draw(Character_FOUR.sprite);
+    window.draw(Character_FIVE.sprite);
+    window.draw(Character_SIX.sprite);
+    window.draw(Character_SEVEN.sprite);
+    window.draw(Character_EIGHT.sprite);
+
+}
+
+
+void player_two_menu()
+{
+
+    window.setFramerateLimit(60);
+
+
+    //Text
+
+    Text player_two("player Two", game_font, 50);
+    player_two.setOrigin(player_two.getLocalBounds().width / 2, player_two.getLocalBounds().height / 2);
+    player_two.setScale(1.5, 1.5);
+    player_two.setPosition(Vector2f(930, 130));
+
+
+
+    //Sprite
+
+
+    Character_ONE.sprite.setTexture(character_one.original);
+    Character_ONE.sprite.setOrigin(Character_ONE.sprite.getLocalBounds().width / 2, Character_ONE.sprite.getLocalBounds().height / 2);
+    Character_ONE.sprite.setScale(1.25, 1.25);
+    Character_ONE.sprite.setPosition(Vector2f(400, 400));
+
+    Character_TWO.sprite.setTexture(character_two.original);
+    Character_TWO.sprite.setOrigin(Character_TWO.sprite.getLocalBounds().width / 2, Character_TWO.sprite.getLocalBounds().height / 2);
+    Character_TWO.sprite.setScale(1.25, 1.25);
+    Character_TWO.sprite.setPosition(Vector2f(760, 400));
+
+    Character_THREE.sprite.setTexture(character_three.original);
+    Character_THREE.sprite.setOrigin(Character_THREE.sprite.getLocalBounds().width / 2, Character_THREE.sprite.getLocalBounds().height / 2);
+    Character_THREE.sprite.setScale(1.25, 1.25);
+    Character_THREE.sprite.setPosition(Vector2f(1120, 400));
+
+    Character_FOUR.sprite.setTexture(character_four.original);
+    Character_FOUR.sprite.setOrigin(Character_FOUR.sprite.getLocalBounds().width / 2, Character_FOUR.sprite.getLocalBounds().height / 2);
+    Character_FOUR.sprite.setScale(1.25, 1.25);
+    Character_FOUR.sprite.setPosition(Vector2f(1480, 400));
+
+    Character_FIVE.sprite.setTexture(character_five.original);
+    Character_FIVE.sprite.setOrigin(Character_FIVE.sprite.getLocalBounds().width / 2, Character_FIVE.sprite.getLocalBounds().height / 2);
+    Character_FIVE.sprite.setScale(1.25, 1.25);
+    Character_FIVE.sprite.setPosition(Vector2f(400, 800));
+
+    Character_SIX.sprite.setTexture(character_six.original);
+    Character_SIX.sprite.setOrigin(Character_SIX.sprite.getLocalBounds().width / 2, Character_SIX.sprite.getLocalBounds().height / 2);
+    Character_SIX.sprite.setScale(1.25, 1.25);
+    Character_SIX.sprite.setPosition(Vector2f(760, 800));
+
+    Character_SEVEN.sprite.setTexture(character_seven.original);
+    Character_SEVEN.sprite.setOrigin(Character_SEVEN.sprite.getLocalBounds().width / 2, Character_SEVEN.sprite.getLocalBounds().height / 2);
+    Character_SEVEN.sprite.setScale(1.25, 1.25);
+    Character_SEVEN.sprite.setPosition(Vector2f(1120, 800));
+
+    Character_EIGHT.sprite.setTexture(character_eight.original);
+    Character_EIGHT.sprite.setOrigin(Character_EIGHT.sprite.getLocalBounds().width / 2, Character_EIGHT.sprite.getLocalBounds().height / 2);
+    Character_EIGHT.sprite.setScale(1.25, 1.25);
+    Character_EIGHT.sprite.setPosition(Vector2f(1480, 800));
+
+
+    back_button.sprite.setTexture(back_button.Default_texture);
+    back_button.sprite.setOrigin(back_button.sprite.getLocalBounds().width / 2, back_button.sprite.getLocalBounds().height / 2);
+    back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
+
+
+    Choose_Player_Back_Ground.setTexture(choose_player_back_ground);
+    Choose_Player_Back_Ground.setScale(4, 4);
+    Choose_Player_Back_Ground.setPosition(1, 2);
+    Choose_Player_Back_Ground.setColor(Color(225, 70, 13));
+
+
+
+    sf::Event event;
+
+    player_two_menu_eventloop();
+
+
+
+    hoverEffect(Character_ONE.sprite, character_one.original, character_one.hovered, character_one.chosen, event);
+    hoverEffect(Character_TWO.sprite, character_two.original, character_two.hovered, character_two.chosen, event);
+    hoverEffect(Character_THREE.sprite, character_three.original, character_three.hovered, character_three.chosen, event);
+    hoverEffect(Character_FOUR.sprite, character_four.original, character_four.hovered, character_four.chosen, event);
+    hoverEffect(Character_FIVE.sprite, character_five.original, character_five.hovered, character_five.chosen, event);
+    hoverEffect(Character_SIX.sprite, character_six.original, character_six.hovered, character_six.chosen, event);
+    hoverEffect(Character_SEVEN.sprite, character_seven.original, character_seven.hovered, character_seven.chosen, event);
+    hoverEffect(Character_EIGHT.sprite, character_eight.original, character_eight.hovered, character_eight.chosen, event);
+
+    hoverEffect(back_button.sprite);
+
+
+    window.draw(Choose_Player_Back_Ground);
+
+
+    if (chosen)
+        player_two.setFillColor(Color::Red);
+    window.draw(back_button.sprite);
+    window.draw(player_two);
+    window.draw(Character_ONE.sprite);
+    window.draw(Character_TWO.sprite);
+    window.draw(Character_THREE.sprite);
+    window.draw(Character_FOUR.sprite);
+    window.draw(Character_FIVE.sprite);
+    window.draw(Character_SIX.sprite);
+    window.draw(Character_SEVEN.sprite);
+    window.draw(Character_EIGHT.sprite);
+
+
+}
+
+
+
 void ReadFile() {
     string myText;
     // Read from the text file
@@ -728,6 +962,69 @@ back_button.Default_texture.loadFromFile("assets/menus/Back_button.png");
 back_button.Pressed_texture.loadFromFile("assets/menus/Back_button_pressed.png");
 
 SFX_click_soundbuffer.loadFromFile("assets/sounds/SFX_click.ogg");
+
+//choose_player
+
+character_one.hovered.loadFromFile("assets/player_characters/default-hovered.png");
+character_one.chosen.loadFromFile("assets/player_characters/default-chosen.png");
+character_one.original.loadFromFile("assets/player_characters/default.png");
+
+character_two.hovered.loadFromFile("assets/player_characters/RedSuit-hovered.png");
+character_two.chosen.loadFromFile("assets/player_characters/RedSuit-chosen.png");
+character_two.original.loadFromFile("assets/player_characters/RedSuit.png");
+
+character_three.hovered.loadFromFile("assets/player_characters/Robot-hovered.png");
+character_three.chosen.loadFromFile("assets/player_characters/Robot-chosen.png");
+character_three.original.loadFromFile("assets/player_characters/Robot.png");
+
+character_four.hovered.loadFromFile("assets/player_characters/wolf-hovered.png");
+character_four.chosen.loadFromFile("assets/player_characters/wolf-chosen.png");
+character_four.original.loadFromFile("assets/player_characters/wolf.png");
+
+
+character_five.hovered.loadFromFile("assets/player_characters/vampire-hovered.png");
+character_five.chosen.loadFromFile("assets/player_characters/vampire-chosen.png");
+character_five.original.loadFromFile("assets/player_characters/vampire.png");
+
+character_six.hovered.loadFromFile("assets/player_characters/pirate-hovered.png");
+character_six.chosen.loadFromFile("assets/player_characters/pirate-chosen.png");
+character_six.original.loadFromFile("assets/player_characters/pirate.png");
+
+character_seven.hovered.loadFromFile("assets/player_characters/mummy-hovered.png");
+character_seven.chosen.loadFromFile("assets/player_characters/mummy-chosen.png");
+character_seven.original.loadFromFile("assets/player_characters/mummy.png");
+
+character_eight.hovered.loadFromFile("assets/player_characters/ninja-hovered.png");
+character_eight.chosen.loadFromFile("assets/player_characters/ninja-chosen.png");
+character_eight.original.loadFromFile("assets/player_characters/ninja.png");
+
+
+choose_player_back_ground.loadFromFile("assets/player_characters/background_circus.png");
+
+
+
+//1v1_map
+
+MAP_1.hovered.loadFromFile("assets/1v1_maps/SandMap-hovered.png");
+MAP_1.original.loadFromFile("assets/1v1_maps/SandMap.png");
+
+MAP_2.hovered.loadFromFile("assets/1v1_maps/mansion-hovered.png");
+MAP_2.original.loadFromFile("assets/1v1_maps/mansion.png");
+
+MAP_3.hovered.loadFromFile("assets/1v1_maps/WhiteWoods-hovered.png");
+MAP_3.original.loadFromFile("assets/1v1_maps/WhiteWoods.png");
+
+MAP_4.hovered.loadFromFile("assets/1v1_maps/wastelands-hovered.png");
+MAP_4.original.loadFromFile("assets/1v1_maps/wastelands.png");
+
+
+
+maps_1v1_player_back_ground.loadFromFile("assets/1v1_maps/desert-background.png");
+maps_one_1v1_back_ground.loadFromFile("assets/1v1_maps/desert-background.png");
+maps_two_1v1_back_ground.loadFromFile("assets/1v1_maps/scream-background.png");
+maps_three_1v1_back_ground.loadFromFile("assets/1v1_maps/ice-background.png");
+maps_four_1v1_back_ground.loadFromFile("assets/1v1_maps/sun_land-background.png");
+
 
 //1v1
 victory_texture.loadFromFile("assets/1v1/fotor_2023-5-6_21_25_1.png");
@@ -1001,6 +1298,87 @@ void volume_manage(sf::Text& text, sf::Sprite volume_up, sf::Sprite volume_down,
 
 }
 
+void MAPS_1v1()
+{
+
+window.setFramerateLimit(60);
+
+
+//Text
+
+Text choose_your_map("choose your map", game_font, 50);
+choose_your_map.setOrigin(choose_your_map.getLocalBounds().width / 2, choose_your_map.getLocalBounds().height / 2);
+choose_your_map.setScale(1.5, 1.5);
+choose_your_map.setPosition(Vector2f(930, 130));
+
+
+//sprite 
+
+
+MAP_1.sprite.setTexture(MAP_1.original);
+MAP_2.sprite.setTexture(MAP_2.original);
+MAP_3.sprite.setTexture(MAP_3.original);
+MAP_4.sprite.setTexture(MAP_4.original);
+
+
+MAP_1.sprite.setTexture(MAP_1.original);
+MAP_1.sprite.setOrigin(MAP_1.sprite.getLocalBounds().width / 2, MAP_1.sprite.getLocalBounds().height / 2);
+MAP_1.sprite.setScale(0.35, 0.35);
+MAP_1.sprite.setPosition(Vector2f(400, 350));
+
+
+MAP_2.sprite.setTexture(MAP_2.original);
+MAP_2.sprite.setOrigin(MAP_2.sprite.getLocalBounds().width / 2, MAP_2.sprite.getLocalBounds().height / 2);
+MAP_2.sprite.setScale(0.35, 0.35);
+MAP_2.sprite.setPosition(Vector2f(1600, 350));
+
+MAP_3.sprite.setTexture(MAP_3.original);
+MAP_3.sprite.setOrigin(MAP_3.sprite.getLocalBounds().width / 2, MAP_3.sprite.getLocalBounds().height / 2);
+MAP_3.sprite.setScale(0.35, 0.35);
+MAP_3.sprite.setPosition(Vector2f(400, 750));
+
+MAP_4.sprite.setTexture(MAP_4.original);
+MAP_4.sprite.setOrigin(MAP_4.sprite.getLocalBounds().width / 2, MAP_4.sprite.getLocalBounds().height / 2);
+MAP_4.sprite.setScale(0.35, 0.35);
+MAP_4.sprite.setPosition(Vector2f(1600, 750));
+
+
+
+MAPS_1v1_player_back_ground.setTexture(maps_1v1_player_back_ground);
+
+
+back_button.sprite.setTexture(back_button.Default_texture);
+back_button.sprite.setOrigin(back_button.sprite.getLocalBounds().width / 2, back_button.sprite.getLocalBounds().height / 2);
+back_button.sprite.setPosition(window.getSize().x / 12.061, window.getSize().y / 1.099);
+
+
+
+  
+
+
+    hoverEffect(MAP_1.sprite, MAP_1.original, MAP_1.hovered);
+    hoverEffect(MAP_2.sprite, MAP_2.original, MAP_2.hovered);
+    hoverEffect(MAP_3.sprite, MAP_3.original, MAP_3.hovered);
+    hoverEffect(MAP_4.sprite, MAP_4.original, MAP_4.hovered);
+
+
+    hoverEffect(back_button.sprite);
+
+    MAPS_1v1_eventloop();
+
+    window.draw(MAPS_1v1_player_back_ground);
+    window.draw(back_button.sprite);
+    window.draw(choose_your_map);
+    window.draw(MAP_1.sprite);
+    window.draw(MAP_2.sprite);
+    window.draw(MAP_3.sprite);
+    window.draw(MAP_4.sprite);
+}
+
+
+
+
+
 void Level_Evaluation(Lev lev[])
 {
     for (int i = 0; i < 15; i++)
@@ -1140,6 +1518,22 @@ void hoverEffect(Lev lev[])
     }
 }
 
+void hoverEffect(sf::Sprite& option, sf::Texture& original, sf::Texture& hovered)
+{
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+    if (option.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+    {
+        option.setTexture(hovered);
+    }
+
+    else
+    {
+        option.setTexture(original);
+
+    }
+}
+
 void hoverEffect(sf::Sprite& option, sf::Texture& original,sf::Texture& hovered, sf::Text& attached_text)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
@@ -1152,4 +1546,31 @@ void hoverEffect(sf::Sprite& option, sf::Texture& original,sf::Texture& hovered,
 
     else
         option.setTexture(original);
+}
+
+void hoverEffect(sf::Sprite& option, sf::Texture& original, sf::Texture& hovered, sf::Texture& clicked, sf::Event& event)
+{
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+    if (option.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+    {
+        option.setTexture(hovered);
+    }
+
+    else
+    {
+        option.setTexture(original);
+
+    }
+
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+    {
+        if (option.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+        {
+            option.setTexture(clicked);
+            chosen = true;
+
+            // SFX_click.play(); // add after merge
+        }
+    }
 }
