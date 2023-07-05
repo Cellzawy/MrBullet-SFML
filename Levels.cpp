@@ -1214,12 +1214,15 @@ void constructOneVSone_one(RenderWindow& window) {
     for (int i = 0; i < 4; i++) {
         lev[16].BLOCK[i].loadFromFile("assets/Textures/square.png");
         lev[16].block[i].setTexture(&lev[16].BLOCK[i]);
+        lev[16].block[i].setOrigin(lev[16].block[i].getLocalBounds().width / 2, lev[0].block[i].getLocalBounds().height / 2);
         lev[16].block[i].setSize(Vector2f(150, 50));
     }
     lev[16].block[0].setPosition(Vector2f(400, 750));
     lev[16].block[1].setPosition(Vector2f(1420, 750));
+    lev[16].block[2].setSize(Vector2f(150, 100));
     lev[16].block[2].setPosition(Vector2f(960, 300));
     lev[16].block[2].setRotation(90.f);
+    lev[16].block[3].setSize(Vector2f(150, 100));
     lev[16].block[3].setPosition(Vector2f(960, 700));
     lev[16].block[3].setRotation(90.f);
 
@@ -1424,6 +1427,10 @@ void DrawingLevels(int num, RenderWindow& window)
         }
         //for (int i = 0; i < bullets.size(); i++) {
         //    window.draw(bullets[i].bulletBody);
+        //}
+
+        //for (int i = 0; i < 4; i++) {
+        //    window.draw(lev[3].shape[i]);
         //}
 
         for (int i = 0; i < bullets.size(); i++) {

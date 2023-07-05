@@ -90,27 +90,48 @@ int main() {
                     line[0].position = playerTwo.bullet_pos;
                     line[1].position = sf::Vector2f(mouse_position.x, mouse_position.y);
                 }
-                for (int i = bullets.size() - 1; i > 0; i--)
-                {
-                    Time elapsed = bullets[i].clock.getElapsedTime();
-                    level_complete = false;
-                    if (elapsed >= seconds(5.f))
-                    {
-                        bullets[i].clock.restart();
-                        bullets.erase(bullets.begin() + i);
-                        std::cout << "erased";
 
-                        level_complete = true;
-                        if (current_menu == Dules_1)
+                if (current_menu == Dules_1)
+                {
+                    for (int i = bullets.size() - 1; i > 0; i--)
+                    {
+                        Time elapsed = bullets[i].clock.getElapsedTime();
+                        level_complete = false;
+                        if (elapsed >= seconds(5.f))
                         {
+                            bullets[i].clock.restart();
+                            bullets.erase(bullets.begin() + i);
+                            std::cout << "erased";
+
+                            level_complete = true;
+
+                            shot = false;
+                            collided = true;
                             playerOne.turn = !playerOne.turn;
                             if (playerOne.turn) {
                                 character_show_player_arrow(playerOne, true);
                                 character_show_player_arrow(playerTwo, false);
-                            } else {
+                            }
+                            else {
                                 character_show_player_arrow(playerOne, false);
                                 character_show_player_arrow(playerTwo, true);
                             }
+                        }
+                    }
+                }
+                else {
+                    for (int i = bullets.size() - 1; i >= 0; i--)
+                    {
+                        Time elapsed = bullets[i].clock.getElapsedTime();
+                        level_complete = false;
+                        if (elapsed >= seconds(5.f))
+                        {
+                            bullets[i].clock.restart();
+                            bullets.erase(bullets.begin() + i);
+                            std::cout << "erased";
+
+                            level_complete = true;
+
                             shot = false;
                             collided = true;
                         }
@@ -1171,7 +1192,7 @@ int main() {
 
         }
 
-        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14) || current_menu == Dules_1)
+        if (current_menu >= static_cast<menu_type>(0) && current_menu <= static_cast<menu_type>(14) || current_menu == Dules_1 || current_menu == Dules_2 || current_menu == Dules_3 || current_menu == Dules_4)
         {
             for (int i = 0; i < bullets.size(); i++) {
                 //window.draw(bullets[i].bulletBody);

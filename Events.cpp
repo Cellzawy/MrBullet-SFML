@@ -178,16 +178,16 @@ sf::Event options_menu_eventloop()
                 {
                     SFX_click.play();
                     fullscreen_close = false;
-                    window.setFramerateLimit(60);
                     window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
+                    window.setFramerateLimit(60);
                 }
 
                 else if (check_box_open.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
                 {
                     SFX_click.play();
                     fullscreen_close = true;
-                    window.setFramerateLimit(60);
                     window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
+                    window.setFramerateLimit(60);
                 }
             }
         }
@@ -242,6 +242,7 @@ sf::Event options_menu_pause_eventloop()
                     SFX_click.play();
                     fullscreen_close = false;
                     window.create(VideoMode(1920, 1080), "window", Style::Fullscreen); //FUllscreen_mode
+                    window.setFramerateLimit(60);
                 }
 
                 else if (check_box_open.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
@@ -249,6 +250,7 @@ sf::Event options_menu_pause_eventloop()
                     SFX_click.play();
                     fullscreen_close = true;
                     window.create(VideoMode(1920, 1080), "window", Style::Default); //Default_mode
+                    window.setFramerateLimit(60);
                 }
             }
         }
@@ -291,7 +293,7 @@ sf::Event pause_eventloop()
                 {
                     QUIT.sprite.setTexture(QUIT.Pressed_texture);
                     current_menu = classic_Mode;
-                    //Reset();
+                    Reset();
                     SFX_click.play();
                     lev[level_index].num_of_bullets = 1;
 
